@@ -2,11 +2,11 @@
 import { Navbar, RelatedDocs, MainDocs, DocsBookmarks } from "../../../index";
 import React, { useEffect, useState } from "react";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
-import { resolve } from "styled-jsx/css";
+
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 
-const ReadPage = ({ params }: Params) => {
+const ReadPage = ({ params }: any) => {
   const { id } = params;
   const [doc, setdoc] = useState(null);
   const { control, watch } = useForm();
