@@ -9,12 +9,12 @@ const Navbar = () => {
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2HfU9mbvNh-1yqsxClQ2vPGXS5ePDm0URhA&s"
+            src="https://img.freepik.com/premium-vector/office-paper-document-with-folder-flat-design_798171-579.jpg"
             className="h-12"
-            alt="Flowbite Logo"
+            alt="Documentarium"
           />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Bloggify
+            Documentarium
           </span>
         </Link>
         <button
