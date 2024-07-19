@@ -10,7 +10,7 @@ const Navbar = () => {
         >
           <img
             src="https://img.freepik.com/premium-vector/office-paper-document-with-folder-flat-design_798171-579.jpg"
-            className="h-12"
+            className="h-12 rounded-sm"
             alt="Documentarium"
           />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
