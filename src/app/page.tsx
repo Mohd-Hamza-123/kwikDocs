@@ -24,7 +24,7 @@ export default function Home() {
         throw new Error("Failed to fetch docs");
       }
       const docs = await res.json();
-      // console.log(docs.Docs);
+
       dispatch(appendDocs({ docsData: docs.Docs }));
       setData((prev) => docs.Docs);
       return docs;

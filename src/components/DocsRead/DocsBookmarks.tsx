@@ -9,6 +9,7 @@ const DocsBookmarks = ({ doc }: any) => {
       <section className="flex flex-col gap-1 mt-5">
         {bookmark?.map((mark: any) => (
           <li
+            key={mark?.bookmarkID}
             className="py-3 md:py-2 sm:py-4 list-disc list-inside cursor-pointer"
             onClick={() => {
               const element = document.getElementById(mark.bookmarkID);
