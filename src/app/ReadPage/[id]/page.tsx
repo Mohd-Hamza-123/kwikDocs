@@ -1,7 +1,7 @@
 "use client";
 import { Navbar, RelatedDocs, MainDocs, DocsBookmarks } from "../../../index";
 import React, { useEffect, useState } from "react";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+
 
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
