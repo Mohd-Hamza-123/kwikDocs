@@ -13,7 +13,9 @@ const ReadPage = ({ params }: any) => {
 
   const getDoc = async (id: number) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/docs/${id}`);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_END_POINT}api/docs/${id}`
+      );
       const doc = await res.json();
       setdoc((prev) => doc.doc);
     } catch (error) {
