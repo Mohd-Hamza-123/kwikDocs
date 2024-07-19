@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import parse from "html-react-parser";
 import Prism from "../Prism";
-import "../../lib/Style/copybtn.css";
+import "../../lib/Style/copyBtn.css"
 import "react-toastify/dist/ReactToastify.css";
 import ReactModel from "../ReactModel";
 import { useRouter } from "next/navigation";
