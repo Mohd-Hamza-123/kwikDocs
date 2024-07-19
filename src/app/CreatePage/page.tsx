@@ -80,7 +80,7 @@ const CreatePage = ({ post }: any) => {
     } else {
       try {
         // console.log("data fetching");
-        const res = await fetch("http://localhost:3000/api/docs", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_END_POINT}/api/docs`, {
           cache: "no-cache",
           method: "POST",
           headers: {
