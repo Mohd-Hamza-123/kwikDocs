@@ -15,16 +15,19 @@ export default function Home() {
 
   const getDocs = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/docs", {
-        cache: "no-cache",
-        method: "GET",
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_END_POINT}api/docs`,
+        {
+          cache: "no-cache",
+          method: "GET",
+        }
+      );
 
       if (!res.ok) {
         throw new Error("Failed to fetch docs");
       }
       const docs = await res.json();
-      // console.log(docs.Docs);
+
       dispatch(appendDocs({ docsData: docs.Docs }));
       setData((prev) => docs.Docs);
       return docs;
