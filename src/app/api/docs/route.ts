@@ -50,3 +50,4 @@ export async function DELETE(request: any) {
         return NextResponse.json({ message: "Can't be deleted", status: 400 });
     }
 }
+

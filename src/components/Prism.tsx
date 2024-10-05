@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import prism from "prismjs";
 import "prismjs/themes/prism-okaidia.css";
 
-
 import "prismjs/components/prism-cshtml";
 import "prismjs/components/prism-css";
 import "prismjs/components/prism-javascript";

@@ -7,7 +7,7 @@ const EditPage = ({ params }: { params: { id: string } }) => {
   const docsData = useAppSelector((state) => state.docsSlice.docsData);
 
   function findDocsByID(id: string) {
-    const index = docsData?.findIndex((docs) => docs._id === id);
+    const index = docsData?.findIndex((docs : any) => docs._id === id);
     // console.log(docsData[index]);
     return docsData[index];
   }
