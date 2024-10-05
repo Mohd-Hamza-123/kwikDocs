@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from "react";
 import Select, { MultiValue, ActionMeta } from "react-select";
 

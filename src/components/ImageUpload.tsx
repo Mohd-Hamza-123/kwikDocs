@@ -1,3 +1,4 @@
+'use client'
 import React, { forwardRef, useState } from "react";
 
 const ImageUpload = ({ value, onChange }: any, ref: any) => {

@@ -1,7 +1,5 @@
-import { timeStamp } from "console";
+
 import mongoose, { Schema, Document } from "mongoose";
-
-
 
 // Define the Schema
 interface TagInterface {
@@ -22,15 +20,7 @@ interface docsInterface extends Document {
     category: string,
     bookmark: BookMarkInterface[]
 }
-const tagScheema = new Schema<TagInterface>(
-    {
-        value: { type: String, required: true },
-        label: { type: String, required: true },
-    },
-    {
-        id: false
-    }
-)
+
 const bookMarkScheema = new Schema<BookMarkInterface>(
     {
         bookmarkID: { type: String, required: true },
@@ -43,12 +33,30 @@ const bookMarkScheema = new Schema<BookMarkInterface>(
 )
 const docSchema = new Schema<docsInterface>(
     {
-        title: { type: String, required: true },
-        description: { type: String, required: false },
-        image: { type: String, required: false },
-        tags: { type: [tagScheema], required: false },
-        category: { type: String, required: true },
-        bookmark: { type: [bookMarkScheema], required: false }
+        title: {
+            type: String,
+            required: true
+        },
+        description: {
+            type: String,
+            required: false
+        },
+        image: {
+            type: String,
+            required: false
+        },
+        tags: {
+            type: [String],
+            required: false
+        },
+        category: {
+            type: String,
+            required: true
+        },
+        bookmark: {
+            type: [bookMarkScheema],
+            required: false
+        }
     },
     {
         timestamps: true

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { DateFormatter } from "@/lib/ConvertDate";
 
 interface cardProps {
@@ -12,13 +13,13 @@ interface cardProps {
 const Cards = ({ title, description, image, _id, createdAt }: cardProps) => {
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <img
+      <Image
+        quality={100}
+        height={200}
+        width={200}
         className="rounded-t-lg h-[220px] w-full"
-        src={image ? image : ""}
-        onError={(e) =>
-          (e.currentTarget.src =
-            "https://cdn.sanity.io/images/tlr8oxjg/production/9692617945204c3c666b30dd755554d7bbb6c746-1200x900.jpg?w=3840&q=100&fit=clip&auto=format")
-        }
+        src={image || "https://cdn.prod.website-files.com/62045da4270c887c4de9c45f/6206f72af2bab0767eeb1690_digitaldocument.jpeg"}
+        alt="Image"
       />
 
       <div className="p-5">
@@ -31,7 +32,7 @@ const Cards = ({ title, description, image, _id, createdAt }: cardProps) => {
           {DateFormatter(createdAt)}
         </p>
         <Link
-          href={`/ReadPage/${_id}`}
+          href={`/read-doc/${_id}`}
           className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Read more

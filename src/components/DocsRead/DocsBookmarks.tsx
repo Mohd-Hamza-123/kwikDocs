@@ -2,7 +2,7 @@ import React from "react";
 
 const DocsBookmarks = ({ doc }: any) => {
   const { bookmark } = doc;
-  console.log(bookmark);
+  
   return (
     <div className="px-2 py-2">
       <p className="mt-4 text-center">Bookmarks</p>
