@@ -1,51 +1,29 @@
 "use client";
 
-import { Navbar, Cards } from "../";
-import { useEffect, useState } from "react";
-import { useAppSelector } from "@/lib/hooks/hooks";
-import { useAppDispatch } from "@/lib/hooks/hooks";
-import { appendDocs } from "@/lib/features/docsSlice";
+import { Navbar, Cards, LoadingPage } from "../";
+import { useQuery } from "@tanstack/react-query";
+import { getDocs } from "@/lib/API/getDoc";
 
 export default function Home() {
-  const dispatch = useAppDispatch();
-  const docsData = useAppSelector((state) => state.docsSlice.docsData);
-  // console.log(docsData);
 
-  const [data, setData] = useState([]);
+  const {
+    isPending: DocsLoading,
+    data: Docs,
+    error,
+  } = useQuery({
+    queryKey: ['docs'],
+    queryFn: getDocs,
+    staleTime: Infinity
+  })
+  console.log(Docs)
 
-  const getDocs = async () => {
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_END_POINT}api/docs`,
-        {
-          cache: "no-cache",
-          method: "GET",
-        }
-      );
-
-      if (!res.ok) {
-        throw new Error("Failed to fetch docs");
-      }
-      const docs = await res.json();
-
-      dispatch(appendDocs({ docsData: docs.Docs }));
-      setData((prev) => docs.Docs);
-      return docs;
-    } catch (error) {
-      console.log("Error in fethcing meesage");
-    }
-  };
-
-  useEffect(() => {
-    getDocs();
-  }, []);
+  if (DocsLoading) return <LoadingPage />
 
   return (
     <>
       <Navbar />
-
       <section className="flex justify-center flex-wrap gap-5 my-3">
-        {data?.map((item: any, index) => (
+        {Docs?.map((item: any, index: number) => (
           <div key={item?._id}>
             <Cards {...item} />
           </div>

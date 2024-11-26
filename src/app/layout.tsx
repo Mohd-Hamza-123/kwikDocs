@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "./StoreProvider";
 import Head from "next/head";
+import QueryProvider from "./QueryProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -19,7 +20,13 @@ export default function RootLayout({
     <>
       <html lang="en">
         <StoreProvider>
-          <body className={inter.className}>{children}</body>
+          <QueryProvider>
+            <body
+              suppressHydrationWarning={true}
+              className={inter.className}>
+              {children}
+            </body>
+          </QueryProvider>
         </StoreProvider>
       </html>
     </>

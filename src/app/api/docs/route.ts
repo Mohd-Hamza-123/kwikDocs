@@ -4,13 +4,16 @@ import Doc from "@/models/docs.model";
 
 
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
     try {
         await connectMongoDB()
         const Docs = await Doc.find()
-        return NextResponse.json({ Docs })
+        return NextResponse.json({ success: true, payload: Docs })
     } catch (error) {
-        return NextResponse.json({ Error: "Error Occured", status: 400 })
+        return NextResponse.json({
+            Error: "Error Occured",
+            status: 400
+        })
     }
 
 }
