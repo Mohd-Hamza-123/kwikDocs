@@ -16,7 +16,7 @@ const Languages = ({
     const isEven = _id % 2 === 0;
 
     return (
-        <div className={`p-3 rounded-lg bg-white shadow-md dark:bg-surface-dark dark:text-white text-surface w-[94%] lg:w-[70%] mx-auto my-8 flex flex-col lg:flex-row ${isEven ? 'flex-row-reverse' : ''}`}>
+        <div className={`p-3 rounded-lg bg-white shadow-md dark:bg-surface-dark dark:text-white text-surface w-[94%] lg:w-[70%] mx-auto my-8 flex flex-col lg:flex-row ${isEven ? 'lg:flex-row-reverse' : ''}`}>
             <div className="relative overflow-hidden bg-cover bg-no-repeat lg:w-[40%] w-full">
                 <img
                     className={`${isEven ? "rounded-r-lg" : 'rounded-l-lg'} w-full h-full object-contain object-center`}
