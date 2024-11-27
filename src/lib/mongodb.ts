@@ -1,5 +1,3 @@
-// src/lib/mongodb.js
-
 import mongoose from 'mongoose';
 
 export const connectMongoDB = async () => {
@@ -12,7 +10,6 @@ export const connectMongoDB = async () => {
         if (mongoose.connection.readyState >= 1) {
             return;
         }
-
 
         await mongoose.connect(mongoDBuri);
         console.log("MongoDB connected");

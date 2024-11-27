@@ -1,9 +1,11 @@
+import "./globals.css";
+import Head from "next/head";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import StoreProvider from "./StoreProvider";
-import Head from "next/head";
 import QueryProvider from "./QueryProvider";
+import { Navbar } from '../index'
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -16,6 +18,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <>
       <html lang="en">
@@ -24,6 +27,7 @@ export default function RootLayout({
             <body
               suppressHydrationWarning={true}
               className={inter.className}>
+              <Navbar />
               {children}
             </body>
           </QueryProvider>

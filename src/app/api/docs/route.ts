@@ -2,17 +2,19 @@ import { NextRequest, NextResponse } from 'next/server';
 import { connectMongoDB } from "@/lib/mongodb";
 import Doc from "@/models/docs.model";
 
-
-
 export async function GET(request: NextRequest) {
     try {
         await connectMongoDB()
         const Docs = await Doc.find()
-        return NextResponse.json({ success: true, payload: Docs })
+        return NextResponse.json({
+            success: true,
+            payload: Docs,
+            status: 200
+        })
     } catch (error) {
         return NextResponse.json({
-            Error: "Error Occured",
-            status: 400
+            error: error,
+            status: 500
         })
     }
 

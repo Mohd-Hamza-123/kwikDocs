@@ -1,4 +1,4 @@
-import Navbar from "./components/Navbar"
+import Navbar from "./components/Navbar/Navbar"
 import Cards from "./components/Cards"
 import RTE from "./components/RTE.tsx"
 import MultiSelect from "./components/MultiSelect"
@@ -9,4 +9,5 @@ import DocsBookmarks from "./components/DocsRead/DocsBookmarks"
 import SearchBar from "./components/SearchBar"
 import SearchedCards from "./components/SearchedCards"
 import LoadingPage from "./components/LoadingPage"
-export { Navbar, Cards, RTE, MultiSelect, ImageUpload, DocsBookmarks, MainDocs, RelatedDocs, SearchBar, SearchedCards , LoadingPage }
+import Languages from "./components/Content/Languages"
+export { Languages, Navbar, Cards, RTE, MultiSelect, ImageUpload, DocsBookmarks, MainDocs, RelatedDocs, SearchBar, SearchedCards, LoadingPage }

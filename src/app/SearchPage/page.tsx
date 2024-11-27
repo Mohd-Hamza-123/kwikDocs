@@ -3,7 +3,7 @@ import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import SearchBar from "../../components/SearchBar"; // Adjust the import path as needed
-import Navbar from "../../components/Navbar"; // Adjust the import path as needed
+// Adjust the import path as needed
 import SearchedCards from "@/components/SearchedCards";
 
 const Page = () => {
@@ -28,9 +28,6 @@ const Page = () => {
 
   return (
     <>
-      <header>
-        <Navbar />
-      </header>
       <main className="p-3">
         <form onSubmit={handleSubmit(submit)} className="mt-2">
           <SearchBar

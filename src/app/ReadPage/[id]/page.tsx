@@ -1,32 +1,27 @@
 "use client";
-import { Navbar, RelatedDocs, MainDocs, DocsBookmarks } from "../../../index";
-import React, { useEffect, useState } from "react";
-
-
-import { useForm } from "react-hook-form";
+import React from "react";
+import { getDoc } from "@/lib/API/getDoc";
+import { useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
+import { Navbar, RelatedDocs, MainDocs, DocsBookmarks, LoadingPage } from "../../../index";
 
 const ReadPage = ({ params }: any) => {
   const { id } = params;
-  const [doc, setdoc] = useState(null);
-  const { control, watch } = useForm();
+  const {
+    error,
+    isError,
+    isPending,
+    isSuccess,
+    data: doc,
+  } = useQuery({
+    queryKey: ['product', id],
+    queryFn: () => getDoc(id),
+    staleTime: 1000 * 60
+  })
 
-  const getDoc = async (id: number) => {
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_END_POINT}api/docs/${id}`
-      );
-      const doc = await res.json();
-      setdoc((prev) => doc.doc);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  if (isPending) return <LoadingPage loadingMsg="Document is Loading" />
 
-  useEffect(() => {
-    getDoc(id);
-  }, []);
-  return doc ? (
+  return (
     <>
       <Navbar />
       <main className="flex">
@@ -42,7 +37,7 @@ const ReadPage = ({ params }: any) => {
       </main>
       <ToastContainer />
     </>
-  ) : null;
+  )
 };
 
 export default ReadPage;

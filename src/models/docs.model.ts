@@ -1,7 +1,5 @@
-import { timeStamp } from "console";
+
 import mongoose, { Schema, Document } from "mongoose";
-
-
 
 // Define the Schema
 interface TagInterface {

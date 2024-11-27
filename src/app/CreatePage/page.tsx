@@ -1,16 +1,14 @@
 "use client";
+import Prism from "@/components/Prism";
 import React, { useState } from "react";
-import { Navbar, RTE, MultiSelect, ImageUpload } from "../../index";
 import { useRouter } from "next/navigation";
-
+import { Button } from "@/components/ui/button";
+import { useAppDispatch } from "@/lib/hooks/hooks";
+import { Textarea } from "@/components/ui/textarea";
+import { appendDocs } from "@/lib/features/docsSlice";
 import { useForm, Controller } from "react-hook-form";
 import { ComboboxDemo } from "@/components/ComboboxDemo";
-import { Button } from "@/components/ui/button";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
-import Prism from "@/components/Prism";
-
-import { appendDocs } from "@/lib/features/docsSlice";
-import { Textarea } from "@/components/ui/textarea";
+import { RTE, MultiSelect, ImageUpload } from "../../index";
 
 interface FormValues {
   title: string;
@@ -112,7 +110,7 @@ const CreatePage = ({ post }: any) => {
 
   return (
     <>
-      <Navbar />
+      
       <main className="">
         <form className="w-full flex p-5 gap-2" onSubmit={handleSubmit(submit)}>
           <section className="w-[77%]">
