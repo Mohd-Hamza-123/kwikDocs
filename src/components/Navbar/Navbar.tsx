@@ -2,6 +2,9 @@
 import Link from 'next/link'
 import React from 'react'
 import { usePathname } from 'next/navigation'
+import { RxHamburgerMenu } from "react-icons/rx";
+import { Sidebar } from '@/index';
+import { Button } from '../ui/button';
 const Navbar = () => {
     const hidePaths = ['login', 'signup', '/'];
     const pathName = usePathname();
@@ -18,11 +21,12 @@ const Navbar = () => {
                     <Link href="#guides" className="hover:text-indigo-500">
                         Guides
                     </Link>
-                    <Link href="#contact" className="hover:text-indigo-500">
-                        Contact
-                    </Link>
+                    <Button variant={'outline'} className="hover:text-indigo-500">
+                        <RxHamburgerMenu className='text-2xl' />
+                    </Button>
                 </nav>
             </div>
+            <Sidebar />
         </header>
     )
 }

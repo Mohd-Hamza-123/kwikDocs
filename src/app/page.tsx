@@ -1,15 +1,18 @@
 'use client'
 import gsap from 'gsap';
 import React from "react";
-import { Languages } from "..";
+import { Languages, Sidebar } from "..";
 import { useGSAP } from '@gsap/react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FaArrowCircleDown } from "react-icons/fa";
 import { frameworksToLearn, languagesToLearn } from '@/components/Content/LanguagesContent';
+import Link from 'next/link';
+import { RxHamburgerMenu } from "react-icons/rx";
+import { useTypicalContext } from '@/context/Typical-Context';
 
 const GettingStarted = () => {
-
+  const { isSideBarOpen, setIsSideBarOpen } = useTypicalContext()
   useGSAP(() => {
     gsap.to('#home-scroll-down', {
       y: 60,
@@ -18,7 +21,9 @@ const GettingStarted = () => {
     });
   },
   );
-
+  const sideBarToggle = () => {
+    setIsSideBarOpen((prev) => !prev)
+  }
   return (
     <div className="bg-gray-100">
       {/* Navigation Bar */}
@@ -26,18 +31,22 @@ const GettingStarted = () => {
         <header className="bg-white shadow-md py-4">
           <div className="container mx-auto px-6 flex justify-between items-center">
             <h1 className="text-2xl font-bold text-indigo-600">MyDocs</h1>
-            <nav className="space-x-6 text-gray-700">
-              <a href="#tutorials" className="hover:text-indigo-500">
+            <nav className="space-x-6 flex items-center text-gray-700">
+              <Link href="#tutorials" className="hover:text-indigo-500">
                 Tutorials
-              </a>
-              <a href="#guides" className="hover:text-indigo-500">
+              </Link>
+              <Link href="#guides" className="hover:text-indigo-500">
                 Guides
-              </a>
-              <a href="#contact" className="hover:text-indigo-500">
-                Contact
-              </a>
+              </Link>
+              <Button
+                variant={'outline'} className="hover:text-indigo-500 p-3"
+                onClick={sideBarToggle}
+              >
+                <RxHamburgerMenu className='text-2xl' />
+              </Button>
             </nav>
           </div>
+          <Sidebar />
         </header>
         <div className="bg-white shadow-lg mx-auto mt-16 max-w-4xl rounded-lg p-8 text-center">
           <h1 className="text-4xl font-extrabold text-gray-800 mb-4">

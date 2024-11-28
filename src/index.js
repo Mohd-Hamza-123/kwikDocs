@@ -10,4 +10,5 @@ import SearchBar from "./components/SearchBar"
 import SearchedCards from "./components/SearchedCards"
 import LoadingPage from "./components/LoadingPage"
 import Languages from "./components/Content/Languages"
-export { Languages, Navbar, Cards, RTE, MultiSelect, ImageUpload, DocsBookmarks, MainDocs, RelatedDocs, SearchBar, SearchedCards, LoadingPage }
+import Sidebar from "./components/Sidebar/Sidebar"
+export { Languages, Navbar, Cards, RTE, MultiSelect, ImageUpload, DocsBookmarks, MainDocs, RelatedDocs, SearchBar, SearchedCards, LoadingPage, Sidebar }

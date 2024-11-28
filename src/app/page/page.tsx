@@ -21,16 +21,13 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
       <section className="flex justify-center flex-wrap gap-5 my-3">
         {Docs?.map((item: any, index: number) => (
           <div key={item?._id}>
             <Cards {...item} />
           </div>
         ))}
-      </section>
-
-      
+      </section>    
     </>
   );
 }
