@@ -7,7 +7,7 @@ const Sidebar = () => {
     const { isSideBarOpen, setIsSideBarOpen } = useTypicalContext();
     console.log(isSideBarOpen)
     return (
-        isSideBarOpen && <aside className="flex flex-col w-[70%] lg:w-[23%] h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700 fixed top-0 z-40">
+        isSideBarOpen && <aside className="flex flex-col w-[80%] sm:w-[40%] md:w-[30%]  h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700 fixed top-0 z-40">
             <div className="flex flex-col justify-between flex-1 mt-6">
                 <nav className="flex-1 -mx-3 space-y-3 ">
                     <div className="relative mx-3">
