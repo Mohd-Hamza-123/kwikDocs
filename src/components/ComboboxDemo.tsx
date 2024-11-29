@@ -18,29 +18,23 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { frameworksToLearn, languagesToLearn } from "./Content/LanguagesContent";
 
-const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-];
+
+
+
+const languages = languagesToLearn.map((languages) => {
+  return {
+    value: languages.title
+  }
+})
+const frameworks = frameworksToLearn.map((framework) => {
+  return {
+    value: framework.title
+  }
+})
+
+const techonology = [...languages, ...frameworks]
 
 export function ComboboxDemo({
   value,
@@ -62,22 +56,22 @@ export function ComboboxDemo({
           className="w-[100%] justify-between"
         >
           {value
-            ? frameworks.find((framework) => framework.value === value)?.label
+            ? techonology.find((tech) => tech.value === value)?.value
             : "Select Category"}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[285px] p-0 ">
         <Command>
-          <CommandInput placeholder="Search Category..." />
+          <CommandInput placeholder="select technology" />
           <CommandEmpty>No Category found.</CommandEmpty>
           <CommandGroup>
             <CommandList>
               <ScrollArea className="h-[200px] w-[350px] rounded-md border p-4">
-                {frameworks.map((framework) => (
+                {techonology.map((tech) => (
                   <CommandItem
-                    key={framework.value}
-                    value={framework.value}
+                    key={tech.value}
+                    value={tech.value}
                     onSelect={(currentValue) => {
                       onChange((value = currentValue));
                       setOpen(false);
@@ -86,10 +80,10 @@ export function ComboboxDemo({
                     <Check
                       className={cn(
                         "mr-2 h-4 w-4 ",
-                        value === framework.value ? "opacity-100" : "opacity-0 "
+                        value === tech.value ? "opacity-100" : "opacity-0 "
                       )}
                     />
-                    {framework.label}
+                    {tech.value}
                   </CommandItem>
                 ))}
               </ScrollArea>

@@ -1,12 +1,11 @@
 import mongoose, { Schema, Types } from "mongoose";
 
-
 interface IUser {
     username: string;
     email: string;
     password: string;
-    role: "user" | "admin" | "superAdmin" | "superUser";
-    wishlist?: Types.ObjectId[]
+    role: "user" | "admin";
+    bookmark?: Types.ObjectId[]
 }
 
 const userSchema = new Schema<IUser>({
@@ -28,16 +27,16 @@ const userSchema = new Schema<IUser>({
         required: true,
         minlength: 8
     },
-    wishlist: [
+    bookmark: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Product'
+            ref: 'doc'
         }
     ],
 
     role: {
         type: String,
-        enum: ["user", "admin", "superAdmin", "superUser"],
+        enum: ["user", "admin"],
         default: "user",
     },
 },

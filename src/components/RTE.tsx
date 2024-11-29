@@ -23,7 +23,6 @@ const App: React.FC<RTEType> = ({
   const [currentEditorValue, setcurrentEditorValue] = useState(defaultValue);
   const editorRef = useRef<any>(null);
 
-  console.log(process.env.NEXT_PUBLIC_TINYMCE_KEY)
 
   return (
     <Controller

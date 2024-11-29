@@ -1,6 +1,6 @@
 "use client";
-import Prism from "@/components/Prism";
-import React, { useState } from "react";
+
+import React, { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch } from "@/lib/hooks/hooks";
@@ -8,15 +8,20 @@ import { Textarea } from "@/components/ui/textarea";
 import { appendDocs } from "@/lib/features/docsSlice";
 import { useForm, Controller } from "react-hook-form";
 import { ComboboxDemo } from "@/components/ComboboxDemo";
-import { RTE, MultiSelect, ImageUpload } from "../../index";
+import { RTE, ImageUpload, Prism } from "../../index";
+import { useMutation } from "@tanstack/react-query";
+import { createDoc, updateDoc } from "@/lib/API/createDoc";
+import { Input } from "@/components/ui/input";
+import { toast } from "@/hooks/use-toast";
+import { GoXCircleFill } from "react-icons/go";
 
-interface FormValues {
+export interface I_Docs {
   title: string;
   description: string;
-  image: string;
+  image?: string;
   category: string;
-  tags: string;
-  bookmark: BookMarkInterface[];
+  tags?: string[];
+  bookmark?: BookMarkInterface[];
 }
 
 interface BookMarkInterface {
@@ -26,10 +31,11 @@ interface BookMarkInterface {
 
 const CreatePage = ({ post }: any) => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
-  // const docs = useAppSelector((state) => state.docsSlice.docsData);
+  const tagRef = useRef<HTMLInputElement | null>(null)
+  const [tags, setTags] = useState<string[]>(post?.tags || []);
+
   const { handleSubmit, register, control, watch, setValue, getValues } =
-    useForm<FormValues>({
+    useForm<I_Docs>({
       defaultValues: {
         title: post?.title || "",
         description: post?.description || "",
@@ -41,7 +47,40 @@ const CreatePage = ({ post }: any) => {
   const [bookMark, setBookMark] = useState<BookMarkInterface[]>(
     post ? post?.bookmark : []
   );
-  console.log(bookMark);
+
+  const createDocumentQuery = useMutation({
+    mutationFn: (doc: I_Docs) => createDoc(doc),
+    onMutate: (variables) => {
+
+    },
+    onError: (error, variables, context) => {
+
+    },
+    onSuccess: (data, variables, context) => {
+      console.log(data);
+      router.push(`/read-doc/${data?._id}`);
+    },
+    onSettled: (data, error, variables, context) => {
+
+    },
+  })
+
+  const updateDocumentQuery = useMutation({
+    mutationFn: (doc: any, id: any) => updateDoc(doc, id),
+    onMutate: (variables) => {
+
+    },
+    onError: (error, variables, context) => {
+
+    },
+    onSuccess: (data, variables, context) => {
+
+    },
+    onSettled: (data, error, variables, context) => {
+
+    },
+  })
+
   const submit = async (data: any) => {
     setBookMark((prevBookmark: any) => {
       const arr = prevBookmark.filter((bookmark: any) =>
@@ -50,57 +89,16 @@ const CreatePage = ({ post }: any) => {
       data.bookmark = arr
       return arr;
     });
-    console.log(data);
+
+    data.tags = tags
+    // console.log(data);
     // return;
     if (!data.title || !data.category) return;
 
     if (post) {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_END_POINT}api/docs/${post?._id}`,
-          {
-            method: "PUT",
-            cache: "no-store",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          }
-        );
-        console.log(res);
-        if (!res.ok) {
-          throw new Error("Updation faild");
-        } else {
-          router.push("/");
-        }
-      } catch (error) {
-        console.log("Error in upadtion");
-      }
+      updateDocumentQuery.mutate(data, post?._id)
     } else {
-      try {
-        // console.log("data fetching");
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_END_POINT}/api/docs`, {
-          cache: "no-cache",
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-
-        console.log("Response status:", res.status);
-
-        if (res.ok) {
-          dispatch(appendDocs({ docsData: data }));
-          router.push("/");
-        } else {
-          console.log("NOt created");
-          router.push("/");
-        }
-      } catch (error) {
-        console.error("Error creating docs:", error);
-        router.push("/");
-      }
+      createDocumentQuery.mutate(data)
     }
   };
 
@@ -108,9 +106,25 @@ const CreatePage = ({ post }: any) => {
     setBookMark((prev) => [...prev, { bookmarkID, bookmarkName }]);
   };
 
+  const addTags = () => {
+    if (!tagRef.current) return
+    const value = tagRef.current?.value
+    if (!value) return
+    if (tags.includes(value)) {
+      toast({
+        variant: "destructive",
+        title: 'Same tag not allowed'
+      })
+      return
+    }
+    setTags((prev) => [value.toLowerCase(), ...prev]);
+
+    tagRef.current.value = ''
+  }
+
   return (
     <>
-      
+
       <main className="">
         <form className="w-full flex p-5 gap-2" onSubmit={handleSubmit(submit)}>
           <section className="w-[77%]">
@@ -154,11 +168,29 @@ const CreatePage = ({ post }: any) => {
               />
             </div>
             <div className="mt-3">
-              <Controller
-                name="tags"
-                control={control}
-                render={({ field }) => <MultiSelect {...field} />}
-              />
+              <div className="flex gap-1">
+                <Input ref={tagRef} />
+                <Button
+                  variant={'outline'}
+                  onClick={addTags}
+                >Add</Button>
+              </div>
+              <ul className="flex gap-2 flex-start mt-2">
+                {tags.map((tag: string, index: number) => {
+                  return <li
+                    key={tag}
+                    className="border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground px-1 flex gap-1 items-center"
+                  >
+                    <span>{tag}</span>
+                    <GoXCircleFill
+                      onClick={() => {
+                        setTags((prev) => prev.filter((prevTag) => prevTag !== tag))
+                      }}
+                      className="cursor-pointer" />
+                  </li>
+                })
+                }
+              </ul>
             </div>
 
             <Button className="w-full mt-4">Upload </Button>

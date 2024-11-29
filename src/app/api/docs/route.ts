@@ -23,23 +23,50 @@ export async function GET(request: NextRequest) {
 
 
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     try {
-        const body = await request.json();
-        console.log("request body: ", body);
 
-        const { title, description, tags, category, image, bookmark } = body;
+        const {
+            tags,
+            title,
+            image,
+            description,
+            category,
+            bookmark,
+        } = await request.json();
 
-        const data = await connectMongoDB();
-        // console.log("MongoDB connected:", data);
+        console.log({
+            tags,
+            title,
+            image,
+            category,
+            bookmark,
+            description,
+        });
+        await connectMongoDB();
 
-        const createdData = await Doc.create({ title, description, tags, category, image, bookmark });
+        const createdData = await Doc.create({
+            description,
+            category,
+            bookmark,
+            title,
+            tags,
+            image,
+        });
+
         console.log("Created Data:", createdData);
 
-        return NextResponse.json({ title, description, tags, category, image, bookmark });
+        return NextResponse.json({
+            success: true,
+            payload: createdData
+        }, { status: 200 });
+
     } catch (error) {
         console.error("Error creating data:", error);
-        return NextResponse.json({ message: "Message not sent" });
+        return NextResponse.json({
+            message: "document not created",
+            success: false
+        }, { status: 500 });
     }
 }
 

@@ -23,7 +23,6 @@ const ReadPage = ({ params }: any) => {
 
   return (
     <>
-      <Navbar />
       <main className="flex">
         <section className="w-[20%] border border-r-0">
           <DocsBookmarks doc={doc} />

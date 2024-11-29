@@ -9,7 +9,7 @@ export const getDocs = async () => {
     return null
 };
 
-export const getDoc = async (id: number) => {
+export const getDoc = async (id: string) => {
     const res = await axios.get(
         `${process.env.NEXT_PUBLIC_API_END_POINT}api/docs/${id}`
     );

@@ -30,10 +30,12 @@ const GettingStarted = () => {
       <div className="min-h-screen">
         <header className="bg-white shadow-md py-4">
           <div className="container mx-auto px-6 flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-indigo-600">MyDocs</h1>
+            <Link href={`/`}>
+              <h1 className="text-2xl font-bold text-indigo-600">MyDocs</h1>
+            </Link>
             <nav className="space-x-6 flex items-center text-gray-700">
-              <Link href="#tutorials" className="hover:text-indigo-500">
-                Tutorials
+              <Link href="/quick-look" className="hover:text-indigo-500">
+                Quick look
               </Link>
               <Link href="#guides" className="hover:text-indigo-500">
                 Guides
