@@ -1,8 +1,10 @@
 import {  NextResponse } from 'next/server';
-import { connectMongoDB } from "@/lib/mongodb";
 import Doc from "@/models/docs.model";
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
+import connectDB from '@/dbConfig/dbConfig';
 
+
+connectDB()
 export async function PUT(request: any, { params }: Params) {
     const { id } = params
     try {
@@ -17,7 +19,7 @@ export async function PUT(request: any, { params }: Params) {
             image,
             bookmark
         }
-        await connectMongoDB()
+      
         await Doc.findByIdAndUpdate(id, newObject)
         return NextResponse.json({ ...newObject })
     } catch (error) {
@@ -28,7 +30,7 @@ export async function PUT(request: any, { params }: Params) {
 export async function GET(request: Request, { params }: Params) {
     const { id } = params;
     try {
-        await connectMongoDB();
+    
         const doc = await Doc.findOne({ _id: id });
         if (!doc) {
             return NextResponse.json({

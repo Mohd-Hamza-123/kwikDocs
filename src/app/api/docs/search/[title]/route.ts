@@ -1,7 +1,7 @@
 // find substring
 
 // import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
-import { connectMongoDB } from "@/lib/mongodb";
+import connectDB from "@/dbConfig/dbConfig";
 import Doc from "@/models/docs.model";
 import { Regex } from "lucide-react";
 import { NextResponse } from "next/server";
@@ -18,7 +18,7 @@ import { NextResponse } from "next/server";
 //     }
 // }
 
-
+connectDB()
 
 interface Params {
     params: {
@@ -29,7 +29,7 @@ interface Params {
 export async function GET(request: Request, { params }: Params) {
     const { title } = params;
     try {
-        await connectMongoDB()
+       
         console.log("Searching for title:", title);
         const docs = await Doc.find({ title: { $regex: title, $options: 'i' } })
         console.log("Found documents:", docs);
