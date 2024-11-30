@@ -66,7 +66,7 @@ const CreatePage = ({ post }: any) => {
   })
 
   const updateDocumentQuery = useMutation({
-    mutationFn: (doc: any, id: any) => updateDoc(doc, id),
+    // mutationFn: (doc: any, id: any) => updateDoc(doc, id),
     onMutate: (variables) => {
 
     },
