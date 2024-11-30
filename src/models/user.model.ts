@@ -4,27 +4,32 @@ interface IUser {
     username: string;
     email: string;
     password: string;
-    role: "user" | "admin";
-    bookmark?: Types.ObjectId[]
+    isAdmin: boolean;
+    isVerified: boolean;
+    bookmark?: Types.ObjectId[];
+    forgotPasswordToken: string;
+    forgetPasswordTokenExpiry: Date;
+    verifyToken: string;
+    verifyTokenExpiry: Date;
 }
 
 const userSchema = new Schema<IUser>({
     username: {
         type: String,
-        required: true,
+        required: [true, "username is required"],
         trim: true,
-        unique: true,
+        unique: true
     },
     email: {
         type: String,
-        required: true,
+        required: [true, "email is required"],
         trim: true,
         lowercase: true,
         unique: true,
     },
     password: {
         type: String,
-        required: true,
+        required: [true, "password is required"],
         minlength: 8
     },
     bookmark: [
@@ -33,17 +38,32 @@ const userSchema = new Schema<IUser>({
             ref: 'doc'
         }
     ],
-
-    role: {
-        type: String,
-        enum: ["user", "admin"],
-        default: "user",
+    isVerified: {
+        type: Boolean,
+        default: false,
     },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    forgotPasswordToken: {
+        type: String
+    },
+    forgetPasswordTokenExpiry: {
+        type: Date
+    },
+    verifyToken: {
+        type: String,
+    },
+    verifyTokenExpiry: {
+        type: Date
+    }
 },
     {
         timestamps: true
     })
 
+    
 const UserModel = mongoose.models.UserModel || mongoose.model("UserModel", userSchema);
 
 export default UserModel

@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { connectMongoDB } from "@/lib/mongodb";
+import connectDB from '@/dbConfig/dbConfig';
 import Doc from "@/models/docs.model";
+
+connectDB()
+
 
 export async function GET(request: NextRequest) {
     try {
-        await connectMongoDB()
         const Docs = await Doc.find()
         return NextResponse.json({
             success: true,
@@ -43,7 +45,7 @@ export async function POST(request: NextRequest) {
             bookmark,
             description,
         });
-        await connectMongoDB();
+
 
         const createdData = await Doc.create({
             description,
@@ -74,7 +76,7 @@ export async function POST(request: NextRequest) {
 export async function DELETE(request: any) {
     const id = request.nextUrl.searchParams.get("_id");
     try {
-        await connectMongoDB();
+
         await Doc.findByIdAndDelete(id);
         return NextResponse.json({ message: "Item deleted", status: 200 });
     } catch (error) {

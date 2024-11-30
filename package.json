@@ -33,6 +33,7 @@
     "mongoose": "^8.5.0",
     "next": "^14.2.18",
     "next-cloudinary": "^6.6.2",
+    "nodemailer": "^6.9.16",
     "prismjs": "^1.29.0",
     "react": "^18",
     "react-dom": "^18",
@@ -49,6 +50,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/nodemailer": "^6.4.17",
     "@types/prismjs": "^1.26.4",
     "@types/react": "^18",
     "@types/react-dom": "^18",
