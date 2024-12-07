@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createTechnology, deleteTechnology, getAllTechnology, updateTechnology } from "@/lib/API/tech";
 import { Textarea } from "@/components/ui/textarea";
+import { uploadImageAPI } from "@/lib/API/ImageAPI/uploadImageAPI";
 
 
 const CreateTech = () => {
@@ -30,10 +31,10 @@ const CreateTech = () => {
 
     const {
         data: technology = [],
-        error: categoriesError,
-        isPending: categoriesPending,
-        isSuccess: categoriesSuccess,
-        isFetching: categoriesFetching,
+        error: technologyError,
+        isPending: technologyPending,
+        isSuccess: technologySuccess,
+        isFetching: technologyFetching,
         refetch
     } = useQuery({
         queryKey: ['technologies'],
@@ -51,9 +52,10 @@ const CreateTech = () => {
             setLoading(true);
         },
         onSuccess: (response) => {
-            refetch()
+            refetch();
+            console.log(response);
             // const newCategory = response?.payload;
-            // queryClient.setQueryData(['categories'], (prev: any) => {
+            // queryClient.setQueryData(['technology'], (prev: any) => {
             //   return prev ? [newCategory, ...prev] : [newCategory]
             // })
             setLoading(false)
@@ -79,7 +81,7 @@ const CreateTech = () => {
             setLoading(true);
         },
         onSuccess: (response) => {
-            // queryClient.invalidateQueries({ queryKey: ['categories'] })
+            // queryClient.invalidateQueries({ queryKey: ['technology'] })
 
             setLoading(false)
             // toast({
@@ -103,7 +105,7 @@ const CreateTech = () => {
             setLoading(true)
         },
         onSuccess: (response) => {
-            queryClient.invalidateQueries({ queryKey: ['categories'] })
+            queryClient.invalidateQueries({ queryKey: ['technology'] })
             refetch()
 
             setLoading(false)
@@ -123,7 +125,7 @@ const CreateTech = () => {
     })
 
     // USE STATE
-    const [isCategoryUpdate, setIsCategoryUpdate] = useState(false);
+    const [isTechUpdate, setIsTechUpdate] = useState(false);
     const [imageURL, setImageURL] = useState("");
     const [techType, setTechType] = useState("none");
 
@@ -135,17 +137,16 @@ const CreateTech = () => {
     const submit = async (data: any) => {
         data.techType = techType
         console.log(data)
-        return
-        
-        let image;
 
+        let image;
+        
         if (data.image) {
             setLoading(true)
             const imageFormData = new FormData();
             imageFormData.append("image", data.image);
             // imageFormData.append('userId', userData?._id);
-            imageFormData.append('folder', 'vnsluxe/category');
-            // image = await uploadImageAPI(imageFormData);
+            imageFormData.append('folder', 'documentarium/tech');
+            image = await uploadImageAPI(imageFormData);
             setLoading(false);
         }
 
@@ -153,10 +154,10 @@ const CreateTech = () => {
         payload.techType = techType
         payload.name = data?.name
         // payload.userID = userData?._id
-        if (image) payload.image = JSON.stringify(image)
+        if (image) payload.image = image
         if (data.deleteImage) payload.deleteImage = data?.deleteImage.current
 
-        if (isCategoryUpdate) {
+        if (isTechUpdate) {
             updateCategoryMutation.mutate({
                 payload,
                 categoryID: categoryID.current,
@@ -165,7 +166,6 @@ const CreateTech = () => {
         } else {
             createCategoryMutation.mutate({
                 payload,
-                // token: userData?.token,
             })
         }
 
@@ -174,7 +174,7 @@ const CreateTech = () => {
         setValue("name", "");
         setValue("image", "");
         setValue("deleteImage", "");
-        setIsCategoryUpdate(false);
+        setIsTechUpdate(false);
         categoryID.current = "";
         image_Delete_ID.current = ""
     }
@@ -200,7 +200,7 @@ const CreateTech = () => {
         setValue("image", "");
         image_Delete_ID.current = ""
         setValue("deleteImage", "");
-        setIsCategoryUpdate(false);
+        setIsTechUpdate(false);
     };
 
     function handleImage(e: React.ChangeEvent<HTMLInputElement>) {
@@ -314,7 +314,7 @@ const CreateTech = () => {
                                 <span
                                     onClick={() => {
                                         setImageURL("");
-                                        if (isCategoryUpdate)
+                                        if (isTechUpdate)
                                             setValue("deleteImage", image_Delete_ID);
                                         setValue("image", "");
                                     }}
@@ -328,9 +328,9 @@ const CreateTech = () => {
                 </div>
             </div>
 
-            <Button type="submit">{isCategoryUpdate ? "Update" : "Create"}</Button>
+            <Button type="submit">{isTechUpdate ? "Update" : "Create"}</Button>
 
-            {isCategoryUpdate && (
+            {isTechUpdate && (
                 <Button
                     onClick={() => {
                         setTechType("")
@@ -339,7 +339,7 @@ const CreateTech = () => {
                         setValue("image", "");
                         image_Delete_ID.current = ""
                         setValue("deleteImage", "");
-                        setIsCategoryUpdate(false);
+                        setIsTechUpdate(false);
                         categoryID.current = "";
                     }}
                     className="ml-2"
@@ -355,15 +355,15 @@ const CreateTech = () => {
                     <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
                 </circle>
             </svg>
-            <span>{"Updating Categories"}</span>
+            <span>{"Updating technology"}</span>
         </div>}
-        {(categoriesFetching) && <div className='w-full flex gap-1 items-center justify-center my-2'>
+        {(technologyFetching) && <div className='w-full flex gap-1 items-center justify-center my-2'>
             <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" className='block'>
                 <circle cx="50" cy="50" r="32" strokeWidth="8" stroke="#3498db" strokeDasharray="50.26548245743669 50.26548245743669" fill="none" strokeLinecap="round">
                     <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
                 </circle>
             </svg>
-            <span>{"Fetching Categories"}</span>
+            <span>{"Fetching technology"}</span>
         </div>}
 
         <div className="relative overflow-x-auto h-auto mx-10">
@@ -414,7 +414,7 @@ const CreateTech = () => {
                                             inputRef.current.scrollIntoView({ behavior: "smooth" });
                                             inputRef.current.focus({ preventScroll: true });
                                         }
-                                        setIsCategoryUpdate(true);
+                                        setIsTechUpdate(true);
                                         // setGender(category?.gender);
                                         setValue("name", category?.name);
                                         categoryID.current = category?._id;
@@ -499,3 +499,5 @@ const CreateTech = () => {
 };
 
 export default CreateTech
+
+

@@ -3,7 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 function copyToClipboard(copyText: any) {
     navigator.clipboard.writeText(copyText).then(
         () => {
-            toast.success("Cope Copied", {
+            toast.success("Code Copied", {
                 theme: "colored",
                 autoClose: 1500,
             });
