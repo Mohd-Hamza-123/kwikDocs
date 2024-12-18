@@ -5,15 +5,16 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import { Textarea } from "@/components/ui/textarea";
-import { appendDocs } from "@/lib/features/docsSlice";
+import { appendDocs } from "@/lib/store/features/docsSlice";
 import { useForm, Controller } from "react-hook-form";
 import { ComboboxDemo } from "@/components/ComboboxDemo";
-import { RTE, ImageUpload, Prism } from "../../index";
+import { ImageUpload, Prism, RTE } from "../../index";
 import { useMutation } from "@tanstack/react-query";
 import { createDoc, updateDoc } from "@/lib/API/createDoc";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { GoXCircleFill } from "react-icons/go";
+import { overlayLoadingIsFalseReducer, overlayLoadingIsTrueReducer } from "@/lib/store/features/overlayLoaderSlice";
 
 export interface I_Docs {
   title: string;
@@ -31,6 +32,7 @@ interface BookMarkInterface {
 
 const CreatePage = ({ post }: any) => {
   const router = useRouter();
+  const dispatch = useAppDispatch()
   const tagRef = useRef<HTMLInputElement | null>(null)
   const [tags, setTags] = useState<string[]>(post?.tags || []);
 
@@ -51,17 +53,20 @@ const CreatePage = ({ post }: any) => {
   const createDocumentQuery = useMutation({
     mutationFn: (doc: I_Docs) => createDoc(doc),
     onMutate: (variables) => {
-
+      dispatch(overlayLoadingIsTrueReducer({ loadingMsg: "Documentent is uploading" }))
     },
-    onError: (error, variables, context) => {
-
+    onError: (error : any, variables, context) => {
+      toast({
+        variant: "destructive",
+        title: error?.message || "Document not uploaded"
+      })
     },
     onSuccess: (data, variables, context) => {
       console.log(data);
       router.push(`/read-doc/${data?._id}`);
     },
     onSettled: (data, error, variables, context) => {
-
+      dispatch(overlayLoadingIsFalseReducer())
     },
   })
 
@@ -82,6 +87,8 @@ const CreatePage = ({ post }: any) => {
   })
 
   const submit = async (data: any) => {
+    console.log(data);
+
     setBookMark((prevBookmark: any) => {
       const arr = prevBookmark.filter((bookmark: any) =>
         data.description.includes(bookmark.bookmarkID)
@@ -91,8 +98,7 @@ const CreatePage = ({ post }: any) => {
     });
 
     data.tags = tags
-    // console.log(data);
-    // return;
+
     if (!data.title || !data.category) return;
 
     if (post) {

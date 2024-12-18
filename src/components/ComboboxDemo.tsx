@@ -18,23 +18,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { frameworksToLearn, languagesToLearn } from "./Content/LanguagesContent";
+import { useQuery } from "@tanstack/react-query";
+import { getAllTechnology } from "@/lib/API/techAPI/getAllTech";
 
-
-
-
-const languages = languagesToLearn.map((languages) => {
-  return {
-    value: languages.title
-  }
-})
-const frameworks = frameworksToLearn.map((framework) => {
-  return {
-    value: framework.title
-  }
-})
-
-const techonology = [...languages, ...frameworks]
 
 export function ComboboxDemo({
   value,
@@ -43,8 +29,31 @@ export function ComboboxDemo({
   value: any;
   onChange: any;
 }) {
-  // console.log(value);
+
   const [open, setOpen] = React.useState(false);
+  const [options, setOptions] = React.useState([])
+
+  const {
+    data: technology = [],
+    error: technologyError,
+    isPending: technologyPending,
+    isSuccess: technologySuccess,
+    isFetching: technologyFetching,
+    refetch
+  } = useQuery({
+    queryKey: ['technologies'],
+    queryFn: getAllTechnology,
+    staleTime: Infinity,
+  });
+
+  React.useEffect(() => {
+    if (technology?.length === 0) return
+    const technologies = technology?.flatMap((tech: any) => {
+      return tech.technologies
+    });
+    setOptions(technologies)
+  }, [technology]);
+  
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -56,7 +65,7 @@ export function ComboboxDemo({
           className="w-[100%] justify-between"
         >
           {value
-            ? techonology.find((tech) => tech.value === value)?.value
+            ? options.find((tech: any) => tech?._id === value)?.name
             : "Select Category"}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -68,22 +77,23 @@ export function ComboboxDemo({
           <CommandGroup>
             <CommandList>
               <ScrollArea className="h-[200px] w-[350px] rounded-md border p-4">
-                {techonology.map((tech) => (
+                {options.map((tech: any) => (
                   <CommandItem
-                    key={tech.value}
-                    value={tech.value}
+                    key={tech?._id}
+                    value={tech?.name}
                     onSelect={(currentValue) => {
-                      onChange((value = currentValue));
+
+                      onChange((value = tech?._id));
                       setOpen(false);
                     }}
                   >
                     <Check
                       className={cn(
                         "mr-2 h-4 w-4 ",
-                        value === tech.value ? "opacity-100" : "opacity-0 "
+                        value === tech?.name ? "opacity-100" : "opacity-0 "
                       )}
                     />
-                    {tech.value}
+                    {tech?.name}
                   </CommandItem>
                 ))}
               </ScrollArea>

@@ -1,5 +1,5 @@
 
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, ObjectId } from "mongoose";
 
 // Define the Schema
 interface TagInterface {
@@ -13,12 +13,13 @@ interface BookMarkInterface {
 }
 
 interface docsInterface extends Document {
-    title: string
-    description: string
-    image: string
-    tags: TagInterface[]
-    category: string,
-    bookmark: BookMarkInterface[]
+    title: string;
+    description: string;
+    image: string;
+    tags: TagInterface[];
+    category: ObjectId;
+    bookmark: BookMarkInterface[];
+    index: number;
 }
 
 const bookMarkScheema = new Schema<BookMarkInterface>(
@@ -50,12 +51,18 @@ const docSchema = new Schema<docsInterface>(
             required: false
         },
         category: {
-            type: String,
-            required: true
+            type: mongoose.Types.ObjectId,
+            required: true,
+            ref: "TechModel"
         },
         bookmark: {
             type: [bookMarkScheema],
             required: false
+        },
+        index: {
+            type: Number,
+            required: true,
+            default: 1
         }
     },
     {

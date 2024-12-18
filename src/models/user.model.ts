@@ -1,16 +1,17 @@
 import mongoose, { Schema, Types } from "mongoose";
 
-interface IUser {
+export interface IUser {
+    _id: string;
     username: string;
     email: string;
     password: string;
     isAdmin: boolean;
     isVerified: boolean;
     bookmark?: Types.ObjectId[];
-    forgotPasswordToken: string;
-    forgetPasswordTokenExpiry: Date;
-    verifyToken: string;
-    verifyTokenExpiry: Date;
+    forgotPasswordToken?: string;
+    forgetPasswordTokenExpiry?: Date;
+    verifyToken?: string;
+    verifyTokenExpiry?: Date;
 }
 
 const userSchema = new Schema<IUser>({
@@ -63,7 +64,7 @@ const userSchema = new Schema<IUser>({
         timestamps: true
     })
 
-    
+
 const UserModel = mongoose.models.UserModel || mongoose.model("UserModel", userSchema);
 
 export default UserModel

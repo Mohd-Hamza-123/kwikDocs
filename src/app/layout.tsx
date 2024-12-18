@@ -7,6 +7,8 @@ import QueryProvider from "./QueryProvider";
 import { Navbar } from '../index'
 import { Toaster } from "@/components/ui/toaster";
 import TypicalContextProviderWrapper from "@/context/TypicalContextProvider";
+import OverlayLoader from "@/components/OverlayLoader/OverlayLoader";
+import InitializationWrapper from "./InitializationWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,13 +29,16 @@ export default function RootLayout({
         <StoreProvider>
           <TypicalContextProviderWrapper>
             <QueryProvider>
-              <body
-                suppressHydrationWarning={true}
-                className={inter.className}>
-                <Navbar />
-                {children}
-                <Toaster />
-              </body>
+              <InitializationWrapper>
+                <body
+                  suppressHydrationWarning={true}
+                  className={inter.className}>
+                  <Navbar />
+                  {children}
+                  <Toaster />
+                  <OverlayLoader />
+                </body>
+              </InitializationWrapper>
             </QueryProvider>
           </TypicalContextProviderWrapper>
         </StoreProvider>

@@ -3,8 +3,7 @@ import conf from "@/conf/conf";
 import axios from "axios";
 
 export const createDoc = async (doc: I_Docs) => {
-    console.log(doc)
-    const res = await axios.post(`${conf.api_end_point}/api/docs`, doc);
+    const res = await axios.post(`api/docs/create`, doc);
     if (res.data?.success) {
         return res.data?.payload
     }

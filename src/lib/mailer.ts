@@ -42,7 +42,7 @@ const sendEmail = async ({ email, emailType, userId }: I_Email) => {
             }
         });
 
-        const link = emailType === type_Verify_Email ? `${conf.api_end_point}verify-email?=${token}` : `${conf.api_end_point}forgot-password?=${token}`
+        const link = emailType === type_Verify_Email ? `${conf.api_end_point}verify-email?token=${token}` : `${conf.api_end_point}forgot-password?token=${token}`
         console.log("link", link);
 
         const mailOptions = {
@@ -66,7 +66,7 @@ const sendEmail = async ({ email, emailType, userId }: I_Email) => {
                         </tr>
                         <tr>
                             <td style="padding: 20px; text-align: center; background-color: #f4f4f4;">
-                                <p style="font-size: 14px; color: #777777; margin: 0;">If you have any questions, feel free to <a href="mailto:support@example.com" style="color: #0044cc;">contact our support team</a>.</p>
+                                <p style="font-size: 14px; color: #777777; margin: 0;">If you have any questions, feel free to <a href="mailto:${conf.mail_user}" style="color: #0044cc;">${link}</a></p>
                             </td>
                         </tr>
                     </table>
@@ -76,7 +76,7 @@ const sendEmail = async ({ email, emailType, userId }: I_Email) => {
 
         const mailResponse = await transporter.sendMail(mailOptions);
 
-        console.log(mailResponse)
+        // console.log(mailResponse)
         return mailResponse
     } catch (error: any) {
         console.log(error?.message);

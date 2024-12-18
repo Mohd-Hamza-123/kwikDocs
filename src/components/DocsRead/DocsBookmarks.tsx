@@ -1,7 +1,8 @@
 import React from "react";
 
 const DocsBookmarks = ({ doc }: any) => {
-  const { bookmark } = doc;
+
+  const { bookmark } = doc || {};
   
   return (
     <div className="px-2 py-2">

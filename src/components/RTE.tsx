@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Controller } from "react-hook-form";
-import { generateUniqueId } from "@/lib/ConvertDate";
+import { generateUniqueId } from "@/utils/ConvertDate";
 
 interface RTEType {
   name: string;
