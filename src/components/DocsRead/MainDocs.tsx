@@ -2,17 +2,14 @@
 import React, { useEffect } from "react";
 import parse from "html-react-parser";
 import Prism from "../Prism";
-import "../../lib/Style/copyBtn.css"
-import "react-toastify/dist/ReactToastify.css";
 import ReactModel from "../ReactModel";
 import { useRouter } from "next/navigation";
 import { MdEdit } from "react-icons/md";
-import { makeCodeBlock } from "@/lib/CodeBlock_CopyBtn";
+import { makeCodeBlock } from "@/utils/CodeBlock_CopyBtn";
 
 const MainDocs = ({ doc }: any) => {
   const router = useRouter();
   const { title, description, _id : id } = doc;
-
 
   useEffect(() => {
     makeCodeBlock();

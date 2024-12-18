@@ -1,12 +1,5 @@
 "use client";
 import Image from "next/image";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
@@ -14,20 +7,23 @@ import { Label } from "@/components/ui/label";
 import React, { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createTechnology, deleteTechnology, getAllTechnology, updateTechnology } from "@/lib/API/tech";
+import { createTechnology } from "@/lib/API/techAPI/createTech";
 import { Textarea } from "@/components/ui/textarea";
-import { uploadImageAPI } from "@/lib/API/ImageAPI/uploadImageAPI";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
+import { getAllTechnology } from "@/lib/API/techAPI/getAllTech";
+import { overlayLoadingIsFalseReducer, overlayLoadingIsTrueReducer } from "@/lib/store/features/overlayLoaderSlice";
+import { technologyEnums } from "@/constant";
 
 
 const CreateTech = () => {
 
+    const dispatch = useAppDispatch();
     const queryClient = useQueryClient();
 
+    const userData = useAppSelector((state) => state.auth.userData)
     // REACT-HOOK-FORM
 
-    const { register, handleSubmit, setValue } = useForm();
-
-    const [loading, setLoading] = useState(false)
+    const { register, handleSubmit, setValue, reset } = useForm();
 
     const {
         data: technology = [],
@@ -43,54 +39,59 @@ const CreateTech = () => {
     });
 
 
-
     const createCategoryMutation = useMutation({
-        mutationFn: async (payload: Object) => {
-            return createTechnology(payload)
+        mutationFn: async (formData: FormData) => {
+            return createTechnology(formData)
         },
         onMutate: () => {
-            setLoading(true);
+            dispatch(overlayLoadingIsTrueReducer({
+                loadingMsg: "Wait Please !"
+            }))
         },
         onSuccess: (response) => {
-            refetch();
+
             console.log(response);
             // const newCategory = response?.payload;
             // queryClient.setQueryData(['technology'], (prev: any) => {
             //   return prev ? [newCategory, ...prev] : [newCategory]
             // })
-            setLoading(false)
+
             // toast({
             //     variant: "success",
             //     title: response?.message,
             // });
         },
         onError: (error) => {
-            setLoading(false)
             toast({
                 variant: "destructive",
                 title: error?.message,
             });
         },
+        onSettled: () => {
+            dispatch(overlayLoadingIsFalseReducer());
+            reset()
+        }
     })
+
     const updateCategoryMutation = useMutation({
         mutationFn: async (payload: Object) => {
-            return updateTechnology(payload)
+            // return updateTechnology(payload)
         },
         onMutate: () => {
             refetch();
-            setLoading(true);
+
         },
         onSuccess: (response) => {
             // queryClient.invalidateQueries({ queryKey: ['technology'] })
 
-            setLoading(false)
+
             // toast({
             //     variant: "success",
             //     title: response?.message,
             // });
         },
         onError: (error) => {
-            setLoading(false)
+
             toast({
                 variant: "destructive",
                 title: error.message,
@@ -99,16 +100,15 @@ const CreateTech = () => {
     })
     const deleteCategoryMutation = useMutation({
         mutationFn: async (id: string) => {
-            return deleteTechnology(id)
+            // return deleteTechnology(id)
         },
         onMutate: () => {
-            setLoading(true)
+
         },
         onSuccess: (response) => {
             queryClient.invalidateQueries({ queryKey: ['technology'] })
             refetch()
 
-            setLoading(false)
             // toast({
             //     variant: "success",
             //     title: response?.message,
@@ -116,7 +116,7 @@ const CreateTech = () => {
             // });
         },
         onError: (error) => {
-            setLoading(false)
+
             toast({
                 variant: "destructive",
                 title: error.message,
@@ -127,7 +127,6 @@ const CreateTech = () => {
     // USE STATE
     const [isTechUpdate, setIsTechUpdate] = useState(false);
     const [imageURL, setImageURL] = useState("");
-    const [techType, setTechType] = useState("none");
 
     // use refs
     const inputRef = useRef<HTMLLabelElement | null>(null);
@@ -135,41 +134,32 @@ const CreateTech = () => {
     const categoryID = useRef("");
 
     const submit = async (data: any) => {
-        data.techType = techType
-        console.log(data)
 
-        let image;
-        
+        const formData = new FormData();
         if (data.image) {
-            setLoading(true)
-            const imageFormData = new FormData();
-            imageFormData.append("image", data.image);
-            // imageFormData.append('userId', userData?._id);
-            imageFormData.append('folder', 'documentarium/tech');
-            image = await uploadImageAPI(imageFormData);
-            setLoading(false);
+            formData.append("image", data.image);
+            formData.append('userId', userData?._id!);
+            formData.append('folder', 'documentarium/tech');
         }
-
-        const payload = {} as any;
-        payload.techType = techType
-        payload.name = data?.name
-        // payload.userID = userData?._id
-        if (image) payload.image = image
-        if (data.deleteImage) payload.deleteImage = data?.deleteImage.current
+        if (data.name) {
+            formData.append("name", data.name)
+        }
+        if (data.techType) {
+            formData.append("techType", data.techType)
+        }
+        if (data.description) {
+            formData.append("description", data.description)
+        }
+        if (data.deleteImage) {
+            formData.append('removeImageId', data?.deleteImage.current)
+        }
 
         if (isTechUpdate) {
-            updateCategoryMutation.mutate({
-                payload,
-                categoryID: categoryID.current,
-                // token: userData?.token
-            })
+            updateCategoryMutation.mutate(formData)
         } else {
-            createCategoryMutation.mutate({
-                payload,
-            })
+            createCategoryMutation.mutate(formData)
         }
 
-        setTechType("")
         setImageURL("");
         setValue("name", "");
         setValue("image", "");
@@ -194,7 +184,7 @@ const CreateTech = () => {
         //     userID: userData?._id,
         //     token: userData?.token,
         // })
-        setTechType('')
+
         setImageURL("");
         setValue("name", "");
         setValue("image", "");
@@ -261,30 +251,17 @@ const CreateTech = () => {
                     >
                         Tech Type
                     </Label>
-                    <Select
-                        value={techType}
-                        onValueChange={(e) => {
-                            setTechType(e)
-                        }}
+                    <select
+                        className="w-full rounded-sm"
+                        {...register("techType", {
+                            required: true
+                        })}
                     >
-                        <SelectTrigger className="w-[100%]">
-                            <SelectValue placeholder={techType || "Tech type"} />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="language">
-                                language
-                            </SelectItem>
-                            <SelectItem value="framework">
-                                framework
-                            </SelectItem>
-                            <SelectItem value="library">
-                                library
-                            </SelectItem>
-                            <SelectItem value="none">
-                                none
-                            </SelectItem>
-                        </SelectContent>
-                    </Select>
+                        {technologyEnums?.map((tech, index) => (
+                            <option defaultChecked={tech === 'none' ? true : false} key={tech + index} value={tech}>{tech}</option>
+                        ))}
+
+                    </select>
                 </div>
 
                 <div>
@@ -333,7 +310,7 @@ const CreateTech = () => {
             {isTechUpdate && (
                 <Button
                     onClick={() => {
-                        setTechType("")
+
                         setImageURL("");
                         setValue("name", "");
                         setValue("image", "");
@@ -349,23 +326,6 @@ const CreateTech = () => {
             )}
         </form>
 
-        {(true) && <div className='w-full flex gap-1 items-center justify-center my-2'>
-            <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" className='block'>
-                <circle cx="50" cy="50" r="32" strokeWidth="8" stroke="#3498db" strokeDasharray="50.26548245743669 50.26548245743669" fill="none" strokeLinecap="round">
-                    <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
-                </circle>
-            </svg>
-            <span>{"Updating technology"}</span>
-        </div>}
-        {(technologyFetching) && <div className='w-full flex gap-1 items-center justify-center my-2'>
-            <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" className='block'>
-                <circle cx="50" cy="50" r="32" strokeWidth="8" stroke="#3498db" strokeDasharray="50.26548245743669 50.26548245743669" fill="none" strokeLinecap="round">
-                    <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
-                </circle>
-            </svg>
-            <span>{"Fetching technology"}</span>
-        </div>}
-
         <div className="relative overflow-x-auto h-auto mx-10">
             <table className="w-full h-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -374,13 +334,7 @@ const CreateTech = () => {
                             Sr.No
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Category
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Products
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Gender
+                            Technology
                         </th>
                         <th scope="col" className="px-6 py-3">
                             Edit
@@ -391,20 +345,18 @@ const CreateTech = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {technology?.map((category: any, index: number) => (
+                    {technology?.map((tech: any, index: number) => (
                         <tr
-                            key={category?._id}
+                            key={tech?._id}
                             className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                         >
-                            <th
+                            <td
                                 scope="row"
                                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                             >
                                 {index + 1}
-                            </th>
-                            <td className="px-6 py-4">{category?.name}</td>
-                            <td className="px-6 py-4">{category?.productCount}</td>
-                            <td className="px-6 py-4">{category?.gender}</td>
+                            </td>
+                            <td className="px-6 py-4">{tech?.name}</td>
                             <td className="px-6 py-4">
                                 <svg
                                     onClick={() => {
@@ -416,10 +368,10 @@ const CreateTech = () => {
                                         }
                                         setIsTechUpdate(true);
                                         // setGender(category?.gender);
-                                        setValue("name", category?.name);
-                                        categoryID.current = category?._id;
-                                        setImageURL(category?.image?.secure_url || "");
-                                        image_Delete_ID.current = category?.image?.public_id
+                                        setValue("name", tech?.name);
+                                        categoryID.current = tech?._id;
+                                        setImageURL(tech?.image?.secure_url || "");
+                                        image_Delete_ID.current = tech?.image?.public_id
                                     }}
                                     className="cursor-pointer"
                                     width="25px"
@@ -451,7 +403,7 @@ const CreateTech = () => {
                             <td className="px-6 py-4">
                                 <svg
                                     onClick={() => {
-                                        handleDeleteCategory(category?._id, category?.name)
+                                        handleDeleteCategory(tech?._id, tech?.name)
                                     }}
                                     width="25px"
                                     height="25px"

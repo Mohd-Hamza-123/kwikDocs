@@ -1,12 +1,16 @@
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "@/hooks/use-toast";
+
 
 function copyToClipboard(copyText: any) {
     navigator.clipboard.writeText(copyText).then(
         () => {
-            toast.success("Code Copied", {
-                theme: "colored",
-                autoClose: 1500,
-            });
+            () => {
+                'use client'
+                toast({
+                    variant: "default",
+                    title: "text copied"
+                })
+            }
         },
         (err) => {
             console.error("Failed to copy text: ", err);

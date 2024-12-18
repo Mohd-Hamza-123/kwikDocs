@@ -9,7 +9,8 @@ import DocsBookmarks from "./components/DocsRead/DocsBookmarks"
 import SearchBar from "./components/SearchBar"
 import SearchedCards from "./components/SearchedCards"
 import LoadingPage from "./components/LoadingPage"
-import Languages from "./components/Content/Languages"
+import Technologies from "./components/Content/Languages"
 import Sidebar from "./components/Sidebar/Sidebar"
 import Prism from "./components/Prism"
-export { Languages, Navbar, Cards, RTE, MultiSelect, ImageUpload, DocsBookmarks, MainDocs, RelatedDocs, SearchBar, SearchedCards, LoadingPage, Sidebar, Prism }
+import Home from "./components/Home/Home"
+export { Technologies, Navbar, Cards, RTE, MultiSelect, ImageUpload, DocsBookmarks, MainDocs, RelatedDocs, SearchBar, SearchedCards, LoadingPage, Sidebar, Prism, Home }

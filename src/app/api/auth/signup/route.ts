@@ -22,15 +22,18 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({
                 success: false,
                 message: "User already exists",
-            })
+            }, { status: 400 })
         }
+
         const hashedPassword = await hashPassword(password);
+
         if (!hashedPassword) {
             return NextResponse.json({
                 success: false,
                 message: "something went wrong while signIn."
-            })
+            }, { status: 400 })
         }
+
         const createUser = new UserModel({
             username,
             email,
@@ -38,27 +41,27 @@ export async function POST(request: NextRequest) {
         })
 
         const response = await createUser.save();
- 
+
         delete response?.password
 
         await sendEmail({
             email,
             emailType: type_Verify_Email,
             userId: response?._id.toString()
-        })
+        });
 
         return NextResponse.json({
             success: true,
             message: 'successfully registered',
             payload: response
-        })
+        }, { status: 200 })
 
     } catch (error: any) {
         return NextResponse.json({
             success: true,
             message: 'successfully registered',
             error: error?.message || error
-        })
+        }, { status: 500 })
     }
 }
 

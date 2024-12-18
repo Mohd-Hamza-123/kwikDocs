@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getDocs = async () => {
     const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_END_POINT}api/docs`);
+        `api/docs`);
     if (res.data?.success) {
         return res?.data?.payload
     }
@@ -11,7 +11,7 @@ export const getDocs = async () => {
 
 export const getDoc = async (id: string) => {
     const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_END_POINT}api/docs/${id}`
+        `api/docs/${id}`
     );
     if (res.data?.success) {
         return res?.data?.payload

@@ -1,3 +1,4 @@
+
 import mongoose from "mongoose";
 
 const techSchema = new mongoose.Schema({
@@ -14,7 +15,6 @@ const techSchema = new mongoose.Schema({
     techType: {
         type: String,
         required: true,
-        enum: ['language', 'framework', 'library', 'none']
     },
     image: {
         type: {

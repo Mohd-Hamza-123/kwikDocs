@@ -5,7 +5,9 @@ import { TbPencilCode } from "react-icons/tb";
 import React from 'react'
 
 const Sidebar = () => {
+    
     const { isSideBarOpen, setIsSideBarOpen } = useTypicalContext();
+   
     if (!isSideBarOpen) return null
 
     const closeSideBar = () => {

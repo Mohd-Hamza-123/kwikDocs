@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { DateFormatter } from "@/lib/ConvertDate";
+import { DateFormatter } from "@/utils/ConvertDate";
 
 interface cardProps {
   title: string;
