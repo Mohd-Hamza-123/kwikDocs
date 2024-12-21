@@ -24,9 +24,7 @@ const Navbar = () => {
                     <h1 className="text-xl lg:text-2xl font-bold text-indigo-600">MyDocs</h1>
                 </Link>
                 <nav className="space-x-4 lg:space-x-6 text-gray-700">
-                    <Link href="#tutorials" className="hover:text-indigo-500">
-                        Tutorials
-                    </Link>
+
                     <Link href="#guides" className="hover:text-indigo-500">
                         Guides
                     </Link>
