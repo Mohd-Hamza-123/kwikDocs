@@ -2,14 +2,14 @@ import connectDB from "@/dbConfig/dbConfig";
 import TechModel from "@/models/tech.model";
 import { NextRequest, NextResponse } from "next/server";
 
-connectDB();
+
 
 export async function GET(request: NextRequest) {
+    await connectDB();
     try {
 
-        const allTech = await TechModel.find({}, { techType: 1, _id: 0 }).distinct('techType');
+        const allTech = await TechModel.find({}, { techType: 1, _id: 0 }).distinct('techType').exec();
       
-
         if (!Array.isArray(allTech) || allTech?.length <= 0) {
             return NextResponse.json({
                 success: false,
