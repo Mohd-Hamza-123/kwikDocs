@@ -6,9 +6,6 @@ import { useGSAP } from '@gsap/react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FaArrowCircleDown } from "react-icons/fa";
-import { frameworksToLearn, languagesToLearn } from '@/components/Content/LanguagesContent';
-import { useQuery } from '@tanstack/react-query';
-import { getAllTechnology } from '@/lib/API/techAPI/getAllTech';
 
 const Home = () => {
     useGSAP(() => {
