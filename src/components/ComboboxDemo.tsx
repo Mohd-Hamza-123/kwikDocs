@@ -31,7 +31,7 @@ export function ComboboxDemo({
 }) {
 
   const [open, setOpen] = React.useState(false);
-  const [options, setOptions] = React.useState([])
+  const [options, setOptions] = React.useState<any>([])
 
   const {
     data: technology = [],
@@ -51,6 +51,7 @@ export function ComboboxDemo({
     const technologies = technology?.flatMap((tech: any) => {
       return tech.technologies
     });
+
     setOptions(technologies)
   }, [technology]);
   
