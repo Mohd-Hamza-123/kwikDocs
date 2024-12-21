@@ -37,8 +37,7 @@ const CreateTech = () => {
         queryFn: getAllTechnology,
         staleTime: Infinity,
     });
-
-
+    // console.log(technology)
     const createCategoryMutation = useMutation({
         mutationFn: async (formData: FormData) => {
             return createTechnology(formData)
@@ -257,8 +256,9 @@ const CreateTech = () => {
                             required: true
                         })}
                     >
+                        <option hidden={true} value="">Select Technology Type</option>
                         {technologyEnums?.map((tech, index) => (
-                            <option defaultChecked={tech === 'none' ? true : false} key={tech + index} value={tech}>{tech}</option>
+                            <option key={tech + index} value={tech}>{tech}</option>
                         ))}
 
                     </select>
@@ -326,126 +326,129 @@ const CreateTech = () => {
             )}
         </form>
 
-        <div className="relative overflow-x-auto h-auto mx-10">
-            <table className="w-full h-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" className="px-6 py-3">
-                            Sr.No
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Technology
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Edit
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Delete
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {technology?.map((tech: any, index: number) => (
-                        <tr
-                            key={tech?._id}
-                            className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                        >
-                            <td
-                                scope="row"
-                                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                            >
-                                {index + 1}
-                            </td>
-                            <td className="px-6 py-4">{tech?.name}</td>
-                            <td className="px-6 py-4">
-                                <svg
-                                    onClick={() => {
-
-
-                                        if (inputRef.current) {
-                                            inputRef.current.scrollIntoView({ behavior: "smooth" });
-                                            inputRef.current.focus({ preventScroll: true });
-                                        }
-                                        setIsTechUpdate(true);
-                                        // setGender(category?.gender);
-                                        setValue("name", tech?.name);
-                                        categoryID.current = tech?._id;
-                                        setImageURL(tech?.image?.secure_url || "");
-                                        image_Delete_ID.current = tech?.image?.public_id
-                                    }}
-                                    className="cursor-pointer"
-                                    width="25px"
-                                    height="25px"
-                                    viewBox="0 0 24.00 24.00"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    stroke="#000000"
-                                    strokeWidth="0.192"
-                                    transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)"
-                                >
-                                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                                    <g
-                                        id="SVGRepo_tracerCarrier"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    ></g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        {" "}
-                                        <path
-                                            fillRule="evenodd"
-                                            clipRule="evenodd"
-                                            d="M8.56078 20.2501L20.5608 8.25011L15.7501 3.43945L3.75012 15.4395V20.2501H8.56078ZM15.7501 5.56077L18.4395 8.25011L16.5001 10.1895L13.8108 7.50013L15.7501 5.56077ZM12.7501 8.56079L15.4395 11.2501L7.93946 18.7501H5.25012L5.25012 16.0608L12.7501 8.56079Z"
-                                            fill="#080341"
-                                        ></path>
-                                    </g>
-                                </svg>
-                            </td>
-                            <td className="px-6 py-4">
-                                <svg
-                                    onClick={() => {
-                                        handleDeleteCategory(tech?._id, tech?.name)
-                                    }}
-                                    width="25px"
-                                    height="25px"
-                                    viewBox="0 0 1024 1024"
-                                    className="icon"
-                                    version="1.1"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="#000000"
-                                    stroke="#000000"
-                                >
-                                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                                    <g
-                                        id="SVGRepo_tracerCarrier"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    ></g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <path
-                                            d="M667.8 362.1H304V830c0 28.2 23 51 51.3 51h312.4c28.4 0 51.4-22.8 51.4-51V362.2h-51.3z"
-                                            fill="#CCCCCC"
-                                        ></path>
-                                        <path
-                                            d="M750.3 295.2c0-8.9-7.6-16.1-17-16.1H289.9c-9.4 0-17 7.2-17 16.1v50.9c0 8.9 7.6 16.1 17 16.1h443.4c9.4 0 17-7.2 17-16.1v-50.9z"
-                                            fill="#CCCCCC"
-                                        ></path>
-                                        <path
-                                            d="M733.3 258.3H626.6V196c0-11.5-9.3-20.8-20.8-20.8H419.1c-11.5 0-20.8 9.3-20.8 20.8v62.3H289.9c-20.8 0-37.7 16.5-37.7 36.8V346c0 18.1 13.5 33.1 31.1 36.2V830c0 39.6 32.3 71.8 72.1 71.8h312.4c39.8 0 72.1-32.2 72.1-71.8V382.2c17.7-3.1 31.1-18.1 31.1-36.2v-50.9c0.1-20.2-16.9-36.8-37.7-36.8z m-293.5-41.5h145.3v41.5H439.8v-41.5z m-146.2 83.1H729.5v41.5H293.6v-41.5z m404.8 530.2c0 16.7-13.7 30.3-30.6 30.3H355.4c-16.9 0-30.6-13.6-30.6-30.3V382.9h373.6v447.2z"
-                                            fill="#211F1E"
-                                        ></path>
-                                        <path
-                                            d="M511.6 798.9c11.5 0 20.8-9.3 20.8-20.8V466.8c0-11.5-9.3-20.8-20.8-20.8s-20.8 9.3-20.8 20.8v311.4c0 11.4 9.3 20.7 20.8 20.7zM407.8 798.9c11.5 0 20.8-9.3 20.8-20.8V466.8c0-11.5-9.3-20.8-20.8-20.8s-20.8 9.3-20.8 20.8v311.4c0.1 11.4 9.4 20.7 20.8 20.7zM615.4 799.6c11.5 0 20.8-9.3 20.8-20.8V467.4c0-11.5-9.3-20.8-20.8-20.8s-20.8 9.3-20.8 20.8v311.4c0 11.5 9.3 20.8 20.8 20.8z"
-                                            fill="#211F1E"
-                                        ></path>
-                                    </g>
-                                </svg>
-                            </td>
+        {technology?.map((techObj: any) => {
+            return <div key={techObj?.techType} className="relative overflow-x-auto h-auto mx-10 my-8">
+                <table className="w-full h-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <caption className="text-lg capitalize">{techObj?.techType}</caption>
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" className="px-6 py-3">
+                                Sr.No
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Technology
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Edit
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Delete
+                            </th>
                         </tr>
-                    ))}
-                </tbody >
+                    </thead>
+                    <tbody>
+                        {techObj?.technologies?.map((tech: any, index: number) => (
+                            <tr
+                                key={tech?._id}
+                                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                            >
+                                <td
+                                    scope="row"
+                                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                >
+                                    {index + 1}
+                                </td>
+                                <td className="px-6 py-4">{tech?.name}</td>
+                                <td className="px-6 py-4">
+                                    <svg
+                                        onClick={() => {
 
-            </table >
-        </div >
+
+                                            if (inputRef.current) {
+                                                inputRef.current.scrollIntoView({ behavior: "smooth" });
+                                                inputRef.current.focus({ preventScroll: true });
+                                            }
+                                            setIsTechUpdate(true);
+                                            // setGender(category?.gender);
+                                            setValue("name", tech?.name);
+                                            categoryID.current = tech?._id;
+                                            setImageURL(tech?.image?.secure_url || "");
+                                            image_Delete_ID.current = tech?.image?.public_id
+                                        }}
+                                        className="cursor-pointer"
+                                        width="25px"
+                                        height="25px"
+                                        viewBox="0 0 24.00 24.00"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        stroke="#000000"
+                                        strokeWidth="0.192"
+                                        transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)"
+                                    >
+                                        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                                        <g
+                                            id="SVGRepo_tracerCarrier"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        ></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            {" "}
+                                            <path
+                                                fillRule="evenodd"
+                                                clipRule="evenodd"
+                                                d="M8.56078 20.2501L20.5608 8.25011L15.7501 3.43945L3.75012 15.4395V20.2501H8.56078ZM15.7501 5.56077L18.4395 8.25011L16.5001 10.1895L13.8108 7.50013L15.7501 5.56077ZM12.7501 8.56079L15.4395 11.2501L7.93946 18.7501H5.25012L5.25012 16.0608L12.7501 8.56079Z"
+                                                fill="#080341"
+                                            ></path>
+                                        </g>
+                                    </svg>
+                                </td>
+                                <td className="px-6 py-4">
+                                    <svg
+                                        onClick={() => {
+                                            handleDeleteCategory(tech?._id, tech?.name)
+                                        }}
+                                        width="25px"
+                                        height="25px"
+                                        viewBox="0 0 1024 1024"
+                                        className="icon"
+                                        version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="#000000"
+                                        stroke="#000000"
+                                    >
+                                        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                                        <g
+                                            id="SVGRepo_tracerCarrier"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        ></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path
+                                                d="M667.8 362.1H304V830c0 28.2 23 51 51.3 51h312.4c28.4 0 51.4-22.8 51.4-51V362.2h-51.3z"
+                                                fill="#CCCCCC"
+                                            ></path>
+                                            <path
+                                                d="M750.3 295.2c0-8.9-7.6-16.1-17-16.1H289.9c-9.4 0-17 7.2-17 16.1v50.9c0 8.9 7.6 16.1 17 16.1h443.4c9.4 0 17-7.2 17-16.1v-50.9z"
+                                                fill="#CCCCCC"
+                                            ></path>
+                                            <path
+                                                d="M733.3 258.3H626.6V196c0-11.5-9.3-20.8-20.8-20.8H419.1c-11.5 0-20.8 9.3-20.8 20.8v62.3H289.9c-20.8 0-37.7 16.5-37.7 36.8V346c0 18.1 13.5 33.1 31.1 36.2V830c0 39.6 32.3 71.8 72.1 71.8h312.4c39.8 0 72.1-32.2 72.1-71.8V382.2c17.7-3.1 31.1-18.1 31.1-36.2v-50.9c0.1-20.2-16.9-36.8-37.7-36.8z m-293.5-41.5h145.3v41.5H439.8v-41.5z m-146.2 83.1H729.5v41.5H293.6v-41.5z m404.8 530.2c0 16.7-13.7 30.3-30.6 30.3H355.4c-16.9 0-30.6-13.6-30.6-30.3V382.9h373.6v447.2z"
+                                                fill="#211F1E"
+                                            ></path>
+                                            <path
+                                                d="M511.6 798.9c11.5 0 20.8-9.3 20.8-20.8V466.8c0-11.5-9.3-20.8-20.8-20.8s-20.8 9.3-20.8 20.8v311.4c0 11.4 9.3 20.7 20.8 20.7zM407.8 798.9c11.5 0 20.8-9.3 20.8-20.8V466.8c0-11.5-9.3-20.8-20.8-20.8s-20.8 9.3-20.8 20.8v311.4c0.1 11.4 9.4 20.7 20.8 20.7zM615.4 799.6c11.5 0 20.8-9.3 20.8-20.8V467.4c0-11.5-9.3-20.8-20.8-20.8s-20.8 9.3-20.8 20.8v311.4c0 11.5 9.3 20.8 20.8 20.8z"
+                                                fill="#211F1E"
+                                            ></path>
+                                        </g>
+                                    </svg>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody >
+
+                </table >
+            </div >
+        })}
     </>
 
 };
