@@ -31,9 +31,9 @@ export async function PUT(request: any, { params }: Params) {
 export async function GET(request: Request, { params }: Params) {
     try {
         const { id } = params;
-      
+
         const category = await TechModel.findById(id);
-        console.log(category)
+        console.log("category ID : ", category);
         const doc = await Doc.findOne({ _id: id });
         if (!doc) {
             return NextResponse.json({

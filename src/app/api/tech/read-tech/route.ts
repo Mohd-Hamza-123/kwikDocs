@@ -1,28 +1,40 @@
 import { technologyEnums } from "@/constant";
-import { TechModel } from "@/models/tech.model";
+import connectDB from "@/dbConfig/dbConfig";
+import TechModel from "@/models/tech.model";
 import { NextRequest, NextResponse } from "next/server";
+
+connectDB();
 
 export async function GET(request: NextRequest) {
     try {
 
-        const data = await Promise.all(technologyEnums?.map(async (tech) => {
-            
-            const x = await TechModel.find({ techType: tech });
-            console.log(x)
-            if (x.length <= 0) return
+        const allTech = await TechModel.find({}, { techType: 1, _id: 0 }).distinct('techType');
+      
+
+        if (!Array.isArray(allTech) || allTech?.length <= 0) {
+            return NextResponse.json({
+                success: false,
+                message: "failed to get data",
+            }, { status: 400 })
+        }
+
+        const data = await Promise.all(allTech?.map(async (tech) => {
+            const technologies = await TechModel.find({ techType: tech });
+
+            if (technologies?.length <= 0) return
             return {
                 techType: tech,
-                technologies: x,
+                technologies,
             }
         }))
 
         const payload = data.filter(Boolean)
-        console.log(payload)
-        if (payload) {
+
+        if (payload.length > 0) {
             return NextResponse.json({
                 success: true,
                 message: "Data found",
-                payload
+                payload,
             }, { status: 200 })
         } else {
             return NextResponse.json({
@@ -30,9 +42,10 @@ export async function GET(request: NextRequest) {
                 message: "failed to get data",
             }, { status: 400 })
         }
-        
+
     } catch (error: any) {
-        console.log("((error))--> ", error)
+
+        console.log("error : ",error?.message);
         return NextResponse.json({
             success: false,
             message: "failed to get data",

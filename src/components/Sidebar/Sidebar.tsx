@@ -3,18 +3,22 @@ import { useTypicalContext } from '@/context/Typical-Context'
 import Link from 'next/link'
 import { TbPencilCode } from "react-icons/tb";
 import React from 'react'
+import { GrClose } from "react-icons/gr";
 
 const Sidebar = () => {
-    
+
     const { isSideBarOpen, setIsSideBarOpen } = useTypicalContext();
-   
+
     if (!isSideBarOpen) return null
 
     const closeSideBar = () => {
         setIsSideBarOpen(false)
     }
     return (
-        <aside className="shadow-md flex flex-col w-[80%] sm:w-[40%] md:w-[30%] lg:w-[23%]  h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700 fixed top-0 z-40">
+        <aside className="shadow-md flex flex-col w-[70%] sm:w-[40%] md:w-[30%] lg:w-[23%] h-screen px-3 lg:px-5 lg:py-8 py-4 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700 fixed top-0 z-40">
+            <span onClick={() => setIsSideBarOpen(false)}>
+            <GrClose className='text-lg text-gray-700' />
+            </span>
             <div className="flex flex-col justify-around flex-1 mt-6">
                 <nav className="flex-1 -mx-3 space-y-3 ">
                     <div className="relative mx-3">

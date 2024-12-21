@@ -1,6 +1,6 @@
 import connectDB from "@/dbConfig/dbConfig";
 import { NextResponse, NextRequest } from "next/server";
-import { TechModel } from "@/models/tech.model";
+import TechModel from "@/models/tech.model";
 import uploadImage from "@/lib/imageConfig/imageUpload";
 export const dynamic = 'force-dynamic';  // This forces the route to be dynamic
 export const fetchCache = 'force-no-store';  // This prevents caching

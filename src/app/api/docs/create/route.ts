@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
             title,
             image,
             description,
-            category,
+            techType,
             bookmark,
         } = await request.json();
 
@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
             tags,
             title,
             image,
-            category,
+            techType,
             bookmark,
             description,
         });
@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
 
         const createdData = await Doc.create({
             description,
-            category,
+            techType,
             bookmark,
             title,
             tags,

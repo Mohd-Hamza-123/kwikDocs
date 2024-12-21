@@ -22,8 +22,8 @@ const Home = () => {
     return (
         <div className="bg-gray-100">
             <div className="min-h-screen">
-                <div className="bg-white shadow-lg mx-auto mt-16 max-w-4xl rounded-lg p-8 text-center">
-                    <h1 className="text-4xl font-extrabold text-gray-800 mb-4">
+                <div className="bg-white shadow-lg lg:mx-auto mx-3 mt-16 max-w-4xl rounded-lg p-6 lg:p-8 text-center">
+                    <h1 className="text-3xl lg:text-4xl font-extrabold text-gray-800 mb-4">
                         Learn to Code
                     </h1>
                     <p className="text-lg text-gray-600 mb-6">

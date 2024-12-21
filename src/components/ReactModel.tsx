@@ -13,7 +13,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-const ReactModel = ({ _id }: { _id: number }) => {
+const ReactModel = ({ _id }: { _id: string }) => {
   const router = useRouter();
   const deleteDocument = async () => {
     console.log(process.env.NEXT_PUBLIC_API_END_POINT);

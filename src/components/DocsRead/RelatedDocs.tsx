@@ -2,7 +2,7 @@ import React from 'react'
 
 const RelatedDocs = () => {
   return (
-    <div className='text-center mt-4'>RelatedDocs</div>
+    <div className='text-center mt-4'>BookMarks</div>
   )
 }
 

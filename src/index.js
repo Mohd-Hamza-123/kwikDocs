@@ -13,4 +13,5 @@ import Technologies from "./components/Content/Languages"
 import Sidebar from "./components/Sidebar/Sidebar"
 import Prism from "./components/Prism"
 import Home from "./components/Home/Home"
-export { Technologies, Navbar, Cards, RTE, MultiSelect, ImageUpload, DocsBookmarks, MainDocs, RelatedDocs, SearchBar, SearchedCards, LoadingPage, Sidebar, Prism, Home }
+import Spinner from "./components/Spinner/Spinner"
+export { Technologies, Navbar, Cards, RTE, MultiSelect, ImageUpload, DocsBookmarks, MainDocs, RelatedDocs, SearchBar, SearchedCards, LoadingPage, Sidebar, Prism, Home , Spinner }

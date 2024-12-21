@@ -1,6 +1,5 @@
 "use client";
-import React from "react";
-import { getDoc } from "@/lib/API/getDoc";
+import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
   MainDocs,
@@ -8,37 +7,23 @@ import {
   RelatedDocs,
   DocsBookmarks,
 } from "../../../index";
-import { getAllTechnology } from "@/lib/API/techAPI/getAllTech";
+import { getSingleTechnology } from "@/lib/API/techAPI/getSingleTech";
 
 const ReadPage = ({ params }: any) => {
   const { id } = params;
-
-  const {
-    data: technology = [],
-    error: technologyError,
-    isPending: technologyPending,
-    isSuccess: technologySuccess,
-    isFetching: technologyFetching,
-    refetch
-  } = useQuery({
-    queryKey: ['technologies'],
-    queryFn: getAllTechnology,
-    staleTime: Infinity,
-  });
-
-  console.log(technology)
 
   const {
     error,
     isError,
     isPending,
     isSuccess,
-    data: doc,
+    data: technology,
   } = useQuery({
-    queryKey: ['docs', id],
-    queryFn: () => getDoc(id),
+    queryKey: ['singleDoc', id],
+    queryFn: () => getSingleTechnology(id),
     staleTime: 1000 * 60
   });
+
 
 
   if (isPending) return <LoadingPage loadingMsg="Document is Loading" />
@@ -47,10 +32,11 @@ const ReadPage = ({ params }: any) => {
     <>
       <main className="flex">
         <section className="w-[20%] border border-r-0">
-          <DocsBookmarks doc={doc} />
+          <DocsBookmarks technology={technology}
+          />
         </section>
-        <section className="w-[62%] border">
-          {/* <MainDocs doc={doc} /> */}
+        <section className="w-[62%] border relative">
+          <MainDocs />
         </section>
         <section className="w-[18%] border border-l-0">
           <RelatedDocs />

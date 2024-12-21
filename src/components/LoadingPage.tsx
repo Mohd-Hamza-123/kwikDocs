@@ -3,8 +3,8 @@ import React from 'react'
 
 const LoadingPage = ({ loadingMsg }: { loadingMsg?: string }) => {
     return (
-        <section>
-            <div className="flex items-center justify-center min-h-screen bg-gray-100 min-w-screen">
+        <section className='min-h-screen bg-gray-100 w-screen fixed top-0 overflow-hidden flex items-center justify-center'>
+           
                 <div className="flex flex-col items-center">
                     <svg
                         className="animate-spin-fast h-10 w-10 mb-4 text-yellow-500"
@@ -28,7 +28,7 @@ const LoadingPage = ({ loadingMsg }: { loadingMsg?: string }) => {
                     </svg>
                     <p className="sm:text-lg text-sm break-words text-gray-700 text-center">{loadingMsg || "Please wait..."}</p>
                 </div>
-            </div>
+       
             <style jsx>{`
                     .animate-spin-fast {
                         animation: spin 0.75s linear infinite;

@@ -2,15 +2,19 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { useMutation } from '@tanstack/react-query'
-import { overlayLoadingIsFalseReducer, overlayLoadingIsTrueReducer } from '@/lib/store/features/overlayLoaderSlice'
+import { useForm } from 'react-hook-form'
 import { toast } from '@/hooks/use-toast'
 import { useRouter } from 'next/navigation'
-import { useAppDispatch } from '@/lib/hooks/hooks'
+import { Input } from '@/components/ui/input'
 import LoginUser from '@/lib/API/authAPI/login'
-import { useForm } from 'react-hook-form'
+import { Button } from '@/components/ui/button'
+import { useAppDispatch } from '@/lib/hooks/hooks'
+import { useMutation } from '@tanstack/react-query'
+import {
+    overlayLoadingIsTrueReducer,
+    overlayLoadingIsFalseReducer,
+} from '@/lib/store/features/overlayLoaderSlice'
+
 
 const Login = () => {
     const router = useRouter();
@@ -20,7 +24,7 @@ const Login = () => {
     const loginMutation = useMutation({
         mutationFn: (payload) => LoginUser(payload),
         onMutate: (variables) => {
-            dispatch(overlayLoadingIsTrueReducer({ overlayLoadingMsg: "Please wait you are loggin In" }))
+            dispatch(overlayLoadingIsTrueReducer({ overlayLoadingMsg: "Please wait you are loggin In" }));
         },
         onError: (error: any, variables, context) => {
             toast({

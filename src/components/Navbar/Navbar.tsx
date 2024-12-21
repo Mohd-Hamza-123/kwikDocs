@@ -1,12 +1,13 @@
 'use client'
-import Link from 'next/link'
 import React from 'react'
-import { usePathname, useRouter } from 'next/navigation'
-import { RxHamburgerMenu } from "react-icons/rx";
+import Link from 'next/link'
 import { Sidebar } from '@/index';
 import { Button } from '../ui/button';
+import { RxHamburgerMenu } from "react-icons/rx";
 import { useAppSelector } from '@/lib/hooks/hooks';
+import { usePathname, useRouter } from 'next/navigation'
 import { useTypicalContext } from '@/context/Typical-Context';
+
 const Navbar = () => {
     const router = useRouter()
     const hidePaths = ['/login', '/signup'];
@@ -15,13 +16,14 @@ const Navbar = () => {
     const { isSideBarOpen, setIsSideBarOpen } = useTypicalContext();
     
     if (hidePaths.includes(pathName)) return null;
+
     return (
         <header className="bg-white shadow-xl py-4">
-            <div className="container mx-auto px-6 flex justify-between items-center">
+            <div className="container mx-auto px-3 lg:px-6 flex justify-between items-center">
                 <Link href={`/`}>
-                    <h1 className="text-2xl font-bold text-indigo-600">MyDocs</h1>
+                    <h1 className="text-xl lg:text-2xl font-bold text-indigo-600">MyDocs</h1>
                 </Link>
-                <nav className="space-x-6 text-gray-700">
+                <nav className="space-x-4 lg:space-x-6 text-gray-700">
                     <Link href="#tutorials" className="hover:text-indigo-500">
                         Tutorials
                     </Link>
