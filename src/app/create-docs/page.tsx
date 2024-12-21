@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useMutation } from "@tanstack/react-query";
 import { BookMarkInterface, docsInterface } from "@/models/docs.model";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { ImageUpload, Prism, RTE } from "../../index";
+import { Prism, RTE } from "../../index";
 import { ComboboxDemo } from "@/components/ComboboxDemo";
 import createDoc from "@/lib/API/docsAPI/createDoc";
 import updateDoc from "@/lib/API/docsAPI/updateDoc";
