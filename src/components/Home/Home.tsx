@@ -10,7 +10,7 @@ import { FaArrowCircleDown } from "react-icons/fa";
 const Home = () => {
     useGSAP(() => {
         gsap.to('#home-scroll-down', {
-            y: 60,
+            y: 55,
             duration: 3,
             repeat: -1,
         });
