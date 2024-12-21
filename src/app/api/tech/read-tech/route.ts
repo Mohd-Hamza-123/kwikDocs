@@ -1,4 +1,3 @@
-import { technologyEnums } from "@/constant";
 import connectDB from "@/dbConfig/dbConfig";
 import TechModel from "@/models/tech.model";
 import { NextRequest, NextResponse } from "next/server";
