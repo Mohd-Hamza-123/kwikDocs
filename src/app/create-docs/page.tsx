@@ -35,7 +35,7 @@ export interface I_FormInputs {
   bookmark?: BookMarkInterface[];
 }
 
-const CreatePage = ({ post }: { post: any }) => {
+const CreatePage = ({ post }: any) => {
 
   const router = useRouter();
   const dispatch = useAppDispatch()
