@@ -5,12 +5,12 @@ async function connectDB() {
     try {
         console.log(conf.mongodb_uri)
         if (mongoose.connection.readyState >= 1) return
-        
+
         await mongoose.connect(conf.mongodb_uri);
         const connection = mongoose.connection
 
         connection.on('connected', () => {
-            console.log("mongoDB connected")
+            console.log("mongoDB Connected")
         })
         connection.on('error', (err) => {
             console.log('mongoDB connection error. Make sure mongodb is up & running. Error : ' + err);
