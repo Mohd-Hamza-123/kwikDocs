@@ -1,7 +1,7 @@
 import connectDB from "@/dbConfig/dbConfig";
 import { ObjectId } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
-import { TechModel } from "@/models/tech.model";
+import TechModel from "@/models/tech.model";
 import uploadImage from "@/lib/imageConfig/imageUpload";
 connectDB();
 

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import Doc from "@/models/docs.model";
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 import connectDB from '@/dbConfig/dbConfig';
-import { TechModel } from '@/models/tech.model';
+import TechModel from '@/models/tech.model';
 
 
 connectDB()
