@@ -11,12 +11,16 @@ import "prismjs/components/prism-tsx";
 import "prismjs/components/prism-typescript";
 import "prismjs/components/prism-python";
 import "prismjs/components/prism-java";
+import { useAppSelector } from "@/lib/hooks/hooks";
+import { docsInterface } from "@/models/docs.model";
 
-const Prism = () => {
+const Prism = ({ children }: any) => {
+  const doc: docsInterface | null = useAppSelector((state) => state.docs?.document);
+
   useEffect(() => {
     prism.highlightAll();
-  }, []);
-  return <div className="hidden"></div>;
+  }, [doc]);
+  return <div>{children}</div>;
 };
 
 export default Prism;

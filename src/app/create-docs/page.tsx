@@ -1,69 +1,84 @@
 "use client";
-
-import React, { useRef, useState } from "react";
+import { Prism, RTE } from "../../index";
+import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
+import { GoXCircleFill } from "react-icons/go";
+import React, { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch } from "@/lib/hooks/hooks";
+import createDoc from "@/lib/API/docsAPI/createDoc";
+import updateDoc from "@/lib/API/docsAPI/updateDoc";
 import { Textarea } from "@/components/ui/textarea";
-import { appendDocs } from "@/lib/store/features/docsSlice";
-import { useForm, Controller } from "react-hook-form";
+import { setDoc } from "@/lib/store/features/docsSlice";
 import { ComboboxDemo } from "@/components/ComboboxDemo";
-import { ImageUpload, Prism, RTE } from "../../index";
-import { useMutation } from "@tanstack/react-query";
-import { createDoc, updateDoc } from "@/lib/API/createDoc";
-import { Input } from "@/components/ui/input";
-import { toast } from "@/hooks/use-toast";
-import { GoXCircleFill } from "react-icons/go";
-import { overlayLoadingIsFalseReducer, overlayLoadingIsTrueReducer } from "@/lib/store/features/overlayLoaderSlice";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { BookMarkInterface, docsInterface } from "@/models/docs.model";
+import {
+  overlayLoadingIsFalseReducer,
+  overlayLoadingIsTrueReducer
+} from "@/lib/store/features/overlayLoaderSlice";
 
 export interface I_Docs {
   title: string;
   description: string;
-  image?: string;
-  category: string;
+  techType: string;
   tags?: string[];
   bookmark?: BookMarkInterface[];
 }
 
-interface BookMarkInterface {
-  bookmarkID: string;
-  bookmarkName: string;
+export interface I_FormInputs {
+  title: string;
+  tags: string[];
+  techType: string;
+  description: string;
+  bookmark?: BookMarkInterface[];
 }
 
 const CreatePage = ({ post }: any) => {
+
   const router = useRouter();
   const dispatch = useAppDispatch()
+  const queryClient = useQueryClient();
   const tagRef = useRef<HTMLInputElement | null>(null)
   const [tags, setTags] = useState<string[]>(post?.tags || []);
+  const [bookMark, setBookMark] = useState<BookMarkInterface[]>(post?.bookmark || []);
 
-  const { handleSubmit, register, control, watch, setValue, getValues } =
-    useForm<I_Docs>({
+  const {
+    watch,
+    control,
+    setValue,
+    register,
+    getValues,
+    handleSubmit,
+  } =
+    useForm<I_FormInputs>({
       defaultValues: {
         title: post?.title || "",
         description: post?.description || "",
-        category: post?.category || null,
+        techType: String(post?.techType) || undefined,
         tags: post?.tags || undefined,
       },
     });
 
-  const [bookMark, setBookMark] = useState<BookMarkInterface[]>(
-    post ? post?.bookmark : []
-  );
 
   const createDocumentQuery = useMutation({
     mutationFn: (doc: I_Docs) => createDoc(doc),
     onMutate: (variables) => {
       dispatch(overlayLoadingIsTrueReducer({ loadingMsg: "Documentent is uploading" }))
     },
-    onError: (error : any, variables, context) => {
+    onError: (error: any, variables, context) => {
       toast({
         variant: "destructive",
         title: error?.message || "Document not uploaded"
       })
     },
     onSuccess: (data, variables, context) => {
-      console.log(data);
-      router.push(`/read-doc/${data?._id}`);
+     
+      dispatch(setDoc({ document: data }))
+      router.push(`/read-doc/${data?.techType}`);
+
     },
     onSettled: (data, error, variables, context) => {
       dispatch(overlayLoadingIsFalseReducer())
@@ -71,23 +86,53 @@ const CreatePage = ({ post }: any) => {
   })
 
   const updateDocumentQuery = useMutation({
-    // mutationFn: (doc: any, id: any) => updateDoc(doc, id),
+    mutationFn: (data: I_FormInputs) => updateDoc(data, post?._id),
     onMutate: (variables) => {
-
+      dispatch(overlayLoadingIsTrueReducer({ loadingMsg: "Documentent is updating" }))
     },
     onError: (error, variables, context) => {
-
+      toast({
+        variant: "destructive",
+        title: error?.message || "Document not updated"
+      })
     },
-    onSuccess: (data, variables, context) => {
+    onSuccess: async (data, variables, context) => {
 
+     
+      dispatch(setDoc({ document: data }));
+      await queryClient.setQueryData(['docs', data?.techType], (oldData: any) => {
+
+        const newData = {
+          ...oldData,
+          pages: oldData?.pages?.map((page: any) => {
+            return {
+              ...page,
+              payload: page?.payload?.map((doc: any) => {
+                // Modify the payload if needed
+                if (doc?._id === data?._id) {
+                  // Update the document with new data
+                  return {
+                    ...doc,
+                    ...data,
+                  };
+                }
+                return doc;
+              }),
+            };
+          }),
+        };
+        return newData
+      })
+      router.push(`/read-doc/${data?.techType}`);
     },
     onSettled: (data, error, variables, context) => {
-
+      dispatch(overlayLoadingIsFalseReducer())
     },
   })
 
-  const submit = async (data: any) => {
-    console.log(data);
+
+
+  const submit: SubmitHandler<I_FormInputs> = async (data) => {
 
     setBookMark((prevBookmark: any) => {
       const arr = prevBookmark.filter((bookmark: any) =>
@@ -99,10 +144,10 @@ const CreatePage = ({ post }: any) => {
 
     data.tags = tags
 
-    if (!data.title || !data.category) return;
+    if (!data?.title || !data?.techType) return;
 
     if (post) {
-      updateDocumentQuery.mutate(data, post?._id)
+      updateDocumentQuery.mutate(data)
     } else {
       createDocumentQuery.mutate(data)
     }
@@ -158,17 +203,10 @@ const CreatePage = ({ post }: any) => {
             <Prism />
           </section>
           <section className="w-[23%]">
-            <div>
-              <Controller
-                name="image"
-                control={control}
-                render={({ field }: any) => <ImageUpload {...field} />}
-              />
-            </div>
 
-            <div className="mt-3">
+            <div className="mt-9">
               <Controller
-                name="category"
+                name="techType"
                 control={control}
                 render={({ field }) => <ComboboxDemo {...field} />}
               />

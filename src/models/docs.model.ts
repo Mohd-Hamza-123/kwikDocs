@@ -1,24 +1,19 @@
 
 import mongoose, { Schema, Document, ObjectId } from "mongoose";
 
-// Define the Schema
-interface TagInterface {
-    value: string
-    label: string
-}
 
-interface BookMarkInterface {
+export interface BookMarkInterface {
     bookmarkID: string
     bookmarkName: string
 }
 
-interface docsInterface extends Document {
+export interface docsInterface extends Document {
+    _id: string;
     title: string;
     description: string;
-    image: string;
-    tags: TagInterface[];
-    category: ObjectId;
-    bookmark: BookMarkInterface[];
+    tags?: string[];
+    techType: ObjectId;
+    bookmark?: BookMarkInterface[];
     index: number;
 }
 
@@ -30,8 +25,8 @@ const bookMarkScheema = new Schema<BookMarkInterface>(
     {
         id: false,
     },
-
 )
+
 const docSchema = new Schema<docsInterface>(
     {
         title: {
@@ -42,15 +37,11 @@ const docSchema = new Schema<docsInterface>(
             type: String,
             required: false
         },
-        image: {
-            type: String,
-            required: false
-        },
         tags: {
             type: [String],
             required: false
         },
-        category: {
+        techType: {
             type: mongoose.Types.ObjectId,
             required: true,
             ref: "TechModel"

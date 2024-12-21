@@ -11,7 +11,7 @@ const OverlayLoader = () => {
 
     return (
         <div className="fixed inset-0 bg-white bg-opacity-50 flex flex-col gap-2 items-center justify-center z-50">
-            <div className="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-orange-500 rounded-full animate-spin"></div>
+            <div className="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-black rounded-full animate-spin"></div>
             <h4 className='text-center text-black text-md'>{loadingMsg || 'please wait...'}</h4>
         </div>
     );

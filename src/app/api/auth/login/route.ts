@@ -9,7 +9,9 @@ connectDB();
 
 export async function POST(request: NextRequest) {
     try {
+
         const body = await request.json();
+     
         const { email, password } = body;
 
         const user = await UserModel.findOne({ email });
@@ -21,7 +23,7 @@ export async function POST(request: NextRequest) {
             })
         }
         const isPasswordCorrect = await bcrypt.compare(password, user?.password);
-        // console.log("password correct", isPasswordCorrect)
+    
         if (!isPasswordCorrect) {
             return NextResponse.json({
                 success: false,
@@ -35,7 +37,7 @@ export async function POST(request: NextRequest) {
             username: user?.username
         }
 
-        const token = jwt.sign(tokenData, conf.token_secret, { expiresIn: '2h' });
+        const token = jwt.sign(tokenData, conf.token_secret, { expiresIn: '24h' });
         console.log(token)
 
         const response = NextResponse.json({

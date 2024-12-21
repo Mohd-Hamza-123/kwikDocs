@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import Doc from "@/models/docs.model";
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 import connectDB from '@/dbConfig/dbConfig';
-import { TechModel } from '@/models/tech.model';
+import TechModel from '@/models/tech.model';
 
 
 connectDB()
@@ -31,9 +31,9 @@ export async function PUT(request: any, { params }: Params) {
 export async function GET(request: Request, { params }: Params) {
     try {
         const { id } = params;
-      
+
         const category = await TechModel.findById(id);
-        console.log(category)
+        console.log("category ID : ", category);
         const doc = await Doc.findOne({ _id: id });
         if (!doc) {
             return NextResponse.json({

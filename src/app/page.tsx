@@ -4,7 +4,9 @@ import { Home } from "..";
 const GettingStarted = () => {
 
   return (
-    <Home />
+    <main>
+      <Home />
+    </main>
   );
 };
 

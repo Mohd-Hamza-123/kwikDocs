@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+
 interface I_TypialContext {
     isSideBarOpen: boolean;
     setIsSideBarOpen: React.Dispatch<React.SetStateAction<boolean>>
