@@ -1,4 +1,5 @@
 'use client'
+import { useResponsiveContext } from "@/context/CSS-Context";
 import { getDocs } from "@/lib/API/docsAPI/getDocs";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { setDoc } from "@/lib/store/features/docsSlice";
@@ -14,7 +15,9 @@ const DocsBookmarks = ({ technology }: any) => {
   const { _id: techId, name } = technology || {};
   const spinnerRef = useRef<null | HTMLDivElement>(null);
   const document = useAppSelector((state) => state.docs.document);
- 
+
+  const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
+
   const {
     data: docs,
     error,
@@ -64,7 +67,7 @@ const DocsBookmarks = ({ technology }: any) => {
 
   const allDocs: docsInterface[] = docs?.pages?.map((page) => page?.payload).flat() || [];
 
-  
+
 
   return (
     <div className="py-2 w-full">
@@ -74,7 +77,10 @@ const DocsBookmarks = ({ technology }: any) => {
           <li
             key={doc?._id}
             className={`rounded-sm px-2 py-3 md:py-2 sm:py-4 list-none cursor-pointer border-b border-gray-200  text-gray-700 ${doc?._id === document?._id ? "bg-indigo-600 text-white" : "hover:bg-gray-300"}`}
-            onClick={() => dispatch(setDoc({ document: doc }))}
+            onClick={() => {
+              dispatch(setDoc({ document: doc }))
+              setIsDocIndexOpen(false)
+            }}
           >
             {doc?.title}
           </li>
