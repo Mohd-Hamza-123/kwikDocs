@@ -1,4 +1,5 @@
 'use client'
+
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -14,12 +15,25 @@ import {
     overlayLoadingIsTrueReducer,
     overlayLoadingIsFalseReducer,
 } from '@/lib/store/features/overlayLoaderSlice'
+import getProfile from '@/lib/API/authAPI/profile'
+import logoutAPI from '@/lib/API/authAPI/logout'
+import { logout, login } from '@/lib/store/features/authSlice'
 
 
 const Login = () => {
     const router = useRouter();
     const dispatch = useAppDispatch();
     const { register, handleSubmit } = useForm();
+
+    const getUserData = async () => {
+        const user = await getProfile();
+        if (user) {
+            dispatch(login({ userData: user }));
+        } else {
+            await logoutAPI();
+            dispatch(logout());
+        }
+    }
 
     const loginMutation = useMutation({
         mutationFn: (payload) => LoginUser(payload),
@@ -34,20 +48,22 @@ const Login = () => {
             })
         },
         onSuccess: (data, variables, context) => {
-            console.log(data);
+            router.push('/')
+            getUserData();
             toast({
                 title: "You are Logged In",
             });
-            router.push('/')
+
         },
         onSettled: (data, error, variables, context) => {
             dispatch(overlayLoadingIsFalseReducer());
         },
     })
 
-    const login = (data: any) => {
+    const handleLogin = (data: any) => {
         loginMutation.mutate(data)
     }
+
     return (
         <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -61,7 +77,7 @@ const Login = () => {
                 <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Log in to your account</h2>
             </div>
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form className="space-y-6" onSubmit={handleSubmit(login)}>
+                <form className="space-y-6" onSubmit={handleSubmit(handleLogin)}>
                     <div>
                         <div className="mt-2">
                             <Input

@@ -1,6 +1,6 @@
 'use client'
 import { getDocs } from "@/lib/API/docsAPI/getDocs";
-import { useAppDispatch } from "@/lib/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { setDoc } from "@/lib/store/features/docsSlice";
 import { docsInterface } from "@/models/docs.model";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -13,7 +13,8 @@ const DocsBookmarks = ({ technology }: any) => {
   const dispatch = useAppDispatch();
   const { _id: techId, name } = technology || {};
   const spinnerRef = useRef<null | HTMLDivElement>(null);
-
+  const document = useAppSelector((state) => state.docs.document);
+ 
   const {
     data: docs,
     error,
@@ -62,16 +63,17 @@ const DocsBookmarks = ({ technology }: any) => {
 
 
   const allDocs: docsInterface[] = docs?.pages?.map((page) => page?.payload).flat() || [];
-  // console.log(allDocs);
+
+  
 
   return (
-    <div className="px-2 py-2">
+    <div className="py-2 w-full">
       <p className="mt-4 text-center font-semibold">{name}</p>
       <ul className="flex flex-col gap-1 mt-5">
         {allDocs?.map((doc: docsInterface) => (
           <li
             key={doc?._id}
-            className="py-3 md:py-2 sm:py-4 list-none cursor-pointer border-b border-gray-200 hover:bg-gray-100 text-gray-700"
+            className={`rounded-sm px-2 py-3 md:py-2 sm:py-4 list-none cursor-pointer border-b border-gray-200  text-gray-700 ${doc?._id === document?._id ? "bg-indigo-600 text-white" : "hover:bg-gray-300"}`}
             onClick={() => dispatch(setDoc({ document: doc }))}
           >
             {doc?.title}
@@ -83,7 +85,7 @@ const DocsBookmarks = ({ technology }: any) => {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" height="22px" width="22px"><radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)"><stop offset={0} stopColor="#000000" /><stop offset=".3" stopColor="#000000" stopOpacity=".9" /><stop offset=".6" stopColor="#000000" stopOpacity=".6" /><stop offset=".8" stopColor="#000000" stopOpacity=".3" /><stop offset={1} stopColor="#000000" stopOpacity={0} /></radialGradient><circle transform-origin="center" fill="none" stroke="url(#a12)" strokeWidth={15} strokeLinecap="round" strokeDasharray="200 1000" strokeDashoffset={0} cx={100} cy={100} r={70}><animateTransform type="rotate" attributeName="transform" calcMode="spline" dur={2} values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite" /></circle><circle transform-origin="center" fill="none" opacity=".2" stroke="#000000" strokeWidth={15} strokeLinecap="round" cx={100} cy={100} r={70} /></svg>
 
       </div>}
-
+      {!hasNextPage && <span className="text-center text-md mx-auto block my-2 text-gray-600">No more Document</span>}
     </div>
   );
 };

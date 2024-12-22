@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 import TypicalContextProviderWrapper from "@/context/TypicalContextProvider";
 import OverlayLoader from "@/components/OverlayLoader/OverlayLoader";
 import InitializationWrapper from "./InitializationWrapper";
+import CSS_Context_Provider_Wrapper from "@/context/CSS_Context_Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,22 +27,24 @@ export default function RootLayout({
   return (
     <>
       <html lang="en">
-        <StoreProvider>
-          <TypicalContextProviderWrapper>
-            <QueryProvider>
-              <InitializationWrapper>
-                <body
-                  suppressHydrationWarning={true}
-                  className={inter.className}>
-                  <Navbar />
-                  {children}
-                  <Toaster />
-                  <OverlayLoader />
-                </body>
-              </InitializationWrapper>
-            </QueryProvider>
-          </TypicalContextProviderWrapper>
-        </StoreProvider>
+        <QueryProvider>
+          <StoreProvider>
+            <InitializationWrapper>
+              <TypicalContextProviderWrapper>
+                <CSS_Context_Provider_Wrapper>
+                  <body
+                    suppressHydrationWarning={true}
+                    className={inter.className}>
+                    <Navbar />
+                    {children}
+                    <Toaster />
+                    <OverlayLoader />
+                  </body>
+                </CSS_Context_Provider_Wrapper>
+              </TypicalContextProviderWrapper>
+            </InitializationWrapper>
+          </StoreProvider>
+        </QueryProvider>
       </html>
     </>
   );

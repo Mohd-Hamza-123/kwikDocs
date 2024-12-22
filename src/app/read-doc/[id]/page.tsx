@@ -8,10 +8,12 @@ import {
   DocsBookmarks,
 } from "../../../index";
 import { getSingleTechnology } from "@/lib/API/techAPI/getSingleTech";
+import { useResponsiveContext } from "@/context/CSS-Context";
 
 const ReadPage = ({ params }: any) => {
   const { id } = params;
 
+  const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
   const {
     error,
     isError,
@@ -25,20 +27,19 @@ const ReadPage = ({ params }: any) => {
   });
 
 
-
   if (isPending) return <LoadingPage loadingMsg="Document is Loading" />
 
   return (
     <>
-      <main className="flex">
-        <section className="w-[20%] border border-r-0">
+      <main className="flex relative">
+        <section className={`w-[100%] lg:w-[20%] border border-r-3 max-h-[90vh] overflow-y-scroll absolute lg:sticky top-0 bg-slate-50 z-20 ${isDocIndexOpen ? 'block' : 'hidden'} lg:block`}>
           <DocsBookmarks technology={technology}
           />
         </section>
-        <section className="w-[62%] border relative">
-          <MainDocs />
+        <section className="w-[100%] lg:w-[62%] border relative">
+          <MainDocs technology={technology} />
         </section>
-        <section className="w-[18%] border border-l-0">
+        <section className="w-[18%] border border-l-0 hidden">
           <RelatedDocs />
         </section>
       </main>

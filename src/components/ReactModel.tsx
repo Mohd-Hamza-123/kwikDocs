@@ -16,7 +16,7 @@ import {
 const ReactModel = ({ _id }: { _id: string }) => {
   const router = useRouter();
   const deleteDocument = async () => {
-    console.log(process.env.NEXT_PUBLIC_API_END_POINT);
+
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_END_POINT}/api/docs?_id=${_id}`,
@@ -24,16 +24,18 @@ const ReactModel = ({ _id }: { _id: string }) => {
           method: "DELETE",
         }
       );
-      console.log(res);
+      // console.log(res);
       if (res.ok) router.push("/");
     } catch (error) {
       console.log(error);
     }
   };
+
+
   return (
     <AlertDialog>
       <AlertDialogTrigger>
-        <MdDelete className="cursor-pointer" />
+        <MdDelete className="cursor-pointer text-xl" />
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

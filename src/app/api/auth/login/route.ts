@@ -9,7 +9,9 @@ connectDB();
 
 export async function POST(request: NextRequest) {
     try {
+
         const body = await request.json();
+     
         const { email, password } = body;
 
         const user = await UserModel.findOne({ email });
@@ -21,7 +23,7 @@ export async function POST(request: NextRequest) {
             })
         }
         const isPasswordCorrect = await bcrypt.compare(password, user?.password);
-        // console.log("password correct", isPasswordCorrect)
+    
         if (!isPasswordCorrect) {
             return NextResponse.json({
                 success: false,

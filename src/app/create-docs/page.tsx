@@ -7,7 +7,7 @@ import React, { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import { Textarea } from "@/components/ui/textarea";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { BookMarkInterface, docsInterface } from "@/models/docs.model";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Prism, RTE } from "../../index";
@@ -18,6 +18,7 @@ import {
   overlayLoadingIsFalseReducer,
   overlayLoadingIsTrueReducer
 } from "@/lib/store/features/overlayLoaderSlice";
+import { setDoc } from "@/lib/store/features/docsSlice";
 
 export interface I_Docs {
   title: string;
@@ -39,6 +40,7 @@ const CreatePage = ({ post }: any) => {
 
   const router = useRouter();
   const dispatch = useAppDispatch()
+  const queryClient = useQueryClient();
   const tagRef = useRef<HTMLInputElement | null>(null)
   const [tags, setTags] = useState<string[]>(post?.tags || []);
   const [bookMark, setBookMark] = useState<BookMarkInterface[]>(post?.bookmark || []);
@@ -62,8 +64,6 @@ const CreatePage = ({ post }: any) => {
     });
 
 
-
-
   const createDocumentQuery = useMutation({
     mutationFn: (doc: I_Docs) => createDoc(doc),
     onMutate: (variables) => {
@@ -77,7 +77,11 @@ const CreatePage = ({ post }: any) => {
     },
     onSuccess: (data, variables, context) => {
       console.log(data);
-      router.push(`/read-doc/${data?._id}`);
+      console.log(variables);
+      console.log(context);
+      dispatch(setDoc({ document: data }))
+      router.push(`/read-doc/${data?.techType}`);
+
     },
     onSettled: (data, error, variables, context) => {
       dispatch(overlayLoadingIsFalseReducer())
@@ -95,10 +99,38 @@ const CreatePage = ({ post }: any) => {
         title: error?.message || "Document not updated"
       })
     },
-    onSuccess: (data, variables, context) => {
-      console.log(data);
+    onSuccess: async (data, variables, context) => {
+
+      console.log("data :", data);
+      dispatch(setDoc({ document: data }));
+      await queryClient.setQueryData(['docs', data?.techType], (oldData: any) => {
+
+        const newData = {
+          ...oldData,
+          pages: oldData.pages?.map((page: any) => {
+            return {
+              ...page,
+              payload: page?.payload?.map((doc: any) => {
+                // Modify the payload if needed
+                if (doc._id === data?._id) {
+                  // Update the document with new data
+                  return {
+                    ...doc,
+                    ...data,
+                  };
+                }
+                return doc;
+              }),
+            };
+          }),
+        };
+        console.log(newData);
+        return newData
+      })
+      router.push(`/read-doc/${data?.techType}`);
     },
     onSettled: (data, error, variables, context) => {
+
       dispatch(overlayLoadingIsFalseReducer())
     },
   })

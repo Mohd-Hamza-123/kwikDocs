@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { FaArrowCircleDown } from "react-icons/fa";
 
 const Home = () => {
+
     useGSAP(() => {
         gsap.to('#home-scroll-down', {
             y: 55,

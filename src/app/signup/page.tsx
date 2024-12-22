@@ -32,7 +32,7 @@ const Signup = () => {
       })
     },
     onSuccess: (data, variables, context) => {
-      console.log(data);
+    
       toast({
         title: "You are signIn",
       });
@@ -40,9 +40,9 @@ const Signup = () => {
         toast({
           title: "Verification email has been sent!",
           description: "verify your email"
-        })
-      }, 4000)
-      router.push('/')
+        });
+      }, 4000);
+      router.push('/login')
     },
     onSettled: (data, error, variables, context) => {
       dispatch(overlayLoadingIsFalseReducer());

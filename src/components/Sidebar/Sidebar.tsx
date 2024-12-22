@@ -1,12 +1,16 @@
 'use client'
-import { useTypicalContext } from '@/context/Typical-Context'
-import Link from 'next/link'
-import { TbPencilCode } from "react-icons/tb";
 import React from 'react'
+import Link from 'next/link'
 import { GrClose } from "react-icons/gr";
+import { TbPencilCode } from "react-icons/tb";
+import logoutAPI from '@/lib/API/authAPI/logout';
+import { useAppDispatch } from '@/lib/hooks/hooks';
+import { logout } from '@/lib/store/features/authSlice';
+import { useTypicalContext } from '@/context/Typical-Context'
 
 const Sidebar = () => {
 
+    const dispatch = useAppDispatch();
     const { isSideBarOpen, setIsSideBarOpen } = useTypicalContext();
 
     if (!isSideBarOpen) return null
@@ -14,10 +18,17 @@ const Sidebar = () => {
     const closeSideBar = () => {
         setIsSideBarOpen(false)
     }
+
+    const handleLogout = async () => {
+        await logoutAPI();
+        dispatch(logout());
+        closeSideBar();
+    }
+
     return (
         <aside className="shadow-md flex flex-col w-[70%] sm:w-[40%] md:w-[30%] lg:w-[23%] h-screen px-3 lg:px-5 lg:py-8 py-4 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700 fixed top-0 z-40">
             <span onClick={() => setIsSideBarOpen(false)}>
-            <GrClose className='text-lg text-gray-700' />
+                <GrClose className='text-lg text-gray-700' />
             </span>
             <div className="flex flex-col justify-around flex-1 mt-6">
                 <nav className="flex-1 -mx-3 space-y-3 ">
@@ -98,11 +109,11 @@ const Sidebar = () => {
                             <img className="object-cover rounded-full h-7 w-7" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&h=634&q=80" alt="avatar" />
                             <span className="text-sm font-medium text-gray-700 dark:text-gray-200">John Doe</span>
                         </a>
-                        <a href="#" className="text-gray-500 transition-colors duration-200 rotate-180 dark:text-gray-400 rtl:rotate-0 hover:text-blue-500 dark:hover:text-blue-400">
+                        <Link onClick={handleLogout} href="/" className="text-gray-500 transition-colors duration-200 rotate-180 dark:text-gray-400 rtl:rotate-0 hover:text-blue-500 dark:hover:text-blue-400">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
                             </svg>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 async function connectDB() {
     try {
-        console.log(conf.mongodb_uri)
+        // console.log(conf.mongodb_uri)
         if (mongoose.connection.readyState >= 1) return
 
         await mongoose.connect(conf.mongodb_uri);
