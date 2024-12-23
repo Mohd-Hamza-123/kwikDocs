@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { getAllTechnology } from '@/lib/API/techAPI/getAllTech';
 import { LoadingPage } from '@/index';
+import { useAppDispatch } from '@/lib/hooks/hooks';
+import { setDoc } from '@/lib/store/features/docsSlice';
 
 export interface I_Image {
     public_id: string;
@@ -21,7 +23,8 @@ export interface I_Language {
 
 const Technologies = () => {
 
-    const router = useRouter()
+    const router = useRouter();
+    const dispatch = useAppDispatch();
     const {
         data: technology = [],
         error: technologyError,
@@ -38,10 +41,12 @@ const Technologies = () => {
     if (technologyPending) return <LoadingPage />
 
     const handleLearn = (techId: string) => {
-        router.push(`/read-doc/${techId}`)
+        router.push(`/read-doc/${techId}`);
+        dispatch(setDoc({ document: null }));
     }
+
     return (
-        <>
+        <div className=''>
             {technology?.map((techObj: any) => {
                 return <section key={techObj?.techType}>
                     <h1 className='text-2xl lg:text-4xl text-center capitalize'>{techObj?.techType}</h1>
@@ -74,7 +79,7 @@ const Technologies = () => {
                 </section>
             })}
 
-        </>
+        </div>
 
     )
 }
