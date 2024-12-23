@@ -23,7 +23,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
+  
   return (
     <>
       <html lang="en">
@@ -34,7 +34,7 @@ export default function RootLayout({
                 <CSS_Context_Provider_Wrapper>
                   <body
                     suppressHydrationWarning={true}
-                    className={inter.className}>
+                    className={`${inter.className}`}>
                     <Navbar />
                     {children}
                     <Toaster />

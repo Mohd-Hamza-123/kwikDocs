@@ -18,9 +18,11 @@ const InitializationWrapper = ({ children }: any) => {
             dispatch(logout());
         }
     }
+   
 
     useEffect(() => {
         getUserData()
+       
     }, [logout, login])
 
     return (<>{children}</>)

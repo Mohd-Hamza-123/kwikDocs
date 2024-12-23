@@ -48,10 +48,10 @@ const Technologies = () => {
     return (
         <div className=''>
             {technology?.map((techObj: any) => {
-                return <section key={techObj?.techType}>
+                return <section key={techObj?.techType}className=''>
                     <h1 className='text-2xl lg:text-4xl text-center capitalize'>{techObj?.techType}</h1>
                     {techObj?.technologies?.map((tech: any, index: number) => (
-                        <div key={tech?._id + index} className={`p-3 rounded-lg bg-white shadow-md dark:bg-surface-dark dark:text-white text-surface w-[94%] lg:w-[70%] mx-auto my-8 flex flex-col lg:flex-row ${(index + 1) % 2 === 0 ? 'lg:flex-row-reverse' : ''}`}>
+                        <div key={tech?._id + index} className={`dark:bg-gray-950 dark:border-gray-700 p-3 rounded-lg bg-white shadow-md dark:bg-surface-dark dark:text-white text-surface w-[94%] lg:w-[70%] mx-auto my-8 flex flex-col lg:flex-row ${(index + 1) % 2 === 0 ? 'lg:flex-row-reverse' : ''}`}>
                             <div className="relative overflow-hidden bg-cover bg-no-repeat lg:w-[40%] w-full">
                                 <img
                                     className={`rounded-sm w-full h-full object-contain object-center`}

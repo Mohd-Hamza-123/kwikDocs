@@ -71,7 +71,7 @@ const DocsBookmarks = ({ technology }: any) => {
 
 
   return (
-    <div className="py-2 w-full">
+    <div className="py-2 w-full dark:bg-gray-900 dark:border-gray-700">
       <p className="mt-4 text-center font-semibold">{name}</p>
       <ul className="flex flex-col gap-1 mt-5">
         {allDocs?.map((doc: docsInterface) => (
