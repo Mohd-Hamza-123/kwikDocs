@@ -5,6 +5,7 @@ import uploadImage from "@/lib/imageConfig/imageUpload";
 export const dynamic = 'force-dynamic';  // This forces the route to be dynamic
 export const fetchCache = 'force-no-store';  // This prevents caching
 export const revalidate = 0; // if 60 then data will be cached for 60 seconds
+
 connectDB()
 
 export async function POST(request: NextRequest) {

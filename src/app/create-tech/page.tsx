@@ -13,10 +13,10 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { getAllTechnology } from "@/lib/API/techAPI/getAllTech";
 import { overlayLoadingIsFalseReducer, overlayLoadingIsTrueReducer } from "@/lib/store/features/overlayLoaderSlice";
 import { technologyEnums } from "@/constant";
-
+import { useRouter } from "next/navigation";
 
 const CreateTech = () => {
-
+    const router = useRouter()
     const dispatch = useAppDispatch();
     const queryClient = useQueryClient();
 
@@ -49,7 +49,7 @@ const CreateTech = () => {
         },
         onSuccess: (response) => {
 
-            console.log(response);
+            router.push('/')
             // const newCategory = response?.payload;
             // queryClient.setQueryData(['technology'], (prev: any) => {
             //   return prev ? [newCategory, ...prev] : [newCategory]
