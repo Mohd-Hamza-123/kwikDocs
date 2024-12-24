@@ -14,5 +14,5 @@ import Sidebar from "./components/Sidebar/Sidebar"
 import Prism from "./components/Prism"
 import Home from "./components/Home/Home"
 import Spinner from "./components/Spinner/Spinner"
-
-export { Technologies, Navbar, Cards, RTE, MultiSelect, ImageUpload, DocsBookmarks, MainDocs, RelatedDocs, SearchBar, SearchedCards, LoadingPage, Sidebar, Prism, Home , Spinner }
+import Footer from "./components/Footer"
+export { Technologies, Navbar, Cards, RTE, MultiSelect, ImageUpload, DocsBookmarks, MainDocs, RelatedDocs, SearchBar, SearchedCards, LoadingPage, Sidebar, Prism, Home , Spinner , Footer}

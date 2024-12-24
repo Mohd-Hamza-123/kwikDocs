@@ -36,9 +36,9 @@ const ReadPage = ({ params }: any) => {
           <DocsBookmarks technology={technology}
           />
         </section>
-        <section className="w-[100%] lg:w-[62%] border relative">
+        {!isDocIndexOpen && <section className="w-[100%] lg:w-[62%] border relative">
           <MainDocs technology={technology} />
-        </section>
+        </section>}
         <section className="w-[18%] border border-l-0 hidden">
           <RelatedDocs />
         </section>

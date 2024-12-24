@@ -1,14 +1,14 @@
 'use client'
-import { useResponsiveContext } from "@/context/CSS-Context";
-import { getDocs } from "@/lib/API/docsAPI/getDocs";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
-import { setDoc } from "@/lib/store/features/docsSlice";
-import { docsInterface } from "@/models/docs.model";
 import { ImSpinner3 } from "react-icons/im";
+import { getDocs } from "@/lib/API/docsAPI/getDocs";
+import { docsInterface } from "@/models/docs.model";
+import { setDoc } from "@/lib/store/features/docsSlice";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import React, { useEffect, useRef, useState } from "react";
-const Docs_LIMIT = 3
+import { useResponsiveContext } from "@/context/CSS-Context";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 
+const Docs_LIMIT = 3;
 
 const DocsBookmarks = ({ technology }: any) => {
 
@@ -20,13 +20,12 @@ const DocsBookmarks = ({ technology }: any) => {
   const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
 
   const {
-    data: docs,
     error,
-    fetchNextPage,
-    hasNextPage,
     isFetching,
+    data: docs,
+    hasNextPage,
+    fetchNextPage,
     isFetchingNextPage,
-    status,
   } = useInfiniteQuery({
     queryKey: ['docs', techId],
     queryFn: ({ pageParam = 1 }) => {

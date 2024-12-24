@@ -21,9 +21,9 @@ const Home = () => {
         <div className="bg-gray-100 dark:bg-gray-900 dark:border-gray-700">
             <div className="h-[80vh]">
                 <div className="bg-white dark:bg-slate-950 dark:border-gray-700 shadow-lg lg:mx-auto mx-3 mt-16 max-w-4xl rounded-lg p-6 lg:p-8 text-center">
-                    <h1 className="text-3xl lg:text-4xl font-extrabold text-gray-800 dark:text-white mb-4">
+                    <h2 className="text-3xl lg:text-4xl font-extrabold text-gray-800 dark:text-white mb-4">
                         Learn to Code
-                    </h1>
+                    </h2>
                     <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
                         With the best guides and resources for developers.
                     </p>
@@ -41,15 +41,7 @@ const Home = () => {
                     <FaArrowCircleDown />
                 </div>
             </div>
-
-
             <Technologies />
-
-            <footer className="bg-gray-50 mt-10 py-6 dark:bg-gray-900 dark:border-gray-700">
-                <div className="container mx-auto text-center text-gray-600 dark:text-gray-300 text-sm">
-                    © {new Date().getFullYear()} MyDocs. All rights reserved.
-                </div>
-            </footer>
         </div>
     )
 }

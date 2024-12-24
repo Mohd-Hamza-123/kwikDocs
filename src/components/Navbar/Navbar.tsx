@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
-import { Sidebar } from '@/index';
+import Image from 'next/image'
 import { Button } from '../ui/button';
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useAppSelector } from '@/lib/hooks/hooks';
@@ -14,7 +14,7 @@ const Navbar = () => {
     const router = useRouter()
     const hidePaths = ['/login', '/signup'];
     const pathName = usePathname();
-  
+
     const userStatus = useAppSelector((state) => state.auth.userStatus);
     const { isSideBarOpen, setIsSideBarOpen } = useTypicalContext();
     const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
@@ -24,12 +24,20 @@ const Navbar = () => {
     const isDocIndexVisible = pathName.includes('/read-doc');
 
     return (
-        <header className="dark:bg-gray-900 dark:border-gray-700 shadow-xl py-4">
-            <div className="container mx-auto px-3 lg:px-6 flex justify-between items-center">
+        <header className="dark:bg-gray-900 dark:border-gray-700 shadow-xl h-[12vh] content-center px-3 lg:px-6">
+            <nav className="flex justify-between items-center">
                 <Link href={`/`}>
-                    <h1 className="text-xl lg:text-2xl font-bold">MyDocs</h1>
+                    <figure className='flex gap-1 items-center cursor-pointer'>
+                        <Image
+                            height={200}
+                            width={200}
+                            className="mx-auto h-10 w-auto"
+                            src="https://img.freepik.com/premium-vector/office-paper-document-with-folder-flat-design_798171-579.jpg" alt='Image' />
+                        <figcaption className="font-semibold text-xl"> <h1>Documentarium
+                        </h1> </figcaption>
+                    </figure>
                 </Link>
-                <nav className="space-x-4 lg:space-x-6 text-gray-700 flex items-center">
+                <div className="space-x-4 lg:space-x-6 text-gray-700 flex items-center">
 
                     <div className={`block lg:hidden ${isDocIndexVisible ? '' : 'hidden'}`}>
                         <IoListCircleOutline className={`text-4xl ${isDocIndexOpen ? "text-indigo-600" : ""}`}
@@ -49,9 +57,8 @@ const Navbar = () => {
                             SignIn
                         </Button>
                     </>}
-                </nav>
-            </div>
-            <Sidebar />
+                </div>
+            </nav>
         </header>
     )
 }
