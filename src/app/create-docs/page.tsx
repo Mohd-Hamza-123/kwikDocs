@@ -44,7 +44,7 @@ const CreatePage = ({ post }: any) => {
   const tagRef = useRef<HTMLInputElement | null>(null)
   const [tags, setTags] = useState<string[]>(post?.tags || []);
   const [bookMark, setBookMark] = useState<BookMarkInterface[]>(post?.bookmark || []);
-
+  console.log(bookMark);
 
   const {
     watch,
@@ -76,9 +76,7 @@ const CreatePage = ({ post }: any) => {
       })
     },
     onSuccess: (data, variables, context) => {
-      console.log(data);
-      console.log(variables);
-      console.log(context);
+     
       dispatch(setDoc({ document: data }))
       router.push(`/read-doc/${data?.techType}`);
 
@@ -89,7 +87,7 @@ const CreatePage = ({ post }: any) => {
   })
 
   const updateDocumentQuery = useMutation({
-    mutationFn: (data: I_FormInputs) => updateDoc(data, post._id),
+    mutationFn: (data: I_FormInputs) => updateDoc(data, post?._id),
     onMutate: (variables) => {
       dispatch(overlayLoadingIsTrueReducer({ loadingMsg: "Documentent is updating" }))
     },
@@ -101,18 +99,18 @@ const CreatePage = ({ post }: any) => {
     },
     onSuccess: async (data, variables, context) => {
 
-      console.log("data :", data);
+     
       dispatch(setDoc({ document: data }));
       await queryClient.setQueryData(['docs', data?.techType], (oldData: any) => {
 
         const newData = {
           ...oldData,
-          pages: oldData.pages?.map((page: any) => {
+          pages: oldData?.pages?.map((page: any) => {
             return {
               ...page,
               payload: page?.payload?.map((doc: any) => {
                 // Modify the payload if needed
-                if (doc._id === data?._id) {
+                if (doc?._id === data?._id) {
                   // Update the document with new data
                   return {
                     ...doc,
@@ -124,13 +122,11 @@ const CreatePage = ({ post }: any) => {
             };
           }),
         };
-        console.log(newData);
         return newData
       })
       router.push(`/read-doc/${data?.techType}`);
     },
     onSettled: (data, error, variables, context) => {
-
       dispatch(overlayLoadingIsFalseReducer())
     },
   })

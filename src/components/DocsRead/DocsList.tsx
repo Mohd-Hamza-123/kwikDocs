@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 
 const Docs_LIMIT = 3;
 
-const DocsBookmarks = ({ technology }: any) => {
+const DocsList = ({ technology }: any) => {
 
   const dispatch = useAppDispatch();
   const { _id: techId, name } = technology || {};
@@ -95,7 +95,7 @@ const DocsBookmarks = ({ technology }: any) => {
   );
 };
 
-export default DocsBookmarks;
+export default DocsList;
 
 // import React, { useEffect, useState } from "react";
 

@@ -96,6 +96,7 @@ const App: React.FC<RTEType> = ({
                   const anchorName = prompt("Enter anchor name:");
                   const bookmarkID = generateUniqueId();
                   const bookmarkName = anchorName;
+               
                   if (anchorName) {
                     editor.insertContent(`<a id="BookMark${bookmarkID}"></a>`);
                     getBookMark({

@@ -2,10 +2,10 @@
 import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
-  MainDocs,
+  DocContent,
   LoadingPage,
   RelatedDocs,
-  DocsBookmarks,
+  DocsList,
 } from "../../../index";
 import { getSingleTechnology } from "@/lib/API/techAPI/getSingleTech";
 import { useResponsiveContext } from "@/context/CSS-Context";
@@ -30,21 +30,16 @@ const ReadPage = ({ params }: any) => {
   if (isPending) return <LoadingPage loadingMsg="Document is Loading" />
 
   return (
-    <>
-      <main className="flex relative">
-        <section className={`w-[100%] lg:w-[20%] border border-r-3 max-h-[90vh] overflow-y-scroll absolute lg:sticky top-0 bg-slate-50 z-20 ${isDocIndexOpen ? 'block' : 'hidden'} lg:block`}>
-          <DocsBookmarks technology={technology}
-          />
-        </section>
-        {!isDocIndexOpen && <section className="w-[100%] lg:w-[62%] border relative">
-          <MainDocs technology={technology} />
-        </section>}
-        <section className="w-[18%] border border-l-0 hidden">
-          <RelatedDocs />
-        </section>
-      </main>
-    </>
-  )
+    <main className="flex relative h-[88vh] overflow-hidden">
+      <section className={`w-[100%] lg:w-[20%] border border-r-3 max-h-[88vh] overflow-y-scroll absolute lg:sticky top-0 bg-slate-50 z-20 ${isDocIndexOpen ? 'block' : 'hidden'} lg:block`}>
+        <DocsList technology={technology} />
+      </section>
+      {!isDocIndexOpen && <section className="lg:w-[62%] border relative w-full h-full overflow-x-hidden overflow-y-scroll">
+        <DocContent technology={technology} />
+      </section>}
+      <RelatedDocs />
+    </main>
+  );
 };
 
 export default ReadPage;
