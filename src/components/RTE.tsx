@@ -46,18 +46,19 @@ const App: React.FC<RTEType> = ({
             content_style:
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
             codesample_languages: [
+              { text: "Python", value: "python" },
               { text: "HTML/XML", value: "markup" },
               { text: "JavaScript", value: "javascript" },
               { text: "JSX", value: "jsx" },
               { text: "TypeScript", value: "typescript" },
               { text: "TSX", value: "tsx" },
               { text: "CSS", value: "css" },
-              { text: "SCSS", value: "scss" },
-              { text: "Python", value: "python" },
+              { text: "Markdown", value: "markdown" },
               { text: "Java", value: "java" },
               { text: "C", value: "c" },
-              { text: "C#", value: "csharp" },
               { text: "C++", value: "cpp" },
+              { text: "C#", value: "csharp" },
+              { text: "SCSS", value: "scss" },
             ],
             file_picker_callback: function (cb, value, meta) {
               const input = document.createElement("input");

@@ -9,6 +9,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useTypicalContext } from '@/context/Typical-Context';
 import { IoListCircleOutline } from "react-icons/io5";
 import { useResponsiveContext } from '@/context/CSS-Context';
+import { appName } from '@/constant';
 
 const Navbar = () => {
     const router = useRouter()
@@ -35,8 +36,7 @@ const Navbar = () => {
                             src="/logo.jpg"
                             alt='Image'
                         />
-                        <figcaption className="font-semibold text-lg lg:text-xl"> <h1>Documentarium
-                        </h1> </figcaption>
+                        <figcaption className="font-semibold text-lg lg:text-xl"> <h1>{appName}</h1> </figcaption>
                     </figure>
                 </Link>
                 <div className="space-x-3 lg:space-x-6 text-gray-700 flex items-center">
@@ -53,14 +53,14 @@ const Navbar = () => {
                         <RxHamburgerMenu className='text-2xl' />
                     </Button> : <>
                         <Button
-                         onClick={() => router.push('/login')}
-                         className='text-sm p-0 px-1 lg:px-3'
-                         >
+                            onClick={() => router.push('/login')}
+                            className='text-sm p-0 px-1 lg:px-3'
+                        >
                             Login
                         </Button>
-                        <Button 
-                        onClick={() => router.push('/signup')}
-                        className='text-sm p-0 px-1 lg:px-3'
+                        <Button
+                            onClick={() => router.push('/signup')}
+                            className='text-sm p-0 px-1 lg:px-3'
                         >
                             SignIn
                         </Button>

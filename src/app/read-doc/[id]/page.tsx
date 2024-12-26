@@ -30,7 +30,7 @@ const ReadPage = ({ params }: any) => {
   if (isPending) return <LoadingPage loadingMsg="Document is Loading" />
 
   return (
-    <main className="flex relative h-[88vh] overflow-hidden">
+    <main className="flex flex-col-reverse lg:flex-row relative h-[88vh] overflow-hidden">
       <section className={`w-[100%] lg:w-[20%] border border-r-3 max-h-[88vh] overflow-y-scroll absolute lg:sticky top-0 bg-slate-50 z-20 ${isDocIndexOpen ? 'block' : 'hidden'} lg:block`}>
         <DocsList technology={technology} />
       </section>

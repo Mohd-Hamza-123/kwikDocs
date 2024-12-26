@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     try {
 
         const userId = await getDataFromToken(request);
-        console.log("userId", userId)
+      
         if (!userId) {
             return NextResponse.json({
                 success: false,

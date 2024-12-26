@@ -1,4 +1,5 @@
 "use client";
+import { Prism, RTE } from "../../index";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
@@ -6,19 +7,18 @@ import { GoXCircleFill } from "react-icons/go";
 import React, { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch } from "@/lib/hooks/hooks";
-import { Textarea } from "@/components/ui/textarea";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { BookMarkInterface, docsInterface } from "@/models/docs.model";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { Prism, RTE } from "../../index";
-import { ComboboxDemo } from "@/components/ComboboxDemo";
 import createDoc from "@/lib/API/docsAPI/createDoc";
 import updateDoc from "@/lib/API/docsAPI/updateDoc";
+import { Textarea } from "@/components/ui/textarea";
+import { setDoc } from "@/lib/store/features/docsSlice";
+import { ComboboxDemo } from "@/components/ComboboxDemo";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { BookMarkInterface, docsInterface } from "@/models/docs.model";
 import {
   overlayLoadingIsFalseReducer,
   overlayLoadingIsTrueReducer
 } from "@/lib/store/features/overlayLoaderSlice";
-import { setDoc } from "@/lib/store/features/docsSlice";
 
 export interface I_Docs {
   title: string;
@@ -44,7 +44,6 @@ const CreatePage = ({ post }: any) => {
   const tagRef = useRef<HTMLInputElement | null>(null)
   const [tags, setTags] = useState<string[]>(post?.tags || []);
   const [bookMark, setBookMark] = useState<BookMarkInterface[]>(post?.bookmark || []);
-  console.log(bookMark);
 
   const {
     watch,
