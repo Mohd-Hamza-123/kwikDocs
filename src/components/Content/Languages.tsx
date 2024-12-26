@@ -66,7 +66,7 @@ const Technologies = () => {
                                 <h3 className="mb-2 text-2xl lg:text-4xl font-medium leading-tight text-center">
                                     {tech?.name}
                                 </h3>
-                                <p className="mb-4 text-base text-gray-500">
+                                <p className="mb-4 text-base text-gray-500 text-justify">
                                     {tech?.description}
                                 </p>
                                 <Button
