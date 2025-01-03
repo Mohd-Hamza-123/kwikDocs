@@ -65,6 +65,12 @@ html {
   height: 100vh;
   overflow-x: hidden;
 }
+
+body,
+html::-webkit-scrollbar {
+  width: 0px;
+}
+
 @layer base {
   * {
     @apply border-border;
