@@ -54,6 +54,7 @@ const App: React.FC<RTEType> = ({
               { text: "TSX", value: "tsx" },
               { text: "CSS", value: "css" },
               { text: "Markdown", value: "markdown" },
+              { text: "SQL", value: "sql" },  
               { text: "Java", value: "java" },
               { text: "C", value: "c" },
               { text: "C++", value: "cpp" },

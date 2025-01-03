@@ -1,9 +1,9 @@
 'use client'
 import { usePathname } from 'next/navigation';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Footer = () => {
-    
+
     const visiblePaths = ['/'];
     const pathName = usePathname();
     const [isRender, setIsRender] = useState(true)
@@ -17,9 +17,9 @@ const Footer = () => {
 
     if (isRender)
         return (
-            <footer className="bg-gray-50 mt-10 py-6 dark:bg-gray-900 dark:border-gray-700">
+            <footer className="bg-gray-50 dark:bg-gray-900 dark:border-gray-700 h-[3vh]">
                 <div className="container mx-auto text-center text-gray-600 dark:text-gray-300 text-sm">
-                    © {new Date().getFullYear()} MyDocs. All rights reserved.
+                    &copy; {new Date().getFullYear()} DocsNode. All rights reserved.
                 </div>
             </footer>
         )

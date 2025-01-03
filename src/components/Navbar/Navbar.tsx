@@ -2,6 +2,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { appName } from '@/constant';
 import { Button } from '../ui/button';
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useAppSelector } from '@/lib/hooks/hooks';
@@ -9,26 +10,31 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useTypicalContext } from '@/context/Typical-Context';
 import { IoListCircleOutline } from "react-icons/io5";
 import { useResponsiveContext } from '@/context/CSS-Context';
-import { appName } from '@/constant';
 
 const Navbar = () => {
+
     const router = useRouter()
-    const hidePaths = ['/login', '/signup'];
     const pathName = usePathname();
 
-    const userStatus = useAppSelector((state) => state.auth.userStatus);
-    const { isSideBarOpen, setIsSideBarOpen } = useTypicalContext();
-    const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
-
-    if (hidePaths.includes(pathName)) return null;
+    const hidePaths = ['/login', '/signup', `/forgot-password`];
 
     const isDocIndexVisible = pathName.includes('/read-doc');
 
+    const { isSideBarOpen, setIsSideBarOpen } = useTypicalContext();
+    const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
+    const userStatus = useAppSelector((state) => state.auth.userStatus);
+
+
+    if (hidePaths.includes(pathName)) return null;
+
+    const login = () => router.push('/login');
+    const signUp = () => router.push('/signup')
+
     return (
-        <header className="dark:bg-gray-900 dark:border-gray-700 shadow-xl h-[12vh] content-center px-2 lg:px-6">
+        <header className="dark:bg-bgDark shadow-xl h-[12vh] content-center px-3 lg:px-7">
             <nav className="flex justify-between items-center">
                 <Link href={`/`}>
-                    <figure className='flex gap-1 items-center cursor-pointer'>
+                    <figure className='flex gap-2 items-center cursor-pointer'>
                         <Image
                             height={200}
                             width={200}
@@ -36,12 +42,16 @@ const Navbar = () => {
                             src="/logo.jpg"
                             alt='Image'
                         />
-                        <figcaption className="font-semibold text-lg lg:text-xl"> <h1>{appName}</h1> </figcaption>
+                        <figcaption className="font-semibold text-lg lg:text-xl">
+                            <h1>{appName}</h1>
+                        </figcaption>
                     </figure>
                 </Link>
                 <div className="space-x-3 lg:space-x-6 text-gray-700 flex items-center">
 
-                    <div className={`block lg:hidden ${isDocIndexVisible ? '' : 'hidden'}`}>
+                    <div
+                        className={`block lg:hidden ${isDocIndexVisible ? '' : 'hidden'}`}
+                    >
                         <IoListCircleOutline className={`text-4xl ${isDocIndexOpen ? "text-indigo-600" : ""}`}
                             onClick={() => setIsDocIndexOpen((prev) => !prev)}
                         />
@@ -53,16 +63,16 @@ const Navbar = () => {
                         <RxHamburgerMenu className='text-2xl' />
                     </Button> : <>
                         <Button
-                            onClick={() => router.push('/login')}
-                            className='text-sm p-0 px-1 lg:px-3'
+                            onClick={login}
+                            className='text-sm py-2 px-2 lg:px-3 font-bold'
                         >
                             Login
                         </Button>
                         <Button
-                            onClick={() => router.push('/signup')}
-                            className='text-sm p-0 px-1 lg:px-3'
+                            onClick={signUp}
+                            className='text-sm py-2 px-2 lg:px-3 font-bold'
                         >
-                            SignIn
+                            Sign-Up
                         </Button>
                     </>}
                 </div>
