@@ -1,19 +1,20 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useResponsiveContext } from "@/context/CSS-Context";
+import { getSingleTechnology } from "@/lib/API/techAPI/getSingleTech";
 import {
+  DocsList,
   DocContent,
   LoadingPage,
   RelatedDocs,
-  DocsList,
 } from "../../../index";
-import { getSingleTechnology } from "@/lib/API/techAPI/getSingleTech";
-import { useResponsiveContext } from "@/context/CSS-Context";
 
 const ReadPage = ({ params }: any) => {
   const { id } = params;
 
   const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
+
   const {
     error,
     isError,
@@ -23,7 +24,7 @@ const ReadPage = ({ params }: any) => {
   } = useQuery({
     queryKey: ['singleDoc', id],
     queryFn: () => getSingleTechnology(id),
-    staleTime: 1000 * 60
+    staleTime: Infinity
   });
 
 
