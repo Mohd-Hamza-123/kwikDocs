@@ -68,7 +68,7 @@ html {
 
 body,
 html::-webkit-scrollbar {
-  width: 0px;
+  display: none;
 }
 
 @layer base {
