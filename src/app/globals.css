@@ -66,10 +66,7 @@ html {
   overflow-x: hidden;
 }
 
-body,
-html::-webkit-scrollbar {
-  display: none;
-}
+
 
 @layer base {
   * {
