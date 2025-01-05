@@ -76,7 +76,7 @@ const DocsList = ({ technology }: any) => {
         {allDocs?.map((doc: docsInterface) => (
           <li
             key={doc?._id}
-            className={`rounded-sm px-2 py-3 md:py-2 sm:py-4 list-none cursor-pointer border-b border-gray-200  text-gray-700 ${doc?._id === document?._id ? "bg-indigo-600 text-white" : "hover:bg-gray-300"}`}
+            className={`text-sm font-bold rounded-sm px-2 py-3 md:py-2 sm:py-4 list-none cursor-pointer border-b border-gray-200  text-gray-700 ${doc?._id === document?._id ? "bg-indigo-600 text-white" : "hover:bg-gray-300"}`}
             onClick={() => {
               dispatch(setDoc({ document: doc }))
               setIsDocIndexOpen(false)
@@ -90,58 +90,10 @@ const DocsList = ({ technology }: any) => {
       {hasNextPage && <div ref={spinnerRef} className="flex justify-center items-center">
         {isFetchingNextPage && <ImSpinner3 className="animate-spin text-2xl mt-1" />}
       </div>}
-      {!hasNextPage && <span className="text-center text-md mx-auto block my-2 text-gray-600">No more Document</span>}
+      {!hasNextPage && <span className="text-center text-sm mx-auto block my-2 text-gray-600">No more Document</span>}
     </div>
   );
 };
 
 export default DocsList;
 
-// import React, { useEffect, useState } from "react";
-
-// interface BookmarkListProps {
-//   content: string;
-// }
-
-// const DocsBookmarks: React.FC<BookmarkListProps> = ({ content }) => {
-//   const [headings, setHeadings] = useState<string[]>([]);
-//   console.log(headings);
-//   useEffect(() => {
-//     const parser = new DOMParser();
-//     const doc = parser.parseFromString(content, "text/html");
-//     const headingsArray = Array.from(
-//       doc.querySelectorAll("h1, h2, h3, h4, h5, h6")
-//     );
-//     const headingIds = headingsArray.map((heading, index) => {
-//       if (!heading.id) {
-//         heading.id = `heading-${index}`;
-//       }
-//       return heading.id;
-//     });
-//     setHeadings(headingIds);
-//   }, [content]);
-
-//   const handleScrollTo = (id: string) => {
-//     const element = document.getElementById(id);
-//     if (element) {
-//       element.scrollIntoView({ behavior: "smooth" });
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <h2>Bookmarks</h2>
-//       <ul>
-//         {headings.map((id, index) => (
-//           <li key={id}>
-//             <button onClick={() => handleScrollTo(id)}>
-//               Heading {index + 1}
-//             </button>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default DocsBookmarks;
