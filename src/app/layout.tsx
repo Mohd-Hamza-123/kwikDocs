@@ -37,7 +37,9 @@ export default function RootLayout({
                   className={`${inter.className}`}>
                   <Navbar />
                   <Sidebar />
-                  {children}
+                  <main className="overflow-x-hidden overflow-y-scroll">
+                    {children}
+                  </main>
                   <Footer />
                   <Toaster />
                   <OverlayLoader />

@@ -66,7 +66,7 @@ const CreatePage = ({ post }: any) => {
   const createDocumentQuery = useMutation({
     mutationFn: (doc: I_Docs) => createDoc(doc),
     onMutate: (variables) => {
-      dispatch(overlayLoadingIsTrueReducer({ loadingMsg: "Documentent is uploading" }))
+      dispatch(overlayLoadingIsTrueReducer({ loadingMsg: "Document is uploading" }))
     },
     onError: (error: any, variables, context) => {
       toast({
@@ -88,7 +88,7 @@ const CreatePage = ({ post }: any) => {
   const updateDocumentQuery = useMutation({
     mutationFn: (data: I_FormInputs) => updateDoc(data, post?._id),
     onMutate: (variables) => {
-      dispatch(overlayLoadingIsTrueReducer({ loadingMsg: "Documentent is updating" }))
+      dispatch(overlayLoadingIsTrueReducer({ loadingMsg: "Document is updating" }))
     },
     onError: (error, variables, context) => {
       toast({
@@ -174,9 +174,7 @@ const CreatePage = ({ post }: any) => {
   }
 
   return (
-    <>
-
-      <main className="">
+    
         <form className="w-full flex p-5 gap-2" onSubmit={handleSubmit(submit)}>
           <section className="w-[77%]">
             <div>
@@ -240,8 +238,7 @@ const CreatePage = ({ post }: any) => {
             <Button className="w-full mt-4">Upload </Button>
           </section>
         </form>
-      </main>
-    </>
+   
   );
 };
 
