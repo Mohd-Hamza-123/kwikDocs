@@ -22,7 +22,7 @@ const DocContent = ({ technology }: any) => {
   }, [doc]);
 
   if (!doc) {
-    return <div className="dark:bg-gray-900 dark:border-gray-700 h-full overflow-x-hidden overflow-y-scroll">
+    return <div className="dark:bg-gray-900 dark:border-gray-700 h-full">
       <h1 className="text-2xl text-center font-bold text-gray-800 mt-5">{technology?.name}</h1>
       <figure className="w-[220px] h-[220px] mx-auto my-4 rounded-sm overflow-hidden">
         <Image
@@ -40,7 +40,7 @@ const DocContent = ({ technology }: any) => {
 
   return (
     <Prism>
-      <section className="w-full h-full overflow-x-hidden overflow-y-scroll">
+      <section className="w-full h-full overflow-hidden">
         <div className="w-full bg-white z-10 shadow-md dark:bg-gray-900 dark:border-gray-700">
           <div className="dark:bg-gray-900 dark:border-gray-700 h-[75px] font-bold text-gray-800 dark:text-gray-300 px-3 flex items-center border border-solid border-gray-200 border-t-0 border-l-0 border-r-0 justify-between">
             <h2 className="text-md lg:text-3xl w-[70%] ">{doc?.title}</h2>
