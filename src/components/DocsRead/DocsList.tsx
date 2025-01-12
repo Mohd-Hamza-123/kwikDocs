@@ -4,11 +4,11 @@ import { getDocs } from "@/lib/API/docsAPI/getDocs";
 import { docsInterface } from "@/models/docs.model";
 import { setDoc } from "@/lib/store/features/docsSlice";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef} from "react";
 import { useResponsiveContext } from "@/context/CSS-Context";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 
-const Docs_LIMIT = 3;
+const Docs_LIMIT = 5;
 
 const DocsList = ({ technology }: any) => {
 
@@ -71,6 +71,7 @@ const DocsList = ({ technology }: any) => {
 
   return (
     <div className="py-2 w-full dark:bg-gray-900 dark:border-gray-700">
+      
       <p className="mt-4 text-center font-semibold">{name}</p>
       <ul className="flex flex-col gap-1 mt-5">
         {allDocs?.map((doc: docsInterface) => (

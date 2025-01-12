@@ -9,13 +9,16 @@ export async function POST(request: NextRequest) {
     try {
 
         const userId = await getDataFromToken(request);
-      
-        if (!userId) {
-            return NextResponse.json({
-                success: false,
-                message: "Cannot get your details",
-            }, { status: 400 })
-        }
+        console.log(userId)
+        if (!userId) return NextResponse.json(
+                {
+                    success: false,
+                    message: "Cannot get your details",
+                },
+                { status: 400 }
+            )
+        
+
         const user = await UserModel.findById(userId).select("-password -verifyToken -verifyTokenExpiry").lean();
 
         return NextResponse.json({

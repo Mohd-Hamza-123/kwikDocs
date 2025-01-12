@@ -5,7 +5,7 @@ import conf from "@/conf/conf";
 const getDataFromToken = async (request: NextRequest) => {
     try {
         const token = request.cookies.get('token')?.value || ""
-        
+      
         const decodedToken: any = jwt.verify(token, conf.token_secret);
       
         return decodedToken?._id
