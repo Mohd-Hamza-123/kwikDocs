@@ -46,12 +46,14 @@ const Technologies = () => {
     }
 
     return (
-        <div>
+        <div className='dark:bg-bgDark'>
             {technology?.map((techObj: any) => {
-                return <section key={techObj?.techType} className=''>
-                    <h1 className='text-2xl lg:text-3xl text-center capitalize'>{techObj?.techType}</h1>
+                return <section
+                    key={techObj?.techType}>
+                    <h1 className='text-2xl lg:text-3xl text-center capitalize font-cursive'>{techObj?.techType}
+                    </h1>
                     {techObj?.technologies?.map((tech: any, index: number) => (
-                        <div key={tech?._id + index} className={`dark:bg-gray-950 dark:border-gray-700 p-3 rounded-lg bg-white shadow-md dark:bg-surface-dark dark:text-white text-surface w-[94%] lg:w-[70%] mx-auto my-8 flex flex-col lg:flex-row ${(index + 1) % 2 === 0 ? 'lg:flex-row-reverse' : ''}`}>
+                        <div key={tech?._id + index} className={`dark:bg-containerDark rounded-lg bg-white shadow-md my-6 dark:text-white p-5 w-[94%] lg:w-[70%] mx-auto flex flex-col lg:flex-row ${(index + 1) % 2 === 0 ? 'lg:flex-row-reverse' : ''}`}>
                             <div className="relative overflow-hidden bg-cover bg-no-repeat lg:w-[40%] w-full">
                                 <img
                                     className={`rounded-sm w-full h-full object-contain object-center`}
@@ -62,7 +64,7 @@ const Technologies = () => {
 
                                 />
                             </div>
-                            <div className="p-6 flex justify-around flex-col lg:w-[60%] w-full">
+                            <div className="flex justify-around flex-col lg:w-[60%] w-full p-3">
                                 <h3 className="mb-2 text-2xl lg:text-3xl font-medium leading-tight text-center">
                                     {tech?.name}
                                 </h3>

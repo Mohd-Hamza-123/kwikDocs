@@ -75,7 +75,7 @@ const CreatePage = ({ post }: any) => {
       })
     },
     onSuccess: (data, variables, context) => {
-     
+
       dispatch(setDoc({ document: data }))
       router.push(`/read-doc/${data?.techType}`);
 
@@ -98,7 +98,7 @@ const CreatePage = ({ post }: any) => {
     },
     onSuccess: async (data, variables, context) => {
 
-     
+
       dispatch(setDoc({ document: data }));
       await queryClient.setQueryData(['docs', data?.techType], (oldData: any) => {
 
@@ -174,71 +174,71 @@ const CreatePage = ({ post }: any) => {
   }
 
   return (
-    
-        <form className="w-full flex p-5 gap-2" onSubmit={handleSubmit(submit)}>
-          <section className="w-[77%]">
-            <div>
-              <label htmlFor="Title" className="text-md block mt-3">
-                Title
-              </label>
-              <Textarea
-                id="Title"
-                className="w-[100%] h-[100px]
+
+    <form className="w-full flex p-5 gap-2" onSubmit={handleSubmit(submit)}>
+      <section className="w-[77%]">
+        <div>
+          <label htmlFor="Title" className="text-md block mt-3">
+            Title
+          </label>
+          <Textarea
+            id="Title"
+            className="w-[100%] h-[100px]
               "
-                {...register("title", { required: true })}
-              />
-            </div>
-            <div className="mt-3">
-              <RTE
-                setBookMark={setBookMark}
-                bookMark={bookMark}
-                control={control}
-                name="description"
-                defaultValue={getValues("description")}
-                getBookMark={getBookMark}
-              />
-            </div>
-            <Prism />
-          </section>
-          <section className="w-[23%]">
+            {...register("title", { required: true })}
+          />
+        </div>
+        <div className="mt-3">
+          <RTE
+            setBookMark={setBookMark}
+            bookMark={bookMark}
+            control={control}
+            name="description"
+            defaultValue={getValues("description")}
+            getBookMark={getBookMark}
+          />
+        </div>
+        <Prism />
+      </section>
+      <section className="w-[23%]">
 
-            <div className="mt-9">
-              <Controller
-                name="techType"
-                control={control}
-                render={({ field }) => <ComboboxDemo {...field} />}
-              />
-            </div>
-            <div className="mt-3">
-              <div className="flex gap-1">
-                <Input ref={tagRef} />
-                <Button
-                  variant={'outline'}
-                  onClick={addTags}
-                >Add</Button>
-              </div>
-              <ul className="flex gap-2 flex-start mt-2">
-                {tags.map((tag: string, index: number) => {
-                  return <li
-                    key={tag}
-                    className="border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground px-1 flex gap-1 items-center"
-                  >
-                    <span>{tag}</span>
-                    <GoXCircleFill
-                      onClick={() => {
-                        setTags((prev) => prev.filter((prevTag) => prevTag !== tag))
-                      }}
-                      className="cursor-pointer" />
-                  </li>
-                })
-                }
-              </ul>
-            </div>
+        <div className="mt-9">
+          <Controller
+            name="techType"
+            control={control}
+            render={({ field }) => <ComboboxDemo {...field} />}
+          />
+        </div>
+        <div className="mt-3">
+          <div className="flex gap-1">
+            <Input ref={tagRef} />
+            <Button
+              variant={'outline'}
+              onClick={addTags}
+            >Add</Button>
+          </div>
+          <ul className="flex gap-2 flex-start mt-2">
+            {tags.map((tag: string, index: number) => {
+              return <li
+                key={tag}
+                className="border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground px-1 flex gap-1 items-center"
+              >
+                <span>{tag}</span>
+                <GoXCircleFill
+                  onClick={() => {
+                    setTags((prev) => prev.filter((prevTag) => prevTag !== tag))
+                  }}
+                  className="cursor-pointer" />
+              </li>
+            })
+            }
+          </ul>
+        </div>
 
-            <Button className="w-full mt-4">Upload </Button>
-          </section>
-        </form>
-   
+        <Button className="w-full mt-4">Upload </Button>
+      </section>
+    </form>
+
   );
 };
 

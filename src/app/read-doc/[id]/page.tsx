@@ -28,7 +28,7 @@ const ReadPage = ({ params }: any) => {
   });
 
 
-  if (isPending) return <LoadingPage loadingMsg="Document is Loading" />
+  if (isPending) return <LoadingPage loadingMsg="Document is loading" />
 
   return (
     <main className="flex flex-col-reverse lg:flex-row relative h-[88vh] overflow-x-hidden">

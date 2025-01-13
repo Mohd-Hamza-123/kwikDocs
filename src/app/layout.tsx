@@ -15,7 +15,7 @@ import TypicalContextProviderWrapper from "@/context/TypicalContextProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Documentarium",
+  title: "DocsNode",
   description: "An Easy Documentation Website",
 };
 
@@ -35,11 +35,9 @@ export default function RootLayout({
                 <body
                   suppressHydrationWarning={true}
                   className={`${inter.className}`}>
-                  <Navbar />
                   <Sidebar />
-                  <main className="overflow-x-hidden overflow-y-scroll">
-                    {children}
-                  </main>
+                  <Navbar />
+                  <main>{children}</main>
                   <Footer />
                   <Toaster />
                   <OverlayLoader />

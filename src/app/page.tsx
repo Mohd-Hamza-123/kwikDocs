@@ -1,12 +1,13 @@
-import { Home } from "..";
+import { Home, Technologies } from "..";
 
 
 const GettingStarted = () => {
 
   return (
-    <main className="h-[88vh] overflow-y-scroll">
+    <>
       <Home />
-    </main>
+      <Technologies />
+    </>
   );
 };
 
