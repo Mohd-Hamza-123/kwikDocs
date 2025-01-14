@@ -4,7 +4,7 @@ import { getDocs } from "@/lib/API/docsAPI/getDocs";
 import { docsInterface } from "@/models/docs.model";
 import { setDoc } from "@/lib/store/features/docsSlice";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import React, { useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 import { useResponsiveContext } from "@/context/CSS-Context";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 
@@ -70,17 +70,17 @@ const DocsList = ({ technology }: any) => {
 
 
   return (
-    <div className="py-2 w-full dark:bg-gray-900 dark:border-gray-700">
-      
+    <div className={`w-[100%] lg:w-[20%] border border-r-3 max-h-[88vh] overflow-y-scroll absolute lg:sticky top-0 bg-slate-50 dark:bg-bgDark z-20 py-2 dark:border-gray-700 ${isDocIndexOpen ? 'block' : 'hidden'} lg:block`}>
+
       <p className="mt-4 text-center font-semibold">{name}</p>
       <ul className="flex flex-col gap-1 mt-5">
         {allDocs?.map((doc: docsInterface) => (
           <li
             key={doc?._id}
-            className={`text-sm font-bold rounded-sm px-2 py-3 md:py-2 sm:py-4 list-none cursor-pointer border-b border-gray-200  text-gray-700 ${doc?._id === document?._id ? "bg-indigo-600 text-white" : "hover:bg-gray-300"}`}
+            className={`text-sm font-bold rounded-sm px-2 py-3 md:py-2 sm:py-4 list-none cursor-pointer border-b border-gray-200 dark:text-gray-300 ${doc?._id === document?._id ? "bg-indigo-600 text-white" : "hover:bg-gray-300 dark:hover:bg-black"}`}
             onClick={() => {
               dispatch(setDoc({ document: doc }))
-              setIsDocIndexOpen(false)
+              setIsDocIndexOpen(false);
             }}
           >
             {doc?.title}
@@ -91,7 +91,7 @@ const DocsList = ({ technology }: any) => {
       {hasNextPage && <div ref={spinnerRef} className="flex justify-center items-center">
         {isFetchingNextPage && <ImSpinner3 className="animate-spin text-2xl mt-1" />}
       </div>}
-      {!hasNextPage && <span className="text-center text-sm mx-auto block my-2 text-gray-600">No more Document</span>}
+      {!hasNextPage && <span className="text-center text-sm mx-auto block my-2">No more Document</span>}
     </div>
   );
 };

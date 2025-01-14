@@ -46,7 +46,7 @@ const Technologies = () => {
     }
 
     return (
-        <div className='dark:bg-bgDark'>
+        <div className='dark:bg-bgDark bg-gray-100'>
             {technology?.map((techObj: any) => {
                 return <section
                     key={techObj?.techType}>

@@ -22,7 +22,7 @@ const RelatedDocs = () => {
   };
 
   return (
-    <div className={`text-left lg:text-center w-full h-fit lg:w-[18%] border border-l-0 lg:block lg:static z-20 bg-slate-100 text-black top-0 ${document ? "block" : "hidden"}`}>
+    <div className={`text-left lg:text-center w-full h-fit lg:w-[20%] border border-l-0 lg:block lg:static z-20 bg-slate-100 dark:bg-bgDark top-0 ${document ? "block" : "hidden"}`}>
       <div className='flex items-center gap-2 max-w-full w-full my-3 mx-2'
         onClick={() => setIsDocBookmarkOpen((prev) => !prev)}
       >
@@ -37,7 +37,7 @@ const RelatedDocs = () => {
           <li
 
             key={bookmark?.bookmarkID}
-            className={`text-sm font-bold rounded-sm px-2 py-1 text-left lg:py-3 md:py-2 sm:py-4 list-none cursor-pointer border-b border-gray-200 text-gray-700 ${selectedID === bookmark?.bookmarkID ? 'text-indigo-600' : ''}`}
+            className={`text-sm font-bold rounded-sm px-2 py-1 text-left lg:py-3 md:py-2 sm:py-4 list-none cursor-pointer border-b border-gray-200 ${selectedID === bookmark?.bookmarkID ? 'text-indigo-600' : ''}`}
             onClick={() => {
               handleScrollTo(bookmark?.bookmarkID);
               setBookmarkName(bookmark?.bookmarkName)
