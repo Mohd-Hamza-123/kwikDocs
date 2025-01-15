@@ -140,3 +140,8 @@ html {
   cursor: not-allowed;
   opacity: 1;
 }
+
+
+#TinyMceArticle code {
+  font-size: 17px !important;
+}
