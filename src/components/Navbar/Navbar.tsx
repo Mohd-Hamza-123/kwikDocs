@@ -31,8 +31,8 @@ const Navbar = () => {
     const signUp = () => router.push('/signup')
 
     return (
-        <header className="dark:bg-bgDark shadow-xl h-[12vh] content-center px-3 lg:px-7">
-            <nav className="flex justify-between items-center">
+        <header>
+            <nav className="flex justify-between items-center dark:bg-bgDark shadow-xl h-[12vh]  px-3 lg:px-7">
                 <Link href={`/`}>
                     <figure className='flex gap-2 items-center cursor-pointer'>
                         <Image

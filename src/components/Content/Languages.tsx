@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import Image from 'next/image';
 import { Button } from '../ui/button'
 import { LoadingPage } from '@/index';
 import { useRouter } from 'next/navigation';
@@ -54,27 +55,29 @@ const Technologies = () => {
                     </h1>
                     {techObj?.technologies?.map((tech: any, index: number) => (
                         <div key={tech?._id + index} className={`dark:bg-containerDark rounded-lg bg-white shadow-md my-6 dark:text-white p-5 w-[94%] lg:w-[70%] mx-auto flex flex-col lg:flex-row ${(index + 1) % 2 === 0 ? 'lg:flex-row-reverse' : ''}`}>
-                            <div className="relative overflow-hidden bg-cover bg-no-repeat lg:w-[40%] w-full">
-                                <img
-                                    className={`rounded-sm w-full h-full object-contain object-center`}
+                            <div className="lg:w-[40%] w-full flex justify-center items-center">
+                                <Image
+                                    className={`rounded-md object-contain h-full w-full object-center`}
                                     src={tech?.image?.secure_url}
-                                    alt='image'
+                                    alt={`${tech?.name} Image`}
                                     height={200}
                                     width={200}
-
+                                    quality={100}
+                                    priority={true}
                                 />
                             </div>
                             <div className="flex justify-around flex-col lg:w-[60%] w-full p-3">
-                                <h3 className="mb-2 text-2xl lg:text-3xl font-medium leading-tight text-center">
+                                <h2 className="mb-2 text-2xl lg:text-3xl font-medium leading-tight text-center">
                                     {tech?.name}
-                                </h3>
+                                </h2>
                                 <p className="mb-4 text-base text-gray-500 text-justify">
                                     {tech?.description}
                                 </p>
                                 <Button
                                     variant={'outline'}
                                     onClick={() => handleLearn(tech?._id)}
-                                >Learn {tech?.name}</Button>
+                                >Learn {tech?.name}
+                                </Button>
                             </div>
                         </div>
                     ))}
