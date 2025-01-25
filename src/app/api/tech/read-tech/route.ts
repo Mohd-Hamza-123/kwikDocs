@@ -6,12 +6,12 @@ export const dynamic = 'force-dynamic';  // This forces the route to be dynamic
 export const fetchCache = 'force-no-store';  // This prevents caching
 export const revalidate = 0; // if 60 then data will be cached for 60 seconds
 
-export async function GET(request: NextRequest) {
-    await connectDB();
+export async function GET() {
     try {
-
+        await connectDB();
         const allTech = await TechModel.find({}, { techType: 1, _id: 0 }).distinct('techType').exec();
-      
+        console.log(allTech);
+
         if (!Array.isArray(allTech) || allTech?.length <= 0) {
             return NextResponse.json({
                 success: false,
@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
 
     } catch (error: any) {
 
-        console.log("error : ",error?.message);
+        console.log("error : ", error?.message);
         return NextResponse.json({
             success: false,
             message: "failed to get data",
