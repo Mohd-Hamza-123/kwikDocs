@@ -1,7 +1,6 @@
 'use client'
 import gsap from 'gsap';
 import React from "react";
-
 import { useGSAP } from '@gsap/react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -36,7 +35,7 @@ const Home = () => {
                 </p>
             </div>
 
-            <div id="home-scroll-down" className="text-center mt-10 flex flex-col gap-2 items-center">
+            <div id="home-scroll-down" className="text-center mt-8 flex flex-col gap-2 items-center">
                 <p className="text-lg">Scroll Down</p>
                 <FaArrowCircleDown />
             </div>

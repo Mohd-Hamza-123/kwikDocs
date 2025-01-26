@@ -6,10 +6,10 @@ import { appName } from '@/constant';
 import { Button } from '../ui/button';
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useAppSelector } from '@/lib/hooks/hooks';
-import { usePathname, useRouter } from 'next/navigation'
-import { useTypicalContext } from '@/context/Typical-Context';
 import { IoListCircleOutline } from "react-icons/io5";
+import { usePathname, useRouter } from 'next/navigation';
 import { useResponsiveContext } from '@/context/CSS-Context';
+import { useTypicalContext } from '@/context/Typical-Context';
 
 const Navbar = () => {
 

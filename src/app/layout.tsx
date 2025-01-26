@@ -12,7 +12,7 @@ import CSS_Context_Provider_Wrapper from "@/context/CSS_Context_Provider";
 import TypicalContextProviderWrapper from "@/context/TypicalContextProvider";
 
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   title: "DocsNode",
@@ -34,13 +34,13 @@ export default function RootLayout({
               <CSS_Context_Provider_Wrapper>
                 <body
                   suppressHydrationWarning={true}
-                  className={`${inter.className}`}>
+                  className={`${inter.className} min-h-dvh overflow-x-hidden`}>
                   <Sidebar />
                   <Navbar />
-                  <main>{children}</main>
-                  <Footer />
                   <Toaster />
                   <OverlayLoader />
+                  <main>{children}</main>
+                  <Footer />
                 </body>
               </CSS_Context_Provider_Wrapper>
             </TypicalContextProviderWrapper>
