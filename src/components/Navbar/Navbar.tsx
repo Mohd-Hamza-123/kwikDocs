@@ -55,16 +55,11 @@ const Navbar = () => {
 
     const lightMode = () => {
         setTheme("light")
-        if (typeof window !== "undefined") {
-            localStorage.setItem("theme", "light");
-        }
+        
     }
 
     const darkMode = () => {
         setTheme('dark')
-        if (typeof window !== "undefined") {
-            localStorage.setItem("theme", "dark");
-        }
     }
 
 

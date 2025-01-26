@@ -1,10 +1,18 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TypicalContextProvider } from './Typical-Context'
 
 const TypicalContextProviderWrapper = ({ children }: any) => {
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-    const [theme, setTheme] = useState(localStorage.getItem("theme") || 'light');
+    const [theme, setTheme] = useState<"light" | 'dark'>("light");
+
+
+    useEffect(() => {
+        const x = localStorage.getItem("theme")
+        if (x) {
+            setTheme(x as 'light' | 'dark')
+        }
+    }, [])
 
     const contextValue = {
         isSideBarOpen,
