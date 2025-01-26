@@ -29,9 +29,10 @@ export default function RootLayout({
     <html lang="en">
       <QueryProvider>
         <StoreProvider>
-          <InitializationWrapper>
-            <TypicalContextProviderWrapper>
-              <CSS_Context_Provider_Wrapper>
+
+          <TypicalContextProviderWrapper>
+            <CSS_Context_Provider_Wrapper>
+              <InitializationWrapper>
                 <body
                   suppressHydrationWarning={true}
                   className={`${inter.className} min-h-dvh overflow-x-hidden`}>
@@ -42,9 +43,9 @@ export default function RootLayout({
                   <main>{children}</main>
                   <Footer />
                 </body>
-              </CSS_Context_Provider_Wrapper>
-            </TypicalContextProviderWrapper>
-          </InitializationWrapper>
+              </InitializationWrapper>
+            </CSS_Context_Provider_Wrapper>
+          </TypicalContextProviderWrapper>
         </StoreProvider>
       </QueryProvider>
     </html>

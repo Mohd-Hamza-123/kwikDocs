@@ -3,6 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { appName } from '@/constant';
+import { svgIcons } from '../icons';
 import { Button } from '../ui/button';
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useAppSelector } from '@/lib/hooks/hooks';
@@ -10,6 +11,16 @@ import { IoListCircleOutline } from "react-icons/io5";
 import { usePathname, useRouter } from 'next/navigation';
 import { useResponsiveContext } from '@/context/CSS-Context';
 import { useTypicalContext } from '@/context/Typical-Context';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { MdOutlineNightlightRound } from 'react-icons/md';
+
 
 const Navbar = () => {
 
@@ -20,15 +31,31 @@ const Navbar = () => {
 
     const isDocIndexVisible = pathName.includes('/read-doc');
 
-    const { isSideBarOpen, setIsSideBarOpen } = useTypicalContext();
-    const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
+    const {
+        isSideBarOpen,
+        setIsSideBarOpen,
+        theme,
+        setTheme
+    } = useTypicalContext();
+
+    const {
+        isDocIndexOpen,
+        setIsDocIndexOpen
+    } = useResponsiveContext();
+
     const userStatus = useAppSelector((state) => state.auth.userStatus);
 
 
     if (hidePaths.includes(pathName)) return null;
 
     const login = () => router.push('/login');
-    const signUp = () => router.push('/signup')
+    const signUp = () => router.push('/signup');
+
+
+    const lightMode = () => setTheme("light")
+
+    const darkMode = () => setTheme('dark')
+
 
     return (
         <header>
@@ -56,6 +83,20 @@ const Navbar = () => {
                             onClick={() => setIsDocIndexOpen((prev) => !prev)}
                         />
                     </div>
+
+
+                    <DropdownMenu>
+                        <DropdownMenuTrigger>
+                            {theme === "dark" ? <MdOutlineNightlightRound className={"h-6 w-6 text-white"} /> : <svgIcons.light className="w-6 h-6" />}
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuItem onClick={lightMode}>Light Mode</DropdownMenuItem>
+                            <DropdownMenuItem onClick={darkMode}>Dark Mode</DropdownMenuItem>
+                            <DropdownMenuItem>System</DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+
+
                     {userStatus ? <Button
                         onClick={() => setIsSideBarOpen((prev) => !prev)}
                         variant={'outline'} className="hover:text-indigo-500"
