@@ -52,9 +52,15 @@ const Navbar = () => {
     const signUp = () => router.push('/signup');
 
 
-    const lightMode = () => setTheme("light")
+    const lightMode = () => {
+        setTheme("light")
+        localStorage.setItem('theme', 'light');
+    }
 
-    const darkMode = () => setTheme('dark')
+    const darkMode = () => {
+        setTheme('dark')
+        localStorage.setItem('theme', 'dark');
+    }
 
 
     return (
