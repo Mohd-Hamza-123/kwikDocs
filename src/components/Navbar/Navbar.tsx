@@ -1,4 +1,5 @@
 'use client'
+
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -54,12 +55,16 @@ const Navbar = () => {
 
     const lightMode = () => {
         setTheme("light")
-        localStorage.setItem('theme', 'light');
+        if (typeof window !== "undefined") {
+            localStorage.setItem("theme", "light");
+        }
     }
 
     const darkMode = () => {
         setTheme('dark')
-        localStorage.setItem('theme', 'dark');
+        if (typeof window !== "undefined") {
+            localStorage.setItem("theme", "dark");
+        }
     }
 
 
