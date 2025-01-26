@@ -29,7 +29,6 @@ export default function RootLayout({
     <html lang="en">
       <QueryProvider>
         <StoreProvider>
-
           <TypicalContextProviderWrapper>
             <CSS_Context_Provider_Wrapper>
               <InitializationWrapper>

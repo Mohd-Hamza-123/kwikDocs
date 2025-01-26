@@ -1,10 +1,11 @@
 'use client'
-import { useTypicalContext } from '@/context/Typical-Context'
+
+import React, { useEffect } from 'react'
 import logoutAPI from '@/lib/API/authAPI/logout'
+import { useTypicalContext } from '@/context/Typical-Context'
 import getProfile from '@/lib/API/authAPI/profile'
 import { useAppDispatch } from '@/lib/hooks/hooks'
 import { login, logout } from '@/lib/store/features/authSlice'
-import React, { useEffect } from 'react'
 
 const InitializationWrapper = ({ children }: any) => {
 
@@ -31,8 +32,10 @@ const InitializationWrapper = ({ children }: any) => {
             const htmlElement = document.documentElement;
             htmlElement.classList.remove('light')
             htmlElement.classList.add('dark')
+            console.log(typeof window)
             localStorage.setItem('theme', 'dark');
         } else {
+            console.log(typeof window)
             const htmlElement = document.documentElement;
             htmlElement.classList.remove('dark')
             htmlElement.classList.add('light')
