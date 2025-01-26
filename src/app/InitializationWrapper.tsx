@@ -32,14 +32,14 @@ const InitializationWrapper = ({ children }: any) => {
             const htmlElement = document.documentElement;
             htmlElement.classList.remove('light')
             htmlElement.classList.add('dark')
-            console.log(typeof window)
-            localStorage.setItem('theme', 'dark');
+          
+          
         } else {
-            console.log(typeof window)
+           
             const htmlElement = document.documentElement;
             htmlElement.classList.remove('dark')
             htmlElement.classList.add('light')
-            localStorage.setItem('theme', 'light');
+       
         }
     }, [theme,setTheme])
 
