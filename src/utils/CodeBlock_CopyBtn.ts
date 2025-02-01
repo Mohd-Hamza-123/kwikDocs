@@ -35,6 +35,7 @@ export function makeCodeBlock() {
             element.prepend(copyBtn);
 
             copyText = element.textContent || '';
+       
             copyBtn.addEventListener("click", () => copyToClipboard(copyText));
         }
         if (copyBtn) copyBtn.addEventListener("click", () => copyToClipboard(copyText));
