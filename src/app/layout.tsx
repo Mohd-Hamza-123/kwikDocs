@@ -11,11 +11,10 @@ import OverlayLoader from "@/components/OverlayLoader/OverlayLoader";
 import CSS_Context_Provider_Wrapper from "@/context/CSS_Context_Provider";
 import TypicalContextProviderWrapper from "@/context/TypicalContextProvider";
 
-
 const inter = Inter({ subsets: ["latin"], variable: '--font-sans' });
 
 export const metadata: Metadata = {
-  title: "DocsNode",
+  title: "Docs Node",
   description: "An Easy Documentation Website",
 };
 
@@ -27,6 +26,9 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <Head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </Head>
       <QueryProvider>
         <StoreProvider>
           <TypicalContextProviderWrapper>

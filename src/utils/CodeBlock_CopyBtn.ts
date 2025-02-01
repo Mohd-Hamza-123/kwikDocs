@@ -7,7 +7,7 @@ function copyToClipboard(copyText: string) {
         .then(() => {
             'use client'
             toast({
-                title: "Text Copied"
+                title: "copied"
             })
         })
         .catch((err) => {
