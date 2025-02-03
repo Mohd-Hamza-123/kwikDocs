@@ -175,8 +175,10 @@ const CreatePage = ({ post }: any) => {
 
   return (
 
-    <form className="w-full flex p-5 gap-2" onSubmit={handleSubmit(submit)}>
-      <section className="w-[77%]">
+    <form
+      className="w-full flex md:flex-row flex-col p-5 gap-2"
+      onSubmit={handleSubmit(submit)}>
+      <section className="md:w-[77%] w-full">
         <div>
           <label htmlFor="Title" className="text-md block mt-3">
             Title
@@ -200,7 +202,7 @@ const CreatePage = ({ post }: any) => {
         </div>
         <Prism />
       </section>
-      <section className="w-[23%]">
+      <section className="md:w-[23%] w-full">
 
         <div className="mt-9">
           <Controller
