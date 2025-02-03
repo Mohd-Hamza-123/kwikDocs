@@ -14,11 +14,12 @@ import { setDoc } from "@/lib/store/features/docsSlice";
 import { ComboboxDemo } from "@/components/ComboboxDemo";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { BookMarkInterface, docsInterface } from "@/models/docs.model";
+import { BookMarkInterface } from "@/models/docs.model";
 import {
   overlayLoadingIsFalseReducer,
   overlayLoadingIsTrueReducer
 } from "@/lib/store/features/overlayLoaderSlice";
+import { Label } from "@/components/ui/label";
 
 export interface I_Docs {
   title: string;
@@ -130,8 +131,6 @@ const CreatePage = ({ post }: any) => {
     },
   })
 
-
-
   const submit: SubmitHandler<I_FormInputs> = async (data) => {
 
     setBookMark((prevBookmark: any) => {
@@ -180,9 +179,9 @@ const CreatePage = ({ post }: any) => {
       onSubmit={handleSubmit(submit)}>
       <section className="md:w-[77%] w-full">
         <div>
-          <label htmlFor="Title" className="text-md block mt-3">
+          <Label htmlFor="Title" className="text-md block mt-3">
             Title
-          </label>
+          </Label>
           <Textarea
             id="Title"
             className="w-[100%] h-[100px]
@@ -237,7 +236,7 @@ const CreatePage = ({ post }: any) => {
           </ul>
         </div>
 
-        <Button className="w-full mt-4">Upload </Button>
+        <Button className="w-full mt-4">Upload</Button>
       </section>
     </form>
 
