@@ -49,13 +49,12 @@ const Navbar = () => {
 
     if (hidePaths.includes(pathName)) return null;
 
-    const login = () => router.push('/login');
-    const signUp = () => router.push('/signup');
+   
 
 
     const lightMode = () => {
         setTheme("light")
-        
+
     }
 
     const darkMode = () => {
@@ -103,25 +102,12 @@ const Navbar = () => {
                     </DropdownMenu>
 
 
-                    {userStatus ? <Button
+                    <Button
                         onClick={() => setIsSideBarOpen((prev) => !prev)}
                         variant={'outline'} className="hover:text-indigo-500"
                     >
                         <RxHamburgerMenu className='text-2xl' />
-                    </Button> : <>
-                        <Button
-                            onClick={login}
-                            className='text-sm py-2 px-2 lg:px-3 font-bold'
-                        >
-                            Login
-                        </Button>
-                        <Button
-                            onClick={signUp}
-                            className='text-sm py-2 px-2 lg:px-3 font-bold'
-                        >
-                            Sign-Up
-                        </Button>
-                    </>}
+                    </Button>
                 </div>
             </nav>
         </header>
