@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Controller } from "react-hook-form";
 import { generateUniqueId } from "@/utils/ConvertDate";
+import { useTypicalContext } from "@/context/Typical-Context";
 
 interface RTEType {
   name: string;
@@ -20,9 +21,11 @@ const App: React.FC<RTEType> = ({
   getBookMark,
 }) => {
 
+  const { theme } = useTypicalContext()
   const [currentEditorValue, setcurrentEditorValue] = useState(defaultValue);
   const editorRef = useRef<any>(null);
 
+  console.log(theme)
 
   return (
     <Controller
@@ -33,9 +36,12 @@ const App: React.FC<RTEType> = ({
           onInit={(evt, editor) => {
             editorRef.current = editor;
           }}
+
           initialValue={defaultValue}
           apiKey={process.env.NEXT_PUBLIC_TINYMCE_KEY}
           init={{
+            skin: `${theme === 'dark' ? 'oxide-dark' : 'oxide'}`,
+            content_css: `${theme === 'dark' ? 'dark' : 'default'}`,
             height: 500,
             menubar: true,
             codesample_global_prismjs: true,
@@ -54,7 +60,7 @@ const App: React.FC<RTEType> = ({
               { text: "TSX", value: "tsx" },
               { text: "CSS", value: "css" },
               { text: "Markdown", value: "markdown" },
-              { text: "SQL", value: "sql" },  
+              { text: "SQL", value: "sql" },
               { text: "Java", value: "java" },
               { text: "C", value: "c" },
               { text: "C++", value: "cpp" },
@@ -98,7 +104,7 @@ const App: React.FC<RTEType> = ({
                   const anchorName = prompt("Enter anchor name:");
                   const bookmarkID = generateUniqueId();
                   const bookmarkName = anchorName;
-               
+
                   if (anchorName) {
                     editor.insertContent(`<a id="BookMark${bookmarkID}"></a>`);
                     getBookMark({
