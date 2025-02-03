@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import SearchBar from "../../components/SearchBar"; // Adjust the import path as needed
 // Adjust the import path as needed
-import SearchedCards from "@/components/SearchedCards";
 
 const Page = () => {
   const { handleSubmit, register, control } = useForm({});
@@ -44,7 +43,7 @@ const Page = () => {
         </form>
 
         <div className="mt-4">
-          <SearchedCards docs={docs} />
+         
         </div>
       </main>
     </>
