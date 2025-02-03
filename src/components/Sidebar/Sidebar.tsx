@@ -15,8 +15,6 @@ import { svgIcons } from "../icons";
 import { CiLogin } from "react-icons/ci";
 import { BiLogInCircle } from "react-icons/bi";
 import { toast } from '@/hooks/use-toast';
-import { GiNightSky } from "react-icons/gi";
-import { WiDaySunny } from "react-icons/wi";
 import { useRouter } from 'next/navigation';
 import { IoMdLogOut } from "react-icons/io";
 import { TbPencilCode } from "react-icons/tb";
@@ -35,20 +33,18 @@ const Sidebar = () => {
 
     if (!isSideBarOpen) return null
 
-    const closeSideBar = () => {
-        setIsSideBarOpen(false)
-    }
+    const closeSideBar = () => setIsSideBarOpen(false)
 
     const handleLogout = async () => {
         try {
-            router.push('/')
             await logoutAPI();
+            router.push('/')
+            closeSideBar();
             toast({
                 variant: "default",
                 title: "Logged out successfully"
             })
             dispatch(logout());
-            closeSideBar();
         } catch (error) {
             toast({
                 variant: "destructive",
@@ -91,9 +87,9 @@ const Sidebar = () => {
                             </Link>}
                             {!userStatus && <Link
                                 onClick={closeSideBar}
-                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" 
+                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
                                 href="/signup"
-                                >
+                            >
                                 <BiLogInCircle className="h-5 w-5" />
                                 <span className="mx-2 text-sm font-medium">Sign-up</span>
                             </Link>}
@@ -114,8 +110,6 @@ const Sidebar = () => {
                                 <TbPencilCode />
                                 <span className="mx-2 text-sm font-medium">Create tech</span>
                             </Link>}
-
-
                             <Link
                                 onClick={closeSideBar}
                                 className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">

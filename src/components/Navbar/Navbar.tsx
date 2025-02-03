@@ -1,13 +1,11 @@
 'use client'
-
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { appName } from '@/constant';
 import { svgIcons } from '../icons';
+import { appName } from '@/constant';
 import { Button } from '../ui/button';
 import { RxHamburgerMenu } from "react-icons/rx";
-import { useAppSelector } from '@/lib/hooks/hooks';
 import { IoListCircleOutline } from "react-icons/io5";
 import { usePathname, useRouter } from 'next/navigation';
 import { useResponsiveContext } from '@/context/CSS-Context';
@@ -22,21 +20,17 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { MdOutlineNightlightRound } from 'react-icons/md';
 
-
 const Navbar = () => {
 
-    const router = useRouter()
     const pathName = usePathname();
-
+    const isDocIndexVisible = pathName.includes('/read-doc');
     const hidePaths = ['/login', '/signup', `/forgot-password`];
 
-    const isDocIndexVisible = pathName.includes('/read-doc');
-
     const {
+        theme,
+        setTheme,
         isSideBarOpen,
         setIsSideBarOpen,
-        theme,
-        setTheme
     } = useTypicalContext();
 
     const {
@@ -44,22 +38,12 @@ const Navbar = () => {
         setIsDocIndexOpen
     } = useResponsiveContext();
 
-    const userStatus = useAppSelector((state) => state.auth.userStatus);
-
 
     if (hidePaths.includes(pathName)) return null;
 
-   
+    const lightMode = () => setTheme("light")
 
-
-    const lightMode = () => {
-        setTheme("light")
-
-    }
-
-    const darkMode = () => {
-        setTheme('dark')
-    }
+    const darkMode = () => setTheme('dark')
 
 
     return (

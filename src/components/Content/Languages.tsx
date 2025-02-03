@@ -46,6 +46,8 @@ const Technologies = () => {
         dispatch(setDoc({ document: null }));
     }
 
+    
+
     return (
         <div className='dark:bg-bgDark bg-gray-100'>
             {technology?.map((techObj: any) => {
