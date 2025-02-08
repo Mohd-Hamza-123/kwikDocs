@@ -44,8 +44,6 @@ const Technologies = () => {
         dispatch(setDoc({ document: null }));
     };
 
-    //   console.log(technologyError?.response?.data);
-
     if (technologyPending) return <LoadingPage />;
 
     if (technologySuccess)
@@ -99,7 +97,7 @@ const Technologies = () => {
     if (isError)
         return (
             <h1 className="text-center capitalize font-bold mt-3">
-                {technologyError?.response?.data?.message}
+                No Documents . Please Check Your Internet Connection
             </h1>
         );
 };
