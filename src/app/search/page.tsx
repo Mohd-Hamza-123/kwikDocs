@@ -14,7 +14,7 @@ const Page = () => {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_END_POINT}api/docs/search/${data.SearchValue}`
       );
-      console.log(res);
+    
       if (res.ok) {
         const result = await res.json();
         const Docs = result?.docs;

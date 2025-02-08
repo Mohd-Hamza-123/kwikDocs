@@ -2,9 +2,9 @@
 
 import React, { useEffect } from 'react'
 import logoutAPI from '@/lib/API/authAPI/logout'
-import { useTypicalContext } from '@/context/Typical-Context'
 import getProfile from '@/lib/API/authAPI/profile'
 import { useAppDispatch } from '@/lib/hooks/hooks'
+import { useTypicalContext } from '@/context/Typical-Context'
 import { login, logout } from '@/lib/store/features/authSlice'
 
 const InitializationWrapper = ({ children }: any) => {
