@@ -44,7 +44,7 @@ const DocContent = ({ technology }: any) => {
     <section className="w-full h-full lg:w-[60%] border relative overflow-x-hidden overflow-y-scroll dark:bg-bgDark">
       <div className="w-full z-10 shadow-md  dark:border-gray-700">
         <div className="dark:border-gray-700 h-[75px] font-bold text-gray-800 dark:text-gray-300 px-3 flex items-center border border-solid border-gray-200 border-t-0 border-l-0 border-r-0 justify-between">
-          <h2 className="text-md lg:text-3xl w-[70%] ">{doc?.title}</h2>
+          <h2 className="text-md lg:text-3xl w-[70%]">{doc?.title}</h2>
           {userData?.isAdmin && <div className="flex gap-6 w-[30%] justify-end">
             <ReactModel _id={doc?._id || ''} />
             <MdEdit
