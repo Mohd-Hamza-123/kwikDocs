@@ -56,7 +56,8 @@
     "redux": "^5.0.1",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
-    "tinymce": "^7.2.1"
+    "tinymce": "^7.2.1",
+    "turndown": "^7.2.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
@@ -68,6 +69,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-modal": "^3.16.3",
+    "@types/turndown": "^5.0.5",
     "babel-plugin-prismjs": "^2.1.0",
     "daisyui": "^4.12.14",
     "eslint": "^8",

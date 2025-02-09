@@ -29,7 +29,8 @@ const ReadPage = ({ params }: any) => {
 
   if (isPending) return <LoadingPage loadingMsg="Document is loading" />
 
-  if (isSuccess)
+  if (isSuccess) {
+   
     return (
       <main className="flex flex-col-reverse lg:flex-row relative h-[90vh] overflow-x-hidden w-full border">
         <DocsList technology={technology} />
@@ -37,6 +38,8 @@ const ReadPage = ({ params }: any) => {
         <RelatedDocs />
       </main>
     );
+  }
+
 
   if (isError)
     return <main className="flex flex-col gap-4 justify-center items-center h-[full] overflow-hidden w-full">

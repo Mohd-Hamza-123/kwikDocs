@@ -21,7 +21,7 @@ const VerifyEmailContent = () => {
 
   useEffect(() => {
     const tokenFromParams = searchParams.get('token');
-    console.log(tokenFromParams);
+    // console.log(tokenFromParams);
     if (tokenFromParams) {
       setToken(tokenFromParams);
     }
