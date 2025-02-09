@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss"
+import { fontFamily } from 'tailwindcss/defaultTheme'
 
 const config = {
   darkMode: ["class"],
@@ -18,6 +19,9 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['var(--font-sans)', ...fontFamily.sans]
+      },
       colors: {
         bgDark: '#121212',
         containerDark: '#09090B',
@@ -79,6 +83,7 @@ const config = {
   plugins: [
     require("tailwindcss-animate"),
     require('@tailwindcss/forms'),
+    require("@tailwindcss/typography")
   ],
 } satisfies Config
 
