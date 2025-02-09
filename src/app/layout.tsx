@@ -37,13 +37,15 @@ export default function RootLayout({
               <InitializationWrapper>
                 <body
                   suppressHydrationWarning={true}
-                  className={cn("min-h-dvh overflow-x-hidden antialiased", inter.variable)}>
-                  <Sidebar />
-                  <Navbar />
-                  <Toaster />
-                  <OverlayLoader />
-                  <main>{children}</main>
-                  <Footer />
+                  className={cn("min-h-screen font-sans overflow-x-hidden antialiased", inter.variable)}>
+                  <div className="min-h-dvh bg-background">
+                    <Sidebar />
+                    <Navbar />
+                    <Toaster />
+                    <OverlayLoader />
+                    <main>{children}</main>
+                    <Footer />
+                  </div>
                 </body>
               </InitializationWrapper>
             </CSS_Context_Provider_Wrapper>
