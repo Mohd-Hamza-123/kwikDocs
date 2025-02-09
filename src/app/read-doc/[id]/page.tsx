@@ -31,7 +31,7 @@ const ReadPage = ({ params }: any) => {
 
   if (isSuccess)
     return (
-      <main className="flex flex-col-reverse lg:flex-row relative h-[88vh] overflow-x-hidden w-full border">
+      <main className="flex flex-col-reverse lg:flex-row relative h-[90vh] overflow-x-hidden w-full border">
         <DocsList technology={technology} />
         <DocContent technology={technology} />
         <RelatedDocs />
