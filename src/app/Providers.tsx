@@ -1,4 +1,4 @@
-'use client'
+
 import React, { ReactNode } from 'react'
 import ThemeProvider from './ThemeProvider'
 import QueryProvider from './QueryProvider'
