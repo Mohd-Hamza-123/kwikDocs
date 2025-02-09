@@ -1,9 +1,20 @@
-/** @type {import('next').NextConfig} */
 import createMDX from '@next/mdx';
+import rehypePrettyCode from 'rehype-pretty-code';
 
 const withMDX = createMDX({
   // Add MDX-specific configurations here
   extension: /\.mdx?$/, // Match MDX file extensions
+  options: {
+    rehypePlugins: [
+      [
+        rehypePrettyCode,
+        {
+          theme: "github-dark",
+          // Additional rehype-pretty-code options
+        },
+      ],
+    ],
+  },
 });
 
 const nextConfig = {
