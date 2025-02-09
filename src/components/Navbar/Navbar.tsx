@@ -19,9 +19,9 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { MdOutlineNightlightRound } from 'react-icons/md';
-
+import { useTheme } from 'next-themes'
 const Navbar = () => {
-
+    const { setTheme: setNextTheme } = useTheme();
     const pathName = usePathname();
     const isDocIndexVisible = pathName.includes('/read-doc');
     const hidePaths = ['/login', '/signup', `/forgot-password`];
@@ -41,9 +41,19 @@ const Navbar = () => {
 
     if (hidePaths.includes(pathName)) return null;
 
-    const lightMode = () => setTheme("light")
+    const lightMode = () => {
+        // setTheme("light")
+        setNextTheme("light")
+    }
 
-    const darkMode = () => setTheme('dark')
+    const darkMode = () => {
+        // setTheme('dark')
+        setNextTheme('dark')
+    }
+
+    const systemMode = () => {
+        setNextTheme("system")
+    }
 
 
     return (
@@ -81,7 +91,7 @@ const Navbar = () => {
                         <DropdownMenuContent>
                             <DropdownMenuItem onClick={lightMode}>Light Mode</DropdownMenuItem>
                             <DropdownMenuItem onClick={darkMode}>Dark Mode</DropdownMenuItem>
-                            <DropdownMenuItem>System</DropdownMenuItem>
+                            <DropdownMenuItem onClick={systemMode}>System</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
 
