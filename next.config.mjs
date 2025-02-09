@@ -1,45 +1,74 @@
-import createMDX from '@next/mdx';
-import rehypePrettyCode from 'rehype-pretty-code';
+import { build } from 'velite'
 
-const withMDX = createMDX({
-  // Add MDX-specific configurations here
-  extension: /\.mdx?$/, // Match MDX file extensions
-  options: {
-    rehypePlugins: [
-      [
-        rehypePrettyCode,
-        {
-          theme: "github-dark",
-          // Additional rehype-pretty-code options
-        },
-      ],
-    ],
-  },
-});
-
-const nextConfig = {
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'], // Include MDX extensions for routing
-  reactStrictMode: true,
+/** @type {import('next').NextConfig} */
+export default {
   images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: '**',
-        port: '',
-      },
-      {
-        protocol: 'https',
-        hostname: '**',
-        port: '',
-      },
-      {
-        protocol: 'https',
-        hostname: 'contents.mediadecathlon.com',
-        port: '',
-      },
-    ],
+    domains: ['res.cloudinary.com'],
+    unoptimized: true
   },
-};
+  webpack: config => {
+    config.plugins.push(new VeliteWebpackPlugin())
+    return config
+  }
+}
 
-// Merge MDX config with Next.js config
-export default withMDX(nextConfig);
+class VeliteWebpackPlugin {
+  static started = false
+  apply(/** @type {import('webpack').Compiler} */ compiler) {
+    // executed three times in nextjs
+    // twice for the server (nodejs / edge runtime) and once for the client
+    compiler.hooks.beforeCompile.tapPromise('VeliteWebpackPlugin', async () => {
+      if (VeliteWebpackPlugin.started) return
+      VeliteWebpackPlugin.started = true
+      const dev = compiler.options.mode === 'development'
+      await build({ watch: dev, clean: !dev })
+    })
+  }
+}
+
+
+// import createMDX from '@next/mdx';
+// import rehypePrettyCode from 'rehype-pretty-code';
+
+// const withMDX = createMDX({
+
+//   extension: /\.mdx?$/, 
+//   options: {
+//     rehypePlugins: [
+//       [
+//         rehypePrettyCode,
+//         {
+//           theme: "github-dark",
+//           // Additional rehype-pretty-code options
+//         },
+//       ],
+//     ],
+//   },
+// });
+
+// const nextConfig = {
+//   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'], 
+//   reactStrictMode: true,
+//   images: {
+//     remotePatterns: [
+//       {
+//         protocol: 'http',
+//         hostname: '**',
+//         port: '',
+//       },
+//       {
+//         protocol: 'https',
+//         hostname: '**',
+//         port: '',
+//       },
+//       {
+//         protocol: 'https',
+//         hostname: 'contents.mediadecathlon.com',
+//         port: '',
+//       },
+//     ],
+//   },
+// };
+
+
+// export default withMDX(nextConfig);
