@@ -1,0 +1,207 @@
+**Strings**
+-----------
+
+_Strings in python are surrounded by either single quotation marks, or double quotation marks._
+
+    print("Hello")
+    print('Hello')
+
+**Slicing Strings :**
+=====================
+
+_You can return a range of characters by using the slice syntax._
+
+_Specify the start index and the end index, separated by a colon, to return a part of the string._
+
+    str = "0123456789"
+    
+    s1 = str[:]
+    print(s1)    # output : 0123456789
+    
+    s2 = str[1:5]
+    print(s2)    # output : 1234
+    
+    s3 = str[4:]
+    print(s3)    # output : 456789
+    
+    s4 = str[:9]
+    print(s4)    # output : 012345678 
+    
+    s5 = str[0:len(str):2]
+    print(s5)   # output : 02468
+    
+
+**Slicing Methods :**
+=====================
+
+_Here are some essential string methods in Python with examples:_
+
+### 1\. **`strip()`**
+
+Removes leading and trailing whitespace (or specified characters).
+
+    s = "  Hello World  "
+    print(s.strip())  # Output: "Hello World"
+    
+
+* * *
+
+### 2\. **`lower()`**
+
+Converts all characters in the string to lowercase.
+
+    s = "HELLO"
+    print(s.lower())  # Output: "hello"
+    
+
+* * *
+
+### 3\. **`upper()`**
+
+Converts all characters in the string to uppercase.
+
+    s = "hello"
+    print(s.upper())  # Output: "HELLO"
+    
+
+* * *
+
+### 4\. **`replace(old, new)`**
+
+Replaces occurrences of a substring with another substring.
+
+    s = "Hello, World!"
+    print(s.replace("World", "Python"))  # Output: "Hello, Python!"
+    
+
+* * *
+
+### 5\. **`split(delimiter)`**
+
+Splits the string into a list of substrings based on a delimiter.
+
+    s = "apple,banana,cherry"
+    print(s.split(","))  # Output: ['apple', 'banana', 'cherry']
+    
+
+* * *
+
+### 6\. **`join(iterable)`**
+
+Joins elements of an iterable into a single string, separated by the string used for `join`.
+
+    words = ["Hello", "World"]
+    print(" ".join(words))  # Output: "Hello World"
+    
+
+* * *
+
+### 7\. **`startswith(prefix)`**
+
+Checks if the string starts with the specified prefix.
+
+    s = "Python Programming"
+    print(s.startswith("Python"))  # Output: True
+    
+
+* * *
+
+### 8\. **`endswith(suffix)`**
+
+Checks if the string ends with the specified suffix.
+
+    s = "example.txt"
+    print(s.endswith(".txt"))  # Output: True
+    
+
+* * *
+
+### 9\. **`find(substring)`**
+
+Returns the index of the first occurrence of the substring. Returns `-1` if not found.
+
+    s = "Hello, World!"
+    print(s.find("World"))  # Output: 7
+    
+
+* * *
+
+### 10\. **`count(substring)`**
+
+Counts the occurrences of a substring in the string.
+
+    s = "banana"
+    print(s.count("a"))  # Output: 3
+    
+
+* * *
+
+### 11\. **`capitalize()`**
+
+Capitalizes the first character of the string.
+
+    s = "python"
+    print(s.capitalize())  # Output: "Python"
+    
+
+* * *
+
+### 12\. **`title()`**
+
+Capitalizes the first character of every word in the string.
+
+    s = "hello world"
+    print(s.title())  # Output: "Hello World"
+    
+
+* * *
+
+### 13\. **`isalpha()`**
+
+Checks if all characters in the string are alphabetic.
+
+    s = "Python"
+    print(s.isalpha())  # Output: True
+    
+
+* * *
+
+### 14\. **`isdigit()`**
+
+Checks if all characters in the string are digits.
+
+    s = "12345"
+    print(s.isdigit())  # Output: True
+    
+
+* * *
+
+### 15\. **`islower()`**
+
+Checks if all characters in the string are lowercase.
+
+    s = "hello"
+    print(s.islower())  # Output: True
+    
+
+* * *
+
+### 16\. **`isupper()`**
+
+Checks if all characters in the string are uppercase.
+
+    s = "HELLO"
+    print(s.isupper())  # Output: True
+    
+
+* * *
+
+### 17\. **`format()`**
+
+Formats the string using placeholders.
+
+    s = "My name is {} and I am {} years old."
+    print(s.format("Alice", 25))  # Output: "My name is Alice and I am 25 years old."
+    
+
+\\

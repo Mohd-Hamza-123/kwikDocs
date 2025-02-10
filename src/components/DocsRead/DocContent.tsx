@@ -11,6 +11,7 @@ import { docsInterface } from "@/models/docs.model";
 import { makeCodeBlock } from "@/utils/CodeBlock_CopyBtn";
 import { useResponsiveContext } from "@/context/CSS-Context";
 import convertHtmlToMdx from "@/utils/convertHtmlToMdx";
+import createMdxFile from "@/lib/API/mdxApi/mdxApi";
 
 const DocContent = ({ technology }: any) => {
 
@@ -22,13 +23,14 @@ const DocContent = ({ technology }: any) => {
   useEffect(() => {
     makeCodeBlock();
     if (doc) {
+
       const html = doc.description
       const mdx = convertHtmlToMdx(html)
-      navigator.clipboard.writeText(mdx)
-        .then((res) => {
-          console.log(res)
-        })
-      // console.log(mdx)
+      createMdxFile('python', doc?.title.replaceAll(" ", "-") + ".mdx", mdx)
+      // navigator.clipboard.writeText(mdx)
+      //   .then((res) => {
+      //     console.log(res)
+      //   })
     }
   }, [doc]);
 
