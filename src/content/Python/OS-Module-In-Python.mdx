@@ -1,0 +1,75 @@
+This module provides a portable way of using operating system dependent functionality.
+
+1) Know your current working directory
+```python
+    import os
+    print(os.getcwd());
+```
+2) Create a directory named _path_ 
+
+    import os
+    
+    # Create a directory named "new_folder"
+    
+    os.mkdir("new_folder")
+    
+
+If the directory already exists, `os.mkdir` raises a `FileExistsError`.
+
+3) Check if Directory Already Exists 
+
+    import os
+    
+    if(os.path.exists("newFolder")):
+        print("Folder already exists");
+
+4) Create Nested Directories
+
+    import os
+    
+    # Create intermediate directories and the child folder
+    os.makedirs("parentFolder/childFolder")
+
+5) Renaming Folder
+
+    # syntax :
+    
+    os.rename(source, destination)
+    
+
+    import os
+    
+    os.rename("oldFolderName",'newFolderName')
+
+    import os
+    
+    # Rename a file from "old_name.txt" to "new_name.txt"
+    os.rename("old_name.txt", "new_name.txt")
+    
+
+5) to get a **list of entries** (files and directories) in a specified directory.
+
+    import os
+    
+    # core is a folder with entries
+    print(os.listdir("core"))
+
+sample output : 
+
+    ['note.txt', 'readme.md', 'tutorial 1', 'tutorial 2', 'tutorial 3', 'tutorial 4']
+
+6) To Delete File and Directories
+
+    # to Delete a file 
+    
+    import os
+    
+    os.remove("main.py")
+
+*   Use `os.rmdir()` to delete **empty directories**.
+*   Use `shutil.rmtree()` to delete **non-empty directories**.
+
+    import shutil
+    
+    # delete datebase folder with its content
+    shutil.rmtree('database')

@@ -1,0 +1,187 @@
+![](https://i.postimg.cc/y62mgZLQ/mutable-and-immutable.jpg)
+
+ 
+
+**Mutable**
+
+**Immutable**
+
+**Definition**
+
+Data type whose values can be changed after creation.
+
+Data types whose values can’t be changed or altered.
+
+**Memory Location**
+
+Retains the same memory location even after the content is modified.
+
+Any modification results in a new object and new memory location.
+
+**Example**
+
+List, Dictionaries, Set
+
+Strings, Types, Integer
+
+**Performance**
+
+It is memory-efficient, as no new objects are created for frequent changes.
+
+It might be faster in some scenarios as there’s no need to track changes.
+
+**Thread-Safety**
+
+Not inherently thread-safe. Concurrent modification can lead to unpredictable results.
+
+They are inherently thread-safe due to their unchangeable nature.
+
+**Use-cases**
+
+When you need to modify, add, or remove existing data frequently.
+
+When you want to ensure data remains consistent and unaltered.
+
+**_Lets Understand this Concept with some examples  :_** 
+
+_Eg 1) :_ 
+
+    x = 10 
+    y = x 
+    
+    x = 20
+    
+    print(x) # 20
+    print(y) # 10
+
+![](https://res.cloudinary.com/dkkifg17t/image/upload/v1735135070/Documentarium/Python/ok5n2vfh9pnhaeus8ypf.jpg)
+
+_Eg 2) :_ 
+
+    a = 1000
+    b = a
+    
+    print(a is b) # True
+    
+    #  a and b point to the same memory location (are the same object)
+
+**For Immutables Data Types :**
+
+_For immutable data types, the memory location may or may not be the same when you create a new instance, even if their contents are identical._
+
+    # INTEGERS
+    
+    x = 100
+    y = 100
+    
+    print(x is y)  # True, because of caching
+    
+    # x is y , is always true if value is in range [-5 , 256 ] . 
+    # This is due to Python's integer interning or object caching mechanism, which optimizes memory usage and improves performance.
+    
+    
+    # STRING 
+    
+    str1 = "Hello"
+    str2 = "Hello"
+    
+    print(str1 is str2)  # True
+    
+    str3 = "Hello " + "World"
+    str4 = "Hello World"
+    
+    print(str3 is str4)  # False
+    
+    # In Python, small strings (usually those with fewer than 20 characters) are often interned, 
+    # meaning they are stored in a common memory location to optimize memory usage and performance.
+    
+
+**For Mutables Data Types :**
+
+For mutable data types, the memory location will always be different when you create a new instance, even if their contents are identical.
+
+```python
+    # LIST
+    
+    list1 = [1,2,3]
+    list2 = [1,2,3]
+    
+    print(list1 is list2) # False
+    
+    # SET
+    
+    set1 = {1,2,3}
+    set2 =  {1,2,3}
+    
+    print(set1 is set2) # False
+    
+    # DICTIONARY 
+    
+    dict1 = {"name" : "Mohd Hamza"}
+    dict2 = {"name" : "Mohd Hamza"}
+    
+    print(dict1 is dict2) # False
+    ```
+    
+    
+
+**In Summary**
+
+**Type**
+
+**Mutable / Immutable**
+
+**Same Memory Location if Values Are Identical?**
+
+List
+
+Mutable
+
+No
+
+Set
+
+Mutable
+
+No
+
+Dictionary
+
+Mutable
+
+No
+
+String
+
+Immutable
+
+Yes (for small or common string literals due to interning)
+
+Tuple
+
+Immutable
+
+Yes (for small or simple tuples; No for large or dynamically created tuples)
+
+Integer/Float
+
+Immutable
+
+Yes (for small or common values)
+
+Boolean
+
+Immutable
+
+Yes
+
+### Example of Data Types / Object Types:
+
+1. **Number**: `1234`, `3.1415`, `3+4j`, `0b111`, `Decimal()`, `Fraction()`
+2. **String**: `'spam'`, `"Bob's"`, `b'a\\x01c'`, `u'sp\\xc4m'`
+3. **List**: `[1, [2, 'three'], 4.5]`, `list(range(10))`
+4. **Tuple**: `(1, 'spam', 4, 'U')`, `tuple('spam')`, `namedtuple`
+5. **Dictionary**: `{'food': 'spam', 'taste': 'yum'}`, `dict(hours=10)`
+6. **Set**: `set('abc')`, `{'a', 'b', 'c'}`
+7. **Boolean**: `True`, `False`
+8. **None**: `None`
