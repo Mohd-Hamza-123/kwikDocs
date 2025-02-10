@@ -56,7 +56,7 @@ const DocPage = async ({ params }: PageProps) => {
         const mdxFiles = getAllMdxFiles(category);
 
         return (
-            <main className="flex flex-col-reverse lg:flex-row relative h-[88vh] overflow-x-hidden w-full border border-red-700 justify-between">
+            <main className="flex flex-col-reverse lg:flex-row relative h-[90vh] overflow-x-hidden w-full justify-between">
 
                 <section className="w-[100%] lg:w-[20%] border border-r-3 max-h-[88vh] overflow-y-scroll absolute lg:sticky top-0 bg-slate-50 dark:bg-bgDark z-20 py-2 dark:border-gray-700 lg:block">
                     <p className="mt-4 text-center font-semibold">{data?.title}</p>

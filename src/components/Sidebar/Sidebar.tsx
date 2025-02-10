@@ -110,12 +110,19 @@ const Sidebar = () => {
                                 <TbPencilCode />
                                 <span className="mx-2 text-sm font-medium">Create tech</span>
                             </Link>}
-                            <Link
+                            {userData?.isAdmin && <Link
                                 onClick={closeSideBar}
-                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="/docs/python">
                                 <svgIcons.setting className="w-5 h-5" />
-                                <span className="mx-2 text-sm font-medium">Setting</span>
-                            </Link>
+                                <span className="mx-2 text-sm font-medium">Python Docs</span>
+                            </Link>}
+                            {userData?.isAdmin && <Link
+                                onClick={closeSideBar}
+                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="/docs/javascript">
+                                <svgIcons.setting className="w-5 h-5" />
+                                <span className="mx-2 text-sm font-medium">Javascript Docs</span>
+                            </Link>}
+
                         </nav>
 
                         {userStatus && <div className="flex items-center justify-between mt-6">
