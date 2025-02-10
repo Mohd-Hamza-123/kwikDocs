@@ -23,14 +23,11 @@ const DocContent = ({ technology }: any) => {
   useEffect(() => {
     makeCodeBlock();
     if (doc) {
-
       const html = doc.description
       const mdx = convertHtmlToMdx(html)
-      createMdxFile('python', doc?.title.replaceAll(" ", "-") + ".mdx", mdx)
-      // navigator.clipboard.writeText(mdx)
-      //   .then((res) => {
-      //     console.log(res)
-      //   })
+      const folderName = technology?.name.toLowerCase()
+      console.log(folderName)
+      createMdxFile(folderName, doc?.title.replaceAll(" ", "-") + ".mdx", mdx)
     }
   }, [doc]);
 

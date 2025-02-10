@@ -4,8 +4,9 @@ import path from 'path';
 import Link from 'next/link';
 
 const DocContentList = async ({ params }: { params: { category: string } }) => {
-  const { category } = params;
 
+  const { category } = params;
+  console.log("category",category)
   // Fetch posts for the selected category
   const postsDir = path.join(process.cwd(), 'src/content', category);
   let posts: any = [];
@@ -25,7 +26,7 @@ const DocContentList = async ({ params }: { params: { category: string } }) => {
     console.error(`Error reading posts for category "${category}":`, err);
   }
 
-  // console.log(posts);
+  
   return (
     <div className={`w-[100%] lg:w-[20%] border border-r-3 h-[90vh] overflow-y-scroll absolute lg:sticky top-0 bg-slate-50 dark:bg-bgDark z-20 py-2 dark:border-gray-700 lg:block`}>
       <h1 className='mt-4 text-center font-semibold'>{category}</h1>
