@@ -1,0 +1,65 @@
+---
+title: Primitive Data Types
+description: Learn the basics of JavaScript.
+published : true
+---
+
+Primitive data types in JavaScript are the fundamental types of data that represent single values, not objects. They are immutable (cannot be changed after creation) and are stored directly by their value in memory. 
+
+<table border={"2px"}>
+  <thead>
+    <tr>
+      <th>Data Type</th>
+      <th>Description</th>
+      <th>Examples</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Number</td>
+      <td>Represents both integer and floating-point numbers. Includes special values like NaN and Infinity.</td>
+      <td><code>42</code>, <code>3.14</code>, <code>-1</code>, <code>Infinity</code></td>
+    </tr>
+    <tr>
+      <td>BigInt</td>
+      <td>Represents integers of arbitrary precision (introduced in ES2020).</td>
+      <td><code>12345678901234567890n</code></td>
+    </tr>
+    <tr>
+      <td>String</td>
+      <td>Represents a sequence of characters.</td>
+      <td><code>"Hello"</code>, <code>'World'</code>, <code>""</code></td>
+    </tr>
+    <tr>
+      <td>Boolean</td>
+      <td>Represents logical values: true or false.</td>
+      <td><code>true</code>, <code>false</code></td>
+    </tr>
+    <tr>
+      <td>Undefined</td>
+      <td>Represents a variable that has been declared but not assigned a value.</td>
+      <td><code>undefined</code></td>
+    </tr>
+    <tr>
+      <td>Null</td>
+      <td>Represents the intentional absence of any object value.</td>
+      <td><code>null</code></td>
+    </tr>
+    <tr>
+      <td>Symbol</td>
+      <td>Represents a unique and immutable value (introduced in ES6).</td>
+      <td><code>Symbol('id')</code></td>
+    </tr>
+  </tbody>
+</table>
+
+
+```JavaScript
+let num = 42; // Number
+let bigInt = 123456789012345678901234567890n; // BigInt
+let str = "Hello"; // String
+let isTrue = true; // Boolean
+let notDefined; // Undefined
+let emptyValue = null; // Null
+let uniqueSymbol = Symbol("id"); // Symbol
+```

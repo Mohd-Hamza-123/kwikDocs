@@ -85,8 +85,11 @@ const DocPage = async ({ params }: PageProps) => {
                 </section>
 
                 {/* Main Content */}
-                <section className="lg:w-[60%] prose lg:prose-xl dark:prose-invert p-3 border overflow-y-scroll mx-0">
-                    <h2 className="text-md lg:text-3xl">{data?.title}</h2>
+                <section className="lg:w-[60%] prose lg:prose-xl dark:prose-invert px-3 border overflow-y-scroll mx-0">
+                    <div className="dark:border-gray-700 font-bold text-gray-800 dark:text-gray-300 flex items-center border border-solid border-gray-200 border-t-0 border-l-0 border-r-0 justify-between">
+                        <h2 className="text-md lg:text-2xl">
+                            {data?.title}</h2>
+                    </div>
                     <MDXRemote source={content} />
                 </section>
 

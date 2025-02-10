@@ -6,116 +6,106 @@ published : true
 
 There are three numeric types in Python:
 
-*   **`int`**
-*   **`float`**
-*   **`complex`**
+*   *`int`*
+*   *`float`*
+*   *`complex`*
     
 ```python
-    x = 1    # int
-    y = 2.8  # float
-    z = 2 + 1j   # complex
+x = 1    # int
+y = 2.8  # float
+z = 2 + 1j   # complex
+```
 
 To verify the type of any object in Python, use the `type()` function:
 
-    print(type(x))
-    print(type(y))
-    print(type(z))
-    
-    output : 
-    <class 'int'>
-    <class 'float'>  
-    <class 'complex'>
+```python
+print(type(x))
+print(type(y))
+print(type(z))
+
+# output : 
+# <class 'int'>
+# <class 'float'>  
+# <class 'complex'>
 ```
-Python Math Module :
---------------------
+**Python Math Module :**
 
-_Python has a built-in module that you can use for mathematical tasks._
+Python has a built-in module that you can use for mathematical tasks. The `math` module has a set of methods and constants.
 
-_The `math` module has a set of methods and constants._
+**1) Python math.floor() Method**  
+```python
+#Import math library
+import math
 
-**_1)_ Python math.floor() Method**  
+# Round numbers down to the nearest integer
+print(math.floor(0.6))   # 0
+print(math.floor(1.4))   # 1
+print(math.floor(5.3))   # 5
+print(math.floor(-5.3))  # -6
+print(math.floor(22.6))  # 22
+print(math.floor(10.0))  # 10
+```
+**2) Python math.trunc() Method**
+```python
+import math
+#  It works similarly to rounding towards zero.
+print(math.trunc(5.9))   # Output: 5
+print(math.trunc(-5.9))  # Output: -5
+print(math.trunc(10))    # Output: 10
+```
 
-    #Import math library
-    import math
-    
-    # Round numbers down to the nearest integer
-    print(math.floor(0.6))   # 0
-    print(math.floor(1.4))   # 1
-    print(math.floor(5.3))   # 5
-    print(math.floor(-5.3))  # -6
-    print(math.floor(22.6))  # 22
-    print(math.floor(10.0))  # 10
-
-**_2)_ Python math.trunc() Method**
-
-    import math
-    
-    #  It works similarly to rounding towards zero.
-    print(math.trunc(5.9))   # Output: 5
-    print(math.trunc(-5.9))  # Output: -5
-    print(math.trunc(10))    # Output: 10
-    
-
-Python Random Module :
-----------------------
+**Python Random Module :**
 
 **_1)_ Python random.randint( ) Method** 
-
-    import random
-    
-    # Return a number between 3 and 9 (both included):
-    print(random.randint(3, 9))
-
+```python
+import random
+# Return a number between 3 and 9 (both included):
+print(random.randint(3, 9))
+```
 **_2)_ Python random.choice( ) Method**
-
-    import random
-    
-    # Return a random element from a list:
-    mylist = ["apple", "banana", "cherry"]
-    
-    print(random.choice(mylist))
-
-Python Decimal Module :
------------------------
+```python
+import random
+# Return a random element from a list:
+mylist = ["apple", "banana", "cherry"]
+print(random.choice(mylist))
+```
+**Python Decimal Module :**
 
 Why need this module ? Lets understand with this example
-
-    print(0.2 + 0.2 + 0.2 - 0.6)
-    
-    # output : 1.1102230246251565e-16
-
+```python
+print(0.2 + 0.2 + 0.2 - 0.6)
+# output : 1.1102230246251565e-16
+```
 **_1)_ Python decimal.Decimal( ) Method :**
-
-    from decimal import Decimal
-    
-    print(Decimal('0.2') + Decimal('0.2') + Decimal('0.2') - Decimal('0.6'))
-    
-    # output : 0.0
-
-Python Fractions Module :
--------------------------
+```python
+from decimal import Decimal
+print(Decimal('0.2') + Decimal('0.2') + Decimal('0.2') -Decimal('0.6'))
+# output : 0.0
+```
+**Python Fractions Module :**
 
 This module provides support for rational number arithmetic. 
 
 **_1)_ Python Fraction( ) Method :**
+```python
+from fractions import Fraction
 
-    from fractions import Fraction
-    
-    print (Fraction(11, 35))
-    # returns Fraction(11, 35)
-    
-    print (Fraction(10, 18))
-    # returns Fraction(5, 9)
-    
-    print (Fraction())
-    # returns Fraction(0, 1)
-    
+print (Fraction(11, 35))
+# returns Fraction(11, 35)
+
+print (Fraction(10, 18))
+# returns Fraction(5, 9)
+
+print (Fraction())
+# returns Fraction(0, 1)
+```  
 
 Boolean as 0 , 1 :
-------------------
 
-    print(0 == False) # True
-    print(1 == True) # True
-    
-    print(0 is False) # False
-    print(1 is True)  # False
+```python
+print(0 == False) # True
+print(1 == True) # True
+
+print(0 is False) # False
+print(1 is True)  # False
+```
