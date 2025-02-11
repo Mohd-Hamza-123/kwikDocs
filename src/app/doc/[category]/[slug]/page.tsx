@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
+import Prism from "../../../../components/Prism";
 
 interface PageProps {
     params: {
@@ -11,14 +12,31 @@ interface PageProps {
     };
 }
 
-// Function to get all MDX file names in a specific category
+// Helper function to get the title from an MDX file
+const getMdxTitle = (category: string, slug: string) => {
+    const filePath = path.join(process.cwd(), "src", "content", category, `${slug}.mdx`);
+    try {
+        const source = fs.readFileSync(filePath, "utf-8");
+        const { data } = matter(source);
+        return data.title || slug; // Fallback to slug if title is missing
+    } catch (error) {
+        console.error(`Error reading MDX file ${slug}:`, error);
+        return slug; // Fallback to slug if there's an error
+    }
+};
+
+// Function to get all MDX files with their titles
 const getAllMdxFiles = (category: string) => {
     const directoryPath = path.join(process.cwd(), "src", "content", category);
     try {
         const fileNames = fs.readdirSync(directoryPath);
         return fileNames
             .filter((fileName) => fileName.endsWith(".mdx"))
-            .map((fileName) => fileName.replace(/\.mdx$/, ""));
+            .map((fileName) => {
+                const slug = fileName.replace(/\.mdx$/, "");
+                const title = getMdxTitle(category, slug);
+                return { slug, title };
+            });
     } catch (error) {
         console.error(`Error reading directory ${category}:`, error);
         return [];
@@ -33,8 +51,8 @@ export async function generateStaticParams() {
 
     categories.forEach((category) => {
         const mdxFiles = getAllMdxFiles(category);
-        mdxFiles.forEach((slug) => {
-            paths.push({ category, slug });
+        mdxFiles.forEach((file) => {
+            paths.push({ category, slug: file.slug });
         });
     });
 
@@ -49,29 +67,27 @@ const DocPage = async ({ params }: PageProps) => {
     try {
         const source = fs.readFileSync(filePath, "utf-8");
         const { content, data } = matter(source);
-        console.log("MDX Content:", content); // Check the raw content
-        console.log("MDX Data:", data);       // Check frontmatter
 
-        // Get all MDX files in the current category
+        // Get all MDX files in the current category with their titles
         const mdxFiles = getAllMdxFiles(category);
 
         return (
             <main className="flex flex-col-reverse lg:flex-row relative h-[90vh] overflow-x-hidden w-full justify-between">
-
+                {/* Sidebar */}
                 <section className="w-[100%] lg:w-[20%] border border-r-3 max-h-[88vh] overflow-y-scroll absolute lg:sticky top-0 bg-slate-50 dark:bg-bgDark z-20 py-2 dark:border-gray-700 lg:block">
                     <p className="mt-4 text-center font-semibold capitalize">{category}</p>
 
                     {/* List of MDX files in the current category */}
                     <ul className="flex flex-col gap-1 mt-5">
-                        {mdxFiles.map((fileName) => (
-                            <Link key={fileName} href={`/doc/${category}/${fileName}`}>
+                        {mdxFiles.map((file) => (
+                            <Link key={file.slug} href={`/doc/${category}/${file.slug}`}>
                                 <li
-                                    className={`capitalize text-sm font-bold rounded-sm px-2 py-3 md:py-2 sm:py-4 list-none cursor-pointer border-b border-gray-200 dark:text-gray-300 ${fileName === slug
+                                    className={`capitalize text-sm font-bold rounded-sm px-2 py-3 md:py-2 sm:py-4 list-none cursor-pointer border-b border-gray-200 dark:text-gray-300 ${file.slug === slug
                                         ? "bg-indigo-600 text-white"
                                         : "hover:bg-gray-300 dark:hover:bg-black"
                                         }`}
                                 >
-                                    {fileName}
+                                    {file.title}
                                 </li>
                             </Link>
                         ))}
@@ -90,13 +106,13 @@ const DocPage = async ({ params }: PageProps) => {
                         <h2 className="text-md lg:text-2xl">
                             {data?.title}</h2>
                     </div>
-                    <MDXRemote source={content} />
+                    <Prism>
+                        <MDXRemote source={content} />
+                    </Prism>
                 </section>
 
                 {/* Right Section */}
-                <section className="lg:w-[20%] border">
-
-                </section>
+                <section className="lg:w-[20%] border"></section>
             </main>
         );
     } catch (error) {

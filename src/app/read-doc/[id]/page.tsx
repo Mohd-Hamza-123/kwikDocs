@@ -11,7 +11,14 @@ import {
 } from "../../../index";
 import { Button } from "@/components/ui/button";
 
-const ReadPage = ({ params }: any) => {
+interface ReadPageParams {
+  params: {
+    id: string;
+  }
+}
+
+const ReadPage = ({ params }: ReadPageParams) => {
+
   const { id } = params;
 
   const {
@@ -30,7 +37,7 @@ const ReadPage = ({ params }: any) => {
   if (isPending) return <LoadingPage loadingMsg="Document is loading" />
 
   if (isSuccess) {
-   
+
     return (
       <main className="flex flex-col-reverse lg:flex-row relative h-[90vh] overflow-x-hidden w-full border">
         <DocsList technology={technology} />

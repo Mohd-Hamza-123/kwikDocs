@@ -8,10 +8,10 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/lib/hooks/hooks";
 import { docsInterface } from "@/models/docs.model";
+import createMdxFile from "@/lib/API/mdxApi/mdxApi";
+import convertHtmlToMdx from "@/utils/convertHtmlToMdx";
 import { makeCodeBlock } from "@/utils/CodeBlock_CopyBtn";
 import { useResponsiveContext } from "@/context/CSS-Context";
-import convertHtmlToMdx from "@/utils/convertHtmlToMdx";
-import createMdxFile from "@/lib/API/mdxApi/mdxApi";
 
 const DocContent = ({ technology }: any) => {
 

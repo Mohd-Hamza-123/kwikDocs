@@ -1,0 +1,45 @@
+---
+title: JS Variables
+description: JS Variables are container for storing values
+published : true
+---
+
+In JavaScript, **arrays** are special objects that are used to store multiple values in a single variable. They are ordered collections of data, where each value (called an element) is identified by an **index**.
+
+    const arr = [10, 20, 30];
+    
+    const fruits = ["Apple", "Banana", "Cherry"];
+    
+    const veggies = ["Carrot", "Tomato"];
+
+_**Accessing Elements**: Use the index to access an element._
+
+    const fruits = ["Apple", "Banana", "Cherry"];
+    console.log(fruits[0]); // Output: "Apple"
+    console.log(fruits[2]); // Output: "Cherry"
+    
+
+**Modifying Elements** : You can update an element by assigning a value to its index.
+
+    const fruits = ["Apple", "Banana", "Cherry"];
+    fruits[1] = "Mango";
+    console.log(fruits); // Output: ["Apple", "Mango", "Cherry"]
+    
+
+_**Deleting Elements**: Use the delete operator to delete an element_  
+
+    const fruits = [`Apple`, `Mango`, `Banana`, `Lichi`, `Tomato`]
+    
+    delete fruits[4]
+    
+    console.log(fruits)
+    
+    // ['Apple', 'Mango', 'Banana', 'Lichi', empty] 
+    // length : 5
+    
+    fruits.length = 4
+    
+    console.log(fruits)
+    
+    // ['Apple', 'Mango', 'Banana', 'Lichi']
+    // length : 4

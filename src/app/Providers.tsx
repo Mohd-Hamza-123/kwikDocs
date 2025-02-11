@@ -1,3 +1,4 @@
+'use client'
 
 import React, { ReactNode } from 'react'
 import ThemeProvider from './ThemeProvider'
@@ -8,22 +9,22 @@ import CSS_Context_Provider_Wrapper from '@/context/CSS_Context_Provider'
 import TypicalContextProviderWrapper from '@/context/TypicalContextProvider'
 
 const Providers = ({ children }: { children: ReactNode }) => {
+   
     return (
         <ThemeProvider>
-            <QueryProvider>
-                <StoreProvider>
-                    <TypicalContextProviderWrapper>
-                        <CSS_Context_Provider_Wrapper>
+            <StoreProvider>
+                <TypicalContextProviderWrapper>
+                    <CSS_Context_Provider_Wrapper>
+                        <QueryProvider>
                             <InitializationWrapper>
                                 {children}
                             </InitializationWrapper>
-                        </CSS_Context_Provider_Wrapper>
-                    </TypicalContextProviderWrapper>
-                </StoreProvider>
-            </QueryProvider>
+                        </QueryProvider>
+                    </CSS_Context_Provider_Wrapper>
+                </TypicalContextProviderWrapper>
+            </StoreProvider>
         </ThemeProvider>
-
-    )
-}
+    );
+};
 
 export default Providers

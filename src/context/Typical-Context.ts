@@ -3,8 +3,6 @@ import { createContext, useContext } from "react";
 interface I_TypialContext {
     isSideBarOpen: boolean;
     setIsSideBarOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    theme: 'light' | 'dark';
-    setTheme: React.Dispatch<React.SetStateAction<"light" | "dark">>;
 }
 
 export const TypicalContext = createContext<I_TypialContext | undefined>(undefined);
