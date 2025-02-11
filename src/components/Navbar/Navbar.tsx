@@ -27,8 +27,6 @@ const Navbar = () => {
     const hidePaths = ['/login', '/signup', `/forgot-password`];
 
     const {
-        theme,
-        setTheme,
         isSideBarOpen,
         setIsSideBarOpen,
     } = useTypicalContext();
@@ -86,7 +84,7 @@ const Navbar = () => {
 
                     <DropdownMenu>
                         <DropdownMenuTrigger>
-                            {theme === "dark" ? <MdOutlineNightlightRound className={"h-6 w-6 text-white"} /> : <svgIcons.light className="w-6 h-6" />}
+                            {"dark" === "dark" ? <MdOutlineNightlightRound className={"h-6 w-6 text-white"} /> : <svgIcons.light className="w-6 h-6" />}
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
                             <DropdownMenuItem onClick={lightMode}>Light Mode</DropdownMenuItem>
