@@ -21,12 +21,10 @@ const App: React.FC<RTEType> = ({
   getBookMark,
 }) => {
 
-  const { theme } = useTypicalContext()
   const [currentEditorValue, setcurrentEditorValue] = useState(defaultValue);
   const editorRef = useRef<any>(null);
 
-  console.log(theme)
-
+ 
   return (
     <Controller
       name={name || "description"}
@@ -40,8 +38,8 @@ const App: React.FC<RTEType> = ({
           initialValue={defaultValue}
           apiKey={process.env.NEXT_PUBLIC_TINYMCE_KEY}
           init={{
-            skin: `${theme === 'dark' ? 'oxide-dark' : 'oxide'}`,
-            content_css: `${theme === 'dark' ? 'dark' : 'default'}`,
+            skin: `${'dark' === 'dark' ? 'oxide-dark' : 'oxide'}`,
+            content_css: `${'dark' === 'dark' ? 'dark' : 'default'}`,
             height: 500,
             menubar: true,
             codesample_global_prismjs: true,
