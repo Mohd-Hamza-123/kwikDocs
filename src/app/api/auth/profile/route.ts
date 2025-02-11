@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     try {
 
         const userId = await getDataFromToken(request);
-        console.log(userId)
+        
         if (!userId) return NextResponse.json(
                 {
                     success: false,
@@ -17,7 +17,6 @@ export async function POST(request: NextRequest) {
                 },
                 { status: 400 }
             )
-        
 
         const user = await UserModel.findById(userId).select("-password -verifyToken -verifyTokenExpiry").lean();
 
@@ -28,10 +27,11 @@ export async function POST(request: NextRequest) {
         }, { status: 200 })
 
     } catch (error: any) {
-        console.log("error", error?.message)
+      
         return NextResponse.json({
             success: false,
             message: error?.message || "Internal Server Error",
+            error : error
         }, { status: 500 })
     }
 }

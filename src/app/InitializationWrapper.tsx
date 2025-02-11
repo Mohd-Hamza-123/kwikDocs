@@ -1,46 +1,37 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import logoutAPI from '@/lib/API/authAPI/logout'
+import { useQuery } from '@tanstack/react-query'
 import getProfile from '@/lib/API/authAPI/profile'
 import { useAppDispatch } from '@/lib/hooks/hooks'
-import { useTypicalContext } from '@/context/Typical-Context'
 import { login, logout } from '@/lib/store/features/authSlice'
 
 const InitializationWrapper = ({ children }: any) => {
 
     const dispatch = useAppDispatch();
-    const { theme, setTheme } = useTypicalContext();
-    const getUserData = async () => {
-        const user = await getProfile();
-        if (user) {
-            dispatch(login({ userData: user }));
-        } else {
-            await logoutAPI();
-            dispatch(logout());
-        }
+
+    const {
+        error,
+        isError,
+        isPending,
+        isSuccess,
+        data: userProfile,
+    } = useQuery({
+        queryKey: ["userProfile"],
+        queryFn: () => getProfile(),
+        staleTime: Infinity
+    });
+
+    if (isSuccess) {
+        dispatch(login({ userData: userProfile }));
     }
 
+    if (isError) {
+        logoutAPI()
+            .then(() => dispatch(logout()))
+    }
 
-    useEffect(() => {
-        getUserData()
-    }, [logout, login])
-
-
-    useEffect(() => {
-        if (theme === "dark") {
-            const htmlElement = document.documentElement;
-            htmlElement.classList.remove('light')
-            htmlElement.classList.add('dark')
-            if ((typeof window)) localStorage.setItem('theme', 'dark');
-
-        } else {
-            const htmlElement = document.documentElement;
-            htmlElement.classList.remove('dark')
-            htmlElement.classList.add('light')
-            if ((typeof window)) localStorage.setItem('theme', 'light');
-        }
-    }, [theme, setTheme])
 
     return (<>{children}</>)
 }

@@ -1,0 +1,145 @@
+---
+title: Insertion Sort
+description: JS Variables are container for storing values
+published : true
+---
+
+Insertion sort works by **dividing the array into "sorted" and "unsorted" part.**
+
+_Lets Take an Array :_
+
+**8**
+
+**14**
+
+**2**
+
+**5**
+
+**1**
+
+Assume the first element is considered as sorted. And rest elements are considered as unsorted.
+
+**8**
+
+**14**
+
+**2**
+
+**5**
+
+**1**
+
+**1st Pass :** 
+
+**i)** Now we will insert **14** into sorted array.  Since 8 is less than 14 so there is no need to shift 8 . Now Array will look like this 
+
+**8**
+
+**14**
+
+**2**
+
+**5**
+
+**1**
+
+**2nd Pass :** 
+
+**i)** Now we will insert 2 into sorted part of array. First we compare 2 with 14 , Since 14 is greater than 2, we shift 14 to the right to make space for 2. Now Array will look like this  \[ 8 , 2 , 14 , 5 , 1 \].
+
+**ii)** Now we will compare 2 with 8 , since 8 is greater than 2 , we will shift 8 to the right to make space for 2 . After shifting array will look like this 
+
+\[ 2 , 8 , 14 , 5 , 1 \]
+
+**2**
+
+**8**
+
+**14**
+
+**5**
+
+**1**
+
+**3rd Pass :** 
+
+**i)** Now we will insert 5 into sorted part of array. Since 14 is greater than 5 , we will shift 14  . Array will be \[ 2 , 8 , 5 , 14 , 1 \]
+
+**ii)** Now we will compare 5 with 8 , since 8 is greater than 5 . We will shift 8 . Array will be \[ 2 , 5 , 8 , 14 , 1 \]
+
+**iii)** Now we will compare 5 with 2 , since 2 is less than 5 no need to shift . Array will be \[ 2 , 5 , 8 , 14 , 1\] 
+
+**2**
+
+**5**
+
+**8**
+
+**14**
+
+**1**
+
+**4th Pass :** 
+
+**i )**   Now we will insert 1 into sorted part of array. Since 14 is greater than 1 , we will shift 14 . Array will be \[ 2 , 5 , 8 , 1 , 14 \]
+
+**ii )**  Now compare 1 with 8 . Since 8 is greater than 1 , we will shift 8 . Array will be \[ 2 , 5 , 1 , 8 , 14 \]
+
+**iii )** Now compare 1 with 5. Since 5 is greater than 1 , we will shift 5  . Array will be \[ 2 , 1 , 5 , 8 , 14 \]
+
+**iv )** Now compare 1 with 2 . Since 2 is greater than 1 , we will shift 2 . Array will be \[ 1 , 2 , 5 , 8 , 14 \] 
+
+**Now the Array is Sorted Array :** 
+
+**1**
+
+**2**
+
+**5**
+
+**8**
+
+**14**
+```c
+    #include <stdio.h>
+    
+    // Function to perform insertion sort
+    void insertionSort(int arr[], int n) {
+        for (int i = 1; i < n; i++) {
+            int key = arr[i];
+            int j = i - 1;
+    
+            // Move elements of arr[0..i-1], that are greater than key,
+            // to one position ahead of their current position
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            arr[j + 1] = key;
+        }
+    }
+    
+    // Function to print the array
+    void printArray(int arr[], int n) {
+        for (int i = 0; i < n; i++) {
+            printf("%d ", arr[i]);
+        }
+        printf("\n");
+    }
+    
+    int main() {
+        int arr[] = {12, 11, 13, 5, 6};
+        int n = sizeof(arr) / sizeof(arr[0]);
+    
+        printf("Original array: \n");
+        printArray(arr, n);
+    
+        insertionSort(arr, n);
+    
+        printf("Sorted array: \n");
+        printArray(arr, n);
+    
+        return 0;
+    }
+```
