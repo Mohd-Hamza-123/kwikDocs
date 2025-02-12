@@ -14,5 +14,6 @@ import DocContent from "./components/DocsRead/DocContent"
 import Technologies from "./components/Content/Languages"
 import RelatedDocs from "./components/DocsRead/RelatedDocs"
 import VerifyEmailContent from "./components/VerifyEmailContent.tsx"
+import DocContentList from "./components/DocContentList"
 
-export {VerifyEmailContent, Welcome, Technologies, Navbar, RTE, MultiSelect, ImageUpload, DocContent, RelatedDocs, SearchBar, LoadingPage, Sidebar, Prism, Spinner, Footer, DocsList }
+export { VerifyEmailContent, Welcome, Technologies, Navbar, RTE, MultiSelect, ImageUpload, DocContent, RelatedDocs, SearchBar, LoadingPage, Sidebar, Prism, Spinner, Footer, DocsList, DocContentList }
