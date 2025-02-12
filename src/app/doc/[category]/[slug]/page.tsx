@@ -3,7 +3,6 @@ import path from "path";
 import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
-import Prism from "../../../../components/Prism";
 
 interface PageProps {
     params: {
@@ -106,9 +105,9 @@ const DocPage = async ({ params }: PageProps) => {
                         <h2 className="text-md lg:text-2xl">
                             {data?.title}</h2>
                     </div>
-                    <Prism>
-                        <MDXRemote source={content} />
-                    </Prism>
+
+                    <MDXRemote source={content} />
+
                 </section>
 
                 {/* Right Section */}
