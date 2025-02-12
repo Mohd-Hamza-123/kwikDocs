@@ -1,14 +1,14 @@
-import { Home, Technologies } from "..";
+import {Welcome, Technologies } from "..";
 
 
-const GettingStarted = () => {
+const Home = () => {
 
   return (
     <>
-      <Home />
+      <Welcome />
       <Technologies />
     </>
   );
 };
 
-export default GettingStarted;
+export default Home;

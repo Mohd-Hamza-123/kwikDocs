@@ -3,7 +3,7 @@ import React from 'react'
 
 const LoadingPage = ({ loadingMsg }: { loadingMsg?: string }) => {
     return (
-        <section className='min-h-screen bg-gray-100 w-screen fixed top-0 overflow-hidden flex items-center justify-center'>
+        <section className='dark:bg-bgDark min-h-screen bg-gray-100 w-screen fixed top-0 overflow-hidden flex items-center justify-center'>
            
                 <div className="flex flex-col items-center">
                     <svg

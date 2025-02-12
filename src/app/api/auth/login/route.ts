@@ -11,19 +11,20 @@ export async function POST(request: NextRequest) {
     try {
 
         const body = await request.json();
-     
+
         const { email, password } = body;
 
         const user = await UserModel.findOne({ email });
-        console.log(user)
+        // console.log(user)
         if (!user) {
             return NextResponse.json({
                 success: false,
                 message: "Invalid Credentials",
-            })
+            }, { status: 400 })
         }
+
         const isPasswordCorrect = await bcrypt.compare(password, user?.password);
-    
+
         if (!isPasswordCorrect) {
             return NextResponse.json({
                 success: false,
@@ -38,7 +39,7 @@ export async function POST(request: NextRequest) {
         }
 
         const token = jwt.sign(tokenData, conf.token_secret, { expiresIn: '24h' });
-        console.log(token);
+        // console.log(token);
 
         const response = NextResponse.json({
             message: 'You are login',

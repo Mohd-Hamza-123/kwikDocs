@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
                 { status: 400 }
             )
 
-        const user = await UserModel.findById(userId).select("-password -verifyToken -verifyTokenExpiry").lean();
+        const user = await UserModel.findById(userId).select("-password -verifyToken -verifyTokenExpiry -email").lean();
 
         return NextResponse.json({
             success: true,
