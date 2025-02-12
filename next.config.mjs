@@ -1,4 +1,4 @@
-import { build } from 'velite'
+import { build } from "velite";
 
 /** @type {import('next').NextConfig} */
 export default {
@@ -6,69 +6,28 @@ export default {
     domains: ['res.cloudinary.com'],
     unoptimized: true
   },
-  webpack: config => {
-    config.plugins.push(new VeliteWebpackPlugin())
-    return config
-  }
-}
+  webpack: (config) => {
+    config.plugins.push(new VeliteWebpackPlugin());
+    return config;
+  },
+};
 
 class VeliteWebpackPlugin {
-  static started = false
+  static started = false;
+  constructor(/** @type {import('velite').Options} */ options = {}) {
+    this.options = options;
+  }
   apply(/** @type {import('webpack').Compiler} */ compiler) {
-    // executed three times in nextjs
+    // executed three times in nextjs !!!
     // twice for the server (nodejs / edge runtime) and once for the client
-    compiler.hooks.beforeCompile.tapPromise('VeliteWebpackPlugin', async () => {
-      if (VeliteWebpackPlugin.started) return
-      VeliteWebpackPlugin.started = true
-      const dev = compiler.options.mode === 'development'
-      await build({ watch: dev, clean: !dev })
-    })
+    compiler.hooks.beforeCompile.tapPromise("VeliteWebpackPlugin", async () => {
+      if (VeliteWebpackPlugin.started) return;
+      VeliteWebpackPlugin.started = true;
+      const dev = compiler.options.mode === "development";
+      this.options.watch = this.options.watch ?? dev;
+      this.options.clean = this.options.clean ?? !dev;
+      await build(this.options); // start velite
+    });
   }
 }
 
-
-// import createMDX from '@next/mdx';
-// import rehypePrettyCode from 'rehype-pretty-code';
-
-// const withMDX = createMDX({
-
-//   extension: /\.mdx?$/, 
-//   options: {
-//     rehypePlugins: [
-//       [
-//         rehypePrettyCode,
-//         {
-//           theme: "github-dark",
-//           // Additional rehype-pretty-code options
-//         },
-//       ],
-//     ],
-//   },
-// });
-
-// const nextConfig = {
-//   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'], 
-//   reactStrictMode: true,
-//   images: {
-//     remotePatterns: [
-//       {
-//         protocol: 'http',
-//         hostname: '**',
-//         port: '',
-//       },
-//       {
-//         protocol: 'https',
-//         hostname: '**',
-//         port: '',
-//       },
-//       {
-//         protocol: 'https',
-//         hostname: 'contents.mediadecathlon.com',
-//         port: '',
-//       },
-//     ],
-//   },
-// };
-
-
-// export default withMDX(nextConfig);

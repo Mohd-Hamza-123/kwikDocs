@@ -1,21 +1,10 @@
-'use client'
-import gsap from 'gsap';
 import React from "react";
-import { useGSAP } from '@gsap/react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { FaArrowCircleDown } from "react-icons/fa";
+import { WelcomeScrollDown } from '..';
 
 const Welcome = () => {
 
-    useGSAP(() => {
-        gsap.to('#home-scroll-down', {
-            y: 55,
-            duration: 3,
-            repeat: -1,
-        });
-    },
-    );
     return (
         <div className="bg-gray-100 dark:bg-bgDark h-[88vh] flex flex-col justify-center items-center">
 
@@ -35,10 +24,7 @@ const Welcome = () => {
                 </p>
             </div>
 
-            <div id="home-scroll-down" className="text-center mt-8 flex flex-col gap-2 items-center">
-                <p className="text-lg">Scroll Down</p>
-                <FaArrowCircleDown />
-            </div>
+            <WelcomeScrollDown />
 
         </div>
     )

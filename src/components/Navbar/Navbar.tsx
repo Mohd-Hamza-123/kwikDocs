@@ -3,24 +3,25 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { svgIcons } from '../icons';
-import { appName } from '@/constant';
 import { Button } from '../ui/button';
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoListCircleOutline } from "react-icons/io5";
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useResponsiveContext } from '@/context/CSS-Context';
 import { useTypicalContext } from '@/context/Typical-Context';
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { MdOutlineNightlightRound } from 'react-icons/md';
 import { useTheme } from 'next-themes'
+import { siteConfig } from '../../../config/site';
+
+
 const Navbar = () => {
+    
     const { setTheme: setNextTheme } = useTheme();
     const pathName = usePathname();
     const isDocIndexVisible = pathName.includes('/read-doc');
@@ -67,7 +68,7 @@ const Navbar = () => {
                             alt='Image'
                         />
                         <figcaption className="font-semibold text-lg lg:text-xl">
-                            <h1>{appName}</h1>
+                            <h1>{siteConfig.name}</h1>
                         </figcaption>
                     </figure>
                 </Link>

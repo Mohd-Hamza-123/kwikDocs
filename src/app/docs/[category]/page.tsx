@@ -11,13 +11,13 @@ interface postPageParams {
 
 const page = ({ params }: { params: { category: string } }) => {
   const { category } = params
- 
+
   const post = posts?.map((post) => {
     if (post?.slug.indexOf(category) === 0) return post
   }).filter(Boolean)
 
   console.log(post);
-  
+
   return (
     <main className="flex flex-col-reverse lg:flex-row relative h-[90vh] overflow-x-hidden w-full justify-between">
       {/* Sidebar */}
@@ -27,7 +27,7 @@ const page = ({ params }: { params: { category: string } }) => {
         {/* List of MDX files in the current category */}
         <ul className="flex flex-col gap-1 mt-5">
           {post.map((file) => (
-            <Link key={file?.slug} href={`/doc/${category}/${file?.slug}`}>
+            <Link key={file?.slug} href={`/doc/${category}/${file?.slugAsParams}`}>
               <li
                 className={`capitalize text-sm font-bold rounded-sm px-2 py-3 md:py-2 sm:py-4 list-none cursor-pointer border-b border-gray-200 dark:text-gray-300 ${file?.slug === category
                   ? "bg-indigo-600 text-white"

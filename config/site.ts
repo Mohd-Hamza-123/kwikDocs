@@ -1,8 +1,8 @@
 import conf from "@/conf/conf"
 export const siteConfig = {
-    name: "Docs Node",
-    url: conf.api_end_point || "https://docsnode.vercel.app/",
-    description: "This is a documentation website",
+    name: "Simply",
+    url: conf.api_end_point,
+    description: "Learn Simply: Your Beginner-Friendly Guide to Mastering Concepts",
     author: "Mohd Hamza",
     links: {
         twitter: '',
