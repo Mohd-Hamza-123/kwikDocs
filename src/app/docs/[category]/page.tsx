@@ -3,12 +3,14 @@ import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
 import matter from 'gray-matter';
+import conf from '@/conf/conf';
 
 const DocContentList = async ({ params }: { params: { category: string } }) => {
   const { category } = params;
 
   // Fetch posts for the selected category
-  const postsDir = path.join(process.cwd(), 'src/content', category);
+  const cwd = process.env.NODE_ENV === 'development' ? process.cwd() : conf.api_end_point
+  const postsDir = path.join(cwd, 'src/content', category);
   let posts: any = [];
 
   try {
