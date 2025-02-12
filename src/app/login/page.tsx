@@ -27,6 +27,7 @@ const Login = () => {
 
     const getUserData = async () => {
         const user = await getProfile();
+        console.log(user);
         if (user) {
             dispatch(login({ userData: user }));
         } else {
@@ -38,12 +39,12 @@ const Login = () => {
     const loginMutation = useMutation({
         mutationFn: (payload) => LoginUser(payload),
         onMutate: (variables) => {
-            dispatch(overlayLoadingIsTrueReducer({ overlayLoadingMsg: "Please wait you are loggin In" }));
+            dispatch(overlayLoadingIsTrueReducer({ overlayLoadingMsg: "Please wait you are logging In" }));
         },
         onError: (error: any, variables, context) => {
             toast({
                 variant: "destructive",
-                title: "You are not logIn",
+                title: "Login failed. Try again",
                 description: error?.message
             })
         },
@@ -53,7 +54,6 @@ const Login = () => {
             toast({
                 title: "You are Logged In",
             });
-
         },
         onSettled: (data, error, variables, context) => {
             dispatch(overlayLoadingIsFalseReducer());
@@ -71,8 +71,9 @@ const Login = () => {
                     height={200}
                     width={200}
                     className="mx-auto h-10 w-auto"
-                    src="https://img.freepik.com/premium-vector/office-paper-document-with-folder-flat-design_798171-579.jpg"
+                    src="./logo.jpg"
                     alt='Image'
+                    quality={100}
                 />
                 <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight">Log in to your account</h2>
             </div>

@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FaArrowCircleDown } from "react-icons/fa";
 
-const Home = () => {
+const Welcome = () => {
 
     useGSAP(() => {
         gsap.to('#home-scroll-down', {
@@ -44,4 +44,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Welcome

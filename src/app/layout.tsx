@@ -32,9 +32,9 @@ export default function RootLayout({
         className={cn("min-h-screen font-sans overflow-x-hidden antialiased", inter.variable)}
       >
         <Providers>
-          <div className="min-h-dvh bg-background">
-            <Sidebar />
+          <div className="min-h-dvh bg-background ">
             <Navbar />
+            <Sidebar />
             <Toaster />
             <OverlayLoader />
             <main>{children}</main>
