@@ -1,3 +1,5 @@
+'use client'
+
 import { posts } from '#site/content'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -14,6 +16,8 @@ const page = ({ params }: { params: { category: string } }) => {
     if (post?.slug.indexOf(category) === 0) return post
   }).filter(Boolean)
 
+  console.log(post);
+  
   return (
     <main className="flex flex-col-reverse lg:flex-row relative h-[90vh] overflow-x-hidden w-full justify-between">
       {/* Sidebar */}
