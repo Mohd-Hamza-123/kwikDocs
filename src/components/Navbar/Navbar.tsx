@@ -21,7 +21,7 @@ import { siteConfig } from '../../../config/site';
 
 
 const Navbar = () => {
-    
+
     const { setTheme: setNextTheme } = useTheme();
     const pathName = usePathname();
     const isDocIndexVisible = pathName.includes('/read-doc');
@@ -40,19 +40,12 @@ const Navbar = () => {
 
     if (hidePaths.includes(pathName)) return null;
 
-    const lightMode = () => {
-        // setTheme("light")
-        setNextTheme("light")
-    }
+    const lightMode = () => setNextTheme("light")
 
-    const darkMode = () => {
-        // setTheme('dark')
-        setNextTheme('dark')
-    }
 
-    const systemMode = () => {
-        setNextTheme("system")
-    }
+    const darkMode = () => setNextTheme('dark')
+
+    const systemMode = () => setNextTheme("system")
 
 
     return (

@@ -45,7 +45,7 @@ const Prism = ({ children }: any) => {
     if (prism) {
       prism?.highlightAll();
     }
-
+ 
   }, [doc]);
 
 
