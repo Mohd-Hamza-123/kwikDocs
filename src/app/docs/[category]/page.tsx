@@ -24,7 +24,7 @@ const page = ({ params }: { params: { category: string } }) => {
         {/* List of MDX files in the current category */}
         <ul className="flex flex-col gap-1 mt-5">
           {displayPosts?.map((file) => (
-            <PostItems {...file} category={category} />
+            <PostItems key={file?.slug} {...file} category={category} />
           ))}
         </ul>
 

@@ -13,7 +13,7 @@ const Footer = () => {
     useEffect(() => {
         const isVisible = visiblePaths.some((path) => path === pathName);
         setIsRender(isVisible)
-    }, [pathName])
+    }, [pathName, isRender, visiblePaths])
 
 
     if (isRender)
