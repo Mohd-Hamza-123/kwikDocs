@@ -1,6 +1,6 @@
 import conf from "@/conf/conf"
 export const siteConfig = {
-    name: "Simply",
+    name: "Docs Node",
     url: conf.api_end_point,
     description: "Learn Simply: Your Beginner-Friendly Guide to Mastering Concepts",
     author: "Mohd Hamza",
