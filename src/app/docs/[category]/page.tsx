@@ -10,7 +10,7 @@ import { MdOutlineZoomOutMap } from "react-icons/md";
 import { MDXContent } from '@/components/mdx-component';
 import { PostItemsProps } from '@/components/PostItems';
 
-const page = ({ params }: { params: { category: string } }) => {
+const DocPage = ({ params }: { params: { category: string } }) => {
 
   const { category } = params
   const [post, setPost] = useState<PostItemsProps | null>(null)
@@ -67,6 +67,6 @@ const page = ({ params }: { params: { category: string } }) => {
   )
 }
 
-export default page
+export default DocPage
 
 
