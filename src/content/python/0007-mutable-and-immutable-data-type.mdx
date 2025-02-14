@@ -6,51 +6,64 @@ published : true
 
 ![](https://i.postimg.cc/y62mgZLQ/mutable-and-immutable.jpg)
 
- 
-**Mutable**
 
-**Immutable**
+# Mutable vs Immutable in Python
 
-**Definition**
+In Python, objects can be categorized as **mutable** or **immutable** based on whether their state (or value) can be changed after they are created.
 
-Data type whose values can be changed after creation.
+---
 
-Data types whose values can’t be changed or altered.
+## **Mutable Objects**
+- **Definition**: Objects whose values or state can be modified after creation.
+- **Examples**: `list`, `dict`, `set`, `bytearray`.
+- **Key Characteristics**:
+  - Operations like appending, updating, or deleting can alter the object in place.
+  - Changes are reflected across all references to the object.
+- **Use Case**: Useful when frequent updates to the data structure are required.
 
-**Memory Location**
+### **Example**
+```python
+# Mutable Example
+my_list = [1, 2, 3]
+my_list.append(4)  # Modifies the original list
+print(my_list)     # Output: [1, 2, 3, 4]
 
-Retains the same memory location even after the content is modified.
+another_ref = my_list
+another_ref[0] = 99
+print(my_list)     # Output: [99, 2, 3, 4] (original is also updated)
+```
 
-Any modification results in a new object and new memory location.
+---
 
-**Example**
+## **Immutable Objects**
+- **Definition**: Objects whose state cannot be modified after creation.
+- **Examples**: `int`, `float`, `str`, `tuple`, `frozenset`, `bytes`.
+- **Key Characteristics**:
+  - Any operation that seems to modify an immutable object actually creates a new object.
+  - Safer to use in multi-threaded programs due to their unchanging nature.
+- **Use Case**: Ideal for data that should remain constant throughout the program.
 
-List, Dictionaries, Set
+### **Example**
+```python
+# Immutable Example
+my_string = "Hello"
+new_string = my_string + " World"  # Creates a new string
+print(my_string)    # Output: Hello (original remains unchanged)
+print(new_string)   # Output: Hello World
 
-Strings, Types, Integer
+my_tuple = (1, 2, 3)
+# my_tuple[0] = 99  # This would raise a TypeError
 
-**Performance**
-
-It is memory-efficient, as no new objects are created for frequent changes.
-
-It might be faster in some scenarios as there’s no need to track changes.
-
-**Thread-Safety**
-
-Not inherently thread-safe. Concurrent modification can lead to unpredictable results.
-
-They are inherently thread-safe due to their unchangeable nature.
-
-**Use-cases**
-
-When you need to modify, add, or remove existing data frequently.
-
-When you want to ensure data remains consistent and unaltered.
+new_tuple = my_tuple + (4,)  # Creates a new tuple
+print(my_tuple)    # Output: (1, 2, 3) (original remains unchanged)
+print(new_tuple)   # Output: (1, 2, 3, 4)
+```
 
 **_Lets Understand this Concept with some examples  :_** 
 
 _Eg 1) :_ 
 
+```py
     x = 10 
     y = x 
     
@@ -58,22 +71,24 @@ _Eg 1) :_ 
     
     print(x) # 20
     print(y) # 10
+```
 
 ![](https://res.cloudinary.com/dkkifg17t/image/upload/v1735135070/Documentarium/Python/ok5n2vfh9pnhaeus8ypf.jpg)
 
-_Eg 2) :_ 
+_Eg 2) :_
 
+```py
     a = 1000
     b = a
     
     print(a is b) # True
     
     #  a and b point to the same memory location (are the same object)
-
+```
 **For Immutables Data Types :**
 
 _For immutable data types, the memory location may or may not be the same when you create a new instance, even if their contents are identical._
-
+```py
     # INTEGERS
     
     x = 100
@@ -99,13 +114,13 @@ _For immutable data types, the memory location may or may not be the same when y
     
     # In Python, small strings (usually those with fewer than 20 characters) are often interned, 
     # meaning they are stored in a common memory location to optimize memory usage and performance.
-    
+```
 
 **For Mutables Data Types :**
 
 For mutable data types, the memory location will always be different when you create a new instance, even if their contents are identical.
 
-```python
+```py
     # LIST
     
     list1 = [1,2,3]
@@ -126,59 +141,9 @@ For mutable data types, the memory location will always be different when you cr
     dict2 = {"name" : "Mohd Hamza"}
     
     print(dict1 is dict2) # False
-    ```
+```
     
-    
 
-**In Summary**
-
-**Type**
-
-**Mutable / Immutable**
-
-**Same Memory Location if Values Are Identical?**
-
-List
-
-Mutable
-
-No
-
-Set
-
-Mutable
-
-No
-
-Dictionary
-
-Mutable
-
-No
-
-String
-
-Immutable
-
-Yes (for small or common string literals due to interning)
-
-Tuple
-
-Immutable
-
-Yes (for small or simple tuples; No for large or dynamically created tuples)
-
-Integer/Float
-
-Immutable
-
-Yes (for small or common values)
-
-Boolean
-
-Immutable
-
-Yes
 
 ### Example of Data Types / Object Types:
 
