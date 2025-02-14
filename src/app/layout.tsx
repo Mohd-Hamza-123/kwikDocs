@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
 
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-pt-[3.5rem]">
 
       <body
         suppressHydrationWarning={true}
