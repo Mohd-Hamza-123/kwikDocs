@@ -6,7 +6,7 @@ export async function POST(req: Request) {
     try {
         const body = await req.json();
         const { folderName, fileName, content } = body;
-
+        console.log(folderName,fileName,content)
         if (!folderName || !fileName || !content) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
         }
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
 
         // Checking if the file already exists
         if (fs.existsSync(filePath)) {
-            return NextResponse.json({ message: `File already exists at ${filePath}, skipping creation.` });
+            return NextResponse.json({ message: `File already exists at ${filePath}, skipping creation.` }, { status: 400 });
         }
 
         fs.writeFileSync(filePath, content, 'utf8');

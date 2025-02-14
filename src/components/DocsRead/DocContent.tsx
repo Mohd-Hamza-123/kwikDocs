@@ -24,10 +24,10 @@ const DocContent = ({ technology }: any) => {
     makeCodeBlock();
     if (doc) {
       const html = doc.description
-      const mdx = convertHtmlToMdx(html)
-      const folderName = technology?.name.toLowerCase()
-      console.log(folderName)
-      createMdxFile(folderName, doc?.title.replaceAll(" ", "-") + ".mdx", mdx)
+      // const mdx = convertHtmlToMdx(html)
+      // const folderName = technology?.name.toLowerCase()
+      // const fileName = doc?.title.replaceAll(" ", "-").replaceAll(",", "")
+      // createMdxFile(folderName, fileName + ".mdx", mdx)
     }
   }, [doc]);
 

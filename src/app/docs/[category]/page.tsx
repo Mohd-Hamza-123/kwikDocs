@@ -1,19 +1,27 @@
 'use client'
 
-import { posts } from '#site/content'
-import PostItems from '@/components/PostItems'
+import "@/styles/mdx.css"
 import Link from 'next/link'
+import { posts } from '#site/content'
+import React, { useState } from 'react'
 import { notFound } from 'next/navigation'
-import React from 'react'
-
-interface postPageParams {
-
-}
+import PostItems from '@/components/PostItems'
+import { MdOutlineZoomOutMap } from "react-icons/md";
+import { MDXContent } from '@/components/mdx-component';
+import { PostItemsProps } from '@/components/PostItems';
 
 const page = ({ params }: { params: { category: string } }) => {
-  const { category } = params
 
-  const displayPosts = posts
+  const { category } = params
+  const [post, setPost] = useState<PostItemsProps | null>(null)
+  const [activeSlug, setActiveSlug] = useState('')
+
+  const displayPosts = posts?.filter((post) => post?.slug.indexOf(category) === 0 && post?.published);
+
+  const renderPost = (post: PostItemsProps) => {
+    setPost(post)
+    setActiveSlug(post?.slug)
+  }
 
   return (
     <main className="flex flex-col-reverse lg:flex-row relative h-[90vh] overflow-x-hidden w-full justify-between">
@@ -21,33 +29,40 @@ const page = ({ params }: { params: { category: string } }) => {
       <section className="w-[100%] lg:w-[20%] border border-r-3 max-h-[88vh] overflow-y-scroll absolute lg:sticky top-0 bg-slate-50 dark:bg-bgDark z-20 py-2 dark:border-gray-700 lg:block">
         <p className="mt-4 text-center font-semibold capitalize">{category}</p>
 
-        {/* List of MDX files in the current category */}
         <ul className="flex flex-col gap-1 mt-5">
-          {displayPosts?.map((file) => (
-            <PostItems key={file?.slug} {...file} category={category} />
+          {displayPosts?.map((post) => (
+            <PostItems
+              post={post}
+              key={post?.slug}
+              category={category}
+              renderPost={renderPost}
+              activeSlug={activeSlug}
+            />
           ))}
         </ul>
 
-        {displayPosts?.length === 0 && (
-          <span className="text-center text-sm mx-auto block my-2">
-            No documents found.
-          </span>
-        )}
+        <span className="text-center text-sm mx-auto block my-2">
+          No documents found.
+        </span>
+
       </section>
 
       {/* Main Content */}
-      <section className="lg:w-[60%] prose lg:prose-xl dark:prose-invert px-3 border overflow-y-scroll mx-0">
-        {/* <div className="dark:border-gray-700 font-bold text-gray-800 dark:text-gray-300 flex items-center border border-solid border-gray-200 border-t-0 border-l-0 border-r-0 justify-between">
-          <h2 className="text-md lg:text-2xl">
-            {data?.title}</h2>
-        </div> */}
-        {/* <Prism>
-            <MDXRemote source={content} />
-        </Prism> */}
-      </section>
+      {post && <article className="container py-6 prose dark:prose-invert max-w-3xl mx-auto">
+        <h1 className="mb-2">{post.title}</h1>
 
-      {/* Right Section */}
-      <section className="lg:w-[20%] border"></section>
+        {post.description ? (
+          <p className="text-xl mt-0 text-muted-foreground">{post.description}</p>
+        ) : null}
+        <hr className="my-4" />
+        <MDXContent code={post.body} />
+      </article>}
+
+
+      <section className="lg:w-[20%] border">
+
+
+      </section>
     </main>
   )
 }
@@ -55,51 +70,3 @@ const page = ({ params }: { params: { category: string } }) => {
 export default page
 
 
-
-
-
-
-// import fs from 'fs';
-// import path from 'path';
-// import matter from 'gray-matter';
-// import DocContentList from '@/components/DocContentList';
-
-// export default async function CategoryPage({ params }: { params: { category: string } }) {
-//   const { category } = params;
-//   const postsDir = path.join(process.cwd(), 'src/content', category);
-//   let posts: any[] = [];
-
-//   try {
-//     const files = fs.readdirSync(postsDir); // Read all files in the category folder
-//     posts = files
-//       .filter((file) => file.endsWith('.mdx')) // Filter Markdown files
-//       .map((file) => {
-//         const filePath = path.join(postsDir, file);
-//         const fileContent = fs.readFileSync(filePath, 'utf-8'); // Read file content
-//         const { data } = matter(fileContent); // Parse frontmatter
-//         return {
-//           title: data.title || file.replace('.mdx', ''), // Use title from frontmatter or fallback to file name
-//           path: `/doc/${category}/${file.replace('.mdx', '')}`, // Build the path for navigation
-//         };
-//       });
-//   } catch (err) {
-//     console.error(`Error reading posts for category "${category}":`, err);
-//   }
-
-//   return <DocContentList category={category} posts={posts} />;
-// }
-
-// export async function generateStaticParams() {
-//   const categoriesDir = path.join(process.cwd(), 'src/content');
-//   let categories: string[] = [];
-
-//   try {
-//     categories = fs.readdirSync(categoriesDir); // Read all category directories
-//   } catch (err) {
-//     console.error('Error reading categories directory:', err);
-//   }
-
-//   return categories.map((category) => ({
-//     category,
-//   }));
-// }

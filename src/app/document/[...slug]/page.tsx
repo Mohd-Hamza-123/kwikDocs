@@ -3,6 +3,7 @@ import { posts } from "#site/content";
 import { notFound } from 'next/navigation';
 import { MDXContent } from '@/components/mdx-component';
 import "@/styles/mdx.css"
+import { MdOutlineZoomOutMap } from "react-icons/md";
 interface PostPageProps {
     params: {
         slug: string[];

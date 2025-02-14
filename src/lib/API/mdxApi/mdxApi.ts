@@ -1,5 +1,6 @@
 export default async function createMdxFile(folderName: string, fileName: string, content: string) {
     try {
+     
       const response = await fetch('/api/makeMdxFile', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
