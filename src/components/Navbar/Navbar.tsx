@@ -24,7 +24,7 @@ const Navbar = () => {
 
     const { setTheme: setNextTheme } = useTheme();
     const pathName = usePathname();
-    const isDocIndexVisible = pathName.includes('/read-doc');
+    const isDocIndexVisible = pathName.includes('/read-doc') || pathName.includes("/docs");
     const hidePaths = ['/login', '/signup', `/forgot-password`];
 
     const {
@@ -71,14 +71,14 @@ const Navbar = () => {
                         className={`block lg:hidden ${isDocIndexVisible ? '' : 'hidden'}`}
                     >
                         <IoListCircleOutline className={`text-4xl ${isDocIndexOpen ? "text-indigo-600" : ""}`}
-                            onClick={() => setIsDocIndexOpen((prev) => !prev)}
+                            onClick={() => setIsDocIndexOpen((prev : boolean) => !prev)}
                         />
                     </div>
 
 
                     <DropdownMenu>
                         <DropdownMenuTrigger>
-                            {"dark" === "dark" ? <MdOutlineNightlightRound className={"h-6 w-6 text-white"} /> : <svgIcons.light className="w-6 h-6" />}
+                            {"dark" === "dark" ? <MdOutlineNightlightRound className={"h-6 w-6"} /> : <svgIcons.light className="w-6 h-6" />}
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
                             <DropdownMenuItem onClick={lightMode}>Light Mode</DropdownMenuItem>

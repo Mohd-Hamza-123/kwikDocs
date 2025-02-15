@@ -22,6 +22,7 @@ import logoutAPI from '@/lib/API/authAPI/logout';
 import { logout } from '@/lib/store/features/authSlice';
 import { useTypicalContext } from '@/context/Typical-Context'
 import { useAppDispatch, useAppSelector } from '@/lib/hooks/hooks';
+import { useResponsiveContext } from "@/context/CSS-Context";
 
 const Sidebar = () => {
 
@@ -30,7 +31,7 @@ const Sidebar = () => {
     const userData = useAppSelector((state) => state.auth.userData);
     const userStatus = useAppSelector((state) => state.auth.userStatus)
     const { isSideBarOpen, setIsSideBarOpen } = useTypicalContext();
-
+    const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
     if (!isSideBarOpen) return null
 
     const closeSideBar = () => setIsSideBarOpen(false)
@@ -111,7 +112,10 @@ const Sidebar = () => {
                                 <span className="mx-2 text-sm font-medium">Create tech</span>
                             </Link>}
                             <Link
-                                onClick={closeSideBar}
+                                onClick={() => {
+                                    closeSideBar()
+                                    setIsDocIndexOpen((prev) => !prev)
+                                }}
                                 className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="/docs/python">
                                 <svgIcons.python className="w-5 h-5" />
                                 <span className="mx-2 text-sm font-medium">Python Docs</span>

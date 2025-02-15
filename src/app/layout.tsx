@@ -6,11 +6,12 @@ import { Inter } from "next/font/google";
 import { Footer, Navbar, Sidebar } from '../index'
 import { Toaster } from "@/components/ui/toaster";
 import OverlayLoader from "@/components/OverlayLoader/OverlayLoader";
+import { siteConfig } from "../../config/site";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-sans' });
 
 export const metadata: Metadata = {
-  title: "Simply",
+  title: siteConfig.name,
   description: "Learn Simply: Your Beginner-Friendly Guide to Mastering Concepts",
   icons: {
     icon: "/favicon.ico"
