@@ -1,0 +1,57 @@
+---
+title: Alert, Confirm, and Prompt Dialog Boxes
+description: Learn about alert, confirm, and prompt dialog boxes in JavaScript with examples and comparisons.
+published: true
+---
+
+### **1\. Alert Dialog Box**
+
+* **Purpose**: Displays a message to the user.
+
+```javascript
+alert("This is an alert message!");
+```
+
+---
+
+### **2\. Confirm Dialog Box**
+
+* **Purpose**: Asks the user for confirmation (e.g., Yes/No or OK/Cancel).
+
+```javascript
+const isConfirmed = confirm("Do you want to proceed?");
+if (isConfirmed) {
+  console.log("User clicked OK");
+} else {
+  console.log("User clicked Cancel");
+}
+```
+
+---
+
+### **3\. Prompt Dialog Box**
+
+* **Purpose**: Takes input from the user.
+
+```javascript
+const userInput = prompt("What is your name?");
+if (userInput !== null) {
+  console.log(`Hello, ${userInput}!");
+} else {
+  console.log("User cancelled the prompt");
+}
+```
+
+---
+
+### **Comparison Table**
+
+| Feature        | `alert`             | `confirm`           | `prompt`            |
+|----------------|---------------------|---------------------|---------------------|
+| **Purpose**    | Show a message      | Ask for confirmation| Get user input      |
+| **Buttons**    | OK                  | OK, Cancel          | OK, Cancel          |
+| **Return**     | `undefined`         | `true`/`false`      | String or `null`    |
+| **Input**      | Not applicable      | Not applicable      | Text input field    |
+| **Use Case**   | Information/Warnings| Consent/Confirmation| Simple user input   |
+
+---

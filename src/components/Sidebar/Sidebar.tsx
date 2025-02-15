@@ -118,14 +118,15 @@ const Sidebar = () => {
                                 }}
                                 className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="/docs/python">
                                 <svgIcons.python className="w-5 h-5" />
-                                <span className="mx-2 text-sm font-medium">Python Docs</span>
+                                <span className="mx-2 text-sm font-medium">Python</span>
                             </Link>
-                            {userData?.isAdmin && <Link
+                             <Link
                                 onClick={closeSideBar}
-                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="/docs/javascript">
-                                <svgIcons.setting className="w-5 h-5" />
-                                <span className="mx-2 text-sm font-medium">Javascript Docs</span>
-                            </Link>}
+                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" 
+                                href="/docs/javascript">
+                                <svgIcons.javascript className="w-5 h-5" />
+                                <span className="mx-2 text-sm font-medium">Javascript</span>
+                            </Link>
 
                         </nav>
 

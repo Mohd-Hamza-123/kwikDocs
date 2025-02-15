@@ -1,0 +1,141 @@
+---
+title: let vs var vs const
+description: Each of them used to declare variable
+published : true
+---
+
+**In JavaScript, _`let`_, _`var`_, and _`const`_ are used to declare variables, but they differ in terms of scope, hoisting, and reassignability.**
+
+### **1) Var**
+
+#### i) Scope:
+
+* **Function-scoped:** Accessible within the function in which it is declared.
+* **Not block-scoped:** Can be accessed outside of blocks like `if` or `for`.
+
+```javascript
+function testFunc() {
+    if (true) {
+        var a = 10;
+        let age = 18;
+        const pi = 3.14;
+    }
+    console.log(a);   // 10
+    console.log(age); // ReferenceError: age is not defined
+    console.log(pi);  // ReferenceError: pi is not defined
+}
+
+testFunc();
+
+console.log(a);    // ReferenceError: a is not defined
+console.log(pi);   // ReferenceError: pi is not defined
+console.log(age);  // ReferenceError: age is not defined
+```
+
+#### ii) Hoisting:
+
+* Variables declared with `var` are **hoisted** to the top of their scope but are initialized as `undefined`.
+
+```javascript
+console.log(a); // undefined
+var a = 5;
+```
+
+#### iii) Reassignability:
+
+* Can be reassigned and re-declared in the same scope.
+
+```javascript
+var a = "Mohd Hamza";
+
+function testFunc() {
+    var a = 10;
+    var a = 50; // No Error
+    console.log(a); // 50
+}
+
+testFunc();
+```
+
+### **2) let**
+
+#### i) Scope:
+
+* **Block-scoped:** Only accessible within the block where it is declared.
+
+```javascript
+if (true) {
+    let y = 20;
+    var x = 99;
+    const z = 100;
+}
+
+console.log(x); // 99
+console.log(y); // ReferenceError: y is not defined
+console.log(z); // ReferenceError: z is not defined
+```
+
+#### ii) Hoisting:
+
+* Variables declared with `let` are hoisted but are not initialized. They are in a "temporal dead zone" until the declaration is encountered.
+
+```javascript
+console.log(b); // ReferenceError
+let b = 5;
+```
+
+#### iii) Reassignability:
+
+* Can be reassigned but cannot be re-declared in the same scope.
+
+```javascript
+let c = 30;
+c = 40; // Valid
+let c = 50; // SyntaxError: Identifier 'c' has already been declared
+```
+
+### **3) const**
+
+#### i) Scope:
+
+* **Block-scoped:** Only accessible within the block where it is declared.
+
+```javascript
+if (true) {
+    let y = 20;
+    var x = 99;
+    const z = 100;
+}
+
+console.log(x); // 99
+console.log(y); // ReferenceError: y is not defined
+console.log(z); // ReferenceError: z is not defined
+```
+
+#### ii) Hoisting:
+
+* Variables declared with `const` are hoisted but are not initialized. They are in a "temporal dead zone" until the declaration is encountered.
+
+```javascript
+console.log(d); // ReferenceError
+const d = 10;
+```
+
+#### iii) Reassignability:
+
+* Cannot be reassigned or re-declared.
+
+```javascript
+const e = 60;
+e = 70; // TypeError: Assignment to constant variable
+```
+
+### **Summary**
+
+| Feature         | var                  | let                  | const                |
+|-----------------|----------------------|----------------------|----------------------|
+| **Scope**       | Function-scoped     | Block-scoped         | Block-scoped         |
+| **Hoisting**    | Yes, initialized as `undefined` | Yes, but in temporal dead zone | Yes, but in temporal dead zone |
+| **Reassignable**| Yes                  | Yes                  | No                   |
+| **Re-declarable**| Yes                 | No                   | No                   |
+

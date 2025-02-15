@@ -1,0 +1,140 @@
+Passing reference will not copy the object. 
+
+    const originalObject = {
+        name: "Hamza",
+        phoneNo: 493939,
+        country: "India",
+        isMarried: false,
+    }
+    
+    const copyObject = originalObject // in this line , we are passing reference of originalObject to copyObject
+    
+    copyObject.phoneNo = undefined
+    
+    console.log(copyObject.phoneNo); // undefined
+    console.log(originalObject.phoneNo); // undefined
+
+1) Shallow Copy :
+
+    const originalObject = {
+        name: "Hamza",
+        phoneNo: 493939,
+        country: "India",
+        isMarried: false,
+    }
+    
+    const copyObject = {...originalObject} 
+    
+    // const copyObject = Object.assign({} , originalObject)
+    
+    // Both approaches create a shallow copy of `originalObject` and assign it to `copyObject`.
+    
+    
+    copyObject.phoneNo = undefined
+    
+    console.log(copyObject.phoneNo);      // undefined
+    console.log(originalObject.phoneNo); // 493939
+
+_In a shallow copy, only the top-level properties are copied. Nested objects are not copied; instead, `copyObject` will hold a reference to the nested objects from `originalObject`._
+
+    const originalObject = {
+        name: "Hamza",
+        phoneNo: 493939,
+        country: "India",
+        social: {
+            instagram: {
+                account1: `insta@gmail.com`
+            },
+            twitter: {
+                account1: `twitter@gmail.com`
+            }
+        }
+    }
+    
+    const copyObject = { ...originalObject }
+    
+    
+    copyObject.social.instagram.account1 = undefined
+    
+    console.log(copyObject.social.instagram.account1); // undefined
+    console.log(originalObject.social.instagram.account1); // undefined
+    
+
+To copy Nested object also , we use concept of deepcopy.
+
+2) Deep Copy 
+
+    const originalObject = {
+        name: "Hamza",
+        phoneNo: 493939,
+        country: "India",
+        social: {
+            instagram: {
+                account1: `insta@gmail.com`
+            },
+            twitter: {
+                account1: `twitter@gmail.com`
+            }
+        }
+    }
+    
+    const copyObject = JSON.parse(JSON.stringify(originalObject))
+    
+    // Above approach create a deep copy of `originalObject` and assign it to `copyObject`.
+    
+    copyObject.social.instagram.account1 = undefined
+    
+    console.log(copyObject.social.instagram.account1); // undefined
+    console.log(originalObject.social.instagram.account1); // insta@gmail.com
+    
+
+Deep Copy using recursion 
+
+    // The original object with both primitive properties and nested objects
+    const originalObject = {
+        name: "Hamza",
+        phoneNo: 493939,
+        country: "India",
+        social: {
+            instagram: {
+                account1: `insta@gmail.com` // Nested object inside 'instagram'
+            },
+            twitter: {
+                account1: `twitter@gmail.com` // Nested object inside 'twitter'
+            }
+        }
+    };
+    
+    // Function to create a deep copy of an object
+    const deepCopy = (obj) => {
+    
+        // Base case: If the value is null or not an object, return it as-is
+        if (obj === null || typeof obj !== 'object') return obj;
+    
+        // Create an empty array if obj is an array, otherwise an empty object
+        const copyObject = Array.isArray(obj) ? [] : {};
+    
+        // Get all the keys of the object to iterate over
+        const keys = Object.keys(obj);
+    
+        // Iterate through each key in the object
+        for (let i = 0; i < keys.length; ++i) {
+            // Recursively copy each property to the new object/array
+            copyObject[keys[i]] = deepCopy(obj[keys[i]]);
+        }
+    
+        // Return the fully copied object
+        return copyObject;
+    };
+    
+    // Create a deep copy of the originalObject
+    const copyObject = deepCopy(originalObject);
+    
+    // Modify a deeply nested property in the copied object
+    copyObject.social.instagram.account1 = undefined;
+    
+    // Log the updated property from the copied object
+    console.log(copyObject.social.instagram.account1); // undefined
+    
+    // Log the original object's property to show it remains unchanged
+    console.log(originalObject.social.instagram.account1); // insta@gmail.com
