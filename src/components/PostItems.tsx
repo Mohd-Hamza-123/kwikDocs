@@ -32,7 +32,7 @@ const PostItems = ({
                 renderPost(post)
                 setIsDocIndexOpen(false)
             }}
-            className={`capitalize text-sm font-bold rounded-sm px-2 py-3 md:py-2 sm:py-4 list-none cursor-pointer border-b border-gray-200 dark:text-gray-300 ${post?.slug === activeSlug
+            className={`text-sm font-bold rounded-sm px-2 py-3 md:py-2 sm:py-4 list-none cursor-pointer border-b border-gray-200 dark:text-gray-300 ${post?.slug === activeSlug
                 ? "bg-indigo-600 text-white"
                 : "hover:bg-gray-300 dark:hover:bg-black"
                 }`}

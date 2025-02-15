@@ -1,0 +1,50 @@
+---
+title: Type Casting in JavaScript
+description: Learn how to convert a value from one data type to another.
+published: true
+---
+
+### **Explicit Type Casting (Type Conversion)**
+
+In JavaScript, explicit type casting allows you to manually convert a value from one data type to another.
+
+---
+
+### **1. Converting to a String**
+
+Use the `String()` function to convert a value to a string.
+
+```javascript
+const num = 42;
+console.log(String(num)); // Output: "42"
+```
+
+---
+
+### **2. Converting to a Number**
+
+Use the `Number()` function or parsing methods like `parseInt()` and `parseFloat()`.
+
+```javascript
+const str = "123";
+console.log(Number(str)); // Output: 123
+
+console.log(parseInt("123.45"));  // Output: 123
+console.log(parseFloat("123.45")); // Output: 123.45
+```
+
+---
+
+### **3. Converting to a Boolean**
+
+Use the `Boolean()` function to convert a value to a boolean.
+
+```javascript
+const num = 0;
+console.log(Boolean(num)); // Output: false (0 is falsy)
+
+const str = "Hello";
+console.log(Boolean(str)); // Output: true (non-empty strings are truthy)
+```
+
+---

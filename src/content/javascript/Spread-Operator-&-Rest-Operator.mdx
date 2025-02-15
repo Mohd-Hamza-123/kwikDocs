@@ -1,0 +1,99 @@
+### **Spread Operator (`...`) vs Rest Operator (`...`) in JavaScript**
+
+The **spread operator** and **rest operator** use the same syntax (`...`), but they have opposite purposes depending on the context they are used in.
+
+### **1\. Spread Operator**
+
+The **spread operator** is used to **spread** or expand elements of an array, object, or iterable into individual elements.
+
+#### **Use Cases of the Spread Operator**
+
+##### **a. Copying Arrays**
+
+    const numbers = [1, 2, 3];
+    const newNumbers = [...numbers];
+    console.log(newNumbers); // Output: [1, 2, 3]
+    
+
+##### **b. Merging Arrays**
+
+    const arr1 = [1, 2];
+    const arr2 = [3, 4];
+    const merged = [...arr1, ...arr2];
+    console.log(merged); // Output: [1, 2, 3, 4]
+    
+
+##### **c. Expanding Elements in Function Calls**
+
+    const numbers = [10, 20, 30];
+    console.log(Math.max(...numbers)); // Output: 30
+    
+
+##### **d. Copying/Merging Objects**
+
+    const user = { name: "Hamza", age: 25 };
+    const updatedUser = { ...user, location: "USA" };
+    console.log(updatedUser); // Output: { name: "Hamza", age: 25, location: "USA" }
+    
+
+### **2\. Rest Operator**
+
+The **rest operator** is used to **collect** multiple elements into a single array or object. It is often used in function arguments or destructuring.
+
+#### **Use Cases of the Rest Operator**
+
+##### **a. Function Arguments**
+
+It collects all remaining arguments into a single array.
+
+    function sum(...numbers) {
+      return numbers.reduce((total, num) => total + num, 0);
+    }
+    console.log(sum(1, 2, 3, 4)); // Output: 10
+    
+
+##### **b. Destructuring Arrays**
+
+It collects the remaining elements into a new array.
+
+    const [first, second, ...rest] = [1, 2, 3, 4, 5];
+    console.log(first); // Output: 1
+    console.log(second); // Output: 2
+    console.log(rest); // Output: [3, 4, 5]
+    
+
+##### **c. Destructuring Objects**
+
+It collects the remaining properties into a new object.
+
+    const user = { name: "Hamza", age: 25, location: "USA" };
+    const { name, ...rest } = user;
+    console.log(name); // Output: Hamza
+    console.log(rest); // Output: { age: 25, location: "USA" }
+    
+
+### **Key Differences**
+
+**Aspect**
+
+**Spread Operator**
+
+**Rest Operator**
+
+**Purpose**
+
+Expands elements into individual parts.
+
+Collects multiple elements into a single array or object.
+
+**Context**
+
+Used in function calls, array literals, and object literals.
+
+Used in function arguments or during destructuring.
+
+**Example**
+
+`[...arr]` (spread elements of `arr` into a new array).
+
+`(...args)` (collects arguments into an array).
