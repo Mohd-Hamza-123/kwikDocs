@@ -12,6 +12,9 @@ import createMdxFile from "@/lib/API/mdxApi/mdxApi";
 import convertHtmlToMdx from "@/utils/convertHtmlToMdx";
 import { makeCodeBlock } from "@/utils/CodeBlock_CopyBtn";
 import { useResponsiveContext } from "@/context/CSS-Context";
+import deleteDoc from "@/lib/API/docsAPI/deleteDoc";
+import { svgIcons } from "../icons";
+import { toast } from "@/hooks/use-toast";
 
 const DocContent = ({ technology }: any) => {
 
@@ -30,6 +33,14 @@ const DocContent = ({ technology }: any) => {
       // createMdxFile(folderName, fileName + ".mdx", mdx)
     }
   }, [doc]);
+
+  const deleteDocument = async (id: string | undefined) => {
+    if (id && await deleteDoc(id)) {
+      toast({
+        title: 'Document Deleted'
+      })
+    }
+  }
 
 
   if (!doc && !isDocIndexOpen) {
@@ -55,7 +66,7 @@ const DocContent = ({ technology }: any) => {
         <div className="dark:border-gray-700 h-[75px] font-bold text-gray-800 dark:text-gray-300 px-3 flex items-center border border-solid border-gray-200 border-t-0 border-l-0 border-r-0 justify-between">
           <h2 className="text-md lg:text-3xl w-[70%]">{doc?.title}</h2>
           {userData?.isAdmin && <div className="flex gap-6 w-[30%] justify-end">
-            <ReactModel _id={doc?._id || ''} />
+            <svgIcons.trash onClick={() => deleteDocument(doc?._id)} className="cursor-pointer"/>
             <MdEdit
               className="cursor-pointer text-lg"
               onClick={() => router.push(`/update-doc/${doc?._id}`)}
