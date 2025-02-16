@@ -5,7 +5,7 @@ import { Callout } from "./Callout";
 
 const useMDXComponent = (code: string) => {
     const fn = new Function(code);
-    return fn({ ...runtime }).default;
+    return fn({ ...runtime })?.default;
 };
 
 const components = {
