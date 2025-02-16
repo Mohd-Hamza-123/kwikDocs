@@ -8,21 +8,18 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet"
 import React from 'react'
-import Link from 'next/link'
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { svgIcons } from "../icons";
-import { CiLogin } from "react-icons/ci";
-import { BiLogInCircle } from "react-icons/bi";
 import { toast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { IoMdLogOut } from "react-icons/io";
-import { TbPencilCode } from "react-icons/tb";
 import logoutAPI from '@/lib/API/authAPI/logout';
 import { logout } from '@/lib/store/features/authSlice';
 import { useTypicalContext } from '@/context/Typical-Context'
 import { useAppDispatch, useAppSelector } from '@/lib/hooks/hooks';
 import { useResponsiveContext } from "@/context/CSS-Context";
+import SidebarLinks from "./SidebarLinks";
 
 const Sidebar = () => {
 
@@ -32,7 +29,6 @@ const Sidebar = () => {
     const userStatus = useAppSelector((state) => state.auth.userStatus)
     const { isSideBarOpen, setIsSideBarOpen } = useTypicalContext();
     const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
-    if (!isSideBarOpen) return null
 
     const closeSideBar = () => setIsSideBarOpen(false)
 
@@ -56,7 +52,7 @@ const Sidebar = () => {
 
     }
 
-
+    if (!isSideBarOpen) return null
 
     return (
         <Sheet
@@ -73,61 +69,13 @@ const Sidebar = () => {
                                 </span>
                                 <Input placeholder='search' className='pl-10' />
                             </div>
-                            <Link
-                                onClick={closeSideBar}
-                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="/">
-                                <svgIcons.home className="w-5 h-5" />
-                                <span className="mx-2 text-sm font-medium">Home</span>
-                            </Link>
-                            {!userStatus && <Link
-                                onClick={closeSideBar}
-                                href="/login"
-                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
-                                <CiLogin className="w-5 h-5" />
-                                <span className="mx-2 text-sm font-medium">Login</span>
-                            </Link>}
-                            {!userStatus && <Link
-                                onClick={closeSideBar}
-                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="/signup"
-                            >
-                                <BiLogInCircle className="h-5 w-5" />
-                                <span className="mx-2 text-sm font-medium">Sign-up</span>
-                            </Link>}
-                            {userData?.isAdmin && <Link
-                                href={`/create-docs`}
-                                onClick={closeSideBar}
-                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
 
-                                <svgIcons.createDoc className="w-5 h-5" />
-
-                                <span className="mx-2 text-sm font-medium">Create Docs</span>
-                            </Link>}
-                            {userData?.isAdmin && <Link
-                                href={`/create-tech`}
-                                onClick={closeSideBar}
-                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                            >
-                                <TbPencilCode />
-                                <span className="mx-2 text-sm font-medium">Create tech</span>
-                            </Link>}
-                            <Link
-                                onClick={() => {
-                                    closeSideBar()
-                                    setIsDocIndexOpen((prev) => !prev)
-                                }}
-                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="/docs/python">
-                                <svgIcons.python className="w-5 h-5" />
-                                <span className="mx-2 text-sm font-medium">Python</span>
-                            </Link>
-                             <Link
-                                onClick={closeSideBar}
-                                className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" 
-                                href="/docs/javascript">
-                                <svgIcons.javascript className="w-5 h-5" />
-                                <span className="mx-2 text-sm font-medium">Javascript</span>
-                            </Link>
-
+                            <SidebarLinks
+                                userData={userData}
+                                userStatus={userStatus}
+                                closeSideBar={closeSideBar}
+                                setIsDocIndexOpen={setIsDocIndexOpen}
+                            />
                         </nav>
 
                         {userStatus && <div className="flex items-center justify-between mt-6">
@@ -146,8 +94,6 @@ const Sidebar = () => {
                 </SheetHeader>
             </SheetContent>
         </Sheet>
-
-
     )
 }
 
