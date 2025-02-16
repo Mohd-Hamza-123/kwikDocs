@@ -65,7 +65,7 @@ const SidebarLinks = ({
         {
             slug: '/docs/next',
             name: 'Next JS',
-            icon: <svgIcons.nextjs className='w-5 h-5' /> ,
+            icon: <svgIcons.nextjs className='w-5 h-5' />,
             isVisible: true,
         }
     ]
@@ -73,6 +73,7 @@ const SidebarLinks = ({
         <>
             {navLinks?.map((nav) => (
                 <Link
+                    key={nav?.slug}
                     href={nav.slug}
                     onClick={closeSideBar}
                     className={`${nav.isVisible ? '' : 'hidden'} flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700`}>
@@ -83,6 +84,7 @@ const SidebarLinks = ({
 
             {techLinks?.map((tech) => (
                 <Link
+                    key={tech?.slug}
                     href={tech?.slug}
                     onClick={() => {
                         closeSideBar()
