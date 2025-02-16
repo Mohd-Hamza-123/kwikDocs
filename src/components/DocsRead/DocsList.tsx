@@ -7,6 +7,8 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import React, { useEffect, useRef } from "react";
 import { useResponsiveContext } from "@/context/CSS-Context";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
+import convertHtmlToMdx from "@/utils/convertHtmlToMdx";
+import createMdxFile from "@/lib/API/mdxApi/mdxApi";
 
 const Docs_LIMIT = 5;
 
@@ -16,7 +18,7 @@ const DocsList = ({ technology }: any) => {
   const { _id: techId, name } = technology || {};
   const spinnerRef = useRef<null | HTMLDivElement>(null);
   const document = useAppSelector((state) => state.docs.document);
-
+  const userData = useAppSelector((state) => state.auth.userData)
   const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
 
   const {
@@ -69,6 +71,19 @@ const DocsList = ({ technology }: any) => {
 
 
 
+  function makeMdxFile(doc: any) {
+
+    if (doc && userData?.isAdmin) {
+      const bool = confirm("Do you want to make mdx file ?")
+      if (!bool) return
+      const html = doc.description
+      const mdx = convertHtmlToMdx(html)
+      const folderName = technology?.name.toLowerCase()
+      const fileName = doc?.title.replaceAll(" ", "-").replaceAll(",", "")
+      createMdxFile(folderName, fileName + ".mdx", mdx)
+    }
+  }
+
   return (
     <div className={`w-[100%] lg:w-[20%] border border-r-3 h-full overflow-y-scroll absolute lg:sticky top-0 bg-slate-50 dark:bg-bgDark z-20 py-2 dark:border-gray-700 ${isDocIndexOpen ? 'block' : 'hidden'} lg:block`}>
 
@@ -81,6 +96,7 @@ const DocsList = ({ technology }: any) => {
             onClick={() => {
               dispatch(setDoc({ document: doc }))
               setIsDocIndexOpen(false);
+              makeMdxFile(doc)
             }}
           >
             {doc?.title}

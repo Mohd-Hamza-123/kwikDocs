@@ -182,9 +182,14 @@ closureFunc("inside"); // Output: Outer: outside, Inner: inside
 Here’s an example of creating a custom `Math.floor()` method:
 
 ```javascript
+
 const math = {
     floor: function (num) {
         if (num < 0) {
+            const isInteger = Number.isInteger(num)
+            if(isInteger){
+                return parseInt(num)
+            }
             return parseInt(num) - 1;
         } else if (num > 0) {
             return parseInt(num);

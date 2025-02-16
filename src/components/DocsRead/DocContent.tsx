@@ -8,8 +8,6 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/lib/hooks/hooks";
 import { docsInterface } from "@/models/docs.model";
-import createMdxFile from "@/lib/API/mdxApi/mdxApi";
-import convertHtmlToMdx from "@/utils/convertHtmlToMdx";
 import { makeCodeBlock } from "@/utils/CodeBlock_CopyBtn";
 import { useResponsiveContext } from "@/context/CSS-Context";
 import deleteDoc from "@/lib/API/docsAPI/deleteDoc";
@@ -25,13 +23,7 @@ const DocContent = ({ technology }: any) => {
 
   useEffect(() => {
     makeCodeBlock();
-    if (doc) {
-      const html = doc.description
-      const mdx = convertHtmlToMdx(html)
-      const folderName = technology?.name.toLowerCase()
-      const fileName = doc?.title.replaceAll(" ", "-").replaceAll(",", "")
-      createMdxFile(folderName, fileName + ".mdx", mdx)
-    }
+    
   }, [doc]);
 
   const deleteDocument = async (id: string | undefined) => {

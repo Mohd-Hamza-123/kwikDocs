@@ -1,7 +1,6 @@
 'use client'
 import { useResponsiveContext } from '@/context/CSS-Context';
-import { useTypicalContext } from '@/context/Typical-Context';
-import React, { useState } from 'react'
+import React from 'react'
 
 export interface PostItemsProps {
     slug: string;
