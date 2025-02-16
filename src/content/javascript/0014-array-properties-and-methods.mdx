@@ -120,3 +120,104 @@ console.log(removed); // Output: [2, 3]
 let numbers = [1, 4, 5];
 numbers.splice(1, 0, 2, 3); // Add 2, 3 at index 1
 console.log(numbers); // Output: [1, 2, 3, 4, 5]
+```
+
+### **11. `forEach()`**
+
+The `forEach()` method in JavaScript is used to execute a given function for each element in an array. Unlike other iteration methods, it doesn’t return a new array—it only performs side effects.
+
+#### Syntax:
+```javascript
+array.forEach(callback(currentValue, index, array), thisArg)
+```
+
+#### Parameters:
+- `callback`: A function executed for each element. It accepts the following arguments:
+  - `currentValue`: The current element being processed.
+  - `index` (optional): The index of the current element.
+  - `array` (optional): The array `forEach` was called on.
+- `thisArg` (optional): A value to use as `this` when executing the callback.
+
+#### Example:
+```javascript
+const numbers = [1, 2, 3, 4];
+
+numbers.forEach((number, index) => {
+  console.log(`Index: ${index}, Value: ${number}`);
+});
+// Output:
+// Index: 0, Value: 1
+// Index: 1, Value: 2
+// Index: 2, Value: 3
+// Index: 3, Value: 4
+```
+
+#### Key Points:
+- It modifies the original array if the callback makes changes.
+- It doesn’t return anything (undefined).
+- Best used for performing actions (like logging or updating external variables) rather than transformations.
+
+---
+
+### **12. `map()`**
+
+The `map()` method creates a new array populated with the results of calling a provided function on every element in the calling array.
+
+#### Syntax:
+```javascript
+array.map(callback(currentValue, index, array), thisArg)
+```
+
+#### Parameters:
+- `callback`: A function executed for each element. It accepts the following arguments:
+  - `currentValue`: The current element being processed.
+  - `index` (optional): The index of the current element.
+  - `array` (optional): The array `map` was called on.
+- `thisArg` (optional): A value to use as `this` when executing the callback.
+
+#### Example:
+```javascript
+const numbers = [1, 2, 3, 4];
+const doubled = numbers.map(number => number * 2);
+
+console.log(doubled); // Output: [2, 4, 6, 8]
+```
+
+#### Key Points:
+- It doesn’t modify the original array.
+- It always returns a new array of the same length.
+- Best used for transforming data.
+
+---
+
+### **13. `filter()`**
+
+The `filter()` method creates a new array containing all elements of the calling array that pass a test implemented by the provided function.
+
+#### Syntax:
+```javascript
+array.filter(callback(element, index, array), thisArg)
+```
+
+#### Parameters:
+- `callback`: A function to test each element. It accepts the following arguments:
+  - `element`: The current element being processed.
+  - `index` (optional): The index of the current element.
+  - `array` (optional): The array `filter` was called on.
+- `thisArg` (optional): A value to use as `this` when executing the callback.
+
+#### Example:
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+const evenNumbers = numbers.filter(number => number % 2 === 0);
+
+console.log(evenNumbers); // Output: [2, 4]
+```
+
+#### Key Points:
+- It doesn’t modify the original array.
+- It returns a new array that can have fewer elements than the original.
+- Best used for selecting a subset of data based on a condition.
+
+
+
