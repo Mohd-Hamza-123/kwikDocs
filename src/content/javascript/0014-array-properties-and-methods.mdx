@@ -161,7 +161,7 @@ numbers.forEach((number, index) => {
 
 ### **12. `map()`**
 
-The `map()` method creates a new array populated with the results of calling a provided function on every element in the calling array.
+The `map()` method creates a new array populated with the results of calling a provided function on every element in the calling array. The map method in JavaScript iterates over each element in the array and executes the provided function once for each element.
 
 #### Syntax:
 ```javascript
@@ -175,12 +175,31 @@ array.map(callback(currentValue, index, array), thisArg)
   - `array` (optional): The array `map` was called on.
 - `thisArg` (optional): A value to use as `this` when executing the callback.
 
-#### Example:
-```javascript
-const numbers = [1, 2, 3, 4];
-const doubled = numbers.map(number => number * 2);
+#### Examples:
 
-console.log(doubled); // Output: [2, 4, 6, 8]
+```javascript
+const arr = [1, 2, 3, 4, 5]
+
+arr.map(function (element, index) {
+    console.log(`index = ${index} element = ${element}`)
+})
+
+// index = 0 element = 1
+// index = 1 element = 2
+// index = 2 element = 3
+// index = 3 element = 4
+// index = 4 element = 5
+```
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+
+// Use the map method to create a new array with each element squared
+const squaredNumbers = numbers.map(function (element) {
+    return element * element;
+});
+
+console.log(squaredNumbers); // Output: [1, 4, 9, 16, 25]
 ```
 
 #### Key Points:

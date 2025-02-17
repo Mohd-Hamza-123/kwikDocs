@@ -1,0 +1,193 @@
+---
+title: Dictionary
+description: ''
+published : true
+---
+
+Python dictionaries are built-in data structures that store key-value pairs. Each key in a dictionary must be unique and immutable (like strings, numbers, or tuples), and it maps to a specific value. The value can be of any data type, such as a string, integer, list, or even another dictionary.
+
+Here's an example of a Python dictionary:
+
+```python
+person = {
+    "name": "John",
+    "age": 30,
+    "city": "New York"
+}
+```
+
+In this example:
+- `"name"`, `"age"`, and `"city"` are the keys.
+- `"John"`, `30`, and `"New York"` are the corresponding values.
+
+You can access the values using the keys, like this:
+
+```python
+print(person["name"])  # Output: John
+print(person["age"])   # Output: 30
+```
+
+Dictionaries also support various operations, such as:
+- Adding or updating key-value pairs.
+- Removing items.
+- Checking if a key exists.
+
+Example:
+
+```python
+# Adding a new key-value pair
+person["email"] = "john@example.com"
+
+# Updating an existing value
+person["age"] = 31
+
+# Removing a key-value pair
+del person["city"]
+```
+
+Dictionaries are flexible and commonly used in Python for tasks like storing data with labels or mappings.
+
+Here’s the corrected and enhanced version of your MDX file with additional dictionary methods and examples:
+
+
+### Dictionary Methods
+
+#### 1) `get(key)` method
+
+The `get()` method returns the value associated with the specified key. If the key is not found, it returns `None` instead of raising an error.
+
+```python
+person = {
+    "name": "John",
+    "age": 30,
+    "city": "New York"
+}
+
+print(person.get("name"))  # John
+print(person.get("age"))   # 30
+print(person.get("state")) # None
+print(person["state"])     # Raises KeyError
+```
+
+#### 2) `pop(key)` method
+
+The `pop()` method removes the item with the specified key and returns its value. If the key is not found, it raises a `KeyError`.
+
+```python
+person = {
+    "name": "John",
+    "age": 30,
+    "city": "New York"
+}
+
+removed_value = person.pop("age") # removes "age" item and returns the value (30)
+print(removed_value)             # 30
+print(person)                    # {'name': 'John', 'city': 'New York'}
+```
+
+#### 3) `popitem()` method
+
+The `popitem()` method removes and returns the last key-value pair in the dictionary as a tuple. If the dictionary is empty, it raises a `KeyError`.
+
+```python
+person = {
+    "name": "John",
+    "age": 30,
+    "city": "New York"
+}
+
+removed_item = person.popitem()  # removes last item and returns it as a tuple
+print(removed_item)              # ('city', 'New York')
+print(person)                    # {'name': 'John', 'age': 30}
+```
+
+#### 4) `copy()` method
+
+The `copy()` method creates a shallow copy of the dictionary, which means it duplicates the dictionary's structure but not the objects referenced by its values.
+
+```python
+person = {
+    "name": "John",
+    "age": 30,
+    "city": "New York"
+}
+
+person_copy = person.copy()
+print(person_copy)  # {'name': 'John', 'age': 30, 'city': 'New York'}
+```
+
+#### 5) `update()` method
+
+The `update()` method updates the dictionary with key-value pairs from another dictionary or iterable. If a key already exists, its value will be updated.
+
+```python
+person = {
+    "name": "John",
+    "age": 30
+}
+
+person.update({"age": 31, "city": "New York"})
+print(person)  # {'name': 'John', 'age': 31, 'city': 'New York'}
+```
+
+#### 6) `keys()` method
+
+The `keys()` method returns a view object that displays a list of all the keys in the dictionary.
+
+```python
+person = {
+    "name": "John",
+    "age": 30,
+    "city": "New York"
+}
+
+keys = person.keys()
+print(keys)  # dict_keys(['name', 'age', 'city'])
+```
+
+#### 7) `values()` method
+
+The `values()` method returns a view object that displays a list of all the values in the dictionary.
+
+```python
+person = {
+    "name": "John",
+    "age": 30,
+    "city": "New York"
+}
+
+values = person.values()
+print(values)  # dict_values(['John', 30, 'New York'])
+```
+
+#### 8) `items()` method
+
+The `items()` method returns a view object that displays a list of tuple pairs of key-value items.
+
+```python
+person = {
+    "name": "John",
+    "age": 30,
+    "city": "New York"
+}
+
+items = person.items()
+print(items)  # dict_items([('name', 'John'), ('age', 30), ('city', 'New York')])
+```
+
+#### 9) `clear()` method
+
+The `clear()` method removes all items from the dictionary, leaving it empty.
+
+```python
+person = {
+    "name": "John",
+    "age": 30,
+    "city": "New York"
+}
+
+person.clear()
+print(person)  # {}
+```
+---
+
