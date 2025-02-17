@@ -50,6 +50,7 @@ const Technologies = () => {
     return (
       <div className="dark:bg-bgDark bg-gray-100">
         {technology?.map((techObj: any) => {
+          // console.log(techObj?.technologies)
           return (
             <section key={techObj?.techType}>
               <h1 className="text-2xl lg:text-3xl text-center capitalize font-cursive">

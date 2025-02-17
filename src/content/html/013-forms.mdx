@@ -1,0 +1,112 @@
+---
+title: Forms
+description: ''
+published: true
+---
+
+An HTML form is used to collect user input. The user input is most often sent to a server for processing. 
+
+The HTML `<form>` element is used to create an HTML form for user input.
+
+```html
+<form>
+.
+form elements
+.
+</form>
+```
+
+The `<form>` element is a container for different types of input elements, such as: text fields, checkboxes, radio buttons, submit buttons, etc.
+
+
+Basic Forms : 
+```html
+<form>
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" ><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" >
+  <input type="submit" >
+</form>
+```
+
+
+
+   A form with radio buttons:
+```html
+<p>Choose your favorite Web language:</p>
+<form>
+  <input type="radio" id="html" name="fav_language" >
+  <label for="html">HTML</label><br>
+  <input type="radio" id="css" name="fav_language" >
+  <label for="css">CSS</label><br>
+  <input type="radio" id="javascript" name="fav_language" >
+  <label for="javascript">JavaScript</label>
+</form>
+```
+
+
+A form with checkboxes:
+
+```html
+<form>
+  <input type="checkbox" id="vehicle1" >
+  <label for="vehicle1"> I have a bike</label><br>
+  <input type="checkbox" id="vehicle2" >
+  <label for="vehicle2"> I have a car</label><br>
+  <input type="checkbox" id="vehicle3" >
+  <label for="vehicle3"> I have a boat</label>
+</form>
+```
+
+Forms using Div :
+```html
+<form>
+
+ <div> 
+  <input type="checkbox" id="vehicle1" >
+  <label for="vehicle1"> I have a bike</label>
+ </div>
+
+ <div> 
+   <input type="checkbox" id="vehicle2" >
+   <label for="vehicle2"> I have a car</label>
+ </div>
+
+  <div>
+  <input type="checkbox" id="vehicle3" >
+  <label for="vehicle3"> I have a boat</label>
+  </div>
+
+</form>
+```
+
+Form using Textarea
+
+```html
+<form>
+      <label for="w3">Type Message</label>
+      <textarea id="w3" placeholder="Message" rows="4" cols="50"></textarea>
+      <br />
+      <button value="submit">Submit</button>
+ </form>
+```
+
+Form using select Tag
+
+```html
+<form>
+      <label for="cars">Choose a car:</label>
+
+      <select id="cars">
+        <option hidden>Choose</option>
+        <option>Volvo</option>
+        <option>Saab</option>
+        <option>Mercedes</option>
+        <option>Audi</option>
+      </select>
+
+      <button type="submit">submit</button>
+</form>
+```
+---

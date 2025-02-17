@@ -1,0 +1,53 @@
+---
+title: List
+description: ''
+published: true
+---
+
+In HTML, lists are used to organize and display items in a structured format.
+
+### 1. Ordered Lists (`<ol>`) 📅
+Ordered lists are used when the order of items matters. The `<ol>` tag creates a numbered list, and the `type` attribute specifies the type of numbering.
+
+#### Syntax
+```html
+<ol type="1">
+  <li>First item</li>
+  <li>Second item</li>
+  <li>Third item</li>
+</ol>
+```
+
+#### `type` Attribute
+The `type` attribute specifies the kind of marker to use in the list:
+
+- `1`: Numbers (default)
+- `A`: Uppercase letters
+- `a`: Lowercase letters
+- `I`: Uppercase Roman numerals
+- `i`: Lowercase Roman numerals
+
+For more details, refer to the [type attribute documentation](https://www.w3schools.com/tags/att_ol_type.asp).
+
+### 2. Unordered Lists (`<ul>`) ●
+Unordered lists are used when the order of items does not matter. The `<ul>` tag creates a bulleted list, and the `type` attribute specifies the style of the bullets.
+
+#### Syntax
+```html
+<ul type="disc">
+  <li>Apples</li>
+  <li>Bananas</li>
+  <li>Oranges</li>
+</ul>
+```
+
+#### `type` Attribute
+The `type` attribute specifies the style of the list item markers:
+
+| Value   | Description                                   |
+|---------|-----------------------------------------------|
+| `disc`  | ● Sets the list item marker to a bullet (default) |
+| `circle`| ○ Sets the list item marker to a circle          |
+| `square`| ■ Sets the list item marker to a square          |
+| `none`  | ❌ The list items will not be marked              |
+
