@@ -44,6 +44,7 @@ const Technologies = () => {
     const name = tech?.name?.toLowerCase()
     console.log(name)
     router.push(`/docs/${name}`);
+    // router.push(`/read-doc/${tech?._id}`)
     // dispatch(setDoc({ document: null }));
   };
 
@@ -53,7 +54,7 @@ const Technologies = () => {
     return (
       <div className="dark:bg-bgDark bg-gray-100">
         {technology?.map((techObj: any) => {
-          // console.log(techObj?.technologies)
+        
           return (
             <section key={techObj?.techType}>
               <h1 className="text-2xl lg:text-3xl text-center capitalize font-cursive">
@@ -102,7 +103,7 @@ const Technologies = () => {
   if (isError)
     return (
       <h1 className="text-center capitalize font-bold mt-3">
-        No Documents . Please Check Your Internet Connection
+        No Documents Found . Please Check Your Internet Connection
       </h1>
     );
 };

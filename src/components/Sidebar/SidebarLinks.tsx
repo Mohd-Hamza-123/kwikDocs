@@ -69,12 +69,19 @@ const SidebarLinks = ({
             isVisible: true,
         },
         {
-            slug:'/docs/html',
-            name : 'HTML',
-            icon : <svgIcons.html className="w-5 h-5"/>,
-            isVisible:true,
+            slug: '/docs/html',
+            name: 'HTML',
+            icon: <svgIcons.html className="w-5 h-5" />,
+            isVisible: true,
+        },
+        {
+            slug: '/docs/css',
+            name: 'CSS',
+            icon: <svgIcons.css className='w-5 h-5' />,
+            isVisible: true
         }
     ]
+    
     return (
         <>
             {navLinks?.map((nav) => (
