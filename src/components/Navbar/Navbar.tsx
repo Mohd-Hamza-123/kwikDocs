@@ -52,13 +52,13 @@ const Navbar = () => {
         <header className='sticky top-0 border-b border-border bg-background/95 backdrop:blur supports-[backdrop-filter]:bg-background/60'>
             <nav className="flex justify-between items-center dark:bg-bgDark shadow-xl h-[10vh] px-3 lg:px-7">
                 <Link href={`/`}>
-                    <figure className='flex gap-2 items-center cursor-pointer'>
+                    <figure className='flex gap-1 items-center cursor-pointer'>
                         <Image
                             height={200}
                             width={200}
-                            className="mx-auto h-[32px] lg:h-10 w-auto"
-                            src="/logo.jpg"
-                            alt='Image'
+                            className="mx-auto h-12 lg:h-10 w-auto dark:invert"
+                            src="/logo.png"
+                            alt='logo'
                         />
                         <figcaption className="font-semibold text-lg lg:text-xl">
                             <h1>{siteConfig.name}</h1>

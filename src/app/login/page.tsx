@@ -70,8 +70,8 @@ const Login = () => {
                 <Image
                     height={200}
                     width={200}
-                    className="mx-auto h-10 w-auto"
-                    src="./logo.jpg"
+                    className="mx-auto h-12 w-auto"
+                    src="./logo.png"
                     alt='Image'
                     quality={100}
                 />
