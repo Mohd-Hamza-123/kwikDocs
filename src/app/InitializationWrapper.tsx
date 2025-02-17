@@ -22,7 +22,7 @@ const InitializationWrapper = ({ children }: any) => {
         queryFn: () => getProfile(),
         staleTime: Infinity
     });
-
+    // console.log(userProfile)
     if (isSuccess) {
         dispatch(login({ userData: userProfile }));
     }
