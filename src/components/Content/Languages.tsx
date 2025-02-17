@@ -39,9 +39,12 @@ const Technologies = () => {
     staleTime: Infinity,
   });
 
-  const handleLearn = (techId: string) => {
-    router.push(`/read-doc/${techId}`);
-    dispatch(setDoc({ document: null }));
+  const handleLearn = (tech : any) => {
+    console.log(tech)
+    const name = tech?.name?.toLowerCase()
+    console.log(name)
+    router.push(`/docs/${name}`);
+    // dispatch(setDoc({ document: null }));
   };
 
   if (technologyPending) return <LoadingPage />;
@@ -83,7 +86,7 @@ const Technologies = () => {
                     </p>
                     <Button
                       variant={"outline"}
-                      onClick={() => handleLearn(tech?._id)}
+                      onClick={() => handleLearn(tech)}
                     >
                       Learn {tech?.name}
                     </Button>
