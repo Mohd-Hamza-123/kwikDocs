@@ -59,8 +59,8 @@ const Signup = () => {
         <Image
           height={200}
           width={200}
-          className="mx-auto h-10 w-auto"
-          src="https://img.freepik.com/premium-vector/office-paper-document-with-folder-flat-design_798171-579.jpg"
+          className="mx-auto h-12 w-auto"
+          src="./logo.png"
           alt='Image'
         />
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Sign in to your account</h2>
