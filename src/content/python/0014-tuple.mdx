@@ -1,0 +1,119 @@
+---
+title: Tuples in Python
+description: ''
+published : true
+---
+
+A **tuple** in Python is an **immutable** sequence of values, similar to a list. However, once you create a tuple, you cannot change its contents (i.e., you cannot add, remove, or modify elements). Tuples are typically used to store collections of heterogeneous data, where you want to ensure the data remains unchanged.
+
+#### Creating a Tuple
+
+You create a tuple by placing values inside parentheses `()`:
+
+```python
+# Creating a tuple
+person = ("John", 30, "New York")
+print(person)  # Output: ('John', 30, 'New York')
+```
+
+A tuple can contain elements of different types:
+
+```python
+mixed_tuple = ("apple", 10, 3.14, True)
+print(mixed_tuple)  # Output: ('apple', 10, 3.14, True)
+```
+
+#### Tuple with One Element
+
+To create a tuple with one element, you must add a comma after the element, otherwise, it will be interpreted as a regular data type:
+
+```python
+single_element_tuple = (5,)
+print(single_element_tuple)  # Output: (5)
+```
+
+Without the comma, Python treats it as an integer:
+
+```python
+not_a_tuple = (5)
+print(type(not_a_tuple))  # Output: <class 'int'>
+```
+
+#### Accessing Tuple Elements
+
+You can access elements in a tuple using their index (like a list):
+
+```python
+person = ("John", 30, "New York")
+print(person[0])  # Output: John
+print(person[1])  # Output: 30
+```
+
+#### Tuple Slicing
+
+You can slice tuples to get a portion of the tuple:
+
+```python
+person = ("John", 30, "New York", "Engineer")
+print(person[1:3])  # Output: (30, 'New York')
+```
+
+#### Tuple Methods
+
+1. **`count()`**: Returns the number of times a specified value appears in the tuple.
+
+```python
+numbers = (1, 2, 3, 2, 1, 2)
+print(numbers.count(2))  # Output: 3
+```
+
+2. **`index()`**: Returns the index of the first occurrence of a specified value.
+
+```python
+numbers = (1, 2, 3, 2, 1, 2)
+print(numbers.index(3))  # Output: 2
+```
+
+#### Benefits of Using Tuples
+
+- **Immutability**: Since tuples cannot be modified after creation, they are often used for data integrity and to represent constants.
+- **Performance**: Tuples are faster than lists for iteration because they are immutable.
+- **Hashable**: Tuples can be used as keys in dictionaries, unlike lists.
+
+#### Tuple vs. List
+
+| Feature       | Tuple                    | List                    |
+|---------------|--------------------------|-------------------------|
+| Mutability   | Immutable                | Mutable                 |
+| Syntax       | `()`                     | `[]`                    |
+| Performance  | Faster for iteration      | Slower for iteration     |
+| Use Cases    | Used for fixed data       | Used for dynamic data   |
+
+#### Tuple Packing and Unpacking
+
+1. **Packing**: Packing is the process of assigning multiple values to a single tuple.
+
+```python
+coordinates = (10, 20)  # Packing two values into a tuple
+```
+
+2. **Unpacking**: Unpacking is the process of extracting values from a tuple into variables.
+
+```python
+x, y = coordinates  # Unpacking the tuple
+print(x)  # Output: 10
+print(y)  # Output: 20
+```
+
+#### Adding Two Tuples
+
+You can add or concatenate two tuples using the + operator. This combines both tuples into a new tuple.
+
+```python
+tuple1 = (1, 2, 3)
+tuple2 = (4, 5, 6)
+
+result = tuple1 + tuple2
+print(result)  # Output: (1, 2, 3, 4, 5, 6)
+```
+---
