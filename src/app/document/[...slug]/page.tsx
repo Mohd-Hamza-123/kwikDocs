@@ -3,7 +3,6 @@ import { posts } from "#site/content";
 import { notFound } from 'next/navigation';
 import { MDXContent } from '@/components/mdx-component';
 import "@/styles/mdx.css"
-import { MdOutlineZoomOutMap } from "react-icons/md";
 interface PostPageProps {
     params: {
         slug: string[];
@@ -31,11 +30,6 @@ export default async function PostPage({ params }: PostPageProps) {
 
     return <article className="container py-6 prose dark:prose-invert max-w-3xl mx-auto">
         <h1 className="mb-2">{post.title}</h1>
-        {/* <div className="flex gap-2 mb-2">
-            {post.tags?.map((tag) => (
-                <Tag tag={tag} key={tag} />
-            ))}
-        </div> */}
         {post.description ? (
             <p className="text-xl mt-0 text-muted-foreground">{post.description}</p>
         ) : null}
