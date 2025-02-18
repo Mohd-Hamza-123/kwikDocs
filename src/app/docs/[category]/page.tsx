@@ -3,7 +3,7 @@
 import "@/styles/mdx.css"
 import Link from 'next/link'
 import { posts } from '#site/content'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { notFound } from 'next/navigation'
 import PostItems from '@/components/PostItems'
 import { MdOutlineZoomOutMap } from "react-icons/md";
@@ -15,13 +15,18 @@ const DocPage = ({ params }: { params: { category: string } }) => {
 
   const { category } = params
 
-  const displayPosts = posts?.filter((post) => post?.slug.indexOf(category) === 0 && post?.published);
+  const displayPosts = useMemo(() => {
+    return posts?.filter((post) => post?.slug.indexOf(category) === 0 && post?.published)
+  }, [posts])
 
   const [post, setPost] = useState<PostItemsProps | null>(displayPosts[0] || null);
 
   const [activeSlug, setActiveSlug] = useState(displayPosts[0]?.slug || '')
 
-  const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
+  const {
+    isDocIndexOpen,
+    setIsDocIndexOpen
+  } = useResponsiveContext();
 
 
 
