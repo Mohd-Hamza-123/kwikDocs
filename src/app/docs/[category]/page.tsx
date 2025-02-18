@@ -14,12 +14,16 @@ import { useResponsiveContext } from "@/context/CSS-Context";
 const DocPage = ({ params }: { params: { category: string } }) => {
 
   const { category } = params
-  const [post, setPost] = useState<PostItemsProps | null>(null)
-  const [activeSlug, setActiveSlug] = useState('')
+
+  const displayPosts = posts?.filter((post) => post?.slug.indexOf(category) === 0 && post?.published);
+
+  const [post, setPost] = useState<PostItemsProps | null>(displayPosts[0] || null);
+
+  const [activeSlug, setActiveSlug] = useState(displayPosts[0]?.slug || '')
 
   const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
 
-  const displayPosts = posts?.filter((post) => post?.slug.indexOf(category) === 0 && post?.published);
+
 
   const renderPost = (post: PostItemsProps) => {
     setPost(post)
@@ -57,9 +61,9 @@ const DocPage = ({ params }: { params: { category: string } }) => {
         {post && <article className="container py-4 prose dark:prose-invert max-w-3xl mx-auto">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="mb-2">{post.title}</h1>
-              {post.description ? (
-                <p className="text-xl mt-0 text-muted-foreground">{post.description}</p>
+              <h1 className="mb-2">{post?.title}</h1>
+              {post?.description ? (
+                <p className="text-xl mt-0 text-muted-foreground">{post?.description}</p>
               ) : null}
             </div>
 
@@ -70,7 +74,7 @@ const DocPage = ({ params }: { params: { category: string } }) => {
           </div>
 
           <hr className="my-4" />
-          <MDXContent code={post.body} />
+          <MDXContent code={post?.body} />
         </article>}
 
       </section>
