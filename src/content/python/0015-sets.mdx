@@ -1,0 +1,69 @@
+---
+title: Sets in Python
+description: Learn about sets in Python.
+published: true
+---
+
+Sets are a built-in data type in Python that represent an **unordered collection of unique elements**. Sets are mutable, meaning you can add or remove elements from a set after it has been created. 🛠️
+
+## Creating Sets �
+
+```python
+# Using set() function
+my_set = set([1, 2, 3, 4])
+
+# Using curly braces
+my_set = {1, 2, 3, 4}
+```
+
+## Common Set Methods 🛠️
+
+### 1) `add(elem)`: Adds an element to the set. ➕
+
+```python
+my_set = {1, 2, 3}
+my_set.add(4)
+print(my_set)  # Output: {1, 2, 3, 4}
+```
+
+### 2) Removing Elements 🗑️
+
+```python
+my_set = {1, 2, 3, 4}
+my_set.remove(3)  # Removes an element from the set. Raises a KeyError if the element is not found.
+my_set.discard(4)  # Removes an element if it is a member. Does nothing if the element is not found.
+my_set.pop()  # Removes and returns an arbitrary element from the set. Raises a KeyError if the set is empty.
+my_set.clear()  # Removes all elements from the set.
+print(my_set)  # Output: set()
+```
+
+### Set Operations 🔄
+
+```python
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+
+print(set1.union(set2))            # Output: {1, 2, 3, 4, 5}
+print(set1.intersection(set2))     # Output: {3}
+print(set1.difference(set2))       # Output: {1, 2}
+print(set1.symmetric_difference(set2))  # Output: {1, 2, 4, 5}
+```
+
+### Subset and Superset Operations 🔍
+
+```python
+set1 = {1, 2, 3}
+set2 = {1, 2}
+
+print(set2.issubset(set1))  # Output: True
+print(set1.issuperset(set2))  # Output: True
+```
+
+### Copying Sets 📝
+
+```python
+set1 = {1, 2, 3}
+set2 = set1.copy()
+print(set2)  # Output: {1, 2, 3}
+```
+---
