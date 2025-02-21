@@ -6,4 +6,80 @@ published: true
 
 Rendering paradigms refer to the different strategies or approaches used to generate and deliver the content of a webpage to the user in a web application. In the context of frameworks like Next.js, rendering paradigms define how and when the HTML and other resources of a page are created and sent to the browser.
 
+## **1) Client-Side Rendering (CSR)**
 
+Client-Side Rendering (CSR) is a way of building web pages where most of the content is not included in the initial HTML sent from the server. Instead, the browser (the client) is responsible for generating and displaying the content after receiving the necessary JavaScript files from the server.
+
+
+### How Does CSR Work?
+
+1. **Initial Load**:
+   - When you visit a website, the server sends a **basic HTML file** & other files (javascript , css , etc ) to your browser.
+   - This HTML usually has a `<div>` with an empty placeholder (e.g., `<div id="root"></div>`).
+
+2. **JavaScript Loads**:
+   - The browser downloads JavaScript files that contain the logic to render the page (typically built using libraries like React, Vue, etc.).
+   - The JavaScript runs in the browser and dynamically creates the rest of the HTML.
+
+3. **Data Fetching**:
+   - If the page needs data (like a user’s profile or a list of products), the JavaScript fetches it from an API.
+
+4. **Content Display**:
+   - After the data is fetched, the JavaScript updates the page dynamically to show the content.
+
+
+## **2) Dynamic Rendering ( Server-Side Rendering (SSR) )** 
+
+Server-Side Rendering (SSR) is a rendering method where the server generates the HTML content of a page dynamically for every request. The pre-rendered HTML is sent to the browser, ensuring the page is fully loaded before being displayed.
+
+
+### 1. **First Page Load (SSR):**
+   - When you access a page for the first time, the server renders the page into HTML. This pre-rendered HTML is sent to the browser along with the JavaScript needed for hydration.
+   - This ensures faster initial load times and better SEO because the content is already available in the HTML when it reaches the browser.
+
+### 2. **Subsequent Navigation (CSR):**
+   - After the initial page load, the JavaScript framework (React, for example) takes over.
+   - When you navigate to another page, the browser doesn't make a full-page reload. Instead, it uses **Client-Side Rendering (CSR)**:
+     - The client (browser) fetches the necessary data or components for the new page via API calls or pre-fetched resources.
+     - The page is dynamically rendered on the client side using React or another framework.
+
+### Why This Happens:
+- The JavaScript framework implements **Client-Side Routing** using libraries like `react-router` or the built-in routing system in frameworks like Next.js.
+- Once the app is hydrated, it transitions into a **Single Page Application (SPA)** mode. This avoids full-page reloads, providing a smoother user experience.
+
+### Example with Next.js:
+- **First Request (SSR):**
+  Visiting `/about` directly from the browser causes the server to render the HTML for `/about` and send it to the browser.
+- **Navigating to Another Page (CSR):**
+  Clicking on a link to `/contact` fetches only the JavaScript or data required for the `/contact` page. The page is rendered dynamically on the client.
+
+### Hybrid Rendering Benefits:
+1. **SSR** ensures:
+   - Faster initial page loads.
+   - SEO benefits (search engines can crawl fully-rendered HTML).
+2. **CSR** ensures:
+   - Faster navigation after the initial load.
+   - No full-page reloads, leading to a more app-like experience.
+
+### Note:
+In some cases, SSR can be triggered for every navigation if the framework is configured that way (e.g., using `getServerSideProps` for every route in Next.js). However, this is less common as it can impact performance compared to CSR for subsequent pages. 
+
+
+
+## **3) Static Rendering (Static Site Generation (SSG) )**
+
+Static rendering refers to the process of generating HTML at build time. This approach pre-renders pages into static HTML files, which can be served quickly without server-side processing. Static rendering is suitable for content that doesn't change frequently.
+
+Key Points:
+
+- `HTML Generation`: The HTML for each page is generated at build time and saved as a static file.
+- `JSON Generation`: Along with the HTML, Next.js generates a JSON file containing the initial props for the page. This JSON is used to hydrate the React components on the client side.
+- `CSS and JavaScript Bundles`: Next.js also generates and optimizes the CSS and JavaScript bundles required for the page.
+
+In Next.js, static rendering can be achieved using:
+
+- `getStaticProps` - This function fetches data at build time and passes it to the page component as props.
+
+- `getStaticPaths` - This function generates static pages for dynamic routes at build time.
+
+- `Static Site Generation (SSG)` - This is the process of generating static HTML pages at build time.
