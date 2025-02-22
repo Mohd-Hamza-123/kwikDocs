@@ -1,13 +1,13 @@
 'use client'
 
-import React from 'react'
+import React, { ReactNode } from 'react'
 import logoutAPI from '@/lib/API/authAPI/logout'
 import { useQuery } from '@tanstack/react-query'
 import getProfile from '@/lib/API/authAPI/profile'
 import { useAppDispatch } from '@/lib/hooks/hooks'
 import { login, logout } from '@/lib/store/features/authSlice'
 
-const InitializationWrapper = ({ children }: any) => {
+const InitializationWrapper = ({ children }: { children: ReactNode }) => {
 
     const dispatch = useAppDispatch();
 
@@ -22,7 +22,7 @@ const InitializationWrapper = ({ children }: any) => {
         queryFn: () => getProfile(),
         staleTime: Infinity
     });
-    // console.log(userProfile)
+
     if (isSuccess) {
         dispatch(login({ userData: userProfile }));
     }
