@@ -6,7 +6,6 @@ import { LoadingPage } from "@/index";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { useAppDispatch } from "@/lib/hooks/hooks";
-import { setDoc } from "@/lib/store/features/docsSlice";
 import { getAllTechnology } from "@/lib/API/techAPI/getAllTech";
 
 export interface I_Image {
