@@ -1,0 +1,49 @@
+---
+title: Incremental Site Generation
+description: Learn about Incremental Static Site Generation
+published: true
+---
+
+## Incremental Static Site Generation (ISG)
+
+Incremental Static Site Generation (ISG) is a feature in Next.js that allows you to update static pages at runtime. This means you can generate new pages on-demand without having to rebuild the entire site. ISG is an extension of Static Site Generation (SSG) that provides more flexibility and control over when and how pages are generated.
+
+```typescript
+export const revalidate = 60; // Revalidate every 60 seconds
+```
+
+- This tells Next.js to regenerate the page every 60 seconds when a new request comes in.
+- The page is updated in the background, ensuring that users get fresh content without rebuilding the entire site.
+
+Example : 
+
+```typescript
+import React from 'react';
+
+export const revalidate = 60 ; // Revalidate every 60 seconds , default of revalidate is false
+export async function generateStaticParams() {
+    const res = await fetch('https://jsonplaceholder.typicode.com/todos')
+    const data = await res.json()
+    return data.map((blog: any) => ({ blogId: String(blog?.id) }))
+}
+ 
+interface pageParams {
+    params: {
+        blogId: string;
+    };
+}
+ 
+const BlogPage = async ({ params }: pageParams) => {
+    const { blogId } = await params;
+    const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${blogId}`)
+    const data = await res.json()
+    return (
+        <>
+            <h1> BlogId: {blogId}</h1>
+            <h2>Title : {data?.title}</h2>
+        <>
+    );
+};
+export default BlogPage;
+```
+
