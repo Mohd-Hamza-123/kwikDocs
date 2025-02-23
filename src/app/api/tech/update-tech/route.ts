@@ -1,9 +1,9 @@
 import connectDB from "@/dbConfig/dbConfig";
 import { NextRequest, NextResponse } from "next/server";
 
-connectDB();
 export async function PUT(request: NextRequest, { params }: any) {
     try {
+        await connectDB();
         const { id } = params;
 
         return NextResponse.json({

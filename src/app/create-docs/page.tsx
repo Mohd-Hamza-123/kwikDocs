@@ -58,7 +58,7 @@ const CreatePage = ({ post }: any) => {
       defaultValues: {
         title: post?.title || "",
         description: post?.description || "",
-        techType: String(post?.techType) || undefined,
+        techType: post?.techType,
         tags: post?.tags || undefined,
       },
     });
@@ -132,6 +132,14 @@ const CreatePage = ({ post }: any) => {
   })
 
   const submit: SubmitHandler<I_FormInputs> = async (data) => {
+    console.log(data)
+    if (!data?.title || !data?.techType) {
+      toast({
+        variant: "destructive",
+        title: "Title and TechType is required"
+      })
+      return
+    }
 
     setBookMark((prevBookmark: any) => {
       const arr = prevBookmark.filter((bookmark: any) =>
@@ -143,7 +151,7 @@ const CreatePage = ({ post }: any) => {
 
     data.tags = tags
 
-    if (!data?.title || !data?.techType) return;
+
 
     if (post) {
       updateDocumentQuery.mutate(data)
@@ -184,8 +192,7 @@ const CreatePage = ({ post }: any) => {
           </Label>
           <Textarea
             id="Title"
-            className="w-[100%] h-[100px]
-              "
+            className="w-[100%] h-[100px]"
             {...register("title", { required: true })}
           />
         </div>
