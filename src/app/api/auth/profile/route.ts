@@ -3,11 +3,11 @@ import getDataFromToken from "@/lib/getDataFromToken";
 import UserModel from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 
-connectDB();
 
 export async function POST(request: NextRequest) {
     try {
-
+        
+        await connectDB();
         const userId = await getDataFromToken(request);
         
         if (!userId) return NextResponse.json(

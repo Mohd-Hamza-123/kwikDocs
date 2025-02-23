@@ -21,6 +21,7 @@ export interface I_Language {
 }
 
 const Technologies = () => {
+  
   const router = useRouter();
   const dispatch = useAppDispatch();
 

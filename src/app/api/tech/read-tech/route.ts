@@ -7,9 +7,12 @@ export const fetchCache = 'force-no-store';  // This prevents caching
 export const revalidate = 0; // if 60 then data will be cached for 60 seconds
 
 export async function GET() {
+    
     try {
         await connectDB();
+
         const allTech = await TechModel.find({}, { techType: 1, _id: 0 }).distinct('techType').exec();
+
         console.log(allTech);
 
         if (!Array.isArray(allTech) || allTech?.length <= 0) {
