@@ -64,3 +64,7 @@ Client Components run in the browser. Use them when your component:
 5. **Depends on Real-Time Updates:**
    - Uses WebSockets, subscriptions, or polling for live data (e.g., chat apps, dashboards).
 ---
+
+<Callout>
+If you mark a parent component with "use client", all of its child components automatically inherit the client-side behavior, regardless of whether "use client" is explicitly specified in the child components or not.
+</Callout>
