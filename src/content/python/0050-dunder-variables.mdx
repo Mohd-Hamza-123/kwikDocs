@@ -1,0 +1,26 @@
+---
+title: Dunder Variables
+description: Special Variables and Attributes in Python
+published: true
+---
+
+## 1) **`__name__`**
+
+Python module (file) has a special built-in variable called `__name__`.
+
+If the script is being run directly (not imported). The value of `__name__` is set to `__main__`.
+
+```python
+# script.py
+def func():
+    print("variable : ",__name__)
+func() # output --> variable :  __main__
+```
+
+If the script is being imported, the value of __name__ is set to the name of the script.
+
+```python
+# another_script.py
+from script import func
+func() # output --> variable :  script
+```
