@@ -1,0 +1,67 @@
+---
+title: React Folder Structure
+description: ''
+published: true
+---
+
+### Folder Structure
+```
+my-vite-project/
+├── node_modules/
+├── public/
+├── src/
+│   ├── App.css
+│   ├── App.jsx
+│   ├── index.css
+│   ├── main.jsx
+├── .gitignore
+├── .eslintrc.cjs      # ESLint configuration (optional)
+├── index.html
+├── package.json
+├── package-lock.json
+├── vite.config.js
+├── README.md
+```
+
+### Explanation of Files and Folders
+
+#### **1. `node_modules/`**
+- Contains all the dependencies and packages installed via npm or yarn.
+- Managed by the `package.json` file.
+
+#### **2. `public/`**
+- Used for static assets like images, fonts, and other files that don't require processing by Vite.
+- Files placed here can be directly accessed via `/filename` in your app.
+
+#### **3. `src/`**
+The source folder contains your React application code. It typically includes:
+- **`App.jsx`**  
+  The main application component. This is where the initial structure of your app is defined.
+  
+- **`App.css`**  
+  CSS file for styling your `App.jsx` component.
+
+- **`index.css`**  
+  Global CSS file for defining styles that apply to the entire app.
+
+- **`main.jsx`**  
+  The entry point of your app. This file renders the `App` component inside the root DOM element (in `index.html`) using React DOM.
+
+#### **4. `.gitignore`**
+- Specifies files and directories that Git should ignore, such as `node_modules/` or `.env`.
+
+#### **5. `index.html`**
+- The single HTML file used as the base template for the app.
+- React components are rendered into the `<div id="root"></div>` in this file.
+
+#### **6. `package.json`**
+- Lists the project's dependencies, scripts, and metadata.
+- Scripts like `dev`, `build`, and `serve` are defined here for development and production tasks.
+
+#### **7. `vite.config.js`**
+- Configuration file for Vite.  
+- Contains settings for plugins, paths, and server configuration.
+
+#### **8. `README.md`**
+- A markdown file that provides basic information about the project and instructions.
+---
