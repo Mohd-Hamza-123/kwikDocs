@@ -3,14 +3,14 @@
 import "@/styles/mdx.css"
 import Link from 'next/link'
 import { posts } from '#site/content'
-import React, { useEffect, useMemo, useState } from 'react'
 import { notFound } from 'next/navigation'
+import React, { useEffect, useMemo, useState } from 'react'
 import PostItems from '@/components/PostItems'
+import { Button } from "@/components/ui/button"
 import { MdOutlineZoomOutMap } from "react-icons/md";
 import { MDXContent } from '@/components/mdx-component';
 import { PostItemsProps } from '@/components/PostItems';
 import { useResponsiveContext } from "@/context/CSS-Context";
-import { Button } from "@/components/ui/button"
 
 const DocPage = ({ params }: { params: { category: string } }) => {
 
@@ -89,22 +89,22 @@ const DocPage = ({ params }: { params: { category: string } }) => {
           <MDXContent code={post?.body} />
         </article>}
 
-        <div className="px-4 lg:px-7 py-2 flex justify-between gap-2">
-          <Button 
-          variant={'outline'} 
-          className="flex flex-col py-10 w-1/2 lg:w-1/3 text-sm lg:text-base"
-          onClick={()=> renderPost(previousPost)}
+        <div className="px-4 lg:px-7 py-2 flex justify-between gap-2 flex-col lg:flex-row">
+          <Button
+            variant={'outline'}
+            className="flex flex-col py-10 w-full lg:w-1/3 text-sm lg:text-base"
+            onClick={() => renderPost(previousPost)}
           >
             <span className="font-extralight">Previous</span>
-            <p className="font-bold text-lg">{previousPost?.title}</p>
+            <p className="font-bold lg:text-lg text-sm text-wrap text">{previousPost?.title}</p>
           </Button>
-          <Button 
-          variant={'outline'} 
-          className="flex flex-col py-10 w-1/2 lg:w-1/3 text-sm lg:text-base"
-          onClick={()=> renderPost(nextPost)}
+          <Button
+            variant={'outline'}
+            className="flex flex-col py-10 w-full lg:w-1/3 lg:text-base"
+            onClick={() => renderPost(nextPost)}
           >
             <span className="font-extralight">Next</span>
-            <p className="font-bold text-lg">{nextPost?.title}</p>
+            <p className="font-bold lg:text-lg text-sm text-wrap">{nextPost?.title}</p>
           </Button>
         </div>
 
