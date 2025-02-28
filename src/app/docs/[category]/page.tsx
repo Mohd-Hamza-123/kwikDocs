@@ -3,24 +3,25 @@
 import "@/styles/mdx.css"
 import Link from 'next/link'
 import { posts } from '#site/content'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { notFound } from 'next/navigation'
 import PostItems from '@/components/PostItems'
 import { MdOutlineZoomOutMap } from "react-icons/md";
 import { MDXContent } from '@/components/mdx-component';
 import { PostItemsProps } from '@/components/PostItems';
 import { useResponsiveContext } from "@/context/CSS-Context";
+import { Button } from "@/components/ui/button"
 
 const DocPage = ({ params }: { params: { category: string } }) => {
 
   const { category } = params
 
-  const displayPosts = useMemo(() => {
-    return posts?.filter((post) => post?.slug.indexOf(category) === 0 && post?.published)
-  }, [posts])
+  const displayPosts = useMemo(() => posts?.filter((post) => post?.slug.indexOf(category) === 0 && post?.published)
+    , [posts])
 
   const [post, setPost] = useState<PostItemsProps | null>(displayPosts[0] || null);
-
+  const [nextPost, setNextPost] = useState(displayPosts[1] || null);
+  const [previousPost, setPreviousPost] = useState(displayPosts[displayPosts?.length - 1] || null)
   const [activeSlug, setActiveSlug] = useState(displayPosts[0]?.slug || '')
 
   const {
@@ -28,7 +29,13 @@ const DocPage = ({ params }: { params: { category: string } }) => {
     setIsDocIndexOpen
   } = useResponsiveContext();
 
-
+  useEffect(() => {
+    const index = post && displayPosts?.indexOf(post)
+    console.log(index)
+    if (!index) return
+    setNextPost(displayPosts[index + 1] || null)
+    setPreviousPost(displayPosts[index - 1] || null)
+  }, [post])
 
   const renderPost = (post: PostItemsProps) => {
     setPost(post)
@@ -81,6 +88,25 @@ const DocPage = ({ params }: { params: { category: string } }) => {
           <hr className="my-4" />
           <MDXContent code={post?.body} />
         </article>}
+
+        <div className="px-4 lg:px-7 py-2 flex justify-between gap-2">
+          <Button 
+          variant={'outline'} 
+          className="flex flex-col py-10 w-1/2 lg:w-1/3 text-sm lg:text-base"
+          onClick={()=> renderPost(previousPost)}
+          >
+            <span className="font-extralight">Previous</span>
+            <p className="font-bold text-lg">{previousPost?.title}</p>
+          </Button>
+          <Button 
+          variant={'outline'} 
+          className="flex flex-col py-10 w-1/2 lg:w-1/3 text-sm lg:text-base"
+          onClick={()=> renderPost(nextPost)}
+          >
+            <span className="font-extralight">Next</span>
+            <p className="font-bold text-lg">{nextPost?.title}</p>
+          </Button>
+        </div>
 
       </section>
 
