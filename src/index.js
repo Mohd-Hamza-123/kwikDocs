@@ -9,13 +9,14 @@ import ImageUpload from "./components/ImageUpload"
 import LoadingPage from "./components/LoadingPage"
 import Spinner from "./components/Spinner/Spinner"
 import Sidebar from "./components/Sidebar/Sidebar"
-import DocsList from "./components/DocsRead/DocsList"
-import DocContent from "./components/DocsRead/DocContent"
+import DocContent from "./components/DocsRead/ShowPost.tsx"
 import Technologies from "./components/Content/Languages"
 import RelatedDocs from "./components/DocsRead/RelatedDocs"
 import VerifyEmailContent from "./components/VerifyEmailContent.tsx"
 import PostItems from "./components/PostItems"
 import WelcomeScrollDown from "./components/WelcomeScollDown"
+import FilteredPostList from "./components/DocsRead/filtered-post-list.tsx"
+import ShowPost from "./components/DocsRead/ShowPost.tsx"
 
 
-export { WelcomeScrollDown, VerifyEmailContent, Welcome, Technologies, Navbar, RTE, MultiSelect, ImageUpload, DocContent, RelatedDocs, SearchBar, LoadingPage, Sidebar, Prism, Spinner, Footer, DocsList, PostItems }
+export { WelcomeScrollDown, VerifyEmailContent, Welcome, Technologies, Navbar, RTE, MultiSelect, ImageUpload, DocContent, RelatedDocs, SearchBar, LoadingPage, Sidebar, Prism, Spinner, Footer, PostItems , FilteredPostList , ShowPost }

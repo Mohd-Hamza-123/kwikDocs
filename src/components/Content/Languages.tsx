@@ -1,11 +1,13 @@
 "use client";
-import React from "react";
+
 import Image from "next/image";
+import { svgIcons } from "../icons";
 import { Button } from "../ui/button";
 import { LoadingPage } from "@/index";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { useAppDispatch } from "@/lib/hooks/hooks";
+import React, { useEffect, useRef, useState } from "react";
 import { getAllTechnology } from "@/lib/API/techAPI/getAllTech";
 
 export interface I_Image {
@@ -21,9 +23,14 @@ export interface I_Language {
 }
 
 const Technologies = () => {
-  
+
+  const div = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [showChatIcon, setShowChatIcon] = useState(false);
+
+  // console.log(showChatIcon)
 
   const {
     data: technology = [],
@@ -39,7 +46,7 @@ const Technologies = () => {
     staleTime: Infinity,
   });
 
-  const handleLearn = (tech : any) => {
+  const handleLearn = (tech: any) => {
     console.log(tech)
     const name = tech?.name?.toLowerCase()
     console.log(name)
@@ -48,13 +55,35 @@ const Technologies = () => {
     // dispatch(setDoc({ document: null }));
   };
 
+  useEffect(() => {
+    handleScroll()
+
+    div.current?.addEventListener("scroll", handleScroll)
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
+
+  const handleScroll = () => {
+    console.log(window.scrollY)
+    if (window.scrollY > 200) {
+      setShowChatIcon(true)
+    } {
+      setShowChatIcon(false)
+    }
+  }
+
   if (technologyPending) return <LoadingPage />;
 
   if (technologySuccess)
     return (
-      <div className="dark:bg-bgDark bg-gray-100">
+      <div ref={div} className="dark:bg-bgDark bg-gray-100">
+        {!showChatIcon && <Button variant='outline' className="rounded-full w-[50px] h-[50px] fixed bottom-5 right-6">
+          <svgIcons.message className="dark:fill-white" />
+        </Button>}
         {technology?.map((techObj: any) => {
-        
           return (
             <section key={techObj?.techType}>
               <h1 className="text-2xl lg:text-3xl text-center capitalize font-cursive">
@@ -63,9 +92,8 @@ const Technologies = () => {
               {techObj?.technologies?.map((tech: any, index: number) => (
                 <div
                   key={tech?._id + index}
-                  className={`dark:bg-containerDark rounded-lg bg-white shadow-md my-6 dark:text-white p-5 w-[94%] lg:w-[70%] mx-auto flex flex-col lg:flex-row ${
-                    (index + 1) % 2 === 0 ? "lg:flex-row-reverse" : ""
-                  }`}
+                  className={`dark:bg-containerDark rounded-lg bg-white shadow-md my-6 dark:text-white p-5 w-[94%] lg:w-[70%] mx-auto flex flex-col lg:flex-row ${(index + 1) % 2 === 0 ? "lg:flex-row-reverse" : ""
+                    }`}
                 >
                   <div className="lg:w-[40%] w-full flex justify-center items-center">
                     <Image

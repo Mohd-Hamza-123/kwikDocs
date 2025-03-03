@@ -1,14 +1,13 @@
 import React from "react";
+import { WelcomeScrollDown } from '..';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { WelcomeScrollDown } from '..';
 
 const Welcome = () => {
 
     return (
-        <div className="bg-gray-100 dark:bg-bgDark h-[88vh] flex flex-col justify-center items-center">
-
-            <div className="bg-white dark:bg-containerDark dark:border-gray-700 shadow-lg lg:mx-auto mx-3 max-w-4xl rounded-lg p-4 lg:p-8 text-center w-[95%] lg:w-2/3 h-[57%] flex flex-col justify-around">
+        <div className="bg-gray-100 dark:bg-bgDark h-[88vh] flex flex-col justify-center items-center border">
+            <div className="bg-white dark:bg-containerDark dark:border-gray-700 shadow-lg lg:mx-auto mx-3 max-w-4xl rounded-lg p-4 lg:p-8 text-center w-[95%] lg:w-full h-[57%] flex flex-col justify-around">
                 <h2 className="text-2xl lg:text-4xl font-extrabold text-gray-800 dark:text-white mb-4">
                     Learn to Code
                 </h2>
