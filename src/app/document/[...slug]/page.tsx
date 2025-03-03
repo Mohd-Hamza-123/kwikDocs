@@ -28,7 +28,7 @@ export default async function PostPage({ params }: PostPageProps) {
         notFound();
     }
 
-    return <article className="container py-6 prose dark:prose-invert max-w-3xl mx-auto">
+    return <article className="container py-6 prose dark:prose-invert max-w-[100dvw] lg:max-w-[75dvw] mx-auto">
         <h1 className="mb-2">{post.title}</h1>
         {post.description ? (
             <p className="text-xl mt-0 text-muted-foreground">{post.description}</p>

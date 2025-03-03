@@ -1,15 +1,8 @@
 'use client'
-import { useResponsiveContext } from '@/context/CSS-Context';
 import React from 'react'
+import { useResponsiveContext } from '@/context/CSS-Context';
+import { PostItemsProps } from '@/lib/store/features/postSlice';
 
-export interface PostItemsProps {
-    slug: string;
-    title: string;
-    description?: string | undefined;
-    slugAsParams: string;
-    body: string;
-    published: boolean
-}
 
 const PostItems = ({
     post,
