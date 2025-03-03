@@ -7,7 +7,7 @@ export default function DocPage({ params }: { params: { category: string } }) {
   const { category } = params
 
   return (
-    <div className="flex flex-col-reverse lg:flex-row relative h-[90vh] overflow-x-hidden w-full justify-between">
+    <div className="flex flex-col-reverse lg:flex-row relative h-[91vh] overflow-x-hidden w-full justify-between">
 
       <FilteredPostList category={category} />
 

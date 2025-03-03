@@ -30,7 +30,7 @@ const FilteredPostList = ({ category }: { category: string }) => {
   }
 
   return (
-    <section className={`w-[100%] lg:w-[20%] border border-r-3 max-h-[90vh] overflow-y-scroll absolute lg:sticky top-0 bg-slate-50 dark:bg-bgDark z-20 py-2 dark:border-gray-700 lg:block ${isDocIndexOpen ? "block" : "hidden"} lg:block`}>
+    <section className={`w-[100%] lg:w-[20%] border border-r-3 max-h-[91vh] overflow-y-scroll absolute lg:sticky top-0 bg-slate-50 dark:bg-bgDark z-20 py-2 dark:border-gray-700 lg:block ${isDocIndexOpen ? "block" : "hidden"} lg:block`}>
       <p className="mt-4 text-center font-semibold capitalize">{category}</p>
 
       <ul className="flex flex-col gap-1 mt-5">
