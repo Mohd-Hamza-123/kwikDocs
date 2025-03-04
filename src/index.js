@@ -17,6 +17,6 @@ import PostItems from "./components/PostItems"
 import WelcomeScrollDown from "./components/WelcomeScollDown"
 import FilteredPostList from "./components/DocsRead/filtered-post-list.tsx"
 import ShowPost from "./components/DocsRead/ShowPost.tsx"
-
-
-export { WelcomeScrollDown, VerifyEmailContent, Welcome, Technologies, Navbar, RTE, MultiSelect, ImageUpload, DocContent, RelatedDocs, SearchBar, LoadingPage, Sidebar, Prism, Spinner, Footer, PostItems , FilteredPostList , ShowPost }
+import CodeEditor from "./components/Code-Editor/CodeEditor.tsx"
+import LanguageSelector from "./components/Code-Editor/LanguageSelector.tsx"
+export { WelcomeScrollDown, VerifyEmailContent, Welcome, Technologies, Navbar, RTE, MultiSelect, ImageUpload, DocContent, RelatedDocs, SearchBar, LoadingPage, Sidebar, Prism, Spinner, Footer, PostItems, FilteredPostList, ShowPost, CodeEditor, LanguageSelector }

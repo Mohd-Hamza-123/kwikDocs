@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
 import "./Spinner.css";
+import React, { forwardRef } from "react";
 
 const Spinner = ({ className = "" }, ref: any) => {
   return (
