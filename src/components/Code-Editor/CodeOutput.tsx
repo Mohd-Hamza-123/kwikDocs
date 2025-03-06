@@ -14,7 +14,7 @@ import { LANGUAGE_VERSIONS } from '@/constant'
 
 export default function CodeOutput({
     codeValue,
-    activeLanguage }: { codeValue: string, activeLanguage: keyof typeof LANGUAGE_VERSIONS }) {
+    activeLanguage }: { codeValue: string, activeLanguage: any }) {
 
     const [output, setOutput] = useState(null)
 

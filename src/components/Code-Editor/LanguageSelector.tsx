@@ -8,9 +8,9 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from '../ui/button'
-import { LANGUAGE_VERSIONS } from '@/constant'
+import { CODE_SNIPPETS, LANGUAGE_VERSIONS } from '@/constant'
 
-export default function LanguageSelector({ activeLanguage, onLanguageChange }: { activeLanguage: string, onLanguageChange: (language: string) => void }) {
+export default function LanguageSelector({ activeLanguage, onLanguageChange }: { activeLanguage: string, onLanguageChange: (language: keyof typeof CODE_SNIPPETS) => void }) {
     const languages = Object.entries(LANGUAGE_VERSIONS)
     return (
         <DropdownMenu>
@@ -20,7 +20,7 @@ export default function LanguageSelector({ activeLanguage, onLanguageChange }: {
             <DropdownMenuContent>
                 <DropdownMenuLabel>Select Language</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                {languages?.map(([language, version]) => (
+                {languages?.map(([language, version]: any) => (
                     <DropdownMenuItem
                         key={language}
                         onClick={() => onLanguageChange(language)}
