@@ -49,7 +49,7 @@ const Navbar = () => {
 
 
     return (
-        <header className='sticky top-0 border-b border-border bg-background/95 backdrop:blur supports-[backdrop-filter]:bg-background/60'>
+        <header className='sticky top-0 border-b border-border bg-background/95 backdrop:blur supports-[backdrop-filter]:bg-background/60 z-50'>
             <nav className="flex justify-between items-center dark:bg-bgDark shadow-xl h-[9dvh] px-3 lg:px-7">
                 <Link href={`/`}>
                     <figure className='flex gap-1 items-center cursor-pointer'>
