@@ -13,7 +13,7 @@ const ShowPost = ({ category }: { category: string }) => {
     const dispatch = useAppDispatch()
     const post = useAppSelector((state) => state.post.post);
     const displayPosts = useMemo(() => posts?.filter((post) => post?.slug.indexOf(category) === 0 && post?.published)
-        , [posts])
+        , [posts,category])
 
     const [nextPost, setNextPost] = useState(displayPosts[1] || null);
     const [previousPost, setPreviousPost] = useState(displayPosts[displayPosts?.length - 1] || null)

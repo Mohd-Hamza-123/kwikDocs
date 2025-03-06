@@ -4,7 +4,7 @@ import { CODE_SNIPPETS, LANGUAGE_VERSIONS } from '@/constant'
 import { CodeOutput, LanguageSelector } from '@/index'
 import React, { useState } from 'react'
 
-export default function page() {
+export default function Playground() {
 
   const [codeValue, setCodeValue] = useState('')
   const [activeLanguage, setActiveLanguage] = useState('javascript')
