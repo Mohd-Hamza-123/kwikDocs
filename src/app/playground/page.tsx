@@ -9,10 +9,10 @@ export default function Playground() {
   const [codeValue, setCodeValue] = useState('')
   const [activeLanguage, setActiveLanguage] = useState('javascript')
 
-  const onLanguageChange = (language: string) => {
+  const onLanguageChange = (language: keyof typeof CODE_SNIPPETS) => {
     console.log(language)
     setActiveLanguage(language);
-    const code = CODE_SNIPPETS[language] as any
+    const code = CODE_SNIPPETS[language]
     setCodeValue((prev: string) => code)
   }
 
