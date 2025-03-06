@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from '@/components/ui/button'
 import { useForm } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
-import { registerUser } from '@/lib/API/authAPI/register'
+import { registerUser } from '@/lib/API/Auth/register'
 import { useAppDispatch } from '@/lib/hooks/hooks'
 import { overlayLoadingIsFalseReducer, overlayLoadingIsTrueReducer } from '@/lib/store/features/overlayLoaderSlice'
 import { toast } from '@/hooks/use-toast'

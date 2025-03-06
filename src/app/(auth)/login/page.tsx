@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from '@/hooks/use-toast'
 import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/input'
-import LoginUser from '@/lib/API/authAPI/login'
+import LoginUser from '@/lib/API/Auth/login'
 import { Button } from '@/components/ui/button'
 import { useAppDispatch } from '@/lib/hooks/hooks'
 import { useMutation } from '@tanstack/react-query'
@@ -15,8 +15,8 @@ import {
     overlayLoadingIsTrueReducer,
     overlayLoadingIsFalseReducer,
 } from '@/lib/store/features/overlayLoaderSlice'
-import getProfile from '@/lib/API/authAPI/profile'
-import logoutAPI from '@/lib/API/authAPI/logout'
+import getProfile from '@/lib/API/Auth/profile'
+import logoutAPI from '@/lib/API/Auth/logout'
 import { logout, login } from '@/lib/store/features/authSlice'
 
 

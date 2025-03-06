@@ -14,7 +14,7 @@ import { svgIcons } from "../icons";
 import { toast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { IoMdLogOut } from "react-icons/io";
-import logoutAPI from '@/lib/API/authAPI/logout';
+import logoutAPI from '@/lib/API/Auth/logout';
 import { logout } from '@/lib/store/features/authSlice';
 import { useTypicalContext } from '@/context/Typical-Context'
 import { useAppDispatch, useAppSelector } from '@/lib/hooks/hooks';

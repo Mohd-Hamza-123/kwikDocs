@@ -6,7 +6,7 @@ import { useAppDispatch } from '@/lib/hooks/hooks';
 import React, { useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { login } from '@/lib/store/features/authSlice';
-import { verifyEmail } from '@/lib/API/authAPI/verifyEmail';
+import { verifyEmail } from '@/lib/API/Auth/verifyEmail';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
   overlayLoadingIsTrueReducer,

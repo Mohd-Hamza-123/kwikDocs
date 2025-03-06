@@ -1,9 +1,9 @@
 'use client'
 
 import React, { ReactNode } from 'react'
-import logoutAPI from '@/lib/API/authAPI/logout'
+import logoutAPI from '@/lib/API/Auth/logout'
 import { useQuery } from '@tanstack/react-query'
-import getProfile from '@/lib/API/authAPI/profile'
+import getProfile from '@/lib/API/Auth/profile'
 import { useAppDispatch } from '@/lib/hooks/hooks'
 import { login, logout } from '@/lib/store/features/authSlice'
 
