@@ -17,3 +17,31 @@ def greet(name):
 message = greet("Hamza")
 print(message)
 ```
+
+#### 1) Returning Multiple Values
+
+Python functions can return multiple values using tuples. For example:
+
+```python
+def get_user_info():
+    name = "Hamza"
+    age = 25
+    return name, age  # Returns a tuple
+
+# Unpacking the tuple
+user_name, user_age = get_user_info()
+print(user_name)  # Output: Hamza
+print(user_age)   # Output: 25
+```
+
+#### 2) Default Arguments
+
+You can provide default values for function arguments. If a value is not provided for an argument, the default value is used.
+
+```python
+def greet(name="Hamza"):
+    return f"Hello, {name}!"
+
+print(greet())      # Output: Hello, Hamza!
+print(greet("Ali")) # Output: Hello, Ali!
+```
