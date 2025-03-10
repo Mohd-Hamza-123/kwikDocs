@@ -45,3 +45,40 @@ def greet(name="Hamza"):
 print(greet())      # Output: Hello, Hamza!
 print(greet("Ali")) # Output: Hello, Ali!
 ```
+
+#### 3) Lambda Function
+
+Lambda functions are small, anonymous functions defined using the `lambda` keyword. They can have any number of arguments but only one expression.
+
+```python
+add = lambda x, y: x + y
+print(add(5, 3))  # Output: 8
+```
+
+#### 4) *args 
+
+The `*args` parameter allows a function to accept any number of positional arguments. The arguments are passed as a tuple.
+
+```python
+def add(*args):
+    print(args)
+    return sum(args)
+
+s1 = add(1,2,3,3) 
+print(s1)
+s2 = add(1,2,3,3,4,5,6,7,8,9,10)
+print(s2)
+```
+
+#### 5) **kwargs
+
+The `**kwargs` parameter allows a function to accept any number of keyword arguments. The arguments are passed as a dictionary.
+
+```python
+def print_info(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+print_info(name="Hamza", age=22, country="india")
+print_info(name="Ali", age=30)
+```
