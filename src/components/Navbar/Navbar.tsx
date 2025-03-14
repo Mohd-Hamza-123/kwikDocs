@@ -1,12 +1,15 @@
 'use client'
-import React from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import { svgIcons } from '../icons';
 import { Button } from '../ui/button';
-import { RxHamburgerMenu } from "react-icons/rx";
-import { IoListCircleOutline } from "react-icons/io5";
+import { useTheme } from 'next-themes';
 import { usePathname } from 'next/navigation';
+import { RxHamburgerMenu } from "react-icons/rx";
+import { siteConfig } from '../../../config/site';
+import { IoListCircleOutline } from "react-icons/io5";
+import { MdOutlineNightlightRound } from 'react-icons/md';
 import { useResponsiveContext } from '@/context/CSS-Context';
 import { useTypicalContext } from '@/context/Typical-Context';
 import {
@@ -15,17 +18,16 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { MdOutlineNightlightRound } from 'react-icons/md';
-import { useTheme } from 'next-themes'
-import { siteConfig } from '../../../config/site';
 
 
 const Navbar = () => {
 
-    const { setTheme: setNextTheme } = useTheme();
     const pathName = usePathname();
-    const isDocIndexVisible = pathName.includes('/read-doc') || pathName.includes("/docs");
+    const { setTheme: setNextTheme, theme } = useTheme();
+
+
     const hidePaths = ['/login', '/signup', `/forgot-password`];
+    const isDocIndexVisible = pathName.includes('/read-doc') || pathName.includes("/docs");
 
     const {
         isSideBarOpen,
@@ -38,19 +40,18 @@ const Navbar = () => {
     } = useResponsiveContext();
 
 
-    if (hidePaths.includes(pathName)) return null;
-
-    const lightMode = () => setNextTheme("light")
-
-
     const darkMode = () => setNextTheme('dark')
-
+    const lightMode = () => setNextTheme("light")
     const systemMode = () => setNextTheme("system")
+    const sideBarToggle = () => setIsSideBarOpen((prev) => !prev)
+    const docIndexToggle = () => setIsDocIndexOpen((prev) => !prev)
 
+    if (hidePaths.includes(pathName)) return null;
 
     return (
         <header className='sticky top-0 border-b border-border bg-background/95 backdrop:blur supports-[backdrop-filter]:bg-background/60 z-50'>
             <nav className="flex justify-between items-center dark:bg-bgDark shadow-xl h-[9dvh] px-3 lg:px-7">
+
                 <Link href={`/`}>
                     <figure className='flex gap-1 items-center cursor-pointer'>
                         <Image
@@ -65,20 +66,22 @@ const Navbar = () => {
                         </figcaption>
                     </figure>
                 </Link>
+
                 <div className="space-x-3 lg:space-x-6 text-gray-700 flex items-center">
 
                     <div
                         className={`block lg:hidden ${isDocIndexVisible ? '' : 'hidden'}`}
                     >
-                        <IoListCircleOutline className={`text-4xl ${isDocIndexOpen ? "text-indigo-600" : ""}`}
-                            onClick={() => setIsDocIndexOpen((prev : boolean) => !prev)}
+                        <IoListCircleOutline
+                            className={`text-4xl ${isDocIndexOpen ? "text-indigo-600" : ""}`}
+                            onClick={docIndexToggle}
                         />
                     </div>
 
 
                     <DropdownMenu>
                         <DropdownMenuTrigger>
-                            {"dark" === "dark" ? <MdOutlineNightlightRound className={"h-6 w-6"} /> : <svgIcons.light className="w-6 h-6" />}
+                            {theme === "dark" ? <MdOutlineNightlightRound className={"h-6 w-6 fill-white"} /> : <svgIcons.light className="w-6 h-6 fill-black" />}
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
                             <DropdownMenuItem onClick={lightMode}>Light Mode</DropdownMenuItem>
@@ -89,8 +92,9 @@ const Navbar = () => {
 
 
                     <Button
-                        onClick={() => setIsSideBarOpen((prev) => !prev)}
-                        variant={'outline'} className="hover:text-indigo-500"
+                        onClick={sideBarToggle}
+                        variant={'outline'}
+                        className="hover:text-indigo-500"
                     >
                         <RxHamburgerMenu className='text-2xl' />
                     </Button>
