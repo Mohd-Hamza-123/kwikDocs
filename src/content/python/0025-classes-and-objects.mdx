@@ -150,3 +150,30 @@ print(person1.showName()) # Mohd Hamza
 print(Person.name) # Not Set
 ```
 
+### 4) `isinstance` method
+
+
+```python
+class Animal:
+    def __init__(self,name,lifeSpan):
+        self.name = name
+        self.lifeSpan = lifeSpan
+
+class Shape:
+    def __init__(self,name):
+        self.name = name
+ 
+dog = Animal('Dog',20) 
+
+print(isinstance(dog,Animal)) # True
+print(isinstance(dog,Shape)) # False
+
+cat = Animal('Cat',15) 
+
+print(isinstance(cat,Animal)) # True
+print(isinstance(cat,isinstance)) # False
+```
+
+<Callout>
+An instance of a subclass is also considered an instance of its parent class in Python, provided the subclass directly or indirectly inherits from the parent class.
+</Callout>
