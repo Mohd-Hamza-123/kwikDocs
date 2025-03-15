@@ -1,0 +1,50 @@
+---
+title: Decorators
+description: ''
+published: true
+---
+
+Decorator is a way to modify the behavior of a function or method without changing its source code.
+
+### 1) `@Property` Decorator
+
+- `@property` decorator transforms a method into a `read-only property`.
+- It allows you to access a method as if it were an attribute.
+- We can add additional logic when read,write and delete attributes
+- It gives getter, setter and deleter method.
+
+```python
+class User:
+
+    def __init__(self, username):
+        self.__username = username  # Private attribute
+
+    @property
+    def username(self):  # Getter with a meaningful name
+        return f"My username is {self.__username}"
+
+    @username.setter
+    def username(self, new_username):  # Setter with a meaningful name
+        if not new_username: 
+            raise ValueError("Username cannot be empty.")
+        self.__username = new_username
+
+
+# Create a User instance
+user = User('mohd-hamza')
+
+# Use the getter to retrieve the username
+print(user.username)  # Output: My username is mohd-hamza
+
+# Attempt to directly modify the private attribute (creates a new attribute instead)
+user.__username = 'Hello'
+
+# The getter still accesses the original private attribute
+print(user.username)  # Output: My username is mohd-hamza
+
+# Use the setter to update the username
+user.username = 'hamza'
+
+# Confirm the update
+print(user.username)  # Output: My username is hamza
+```
