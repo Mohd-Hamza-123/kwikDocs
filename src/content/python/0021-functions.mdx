@@ -82,3 +82,20 @@ def print_info(**kwargs):
 print_info(name="Hamza", age=22, country="india")
 print_info(name="Ali", age=30)
 ```
+
+#### 6) Passing argument to another function
+
+Use `*args` & `**kwargs` to pass arguments to another function.
+
+```python
+def sum_values(*args):
+    print(args)
+    print(*args)
+    print('sum',sum(args))
+    
+def display_sum(*args):
+    sum_values(*args)
+
+display_sum(1, 2, 3, 4, 5)
+
+```
