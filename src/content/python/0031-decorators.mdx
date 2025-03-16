@@ -4,7 +4,63 @@ description: ''
 published: true
 ---
 
-Decorator is a way to modify the behavior of a function or method without changing its source code.
+Decorator is a way to modify the behavior of a function or method without changing its source code. 
+
+### Custom Decorator 
+
+- These are user-defined decorators
+- A custom decorator is essentially a function that takes another function as an argument and returns a new function with additional functionality.
+- When you use a decorator, it replaces the original function definition with whatever the decorator function returns. 
+
+Eg 1. Basic Custom Decorator
+
+```python showLineNumbers {8}
+def sayHello(func):
+    def wrapper():
+        print("Function start - ")
+        func()
+        print('Function End - ')
+    return wrapper 
+
+@sayHello  # It is Equivalent to: greetFunc = sayHello(greetFunc)
+def greetFunc():
+    print('Welcome to python')
+greetFunc() 
+# output :
+# Function start - 
+# Welcome to python
+# Function End -
+```
+
+Eg 2. Decorator that measures and prints the execution time of a function.
+
+```python
+import time 
+
+def measureTime(func):
+    def wrapper(*args,**kwargs):
+        startTime = time.time()
+        func(*args,**kwargs)
+        endTime = time.time()
+        # print("total time",endTime-startTime)
+        return endTime - startTime
+
+    return wrapper
+
+@measureTime # Walk = measueTime(Walk) or wrapper
+def Walk(n):
+    print("walk start")
+    time.sleep(n)
+    print("walk End")
+
+total_time = Walk(5)
+print('time taken : ',total_time)
+```
+---
+
+### Built-In Decorator 
+
+- These are decorators provided by Python itself. 
 
 ### 1) `@Property` Decorator
 
