@@ -1,0 +1,110 @@
+---
+title: Initializing Repo
+description: "Initializing and cloning repositories"
+published: true
+---
+
+### Initializing an Existing Directory as a Git Repository
+
+To initialize a directory as a Git repository, use the following command:
+
+```bash
+git init
+```
+
+- This will create a hidden `.git` directory in the current directory and initialize the repository.
+- The `.git` directory contains all the metadata, configuration, and history of the repository.
+- It tracks changes, branches, commits, and repository settings.
+
+To view the hidden `.git` directory, use the following command:
+
+```bash
+Get-ChildItem -Force
+```
+
+Initially, any files in the directory are untracked.
+
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1742306707/Documentarium/Git/ympli6mkzhpkca2rjhmu.png" alt="Untracked File" />
+
+### Adding Files to Version Control
+
+To track a file, use the following command:
+
+```bash
+git add <FILE_PATH>
+```
+
+After the file is tracked:
+
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1742307105/Documentarium/Git/bvdgdaf3wu3f0j9ertrm.png" alt="Tracked File" />
+
+## Viewing Changes with `git diff`
+
+The `git diff` command shows differences between various states of the repository. It helps developers review changes.
+
+### Usage
+
+```bash
+git diff
+```
+
+If the `git diff` output continues to display in the terminal (using a pager like `less`), press `q` to exit.
+
+To bypass the pager and display the output directly, use:
+
+```bash
+git --no-pager diff
+```
+
+### Example Output
+
+```plaintext
+PS E:\Rough\git-tutorial> git --no-pager diff
+warning: in the working copy of 'main.py', CRLF will be replaced by LF the next time Git touches it
+diff --git a/main.py b/main.py
+index d93a136..5fa4abc 100644
+--- a/main.py
++++ b/main.py
+@@ -1,5 +1,7 @@
+# tracking is enabled by git for this file
+-print("Hello World")
+-
+
+def newFunction():
+-    print("New Function")
+\ No newline at end of file
++    print("Tracking is enabled")
++    hello = "Hello World"
++    print(hello)
++
++newFunction()
+\ No newline at end of file
+```
+
+## Adding All Files to Version Control
+
+To add all files in the current directory to version control, use the following command:
+
+```bash
+git add .
+```
+
+### Example
+
+**Before Tracking:**
+
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1742309641/Documentarium/Git/qb0emmu9mevzsedwlr2n.png" alt="Untracked File" />
+
+**After Tracking:**
+
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1742310396/Documentarium/Git/t8ekz04ygdcffe0tcjkp.png" alt="Tracked File" />
+
+### Removing Files from Version Control
+
+To remove a file from version control, use the following command:
+
+```bash
+git rm <FILE_PATH>
+```
+
+This will delete the file from the repository and the working directory.
