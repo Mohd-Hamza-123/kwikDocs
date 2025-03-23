@@ -6,3 +6,31 @@ published: true
 
 An API (Application Programming Interface) is a set of rules, protocols, and tools that allows different software applications to communicate with each other. It acts as a bridge between two systems, enabling them to exchange data or functionality without knowing the underlying code or implementation details.
 
+```python
+import requests
+
+def getRandomUser():
+    url = 'https://api.freepi.app/api/v1/public/randomusers/user/random'
+
+    response = requests.get(url)
+    data = response.json()
+
+    if(data.get("success")):
+        return data
+    else:
+        print("Error: API response does not indicate success.")
+        return None
+
+
+def main():
+    user = getRandomUser()
+
+    if user:
+        print(user)
+    else:
+        print("Error: Failed to fetch data")
+
+
+if __name__ == '__main__':
+    main()
+```

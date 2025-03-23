@@ -76,6 +76,7 @@ git --no-pager show <COMMIT_ID>
 You can use the first 7 characters of the commit ID instead of the full ID.
 
 ---
+
 ## Using `git blame`
 
 The `git blame` command shows the history of a file line by line, indicating the commit that last modified each line.
@@ -98,6 +99,34 @@ PS E:\Rough\git-tutorial> git blame main.py
 ```
 
 ---
+
+## Using `git status`
+
+The `git status` command shows the current status of your repository. It displays the number of files that have been modified, added, or deleted.
+
+```bash
+git status
+```
+
+Example output:
+```plaintext
+PS E:\Rough\git-tutorial> git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   core/config.py
+        modified:   main.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+### Deleting Commits
+
+```bash
+Remove-Item -Recurse -Force .git
+```
+
 ## Key Points About Commits:
 
 - **Unique ID**: Each commit has a unique ID (SHA).
