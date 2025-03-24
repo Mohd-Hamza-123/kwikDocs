@@ -14,9 +14,7 @@ This module provides a portable way of using operating system dependent function
 2) Create a directory named _path_ 
 ```py
     import os
-    
     # Create a directory named "new_folder"
-    
     os.mkdir("new_folder")
 ```
 
@@ -25,30 +23,19 @@ If the directory already exists, `os.mkdir` raises a `FileExistsError`.
 3) Check if Directory Already Exists 
 ```py
     import os
-    
     if(os.path.exists("newFolder")):
         print("Folder already exists");
 ```
 4) Create Nested Directories
 ```py
     import os
-    
     # Create intermediate directories and the child folder
     os.makedirs("parentFolder/childFolder")
 ```
 5) Renaming Folder
 ```py
-    # syntax :
-    
-    os.rename(source, destination)
-    
-
     import os
-    
     os.rename("oldFolderName",'newFolderName')
-
-    import os
-    
     # Rename a file from "old_name.txt" to "new_name.txt"
     os.rename("old_name.txt", "new_name.txt")
 ```
@@ -80,5 +67,4 @@ sample output :
     # delete datebase folder with its content
     shutil.rmtree('database')
 ```
-
 ---
