@@ -37,7 +37,7 @@ const ShowPost = ({ category }: { category: string }) => {
         {post && <article className="py-3 prose dark:prose-invert max-w-[100%] px-3">
             <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="mb-2">{post?.title}</h1>
+                    <h1 className="mb-2 text-xl">{post?.title}</h1>
                     {post?.description ? (
                         <p className="text-xl mt-0 text-muted-foreground">{post?.description}</p>
                     ) : null}
