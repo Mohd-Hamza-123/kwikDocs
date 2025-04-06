@@ -1,0 +1,102 @@
+---
+title: Django Template Filters
+description: Learn how to use template filters in Django
+published: true
+---
+
+
+Template filters are used to modify the output of a variable or expression. They are similar to functions in other programming languages.
+
+### Filters in Django
+
+Django provides a set of built-in filters that you can use in your templates.
+
+Here are some of the most commonly used filters:
+
+- `join`: Joins a list into a string.
+- `concat`: Concatenates two strings.
+- `slice`: Returns a slice of a list.
+- `upper`: Converts a string to uppercase.
+- `lower`: Converts a string to lowercase.
+- `last`: Returns the last item in a list.
+- `title`: Converts a string to title case.
+- `first`: Returns the first item in a list.
+- `dictsort`: Sorts a dictionary by its keys.
+- `date`: Formats a date into a specific format.
+- `subtract`: Subtracts one number from another.
+- `length`: Returns the length of a string or list.
+- `default`: Returns the default value if the variable is empty.
+- `truncatewords`: Truncates a string to a specified number of words.
+- `truncatechars`: Truncates a string to a specified number of characters.
+- `length_is`: Checks if the length of a list is equal to a specified value.
+
+### Example
+
+```python
+# views.py
+def view_function(request):
+    dict = {
+        "id": 1,
+        "author": "Mohd Hamza",
+        "title": "Django Blog",
+        "content": "Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.",
+        "email" : None,
+    }
+    return render(request, "appName/index.html", context=dict)
+```
+
+```html
+<!-- templates/appName/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTL Filters</title>
+</head>
+<body>
+
+    <h1>Filters  </h1>
+
+    <h2>1) Uppercase :</h2>
+    <h3>Author : {{author|upper}}</h3>
+
+    <h2>2) Lowercase : </h2>
+    <h3>Author : {{author|lower}}</h3>
+
+    <h2>3) Capitalize : </h2>
+    <h3>Title : {{title|capfirst}}</h3>
+
+    <h2>4) Truncate Words : </h2>
+    <h3>Content : {{content|truncatewords:10}}</h3>
+
+    <h2>5) Truncate Charaters : </h2>
+    <h3>Content : {{content|truncatechars:30}}</h3>
+
+    <h2>6) Length : </h2>
+    <h3>Content : {{content|length}}</h3>
+    <h3>Title : {{title|length}}</h3>
+
+    <h2>7) DefaultValue : </h2>
+    <h3>Email : {{email|default:"Not Provided"}}</h3>
+
+    <h2>8) Slice : </h2>
+    <h3>Content : {{content|slice:"6"}}</h3>
+    <h3>Content : {{content|slice:"7:30"}}</h3>
+</body>
+</html>
+```
+
+### Date Filters
+
+Django provides a set of built-in filters that you can use in your templates to format dates.
+
+Here are some of the most commonly used date filters:
+
+- `date`: Formats a date into a specific format.
+- `date:"SHORT_DATE_FORMAT"`: Formats a date into a short format.
+- `date:"DATE_FORMAT"`: Formats a date into a long format.
+- `date:"D d M Y"` : Formats a date into a short format.
+- `time`: Formats a time into a specific format.
+- `time:"H i"` : Formats a time into a short format.
+
