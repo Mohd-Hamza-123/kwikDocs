@@ -1,0 +1,98 @@
+---
+title: Dynamic Templates
+description: Learn how to create dynamic templates
+published: true
+---
+
+Dynamic templates allow you to render different templates based on the data passed to the view.
+
+1. Create an HTML file in your templates folder
+
+```html
+<!-- templates/appName/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{site_name}}</title>
+  </head>
+  <body>
+    <!-- using variable -->
+    <h1>Name : {{name}}</h1>
+    <h2>ID : {{id}}</h2>
+
+   <!-- using for loop -->
+    <h2>My Skills :</h2>
+    <ul>
+      {% for skill in skills %}
+      <li>{{skill}}</li>
+      {% endfor %}
+    </ul>
+
+    <!-- using if else ladder -->
+    {% if role == "Senior" %}
+    <h2>I am a Senior . I have full access.</h2>
+    {% elif role == "Junior" %}
+    <h2>I am a Junior . I have limited access.</h2>
+    {% elif role == "Intern" %}
+    <h2>I am an Intern . I have no access.</h2>
+    {% else %}
+    <h2>I have no role.</h2>
+    {% endif %}
+
+    <!-- using if else -->
+    <div>
+      {% if isGraduated %}
+      <h2>Graduated : <i>Yes</i></h2>
+      {% else %}
+      <h2>Graduated : <i>No</i></h2>
+      {% endif %}
+    </div>
+
+    <!-- using loops on dictionary -->
+    <div>
+        <h2>Country Info :</h2>
+        <ol type="1">
+            {% for key,value in country_info.items %}
+            <li>{{key}} - {{value}}</li>
+            {% endfor %}
+        </ol>
+    </div>
+  </body>
+</html>
+```
+
+2. Create a view that renders the template with dynamic data
+
+```python
+# views.py
+from django.shortcuts import render
+
+def view_function(request):
+      dict = {
+        "name": "Hamza",
+        "site_name": "My Django Site",
+        "id": 123456789,
+        "skills": ["Python", "Django", "JavaScript", "HTML", "CSS"],
+        "isGraduated": True,
+          "country_info" : {
+            "country" : "India",
+            "capital" : "New Delhi",
+            "currency" : "INR",
+            "population" :  1460634340,
+        }
+    }
+    return render(request, 'appName/index.html', context = dict)
+```
+
+3. Create a URL pattern that maps to the view
+
+```python
+# urls.py
+from django.urls import path
+from .views import view_function
+
+urlpatterns = [
+    path('', view_function, name='home'),
+]

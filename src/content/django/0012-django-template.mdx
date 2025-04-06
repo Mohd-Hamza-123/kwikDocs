@@ -1,0 +1,54 @@
+---
+title: Templates
+description: "Understanding Django templates and how to render dynamic content"
+published: true
+---
+
+Django templates are a powerful way to create dynamic HTML pages. They allow you to separate your presentation logic from your business logic, making your code cleaner and easier to maintain.
+
+### Template Folder Structure (App Level)
+
+```plaintext
+myproject/
+│
+├── myproject/
+│   └── settings.py
+│
+├── app1/
+│   ├── templates/
+│   │   └── app1/
+│   │       ├── index.html
+│   │       └── detail.html
+│   ├── views.py
+│   └── ...
+│
+└── manage.py
+```
+
+#### In views.py 
+
+```python
+# views.py
+from django.shortcuts import render
+
+def view_name(request):
+    # template_path: 'app1/index.html'
+    # template_name: 'app1/detail.html'
+    return render(request, template_path, context=None, content_type=None, status=None, using=None)
+```
+
+### Parameters
+
+- **request**: The **HTTP request object** passed to the view. Required for generating the response.
+
+- **template_path**: The **path to the HTML file** (within your templates directory) that you want to render.
+
+- **context**: *(Optional)* A **dictionary of data** to pass to the template for dynamic rendering. Defaults to `None`.
+
+- **content_type**: *(Optional)* The **MIME type** of the response. Defaults to `"text/html"`.
+
+- **status**: *(Optional)* The **HTTP status code** to return with the response. Defaults to `200` (OK).
+
+- **using**: *(Optional)* The **template engine name** to use for rendering. This is only needed if you're using **multiple template engines** (e.g., DjangoTemplates, Jinja2). Defaults to the first backend in `settings.TEMPLATES`.
+
+Note : Django finds all templates via the `APP_DIRS: True` setting in TEMPLATES.
