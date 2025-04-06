@@ -6,7 +6,6 @@ published: true
 
 URL patterns, also known as **URLconfs**, are used to map incoming HTTP requests to the appropriate view functions or classes.
 
-
 ## 🔧 Syntax of `path()`
 
 ```python
@@ -114,7 +113,7 @@ def product_detail_view(request, id):
 In larger Django projects with multiple apps (like products, blog, users, etc.), it's best practice to keep each app’s URLs in its own urls.py and include them in the main project's URLconf.
 
 ```python
-# project-level urls.py (e.g., mysite/urls.py)
+# project-level urls.py
 from django.contrib import admin
 from django.urls import path, include
 
