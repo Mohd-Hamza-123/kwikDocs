@@ -4,7 +4,6 @@ description: Learn how to use template filters in Django
 published: true
 ---
 
-
 Template filters are used to modify the output of a variable or expression. They are similar to functions in other programming languages.
 
 ### Filters in Django
@@ -86,7 +85,7 @@ def view_function(request):
 </body>
 </html>
 ```
-
+---
 ### Date Filters
 
 Django provides a set of built-in filters that you can use in your templates to format dates.
@@ -100,3 +99,45 @@ Here are some of the most commonly used date filters:
 - `time`: Formats a time into a specific format.
 - `time:"H i"` : Formats a time into a short format.
 
+
+### Example
+
+```python
+# views.py
+from django.shortcuts import render
+from datetime import datetime
+def blog_view(request):
+    date = datetime.now()
+    dict = {
+        "publishedDate" : date
+    }
+    return render(request, "appName/index.html", context=dict)
+```
+
+```html
+<!-- templates/appName/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTL Filters</title>
+</head>
+<body>
+    <h1>Date and Time Filters  </h1>
+    <h3> Date : {{publishedDate}} </h3>
+    <ol type="1">
+        <li>Format : {{publishedDate|date}}</li>
+        <li>Format : {{publishedDate|date:"d-m-Y"}}</li>
+        <li>Format : {{publishedDate|date:"d-m-Y H:i:s"}}</li>
+        <li>Format : {{publishedDate|date:"D d M Y"}}</li>
+        <li>Format : {{publishedDate|date:"SHORT_DATE_FORMAT"}}</li>
+        <li>Format : {{publishedDate|date:"SHORT_DATETIME_FORMAT"}}</li>
+        <li>Format : {{publishedDate|time}}</li>
+        <li>Format : {{publishedDate|time:"H:i:s"}}</li>
+        <li>Format : {{publishedDate|time:"TIME_FORMAT"}}</li>
+    </ol>
+</body>
+</html>
+```
+---
