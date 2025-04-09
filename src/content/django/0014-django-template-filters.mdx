@@ -46,15 +46,6 @@ def view_function(request):
 
 ```html
 <!-- templates/appName/index.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DTL Filters</title>
-</head>
-<body>
-
     <h1>Filters  </h1>
 
     <h2>1) Uppercase :</h2>
@@ -82,10 +73,9 @@ def view_function(request):
     <h2>8) Slice : </h2>
     <h3>Content : {{content|slice:"6"}}</h3>
     <h3>Content : {{content|slice:"7:30"}}</h3>
-</body>
-</html>
 ```
 ---
+
 ### Date Filters
 
 Django provides a set of built-in filters that you can use in your templates to format dates.
@@ -116,14 +106,6 @@ def blog_view(request):
 
 ```html
 <!-- templates/appName/index.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DTL Filters</title>
-</head>
-<body>
     <h1>Date and Time Filters  </h1>
     <h3> Date : {{publishedDate}} </h3>
     <ol type="1">
@@ -137,7 +119,56 @@ def blog_view(request):
         <li>Format : {{publishedDate|time:"H:i:s"}}</li>
         <li>Format : {{publishedDate|time:"TIME_FORMAT"}}</li>
     </ol>
-</body>
-</html>
 ```
 ---
+
+### Float Filters
+
+Django provides a set of built-in filters that you can use in your templates to format floats.
+
+```plaintext
+syntax
+{{ number|floatformat:precision }}
+```
+
+**How It Works:**
+
+Look at the digit immediately after the place you're rounding to. If that digit is:
+
+- 5 or higher, round up.
+- 4 or lower, round down
+
+```python
+# views.py
+from django.shortcuts import render
+def view_function(request):
+    dict = {
+        "nums": [34.893, 34.2,34.8,55.89,55.32, 23.456, 12.0, -1.234, 11.034],
+    }
+    return render(request, "blog/index.html", context=dict)
+```
+
+```html
+<!-- templates/app/index.html -->
+  <h2>Float Filters</h2>
+    <ul>
+        <p>Filter Name : <b>"floatformat"</b> </p>
+        {% for num in nums %}
+        <li>Original Number : {{num}} , Filtered Number: {{ num|floatformat }}</li>
+        {% endfor %}
+    </ul>
+
+    <ul>
+        <p>Filter Name : <b>"floatformat:anyNumber"</b> </p>
+        {% for num in nums %}
+        <li>Original Number : {{num}} , Filtered Number: {{ num|floatformat:2 }}</li>
+        {% endfor %}
+    </ul>
+
+    <ul>
+        <p>Filter Name : <b>"floatformat:0"</b> </p>
+        {% for num in nums %}
+        <li>Original Number : {{num}} , Filtered Number: {{ num|floatformat:0 }}</li>
+        {% endfor %}
+    </ul>
+```

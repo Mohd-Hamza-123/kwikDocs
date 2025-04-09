@@ -1,7 +1,6 @@
 import Image from "next/image";
-import * as runtime from "react/jsx-runtime";
-import { cn } from "@/lib/utils";
 import { Callout } from "./Callout";
+import * as runtime from "react/jsx-runtime";
 import ImageCenter from "./MDX Components/ImageCenter";
 
 const useMDXComponent = (code: string) => {

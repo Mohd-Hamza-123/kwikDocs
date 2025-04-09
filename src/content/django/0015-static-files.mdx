@@ -1,0 +1,31 @@
+---
+title: Static Files
+description: Learn how to use static files in Django
+published: true
+---
+
+Static files are files that are served directly to the client without going through the server. They are typically used to serve images, stylesheets, and JavaScript files.
+
+### folder structure
+
+```plaintext
+my_project/
+│
+├── my_app1/
+│   ├── static/
+│   │   └── my_app1/
+│   │       ├── css/
+│   │       │   └── styles.css
+│   │       ├── js/
+│   │       │   └── scripts.js
+│   │       ├── images/
+│   │       │   └── logo.png
+│   │       └── fonts/
+│   │           └── custom-font.ttf
+│   └── templates/
+│       └── my_app1/
+│           └── index.html
+│
+├── manage.py
+└── settings.py
+```

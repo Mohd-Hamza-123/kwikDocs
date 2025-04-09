@@ -22,11 +22,29 @@ Dynamic templates allow you to render different templates based on the data pass
     <h1>Name : {{name}}</h1>
     <h2>ID : {{id}}</h2>
 
-   <!-- using for loop -->
+   <!-- using loops on list -->
     <h2>My Skills :</h2>
     <ul>
       {% for skill in skills %}
       <li>{{skill}}</li>
+      {% endfor %}
+    </ul>
+
+    <!-- using loops on empty list -->
+    <h2>My Skills :</h2>
+    <ul>
+      {% for skill in skills %}
+      <li>{{skill}}</li>
+      {% empty %}
+      <li>No Skills</li> <!-- this will run if list is empty [] -->
+      {% endfor %}
+    </ul>
+
+    <!-- using loops with counter -->
+    <h2>My Skills :</h2>
+    <ul>
+      {% for skill in skills %}
+      <li>{{forloop.counter}} : {{skill}}</li>
       {% endfor %}
     </ul>
 
