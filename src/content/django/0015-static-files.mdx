@@ -6,17 +6,20 @@ published: true
 
 Static files are files that are served directly to the client without going through the server. They are typically used to serve images, stylesheets, and JavaScript files.
 
-### folder structure
+### Folder Structure
 
 ```plaintext
 my_project/
+|
+├── myproject/
+│   └── settings.py
 │
 ├── my_app1/
 │   ├── static/
 │   │   └── my_app1/
 │   │       ├── css/
-│   │       │   └── styles.css
-│   │       ├── js/
+│   │       │   └── style.css
+│   │       ├── javascript/
 │   │       │   └── scripts.js
 │   │       ├── images/
 │   │       │   └── logo.png
@@ -29,3 +32,27 @@ my_project/
 ├── manage.py
 └── settings.py
 ```
+
+### Template Example
+
+Below is an example of how to use static files in a Django template. Ensure you load the `static` template tag at the top of your template.
+
+```html
+<!-- templates/my_app1/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Files in Django</title>
+    <link rel="stylesheet" href="{% static 'my_app1/css/style.css' %}">
+</head>
+<body>
+    <h1 class="red">Static Files in Django</h1>
+    <img src="{% static 'my_app1/images/logo.png' %}" alt="Logo" height="200">
+    <script src="{% static 'my_app1/javascript/scripts.js' %}"></script>
+</body>
+</html>
+```
+---
