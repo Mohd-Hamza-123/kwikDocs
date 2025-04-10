@@ -1,0 +1,87 @@
+---
+title: TailwindCSS in Django
+description: "Learn how to integrate TailwindCSS into your Django project for modern styling."
+published: true
+---
+
+There are several ways to integrate TailwindCSS into your Django project.
+
+### Using the django-tailwind package
+
+1. Install the django-tailwind package via pip:
+
+```bash
+pip install django-tailwind
+# or
+python -m pip install django-tailwind
+```
+
+If you want to use automatic page reloads during development.
+
+```bash
+python -m pip install 'django-tailwind[reload]'
+```
+
+2. Add 'tailwind' to INSTALLED_APPS in settings.py:
+
+```python
+INSTALLED_APPS = [
+  # other Django apps
+  'tailwind',
+]
+```
+
+3. Create a Tailwind CSS compatible Django app, call it `theme`:
+
+```bash
+python manage.py tailwind init
+```
+
+4. Add your newly created 'theme' app to INSTALLED_APPS in settings.py:
+
+```python
+INSTALLED_APPS = [
+  # other Django apps
+  'tailwind',
+  'theme',
+]
+```
+
+5. Register the generated 'theme' app by adding the following line to settings.py:
+
+```python
+# settings.py
+TAILWIND_APP_NAME = 'theme'
+```
+
+6. Install Tailwind CSS dependencies by running the following command:
+
+```bash
+python manage.py tailwind install
+#  If for some reason you don’t want package-lock.json to be created, you can use the --no-package-lock flag:
+python manage.py tailwind install --no-package-lock
+```
+
+If you got some error , then : 
+
+```python
+# settings.py
+NPM_BIN_PATH = 'npm.cmd'
+# Alternatively
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
