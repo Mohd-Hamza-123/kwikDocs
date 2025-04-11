@@ -1,5 +1,5 @@
 ---
-title: TailwindCSS in Django
+title: Integrating TailwindCSS
 description: "Learn how to integrate TailwindCSS into your Django project for modern styling."
 published: true
 ---
@@ -66,9 +66,106 @@ If you got some error , then :
 
 ```python
 # settings.py
-NPM_BIN_PATH = 'npm.cmd'
-# Alternatively
-NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+NPM_BIN_PATH = 'npm.cmd' # for windows 
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd" # for windows
+NPM_BIN_PATH = '/usr/local/bin/npm' # for linux/mac
+```
+
+7. Add and configure `django_browser_reload`, which takes care of automatic page and CSS refreshes in development mode. Add it to INSTALLED_APPS in settings.py:
+
+```python
+INSTALLED_APPS = [
+  # other Django apps
+  'tailwind',
+  'theme',
+  'django_browser_reload'
+]
+```
+
+8. Staying in settings.py, add the middleware:
+
+```python
+MIDDLEWARE = [
+  # ...
+  "django_browser_reload.middleware.BrowserReloadMiddleware",
+  # ...
+]
+```
+
+Note : The middleware should be listed after any that encode the response, such as Django’s GZipMiddleware. The middleware automatically inserts the required script tag on HTML responses before `</body>` when DEBUG is True.
+
+9. Add the following to your `urls.py`:
+
+```python
+from django.urls import include, path
+urlpatterns = [
+    path("__reload__/", include("django_browser_reload.urls")),
+    # other urls
+]
+```
+
+10. Finally, you should be able to use Tailwind CSS classes in HTML. Start the development server by running the following command in your terminal:
+
+#### In development:
+```bash
+python manage.py tailwind start
+```
+
+#### In production:
+```bash
+python manage.py tailwind build
+```
+
+11. Add `{% tailwind_css %}` to your base.html template:
+
+```html showlines={1,6}
+{% load tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Django Tailwind</title>
+    {% tailwind_css %}
+  </head>
+  <body></body>
+</html>
+```
+
+### If Intellisense is not working in vscode
+
+1. Add the following to vscode `settings.json`:
+
+```json
+"tailwindCSS.includeLanguages": {
+    "python": "html",
+    "django-html": "html",
+    "html" : "html",
+  },
+  "files.associations": {
+   "*.html": "django-html"
+}
+```
+
+2. Create a file named `tailwind.config.js` in the root of your project and add the following content:
+
+```js
+module.exports = {
+    content: [
+    // Templates in the theme app and other apps
+    '../templates/**/*.html',
+    '../../templates/**/*.html',
+    // Include JavaScript and CSS files in static
+    '../../static/**/*.js',
+    '../../static/**/*.css',
+    // Include Python files with potential inline Tailwind classes
+    '../../**/*.py',
+    // Exclude node_modules for performance
+    '!../../**/node_modules',
+],
+    theme: {
+      extend: {},
+    },
+    plugins: [],
+  };
 ```
 
 
