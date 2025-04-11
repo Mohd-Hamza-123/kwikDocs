@@ -1,0 +1,154 @@
+---
+title: Include Tag
+description: Learn how to include a template inside another template in Django
+published: true
+---
+
+### Steps to Use the `{% include %}` Tag
+
+1. **Directory Structure**
+
+```plaintext
+# Recommended Application Directory Structure
+app1/
+├── templates/
+│   └── app1/
+│       └── components/       # Folder for reusable components
+│           ├── header.html   # Header component
+│           ├── footer.html   # Footer component
+│           ├── navbar.html   # Navbar component
+│           ├── card.html     # Card component
+│           └── ...           # Other reusable components
+|       └── index.html
+|       └── about.html
+|       └── contact.html
+|       ...
+```
+
+2. **Create the Template to Include**
+
+```html
+<!-- app1/templates/app1/components/header.html -->
+<header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+```
+
+3. **Include the Template in Another Template**
+
+```html
+<!-- app1/templates/app1/index.html -->
+ <!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+</head>
+<body>
+    {% include 'app1/components/header.html' %}
+    <main>
+        <h2>Content goes here</h2>
+    </main>
+    <footer>
+        <p>&copy; 2025 My Website</p>
+    </footer>
+</body>
+</html>
+```
+
+### Passing Variables to the Included Template
+
+You can pass variables to the included template by two ways : 
+
+#### 1. Pass `context` keyword argument to the Template
+
+```python
+# app1/views.py
+from django.shortcuts import render
+def index(request):
+    context = {
+        'title': 'KwikDocs',
+    }
+    return render(request, 'app1/index.html', context)
+```
+
+```html
+<!-- app1/templates/app1/index.html -->
+<body>
+<h1>Website Name : {{title}}</h1>
+{% include 'app1/components/header.html'%}
+</body>
+```
+
+```html
+<!-- app1/templates/app1/components/header.html -->
+<header>
+    <h1>{{ title }}</h1> <!-- Accessing the passed variable in the included template -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+```
+---
+#### 2. Pass variables with `with` keyword argument 
+
+```python
+# app1/views.py
+from django.shortcuts import render
+def index(request):
+    return render(request, 'app1/index.html')
+```
+
+```HTML
+<!-- app1/templates/app1/index.html -->
+<html>
+<body>
+{% include 'app1/components/header.html' with title='KwikDocs' %}
+</body>
+</html>
+```
+
+```html
+<!-- app1/templates/app1/components/header.html -->
+<header>
+    <h1>{{ title }}</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+```
+
+We can pass multiple variables to the included template by using `with` keyword argument.    
+
+```html
+<!-- example  -->
+{% include 'app1/components/header.html' with title='KwikDocs' subtitle='docs' image='https://example.com/image.png' %}
+```
+
+##### Using `only` and `with` keyword argument
+
+You can use `only` keyword argument to only include specific variables from the context dictionary.
+
+```html
+<!-- example  -->
+{% include 'app1/components/header.html' with title='KwikDocs' subtitle='docs' image='https://example.com/image.png' only %}
+```
+
+Here only `title` and `subtitle` variables will be included in the included template. Any other variables that are not explicitly included will not be included.
+---
