@@ -114,11 +114,34 @@ git checkout -b feature/new-feature
 
 ---
 
-### **Images**
+### **Visualization**
 Include diagrams or flowcharts to visually explain the branching process.
 
 <ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1744095104/Documentarium/Git/q12jpy48wwz8d58xbdr8.png" alt="Branching Overview" style={{backgroundColor: "white"}} />
 
 <ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1744433639/Documentarium/Git/nzeq35uto1ze1ycbcesj.png" alt="Branching Example" />
+
+---
+
+### Rebase 
+
+Rebasing is a powerful feature in Git that allows you to integrate changes from one branch into another. It’s often used to keep a clean project history by applying commits from one branch onto another.
+
+
+```bash
+git rebase <branch-name>
+# Example
+git rebase feature/new-feature
+```
+
+### Merge vs Rebase
+
+- **Merge**: Combines the commits from two branches and creates a new merge commit in the target branch.
+
+- **Rebase**: Moves (or "rebases") commits from one branch on top of another branch. Rewrites commit history as if the branch started from the tip of the target branch.
+
+### Visualization of Rebase & Merge
+
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1744439732/Documentarium/Git/fr8zrm8tz5j6wv4pioae.png" alt="Rebase" />
 
 ---
