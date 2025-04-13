@@ -37,6 +37,12 @@ const SidebarLinks = ({
             isVisible: userStatus ? false : true,
         },
         {
+            slug: "/playground",
+            name: "Playground",
+            icon: <svgIcons.playground className="w-5 h-5 fill-gray-800 dark:fill-white" />,
+            isVisible: true
+        },
+        {
             slug: '/create-docs',
             name: 'Create Document',
             icon: <svgIcons.createDoc className="w-5 h-5" />,
@@ -81,7 +87,7 @@ const SidebarLinks = ({
             isVisible: true
         }
     ]
-    
+
     return (
         <>
             {navLinks?.map((nav) => (

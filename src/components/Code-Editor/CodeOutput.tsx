@@ -17,7 +17,7 @@ export default function CodeOutput({
     activeLanguage }: { codeValue: string, activeLanguage: any }) {
 
     const [output, setOutput] = useState(null)
-
+    // console.log(output)
     const runCode = async () => {
         if (!codeValue) return
         try {
@@ -29,15 +29,15 @@ export default function CodeOutput({
 
     }
     return (
-        <>
+        <div className='w-1/2 inline-block align-top h-full pl-2'>
             <Button
                 variant='destructive'
                 className='ml-1 mt-1'
                 onClick={runCode}
             >Run Code</Button>
-            <Card className='w-1/2 mt-2 rounded-none'>
+            <Card className='w-full mt-2 rounded-none break-words'>
                 <CardHeader>
-                    {/* <CardTitle>Card Title</CardTitle> */}
+                    <CardTitle>{output ? "Output : " : "Run Code"}</CardTitle>
                     <CardDescription>{output ? output : 'Click "Run Code" to execute the Code'}</CardDescription>
                 </CardHeader>
                 {/* <CardContent>
@@ -47,6 +47,6 @@ export default function CodeOutput({
                     <p>Card Footer</p>
                 </CardFooter> */}
             </Card>
-        </>
+        </div>
     )
 }
