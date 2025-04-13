@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { EditorState } from '@codemirror/state';
-import { EditorView, keymap } from '@codemirror/view';
+import { EditorView, highlightActiveLine, keymap } from '@codemirror/view';
 import { javascript } from '@codemirror/lang-javascript';
 import { oneDark } from '@codemirror/theme-one-dark';
 import { defaultKeymap } from '@codemirror/commands';
@@ -12,7 +12,7 @@ import { CodeOutput } from '@/index'
 const CodeEditor = ({ activeLanguage }: { activeLanguage: string, }) => {
 
     const editorRef = useRef<HTMLDivElement>(null); // Ref for the editor container
-    const [codeValue, setCodeValue] = useState<string>('console.log("Hello, CodeMirror!");');
+    const [codeValue, setCodeValue] = useState<string>('// Write javascript code ');
     const [output, setOutput] = useState<string>('');
 
     useEffect(() => {
@@ -24,6 +24,7 @@ const CodeEditor = ({ activeLanguage }: { activeLanguage: string, }) => {
                 oneDark,
                 javascript(),
                 keymap.of(defaultKeymap),
+                highlightActiveLine(),
                 EditorView.updateListener.of((update) => {
                     if (update.docChanged) {
                         setCodeValue(update.state.doc.toString());
@@ -68,8 +69,8 @@ const CodeEditor = ({ activeLanguage }: { activeLanguage: string, }) => {
     return (
         <section className='flex gap-2 h-full w-full'>
             {/* Editor Container */}
-            <div ref={editorRef} className='h-full w-1/2' />
-            <div className='flex flex-col gap-2 items-center w-1/2'>
+            <div ref={editorRef} className='h-full w-1/2 text-lg' />
+            <div className='flex flex-col gap-2 items-center w-1/2 h-full'>
                 <Button onClick={runCode}>Run Code</Button>
                 <CodeOutput output={output} />
             </div>

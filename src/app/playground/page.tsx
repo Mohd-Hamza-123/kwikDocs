@@ -20,7 +20,7 @@ export default function Playground() {
   }
 
   return (
-    <div className='w-full border border-gray-400 h-[90vh] px-2 py-2'>
+    <div className='w-full border border-gray-400 h-[91dvh] px-2 py-2'>
       {/* <LanguageSelector
         activeLanguage={activeLanguage}
         onLanguageChange={onLanguageChange}
