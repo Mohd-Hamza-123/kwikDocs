@@ -1,4 +1,6 @@
 import React from 'react'
+import { Button } from '../ui/button'
+import { CODE_SNIPPETS, LANGUAGE_VERSIONS } from '@/constant'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -7,12 +9,11 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Button } from '../ui/button'
-import { CODE_SNIPPETS, LANGUAGE_VERSIONS } from '@/constant'
 
 export default function LanguageSelector({ activeLanguage, onLanguageChange }: { activeLanguage: string, onLanguageChange: (language: keyof typeof CODE_SNIPPETS) => void }) {
     const languages = Object.entries(LANGUAGE_VERSIONS)
     return (
+        <div>
         <DropdownMenu>
             <DropdownMenuTrigger className='outline-none'>
                 <Button variant='outline' className='my-2'>{activeLanguage}</Button>
@@ -31,5 +32,6 @@ export default function LanguageSelector({ activeLanguage, onLanguageChange }: {
                 ))}
             </DropdownMenuContent>
         </DropdownMenu>
+        </div>
     )
 }
