@@ -1,0 +1,106 @@
+---
+title: Model and Create Database
+description: Learn how to create a database and model in Django
+published: true
+---
+
+### **What is a Model?**
+A **model** in Django is a Python class that represents a table in your database. It defines:
+- The structure of your data.
+- The fields and their data types.
+- An interface for querying and manipulating data.
+
+---
+
+## **Creating a Model**
+
+```python
+# app1/models.py
+from django.db import models
+# Define your model here.
+class Blog(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    author = models.CharField(max_length=100)
+    is_published = models.BooleanField(default=False)
+    category = models.CharField(max_length=100, default='general')
+```
+
+### **Field Descriptions**
+- `CharField`: Used for short text strings (`max_length` is required).
+- `TextField`: Suitable for long text content.
+- `BooleanField`: Stores `True` or `False` values (`default=False` by default).
+- `category`: A field with a default value of `"general"`.
+
+---
+
+## **Steps to Create a Database**
+
+### 1. **Configure Your Database**
+By default, Django uses SQLite. You can define the database settings in the `settings.py` file:
+
+```python
+# settings.py
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',  # Database engine
+        'NAME': BASE_DIR / "db.sqlite3",         # Database file location
+    }
+}
+```
+
+If you plan to use another database (e.g., MySQL, PostgreSQL), update the `ENGINE` and provide the appropriate credentials.
+
+---
+
+### 2. **Add Your App to Installed Apps**
+Include your app in the `INSTALLED_APPS` list in `settings.py`:
+
+```python
+# settings.py
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'app1',  # Replace 'app1' with your app name
+]
+```
+
+---
+
+### 3. **Create Migrations**
+Migrations are a way for Django to apply model changes to the database schema.
+
+Run the following command to generate migration files:
+```bash
+python manage.py makemigrations
+```
+
+---
+
+### 4. **Apply Migrations**
+Execute the migrations to create database tables:
+```bash
+python manage.py migrate
+```
+
+---
+
+## **Managing Migrations**
+
+### **Check Migration Status**
+To display all migrations and their current status:
+```bash
+python manage.py showmigrations
+```
+
+### **View Raw SQL for a Migration**
+To see the raw SQL statements generated for a migration:
+```bash
+python manage.py sqlmigrate app1 0001
+# Replace 'app1' with your app name and '0001' with the migration file number.
+```
+---
