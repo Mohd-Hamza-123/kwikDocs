@@ -10,13 +10,13 @@ import {
 } from "@/components/ui/card"
 
 export default function CodeOutput({ output }: { output: string }) {
-
+    // console.log(output)
     return (
-        <div className='w-full h-[78vh]'>
-            <Card className='w-full mt-2 rounded-none break-words h-full'>
+        <div className='w-full h-[95%]'>
+            <Card className='w-full rounded-none h-full'>
                 <CardHeader className='h-full'>
                     <CardTitle>{output ? "Output : " : "Run Code"}</CardTitle>
-                    <CardDescription className='h-[100%] whitespace-pre overflow-y-scroll'>
+                    <CardDescription className={`h-[100%] whitespace-pre overflow-y-scroll text-md`}>
                         {output ? output : 'Click "Run Code" to execute the Code'}
                     </CardDescription>
                 </CardHeader>
