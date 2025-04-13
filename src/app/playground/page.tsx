@@ -1,7 +1,7 @@
 'use client'
 import CodeEditor from '@/components/Code-Editor/CodeEditor'
 import { CODE_SNIPPETS, LANGUAGE_VERSIONS } from '@/constant'
-import { CodeOutput, LanguageSelector } from '@/index'
+
 import React, { useEffect, useState } from 'react'
 
 export default function Playground() {
@@ -20,19 +20,15 @@ export default function Playground() {
   }
 
   return (
-    <div className='w-full border border-red-700 h-[90vh] px-2 py-2'>
+    <div className='w-full border border-gray-400 h-[90vh] px-2 py-2'>
       {/* <LanguageSelector
         activeLanguage={activeLanguage}
         onLanguageChange={onLanguageChange}
       /> */}
       <CodeEditor
         activeLanguage={activeLanguage}
-        // codeValue={codeValue}
-        // setCodeValue={setCodeValue}
-      />
-      <CodeOutput
-        codeValue={codeValue}
-        activeLanguage={activeLanguage}
+      // codeValue={codeValue}
+      // setCodeValue={setCodeValue}
       />
     </div>
   )

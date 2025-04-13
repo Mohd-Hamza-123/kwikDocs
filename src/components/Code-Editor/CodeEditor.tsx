@@ -6,6 +6,8 @@ import { EditorView, keymap } from '@codemirror/view';
 import { javascript } from '@codemirror/lang-javascript';
 import { oneDark } from '@codemirror/theme-one-dark';
 import { defaultKeymap } from '@codemirror/commands';
+import { Button } from '../ui/button';
+import { CodeOutput } from '@/index'
 
 const CodeEditor = ({ activeLanguage }: { activeLanguage: string, }) => {
 
@@ -15,7 +17,6 @@ const CodeEditor = ({ activeLanguage }: { activeLanguage: string, }) => {
 
     useEffect(() => {
         if (!editorRef.current) return;
-
         // Create EditorState with extensions and initial code value
         const state = EditorState.create({
             doc: codeValue,
@@ -27,6 +28,12 @@ const CodeEditor = ({ activeLanguage }: { activeLanguage: string, }) => {
                     if (update.docChanged) {
                         setCodeValue(update.state.doc.toString());
                     }
+                }),
+                EditorView.theme({
+                    "&": {
+                        height: "100%",
+                        width: "100%"
+                    },
                 }),
             ],
         });
@@ -49,7 +56,7 @@ const CodeEditor = ({ activeLanguage }: { activeLanguage: string, }) => {
         };
 
         try {
-            // Use Function constructor for safer evaluation
+            // Using Function constructor for safer evaluation
             const func = new Function('console', codeValue);
             func(customConsole);
             setOutput(logs.join('\n') || 'Code executed successfully.');
@@ -59,39 +66,14 @@ const CodeEditor = ({ activeLanguage }: { activeLanguage: string, }) => {
     };
 
     return (
-        <div>
+        <section className='flex gap-2 h-full w-full'>
             {/* Editor Container */}
-            <div ref={editorRef} style={{ border: '1px solid #ddd', height: '500px', marginBottom: '1rem' }} />
-
-            {/* Run Code Button */}
-            <button
-                onClick={runCode}
-                style={{
-                    padding: '0.5rem 1rem',
-                    background: '#4caf50',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                }}
-            >
-                Run Code
-            </button>
-
-            {/* Output Section */}
-            <div
-                style={{
-                    marginTop: '1rem',
-                    padding: '1rem',
-                    background: '#f4f4f4',
-                    border: '1px solid #ddd',
-                    borderRadius: '5px',
-                }}
-            >
-                <strong>Output:</strong>
-                <pre>{output}</pre>
+            <div ref={editorRef} className='h-full w-1/2' />
+            <div className='flex flex-col gap-2 items-center w-1/2'>
+                <Button onClick={runCode}>Run Code</Button>
+                <CodeOutput output={output} />
             </div>
-        </div>
+        </section>
     );
 };
 

@@ -8,37 +8,17 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { executeCode } from '@/lib/API/Code/execute-Code'
-import { LANGUAGE_VERSIONS } from '@/constant'
 
-export default function CodeOutput({
-    codeValue,
-    activeLanguage }: { codeValue: string, activeLanguage: any }) {
+export default function CodeOutput({ output }: { output: string }) {
 
-    const [output, setOutput] = useState(null)
-    // console.log(output)
-    const runCode = async () => {
-        if (!codeValue) return
-        try {
-            const { run: result } = await executeCode(codeValue, activeLanguage)
-            setOutput(result?.output)
-        } catch (error) {
-
-        }
-
-    }
     return (
-        <div className='w-1/2 inline-block align-top h-full pl-2'>
-            <Button
-                variant='destructive'
-                className='ml-1 mt-1'
-                onClick={runCode}
-            >Run Code</Button>
-            <Card className='w-full mt-2 rounded-none break-words'>
-                <CardHeader>
+        <div className='w-full h-[78vh]'>
+            <Card className='w-full mt-2 rounded-none break-words h-full'>
+                <CardHeader className='h-full'>
                     <CardTitle>{output ? "Output : " : "Run Code"}</CardTitle>
-                    <CardDescription>{output ? output : 'Click "Run Code" to execute the Code'}</CardDescription>
+                    <CardDescription className='h-[100%] whitespace-pre overflow-y-scroll'>
+                        {output ? output : 'Click "Run Code" to execute the Code'}
+                    </CardDescription>
                 </CardHeader>
                 {/* <CardContent>
                     <p>Card Content</p>
