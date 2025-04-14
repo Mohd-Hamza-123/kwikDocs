@@ -1,0 +1,18 @@
+---
+title: Models in Depth
+description: Learn models field types, relationships, and more in Django
+published: true
+---
+
+### **Naming Convention of Model Attributes/Field Names**
+
+- Field names should be lowercase, with words separated by underscores. 
+
+```python
+# app1/models.py
+class Blog(models.Model):
+    author = models.CharField(max_length=100)
+    is_published = models.BooleanField(default=False) 
+    blog_publish_date = models.DateField(null=True, blank=True)
+```
+
