@@ -1,30 +1,41 @@
 'use client';
-
-import React, { useEffect, useRef, useState } from 'react';
-import { EditorState } from '@codemirror/state';
-import { EditorView, highlightActiveLine, keymap } from '@codemirror/view';
-import { javascript } from '@codemirror/lang-javascript';
-import { oneDark } from '@codemirror/theme-one-dark';
-import { defaultKeymap } from '@codemirror/commands';
-import { Button } from '../ui/button';
 import { CodeOutput } from '@/index'
+import { Button } from '../ui/button';
+import { EditorState } from '@codemirror/state';
+import { oneDark } from '@codemirror/theme-one-dark';
+import { javascript } from '@codemirror/lang-javascript';
+import { autocompletion } from '@codemirror/autocomplete';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+    history,
+    defaultKeymap,
+    historyKeymap
+} from '@codemirror/commands';
+import {
+    keymap,
+    EditorView,
+    lineNumbers,
+    highlightActiveLine,
+} from '@codemirror/view';
 
-const CodeEditor = ({ activeLanguage }: { activeLanguage: string, }) => {
+const CodeEditor = () => {
 
-    const editorRef = useRef<HTMLDivElement>(null); // Ref for the editor container
-    const [codeValue, setCodeValue] = useState<string>('// Write javascript code ');
+    const editorRef = useRef<HTMLDivElement>(null);
     const [output, setOutput] = useState<string>('');
+    const [codeValue, setCodeValue] = useState<string>('// Write javascript code ');
 
     useEffect(() => {
         if (!editorRef.current) return;
-        // Create EditorState with extensions and initial code value
         const state = EditorState.create({
             doc: codeValue,
             extensions: [
                 oneDark,
+                history(),
                 javascript(),
-                keymap.of(defaultKeymap),
+                lineNumbers(),
+                autocompletion(),
                 highlightActiveLine(),
+                keymap.of([...defaultKeymap, ...historyKeymap]),
                 EditorView.updateListener.of((update) => {
                     if (update.docChanged) {
                         setCodeValue(update.state.doc.toString());
@@ -55,7 +66,7 @@ const CodeEditor = ({ activeLanguage }: { activeLanguage: string, }) => {
                 logs.push(args.map((arg) => String(arg)).join(' '));
             },
         };
-
+        console.log(customConsole)
         try {
             // Using Function constructor for safer evaluation
             const func = new Function('console', codeValue);
