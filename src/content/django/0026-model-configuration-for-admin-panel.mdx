@@ -1,0 +1,39 @@
+---
+title: Model Config for admin-panel
+description: ''
+published: true
+---
+
+### `__str__()` method in Model
+
+The `__str__()` method is a built-in method in Python that returns a string representation of an object. It is commonly used in the Django Admin Panel to display the name of the model in the admin panel.
+
+Before `__str__()` method -
+
+```python
+# models.py
+from django.db import models
+class Product(models.Model):
+    product_name = models.CharField(max_length=100) 
+    price = models.IntegerField()
+    quantity = models.IntegerField()
+    description = models.TextField()
+```
+
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1744739501/Documentarium/Django/qrddihhkg9cbuptqqhcv.png" alt="image" />
+
+After `__str__()` method -
+
+```python
+# models.py
+from django.db import models
+class Product(models.Model):
+    product_name = models.CharField(max_length=100) 
+    price = models.IntegerField()
+    quantity = models.IntegerField()
+    description = models.TextField()
+    def __str__(self):
+        return self.product_name
+```
+
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1744739768/Documentarium/Django/ebfomvjinrboenn7oysx.png" alt="image" />
