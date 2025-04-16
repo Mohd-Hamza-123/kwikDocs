@@ -209,5 +209,26 @@ fm = ContactForm(field_order=["age", "city", "first_name", "last_name"])
 
 ---
 
-By using these features, Django forms become a versatile tool to enhance user experience in your applications.
+### Rendering Form Fields Manually
+
+You can also render form fields manually by accessing the fields of the form object.
+
+```html
+<h2>Contact Form</h2>
+<form action="">
+       label Tag : {{form.first_name.label_tag}}
+       <br>
+       lable Id :  {{form.first_name.id_for_label}} 
+       <br>
+       label name : {{form.first_name.label}}
+       <br>
+       input tag : {{form.first_name}}
+       <br>
+       name attribute : {{form.first_name.name}}
+       <br>
+       value attribute : {{form.first_name.value}}
+       <br>
+       required attribute : {{form.first_name.field.required}}
+</form>
+```
 
