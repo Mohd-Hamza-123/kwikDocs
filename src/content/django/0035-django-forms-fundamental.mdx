@@ -1,0 +1,210 @@
+---
+title: Django Forms Introduction
+description: Learn how to create forms in Django
+published: true
+---
+
+Django forms are a powerful tool for creating user-friendly forms in your Django applications. They allow you to define the fields and validation rules for a form, and then render them in a template.
+
+There are two ways to create a form in Django
+
+1. Using Django Form API 
+2. Using Form Class
+
+## Django Form API
+
+The Django Form API is a simple and easy-to-use way to create forms in Django. It provides a set of classes and functions that you can use to define and render forms.
+
+**Folder Structure**
+
+```plaintext
+my_project/
+│
+├── my_app/
+│   ├── migrations/            
+│   ├── templates/             
+│   │   └── my_app/
+│   │       └── index.html      
+│   ├── __init__.py          
+│   ├── admin.py               
+│   ├── apps.py               
+│   ├── forms.py   # Add forms.py in application folder           
+│   ├── models.py              
+│   ├── urls.py               
+│   ├── views.py                         
+│
+├── my_project/
+│   ├── __init__.py            
+│   ├── asgi.py                
+│   ├── settings.py            
+│   ....                 
+│                   
+├── manage.py                          
+```
+
+To create a form using the Django Form API, you need to define a form class that inherits from the Form class. You can then define the fields and validation rules for the form in the form class.
+
+Here's an example of a simple form class:
+
+```python
+# appName/forms.py
+from django import forms
+class ContactForm(forms.Form):
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+    city = forms.CharField()
+    age = forms.IntegerField()
+```
+
+In View.py
+
+```python
+# appName/views.py
+from django.shortcuts import render
+from registration.forms import ContactForm
+def contact_view(request):
+    fm = ContactForm()
+    dict = {
+        "form" : fm
+    }
+    return render(request,"registration/index.html",context=dict)
+```
+
+In Template 
+
+```html
+<!-- appName/templates/appName/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Contact Form</h2>
+    <form action="">
+        {{form}}
+        <button type='submit'>Submit</button>
+    </form>
+  </body>
+</html>
+```
+
+#### Form Rendering Options in Template
+
+1. In the template, we use the form object to render the form fields.
+
+```html
+ <body>
+    <h2>Contact Form</h2>
+    <form action="">
+        {{form}}
+        <button type='submit'>Submit</button>
+    </form>
+  </body>
+```
+
+2. Render as Table 
+
+```html
+<body>
+    <h2>Contact Form</h2>
+    <form action="">
+        {{form.as_table}}
+        <button type='submit'>Submit</button>
+    </form>
+  </body>
+```
+
+3. Render as List 
+
+```html
+<body>
+    <h2>Contact Form</h2>
+    <form action="">
+        {{form.as_ul}}
+        <button type='submit'>Submit</button>
+    </form>
+  </body>
+```
+
+4. Render as Paragraph
+
+```html
+<body>
+    <h2>Contact Form</h2>
+    <form action="">
+        {{form.as_p}}
+        <button type='submit'>Submit</button>
+    </form>
+  </body>
+```
+
+5. Render as Fieldset
+
+```html
+<body>
+    <h2>Contact Form</h2>
+    <form action="">
+       <!-- Syntax : {{form.fieldset}} -->
+        {{form.first_name}}
+        {{form.last_name}}
+        {{form.city}}
+        {{form.age}}
+        <button type='submit'>Submit</button>
+    </form>
+  </body>
+```
+
+#### Customizing form rendering
+
+We can configure the form rendering options in the template by passing arguments to the form object in `views.py`. Here are some examples:
+
+1. configuring form id with `auto_id` argument 
+
+```python
+# appName/views.py
+fm = ContactForm(auto_id=False)
+```
+
+```python
+# appName/views.py
+fm = ContactForm(auto_id=True) # default
+```
+
+```python
+# appName/views.py
+fm = ContactForm(auto_id="some-string") # default , it will be treated as True 
+```
+
+```python
+# appName/views.py
+fm = ContactForm(auto_id="hello-world_%s")
+ # id will be generated as hello-world_<field_name>
+```
+
+2. Configuring label tag 
+
+```python
+fm = ContactForm(label_suffix=":-") 
+# <label>Last name:-</label>
+```
+
+```python
+fm = ContactForm(initial={"first_name":"Mohammad","last_name":"Hamza"}) 
+# <input type="text" name="first_name" value="Mohammad" required id="id_first_name">
+# <input type="text" name="last_name" value="Hamza" required id="id_last_name">
+```
+
+3. Configuring Field Order
+
+```python
+fm = ContactForm(field_order=["age","last_name","city","first_name"])
+# <input type="text" name="age" required id="id_age">
+# <input type="text" name="last_name" required id="id_last_name">
+# <input type="text" name="city" required id="id_city">
+# <input type="text" name="first_name" required id="id_first_name">
+```
+    
+
