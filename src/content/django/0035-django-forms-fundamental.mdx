@@ -4,30 +4,33 @@ description: Learn how to create forms in Django
 published: true
 ---
 
-Django forms are a powerful tool for creating user-friendly forms in your Django applications. They allow you to define the fields and validation rules for a form, and then render them in a template.
 
-There are two ways to create a form in Django
+Django forms are a powerful tool for creating user-friendly forms in your Django applications. They allow you to define fields and validation rules for a form, and then render them in a template.
 
-1. Using Django Form API 
-2. Using Form Class
+
+## Ways to Create a Form in Django
+
+1. **Using Django Form API**  
+2. **Using Form Class**
+
+---
 
 ## Django Form API
 
-The Django Form API is a simple and easy-to-use way to create forms in Django. It provides a set of classes and functions that you can use to define and render forms.
+The Django Form API provides a simple and intuitive way to create and manage forms in Django. It includes a set of classes and functions to define and render forms efficiently.
 
-**Folder Structure**
+### **Folder Structure**
 
 ```plaintext
 my_project/
-│
 ├── my_app/
 │   ├── migrations/            
 │   ├── templates/             
-│   │   └── my_app/
-│   │       └── index.html      
+│   │   ├── my_app/
+│   │       ├── index.html      
 │   ├── __init__.py          
 │   ├── admin.py               
-│   ├── apps.py               
+│   ├── apps.py                
 │   ├── forms.py   # Add forms.py in application folder           
 │   ├── models.py              
 │   ├── urls.py               
@@ -38,17 +41,20 @@ my_project/
 │   ├── asgi.py                
 │   ├── settings.py            
 │   ....                 
-│                   
+│                    
 ├── manage.py                          
 ```
 
-To create a form using the Django Form API, you need to define a form class that inherits from the Form class. You can then define the fields and validation rules for the form in the form class.
+### **Creating a Form**
 
-Here's an example of a simple form class:
+To create a form using the Django Form API, define a form class that inherits from `forms.Form`. Specify the fields and validation rules within the class.
+
+**Example:**
 
 ```python
 # appName/forms.py
 from django import forms
+
 class ContactForm(forms.Form):
     first_name = forms.CharField()
     last_name = forms.CharField()
@@ -56,155 +62,152 @@ class ContactForm(forms.Form):
     age = forms.IntegerField()
 ```
 
-In View.py
+---
+
+### **Using the Form in Views**
 
 ```python
 # appName/views.py
 from django.shortcuts import render
 from registration.forms import ContactForm
+
 def contact_view(request):
     fm = ContactForm()
-    dict = {
-        "form" : fm
+    context = {
+        "form": fm
     }
-    return render(request,"registration/index.html",context=dict)
+    return render(request, "registration/index.html", context)
 ```
 
-In Template 
+---
+
+### **Rendering the Form in a Template**
+
+**Template Code:**
 
 ```html
 <!-- appName/templates/appName/index.html -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
+    <title>Contact Form</title>
+</head>
+<body>
     <h2>Contact Form</h2>
     <form action="">
-        {{form}}
-        <button type='submit'>Submit</button>
+        {{ form }}
+        <button type="submit">Submit</button>
     </form>
-  </body>
+</body>
 </html>
 ```
 
-#### Form Rendering Options in Template
+---
 
-1. In the template, we use the form object to render the form fields.
+## Form Rendering Options in Templates
 
-```html
- <body>
-    <h2>Contact Form</h2>
-    <form action="">
-        {{form}}
-        <button type='submit'>Submit</button>
-    </form>
-  </body>
-```
+Django provides various rendering options to customize how forms are displayed in templates.
 
-2. Render as Table 
+### **1. Default Rendering**
 
 ```html
-<body>
-    <h2>Contact Form</h2>
-    <form action="">
-        {{form.as_table}}
-        <button type='submit'>Submit</button>
-    </form>
-  </body>
+<form action="">
+    {{ form }}
+    <button type="submit">Submit</button>
+</form>
 ```
 
-3. Render as List 
+### **2. Render as Table**
 
 ```html
-<body>
-    <h2>Contact Form</h2>
-    <form action="">
-        {{form.as_ul}}
-        <button type='submit'>Submit</button>
-    </form>
-  </body>
+<form action="">
+    {{ form.as_table }}
+    <button type="submit">Submit</button>
+</form>
 ```
 
-4. Render as Paragraph
+### **3. Render as List**
 
 ```html
-<body>
-    <h2>Contact Form</h2>
-    <form action="">
-        {{form.as_p}}
-        <button type='submit'>Submit</button>
-    </form>
-  </body>
+<form action="">
+    {{ form.as_ul }}
+    <button type="submit">Submit</button>
+</form>
 ```
 
-5. Render as Fieldset
+### **4. Render as Paragraphs**
 
 ```html
-<body>
-    <h2>Contact Form</h2>
-    <form action="">
-       <!-- Syntax : {{form.fieldset}} -->
-        {{form.first_name}}
-        {{form.last_name}}
-        {{form.city}}
-        {{form.age}}
-        <button type='submit'>Submit</button>
-    </form>
-  </body>
+<form action="">
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
 ```
 
-#### Customizing form rendering
+### **5. Render Individual Fields**
 
-We can configure the form rendering options in the template by passing arguments to the form object in `views.py`. Here are some examples:
+```html
+<form action="">
+    {{ form.first_name }}
+    {{ form.last_name }}
+    {{ form.city }}
+    {{ form.age }}
+    <button type="submit">Submit</button>
+</form>
+```
 
-1. configuring form id with `auto_id` argument 
+---
+
+## Customizing Form Rendering
+
+Django allows you to customize form rendering by passing arguments to the form object in `views.py`.
+
+### **1. Auto ID Configuration**
+
+- Disable Auto IDs:
+  ```python
+  fm = ContactForm(auto_id=False)
+  ```
+
+- Default Auto IDs:
+  ```python
+  fm = ContactForm(auto_id=True)
+  ```
+
+- Custom ID Format:
+  ```python
+  fm = ContactForm(auto_id="field_%s")
+  # ID for fields will be generated as field_<field_name>
+  ```
+
+### **2. Label Suffix**
+
+Add a suffix to form labels:
 
 ```python
-# appName/views.py
-fm = ContactForm(auto_id=False)
+fm = ContactForm(label_suffix=":-")  
+# Example: <label>First name:-</label>
 ```
+
+### **3. Initial Field Values**
+
+Set initial values for fields:
 
 ```python
-# appName/views.py
-fm = ContactForm(auto_id=True) # default
+fm = ContactForm(initial={"first_name": "John", "last_name": "Doe"})
 ```
+
+### **4. Field Order**
+
+Customize the display order of fields:
 
 ```python
-# appName/views.py
-fm = ContactForm(auto_id="some-string") # default , it will be treated as True 
+fm = ContactForm(field_order=["age", "city", "first_name", "last_name"])
 ```
 
-```python
-# appName/views.py
-fm = ContactForm(auto_id="hello-world_%s")
- # id will be generated as hello-world_<field_name>
-```
+---
 
-2. Configuring label tag 
-
-```python
-fm = ContactForm(label_suffix=":-") 
-# <label>Last name:-</label>
-```
-
-```python
-fm = ContactForm(initial={"first_name":"Mohammad","last_name":"Hamza"}) 
-# <input type="text" name="first_name" value="Mohammad" required id="id_first_name">
-# <input type="text" name="last_name" value="Hamza" required id="id_last_name">
-```
-
-3. Configuring Field Order
-
-```python
-fm = ContactForm(field_order=["age","last_name","city","first_name"])
-# <input type="text" name="age" required id="id_age">
-# <input type="text" name="last_name" required id="id_last_name">
-# <input type="text" name="city" required id="id_city">
-# <input type="text" name="first_name" required id="id_first_name">
-```
-    
+By using these features, Django forms become a versatile tool to enhance user experience in your applications.
 
