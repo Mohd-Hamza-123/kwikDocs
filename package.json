@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "vercel-build": "git submodule update --init --recursive && next build"
+
   },
   "dependencies": {
     "@codemirror/autocomplete": "^6.18.6",
