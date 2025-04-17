@@ -1,0 +1,3 @@
+[submodule "src/content"]
+	path = src/content
+	url = https://github.com/Mohd-Hamza-123/Kwik-Docs---Documentation-Content.git
