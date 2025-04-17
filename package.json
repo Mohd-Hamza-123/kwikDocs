@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "vercel-build": "git submodule update --init --recursive && next build"
-
+    "prebuild": "ts-node update-submodules.ts"
   },
   "dependencies": {
     "@codemirror/autocomplete": "^6.18.6",
