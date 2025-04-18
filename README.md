@@ -23,7 +23,7 @@ This website is built using modern web technologies:
 ```
 ├── app
 │   ├── components   # Reusable UI components
-│   ├── pages        # Web pages for documentation
+│   ├── app          
 ├── public           # Static assets
 ├── styles           # Global CSS and styling
 ├── README.md        # Project overview (this file)
