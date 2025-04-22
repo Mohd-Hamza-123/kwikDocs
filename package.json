@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prebuild": "ts-node update-submodules.ts"
+    "postinstall": "git submodule update --init --recursive"
   },
   "dependencies": {
     "@codemirror/autocomplete": "^6.18.6",
