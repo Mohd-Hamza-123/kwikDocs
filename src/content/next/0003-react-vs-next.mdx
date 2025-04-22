@@ -1,0 +1,61 @@
+---
+title: Next vs React
+description: Learn the difference btw next & react
+published: true
+---
+
+### **React**
+
+- **Client-Side Rendering (CSR)**: By default, React uses client-side rendering, where the JavaScript is executed in the browser to build the user interface. The browser's View Page Source only shows the HTML that was initially sent by the server, which contains minimal structure. In Client-Side Rendering (CSR), the pages, components, or JSX are rendered in the browser. The server sends minimal HTML (usually just a placeholder div), and JavaScript on the client generates the DOM dynamically by rendering the components. Any CSS and additional JavaScript required for the components are also executed in the browser.
+
+- **No Built-in Features**: React does not include out-of-the-box solutions for server-side rendering, static site generation, or file-based routing.
+
+---
+
+### **Next.js**
+
+- **Rendering Options**:
+  - **Server-Side Rendering (SSR)**: Generates pages on the server for each request, making content immediately available for SEO. Note : "pages" in SSR specifically refer to the HTML that represents the content and structure, but CSS and JavaScript are also necessary components sent alongside for a fully functional web page.
+  - **Static Site Generation (SSG)**: Pre-renders pages at build time, serving them as static files for fast performance.
+  - **Client-Side Rendering (CSR)**: Also supports React's default client-side rendering.
+  - **Incremental Static Regeneration (ISR)**: Updates static content dynamically without rebuilding the entire site.
+
+---
+
+### **Key Differences**
+| Feature                    | React                         | Next.js                                      |
+|----------------------------|-------------------------------|---------------------------------------------|
+| **Purpose**                | Library for UI development    | Framework for production-ready React apps   |
+| **Routing**                | Needs React Router            | File-based routing built-in                 |
+| **Rendering Options**      | CSR                           | CSR, SSR, SSG, ISR                          |
+| **SEO**                    | Limited                       | Excellent                                   |
+| **Performance Optimizations** | Manual setup                | Built-in                                    |
+| **API Handling**           | External server needed        | Built-in API routes                         |
+| **Learning Curve**         | Easier                        | Slightly steeper due to additional features |
+
+
+### **Rendering the Component in React vs. Next.js**
+
+#### **React (Client-Side Rendering - CSR)**
+1. The server sends minimal HTML:
+   ```html
+   <div id="root"></div>
+   ```
+2. JavaScript runs in the browser, React creates the DOM:
+   ```html
+   <h1>hello world</h1>
+   ```
+3. **Page Source** only shows the initial boilerplate; full DOM is in developer tools.
+
+---
+
+#### **Next.js (Server-Side Rendering - SSR)**
+1. The server generates and sends full HTML:
+   ```html
+   <div id="__next"><h1>hello world</h1></div>
+   ```
+2. Browser displays the page immediately.
+3. JavaScript hydrates it for interactivity.
+4. **Page Source** shows the full HTML.
+
+---

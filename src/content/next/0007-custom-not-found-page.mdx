@@ -1,0 +1,130 @@
+---
+title: Custom Not-Found Page
+description: Learn how to create custom `not-found.tsx` pages in Next.js.
+published: true
+---
+
+Next.js provides a built-in way to handle 404 errors using a special `not-found.tsx` file.
+
+---
+
+## 🚀 Global 404 Page
+
+To create a global 404 page that handles non-existent routes across your app, simply create a `not-found.tsx` file inside your `app` directory.
+
+### Example:
+```tsx
+// app/not-found.tsx
+import Link from 'next/link';
+
+export default function NotFound() {
+  return (
+    <div className="flex flex-col items-center justify-center h-screen text-center bg-gray-100">
+      <h1 className="text-4xl font-bold text-red-500">404 - Page Not Found</h1>
+      <p className="mt-4 text-lg text-gray-600">
+        Oops! The page you’re looking for doesn’t exist.
+      </p>
+      <Link href="/">
+        <a className="mt-6 px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600">
+          🔙 Go Back to Home
+        </a>
+      </Link>
+    </div>
+  );
+}
+```
+
+---
+
+## 🔄 Redirecting to the Not-Found Page
+
+You can programmatically trigger the global `not-found.tsx` page using the `notFound()` function from `next/navigation`.
+
+### Example:
+```tsx
+// app/some-page/page.tsx
+import { notFound } from 'next/navigation';
+
+export default async function SomePage() {
+  const data = await fetchSomeData();
+
+  if (!data) {
+    notFound(); // Redirect to the global NotFound page
+  }
+
+  return <div>Content</div>;
+}
+```
+
+---
+
+## 📂 Custom Not-Found Page for Dynamic Routes
+
+For dynamic routes (e.g., `/product/[id]`), you can create a **custom `not-found.tsx` page** specific to that route. Next.js allows you to override the global `not-found.tsx` by placing a `not-found.tsx` file inside the route directory.
+
+### Folder Structure:
+```plaintext
+app/
+├── not-found.tsx           // 🌐 Global 404 page for the entire app
+├── product/
+│   ├── [id]/               // Dynamic route folder
+│   │   ├── not-found.tsx   // 🚀 Custom 404 page for `/product/[id]`
+│   │   ├── page.tsx        // Main page for `/product/[id]`
+│   │   ├── loading.tsx     // (Optional) Loading state for `/product/[id]`
+│   │   ├── layout.tsx      // (Optional) Layout specific to `/product/[id]`
+```
+
+### Example for a Dynamic Route:
+#### `app/product/[id]/not-found.tsx`:
+```tsx
+export default function NotFound() {
+  return (
+    <div className="flex flex-col items-center justify-center h-screen text-center bg-gray-100">
+      <h1 className="text-4xl font-bold text-red-500">404 - Product Not Found</h1>
+      <p className="mt-4 text-lg text-gray-600">
+        Sorry, we couldn’t find the product you’re looking for. 😢
+      </p>
+      <Link href="/product">
+        <a className="mt-6 px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600">
+          🛒 Back to Products
+        </a>
+      </Link>
+    </div>
+  );
+}
+```
+
+#### `app/product/[id]/page.tsx`:
+```tsx
+import { notFound } from 'next/navigation';
+
+export default function ProductPage({ params }: { params: { id: string } }) {
+  const { id } = params;
+
+  // Example: Trigger NotFound for specific ID
+  if (id === "4") {
+    notFound(); // Redirect to `/product/[id]/not-found.tsx`
+  }
+
+  return (
+    <div>
+      <h1 className="text-2xl font-bold">Product ID: {id}</h1>
+      <p>This is the product detail page for ID: {id}.</p>
+    </div>
+  );
+}
+```
+
+---
+
+## ⚡ Notes
+1. **Global vs. Route-Specific Pages:**
+   - A global `not-found.tsx` applies to all routes unless overridden.
+   - A route-specific `not-found.tsx` only applies to the respective route.
+
+2. **No Props in `not-found.tsx`:**
+   - The `notFound` page doesn’t receive any props or parameters.
+
+3. **Programmatic Redirect:**
+   - Use the `notFound()` function in dynamic routes to handle specific conditions (e.g., invalid IDs).
+---

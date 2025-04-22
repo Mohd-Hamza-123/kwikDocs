@@ -1,0 +1,30 @@
+---
+title: Static Methods
+description: Static Methods in OOPs
+published: true
+---
+
+A static method in Python is a method that is defined within a class using the `@staticmethod` decorator. It does not operate on an instance (self) or the class itself (cls) and is functionally independent. While it is logically associated with the class, it can be accessed by both the class and its instances."
+
+```python
+class Bike:
+
+    def __init__(self,brand,model):
+        self.model = model
+        self.brand = brand 
+    
+    @staticmethod
+    def bikeDescription():
+        return 'A bike is a pedal-powered two-wheeled vehicle'
+    
+bike1 = Bike('Honda','Activa-6G')
+print(bike1.bikeDescription()) # A bike is a pedal-powered two-wheeled vehicle
+print(Bike.bikeDescription()) # A bike is a pedal-powered two-wheeled vehicle
+```
+
+Here's why you should use @staticmethod: 
+
+- `@staticmethod` explicitly signals that the method does not use self (the instance) or cls (the class).
+- Static methods are not bound to any particular instance of the class, so they can be called directly on the class itself.
+- Using `@staticmethod` reflects better object-oriented design principles
+- You want to group utility functions in the class for better organization

@@ -1,0 +1,124 @@
+---
+title: Encapsulation
+description: Encapsulation in OOPs
+published: true
+---
+
+Encapsulation is a mechanism where a class hides its internal data and methods from external code or components, exposing only the necessary details through a public interface. This improves maintainability, security, and robustness.
+
+### Syntax for encapsulation
+
+```python
+class ClassName:
+    def __init__(self, attribute1, attribute2):
+        self.__private_attribute = attribute1  # Private attribute
+        self.public_attribute = attribute2    # Public attribute
+
+    # Private method (not directly accessible outside the class)
+    def __private_method(self):
+        return "This is a private method"
+
+    # Public method to access the private attribute
+    def get_private_attribute(self):
+        return self.__private_attribute
+
+    # Public method to modify the private attribute
+    def set_private_attribute(self, value):
+        self.__private_attribute = value
+```
+
+### 1. Public Access (Default Access Modifier)
+
+Attributes and methods are public by default, meaning they can be accessed from outside the class.
+
+```python
+class Car:
+    def __init__(self, brand, model):
+        self.brand = brand  # Public attribute
+        self.model = model  # Public attribute
+
+    def display(self):
+        return f"Car: {self.brand} {self.model}"  # Public method
+car = Car("Toyota", "Camry")
+print(car.brand)        # Output: Toyota
+print(car.display())    # Output: Car: Toyota Camry
+```
+
+### 2. Protected Access (Single Underscore _)
+
+- Attributes and methods with a single leading underscore (_) are treated as protected.
+
+- They are meant to use within class and sub class but can be accessed by externally i.e by instance.
+
+```python
+class Person: 
+    def __init__(self,name,age,occupation):
+        self.name = name
+         # Protected attribute
+        self._age = age
+         # Protected attribute
+        self._occupation = occupation
+
+    def _displayDetails(self): # Protected method
+        return f"Name: {self.name} , Age: {self._age} , Occupation: {self._occupation}"
+
+person = Person("Leo",25,"Farmer")
+
+print(person.name)
+print(person._age) # output : 25 (but not recommended to access )
+print(person._occupation) # output : Farmer (but not recommended to access )
+print(person._displayDetails()) # output : Name: Leo , Age: 25 , Occupation: Farmer (not recommended to call directly)
+```
+
+### 3. Private Access (Double Underscore __)
+
+- Attributes and methods with a double leading underscore (__) are treated as private. They are not directly accessible outside the class, promoting stricter encapsulation.
+
+- Private attribute & methods are accessible only within the class and its sub-classes.
+
+Example :
+
+```python
+class Person: 
+    def __init__(self,name,accountNo,balance):
+        self.name = name
+         # Private attribute
+        self.__accountNo = accountNo
+         # Private attribute
+        self.__balance = balance
+    
+    def get_accountNo(self): # getter method for accountNo
+        return f"Account number = {self.__accountNo}"
+    
+    def get_balance(self): # getter method for balance
+        return f"Balance = {self.__balance}"
+    
+person1 = Person("Hamza","12R4A4HS02",5000)
+print(person1.name);
+print(person1.get_accountNo()) # output : Account number = 12R4A4HS02
+print(person1.get_balance()) # output : Balance = 5000
+print(person1.__accountNo) # AttributeError: 'Person' object has no attribute '__accountNo'
+print(person1.__balance) # AttributeError: 'Person' object has no attribute '__balance'
+```
+Another example :
+
+```python 
+class Person: 
+    def __init__(self,name,accountNo,balance):
+        self.name = name
+         # Private attribute
+        self.__accountNo = accountNo
+         # Private attribute
+        self.__balance = balance
+    
+    def __formatDetails(self): # private method
+        return f"Name: {self.name} , Account No: {self.__accountNo} ,Balance: {self.__balance}"
+    
+    def get_Details(self):
+        return self.__formatDetails()
+    
+person1 = Person("Hamza","12R4A4HS02",5000)
+
+print(person1.get_Details()) # Name: Hamza , Account No: 12R4A4HS02 ,Balance: 5000
+print(person1.__formatDetails())  # AttributeError: 'Person' object has no attribute '__formatDetails'
+```

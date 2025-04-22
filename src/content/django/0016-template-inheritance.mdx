@@ -1,0 +1,97 @@
+---
+title: Template Inheritance
+description: "Learn how to use template inheritance in Django for better code organization"
+published: true
+---
+
+Template inheritance is a powerful feature in Django that allows you to create a base template and extend it in other templates. This helps in maintaining a consistent layout across your application and reduces code duplication.
+
+### Template Example
+
+Here’s how you can use template inheritance in Django:
+
+1. **Create a Base Template (base.html)** : 
+
+```html
+<!-- core/templates/core/base.html -->
+ <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock title %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <nav>
+      <a href="/articles">Articles</a>
+      <a href="/about">About</a>
+      <a href="/blog">Blog</a>
+    </nav>
+    <main>{% block content %}{% endblock content %}</main>
+    <footer>&copy; All Rights Reserved.</footer>
+  </body>
+</html>
+```
+
+2. **Extend the Base Template** : Other templates can extend the base template and override specific blocks. Create a child template (e.g., home.html).
+
+```py
+{% extends "core/base.html" %}
+
+{% block title %}Home Page{% endblock title %}
+
+{% block content %}
+Home page content goes here.
+{% endblock content %}
+```
+---
+
+### Template Tag - `block.super` 
+
+The `block.super` template tag allows you to render the parent template in the child template. It is used to include the content of the parent block in the child block.
+
+1. **Base Template**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}My Website{% endblock %}</title>
+</head>
+<body>
+    <h1>Welcome to My Website</h1>
+</body>
+</html>
+```
+
+2. **Child Template**
+
+```html
+{% extends "base.html" %}
+
+{% block title %}Home - {{ block.super }}{% endblock %}
+```
+
+3. **Rendered HTML**
+
+```html
+<html lang="en">
+<head>
+    <title>Home - My Website</title>
+</head>
+<body>
+    <h1>Welcome to My Website</h1>
+</body>
+</html>
+```
+---
+### Default Value for Block
+
+```HTML
+<!-- base.html -->
+{% block title %}My Website{% endblock %}
+```
+
+If a block is not defined in a child template, the parent template's block will be rendered by default.
+---

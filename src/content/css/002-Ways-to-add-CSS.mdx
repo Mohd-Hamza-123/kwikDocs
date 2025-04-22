@@ -1,0 +1,104 @@
+---
+title: Ways to Add CSS
+description: Learn the different ways to add CSS to your HTML documents.
+published: true
+---
+
+# Ways to Add CSS 🎨
+
+CSS can be added to HTML documents in **3 ways**:
+
+---
+
+## 1️⃣ External CSS 🌐
+
+In this method, CSS is written in a separate file with a `.css` extension, and linked to the HTML document using the `<link>` tag inside the `<head>` section.
+
+### Example:
+
+#### `index.html` (or any other HTML file)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>This is a heading</h1>
+    <p>This is a paragraph.</p>
+  </body>
+</html>
+```
+
+#### `style.css` (or any other CSS file)
+
+```css
+h1 {
+  color: red;
+}
+
+p {
+  font-size: 20px;
+}
+```
+
+---
+
+## 2️⃣ Internal CSS 🏠
+
+Internal CSS is written inside a `<style>` tag within the `<head>` section of the HTML document. This method is useful when styles are specific to a single HTML file.
+
+### Example:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      h1 {
+        color: red;
+        text-align: center;
+      }
+      p {
+        font-size: 20px;
+        text-align: justify;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>This is a heading</h1>
+    <p>This is a paragraph.</p>
+  </body>
+</html>
+```
+
+---
+
+## 3️⃣ Inline CSS 🎯
+
+Inline CSS is written directly within the `style` attribute of an HTML element. This method is useful for applying unique styles to individual elements.
+
+### Example:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 style="color: blue; text-align: center">This is a heading</h1>
+    <p style="color: red">This is a paragraph.</p>
+  </body>
+</html>
+```
+---

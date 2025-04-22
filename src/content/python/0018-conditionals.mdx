@@ -1,0 +1,82 @@
+---
+title: Conditionals
+description: ''
+published: true
+---
+
+Conditionals in Python are constructs that allow you to execute certain blocks of code based on specified conditions. The most commonly used conditional statements in Python are `if`, `elif`, and `else`.
+
+### Syntax:
+```python
+if condition:
+    # Code block executed if condition is True
+elif another_condition:
+    # Code block executed if another_condition is True
+else:
+    # Code block executed if none of the above conditions are True
+```
+
+### Example 1: Basic Conditional
+```python
+age = 18
+
+if age >= 18:
+    print("You are an adult.")
+else:
+    print("You are a minor.")
+```
+**Output:**
+```
+You are an adult.
+```
+
+### Example 2: Multiple Conditions with `elif`
+```python
+score = 85
+
+if score >= 90:
+    print("Grade: A")
+elif score >= 80:
+    print("Grade: B")
+elif score >= 70:
+    print("Grade: C")
+else:
+    print("Grade: F")
+```
+**Output:**
+```
+Grade: B
+```
+
+### Example 3: Using Logical Operators
+```python
+temperature = 25
+
+if temperature > 30:
+    print("It's hot outside.")
+elif temperature < 15:
+    print("It's cold outside.")
+else:
+    print("The weather is moderate.")
+```
+**Output:**
+```
+The weather is moderate.
+```
+
+### Example 4: Nested Conditionals
+```python
+num = 5
+
+if num > 0:
+    if num % 2 == 0:
+        print("Positive even number")
+    else:
+        print("Positive odd number")
+else:
+    print("Number is not positive")
+```
+**Output:**
+```
+Positive odd number
+```

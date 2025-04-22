@@ -1,0 +1,99 @@
+---
+title: Conditions in JavaScript
+description: Understanding conditional statements in JavaScript
+published: true
+---
+
+Conditional statements in JavaScript are used to perform different actions based on different conditions. They enable decision-making in your code.
+
+### **1. `if` Statement**
+
+Executes a block of code if the specified condition is `true`.
+
+```javascript
+const age = 18;
+if (age >= 18) {
+  console.log("You are eligible to vote.");
+}
+```
+
+### **2. `if...else` Statement**
+
+Executes one block of code if the condition is `true` and another block if it is `false`.
+
+```javascript
+const age = 16;
+if (age >= 18) {
+  console.log("You are eligible to vote.");
+} else {
+  console.log("You are not eligible to vote.");
+}
+```
+
+### **3. `else if` Ladder**
+
+Used to test multiple conditions.
+
+```javascript
+const score = 85;
+if (score >= 90) {
+  console.log("Grade: A");
+} else if (score >= 75) {
+  console.log("Grade: B");
+} else {
+  console.log("Grade: C");
+}
+```
+
+### **4. `switch` Statement**
+
+Evaluates an expression and executes code based on matching `case` clauses.
+
+```javascript
+const day = 3;
+switch (day) {
+  case 1:
+    console.log("Monday");
+    break;
+  case 2:
+    console.log("Tuesday");
+    break;
+  case 3:
+    console.log("Wednesday");
+    break;
+  default:
+    console.log("Invalid day");
+}
+```
+
+### **5. Ternary Operator**
+
+A shorthand for `if...else`. The syntax is:
+
+```javascript
+condition ? expressionIfTrue : expressionIfFalse;
+```
+
+Example:
+
+```javascript
+const age = 20;
+const message = age >= 18 ? "You are an adult." : "You are a minor.";
+console.log(message);
+```
+
+### **6. Logical Operators in Conditions**
+
+Logical operators like `&&` (AND), `||` (OR), and `!` (NOT) can be used in conditions.
+
+```javascript
+const isMember = true;
+const age = 20;
+
+if (isMember && age >= 18) {
+  console.log("Welcome to the club.");
+}
+
+if (!isMember) {
+  console.log("Please register to become a member.");
+}

@@ -1,0 +1,274 @@
+---
+title: Django Forms Introduction
+description: Learn how to create forms in Django
+published: true
+---
+
+
+Django forms are a powerful tool for creating user-friendly forms in your Django applications. They allow you to define fields and validation rules for a form, and then render them in a template.
+
+
+## Ways to Create a Form in Django
+
+1. **Using Django Form API**  
+2. **Using Form Class**
+
+---
+
+## Django Form API
+
+The Django Form API provides a simple and intuitive way to create and manage forms in Django. It includes a set of classes and functions to define and render forms efficiently.
+
+### **Folder Structure**
+
+```plaintext
+my_project/
+├── my_app/
+│   ├── migrations/            
+│   ├── templates/             
+│   │   ├── my_app/
+│   │       ├── index.html      
+│   ├── __init__.py          
+│   ├── admin.py               
+│   ├── apps.py                
+│   ├── forms.py   # Add forms.py in application folder           
+│   ├── models.py              
+│   ├── urls.py               
+│   ├── views.py                         
+│
+├── my_project/
+│   ├── __init__.py            
+│   ├── asgi.py                
+│   ├── settings.py            
+│   ....                 
+│                    
+├── manage.py                          
+```
+
+### **Creating a Form**
+
+To create a form using the Django Form API, define a form class that inherits from `forms.Form`. Specify the fields and validation rules within the class.
+
+**Example:**
+
+```python
+# appName/forms.py
+from django import forms
+
+class ContactForm(forms.Form):
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+    city = forms.CharField()
+    age = forms.IntegerField()
+```
+
+---
+
+### **Using the Form in Views**
+
+```python
+# appName/views.py
+from django.shortcuts import render
+from registration.forms import ContactForm
+
+def contact_view(request):
+    fm = ContactForm()
+    context = {
+        "form": fm
+    }
+    return render(request, "registration/index.html", context)
+```
+
+---
+
+### **Rendering the Form in a Template**
+
+**Template Code:**
+
+```html
+<!-- appName/templates/appName/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Form</title>
+</head>
+<body>
+    <h2>Contact Form</h2>
+    <form action="">
+        {{ form }}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+```
+
+---
+
+## Form Rendering Options in Templates
+
+Django provides various rendering options to customize how forms are displayed in templates.
+
+### **1. Default Rendering**
+
+```html
+<form action="">
+    {{ form }}
+    <button type="submit">Submit</button>
+</form>
+```
+
+### **2. Render as Table**
+
+```html
+<form action="">
+    {{ form.as_table }}
+    <button type="submit">Submit</button>
+</form>
+```
+
+### **3. Render as List**
+
+```html
+<form action="">
+    {{ form.as_ul }}
+    <button type="submit">Submit</button>
+</form>
+```
+
+### **4. Render as Paragraphs**
+
+```html
+<form action="">
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+```
+
+### **5. Render Individual Fields**
+
+```html
+<form action="">
+    {{ form.first_name }}
+    {{ form.last_name }}
+    {{ form.city }}
+    {{ form.age }}
+    <button type="submit">Submit</button>
+</form>
+```
+
+---
+
+## Customizing Form Rendering
+
+Django allows you to customize form rendering by passing arguments to the form object in `views.py`.
+
+### **1. Auto ID Configuration**
+
+- Disable Auto IDs:
+  ```python
+  fm = ContactForm(auto_id=False)
+  ```
+
+- Default Auto IDs:
+  ```python
+  fm = ContactForm(auto_id=True)
+  ```
+
+- Custom ID Format:
+  ```python
+  fm = ContactForm(auto_id="field_%s")
+  # ID for fields will be generated as field_<field_name>
+  ```
+
+### **2. Label Suffix**
+
+Add a suffix to form labels:
+
+```python
+fm = ContactForm(label_suffix=":-")  
+# Example: <label>First name:-</label>
+```
+
+### **3. Initial Field Values**
+
+Set initial values for fields:
+
+```python
+fm = ContactForm(initial={"first_name": "John", "last_name": "Doe"})
+```
+
+### **4. Field Order**
+
+Customize the display order of fields:
+
+```python
+fm = ContactForm(field_order=["age", "city", "first_name", "last_name"])
+```
+
+---
+
+### Rendering Form Fields Manually
+
+You can also render form fields manually by accessing the fields of the form object.
+
+```html
+<h2>Contact Form</h2>
+<form action="">
+       label Tag : {{form.first_name.label_tag}}
+       <br>
+       lable Id :  {{form.first_name.id_for_label}} 
+       <br>
+       label name : {{form.first_name.label}}
+       <br>
+       input tag : {{form.first_name}}
+       <br>
+       name attribute : {{form.first_name.name}}
+       <br>
+       value attribute : {{form.first_name.value}}
+       <br>
+       required attribute : {{form.first_name.field.required}}
+</form>
+```
+
+### Using for Loop to Render Form Fields
+
+```html
+<h2>Contact Form</h2>
+<form action="">
+    <!-- Render all fields -->
+    {% for field in form %}
+        <p>{{ field.label_tag }} : {{ field }}</p>
+        <p> input type : {{ field.field.widget.input_type }}</p>
+        <p> placeholder : {{ field.field.widget.attrs.placeholder }}</p>
+    {% endfor %}
+
+    <!-- Render only visible fields -->
+    {% for field in form.visible_fields %}
+        <p>{{ field.label_tag }} : {{ field }}</p>
+    {% endfor %}
+
+    <!-- Render only hidden fields -->
+    {% for field in form.hidden_fields %}
+        <p>{{ field.label_tag }} : {{ field }}</p>
+    {% endfor %}
+</form>
+```
+
+### widget in form
+
+You can customize the widget of a form field by passing a widget object to the field.
+
+```python
+from django import forms
+class ContactForm(forms.Form):
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter your name'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Enter your password'}))
+    age = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'Enter your age'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Enter your email'}))
+    dob = forms.DateField(widget=forms.DateInput(attrs={'placeholder': 'Enter your date of birth'}))
+    gender = forms.ChoiceField(widget=forms.RadioSelect(attrs={'placeholder': 'Select your gender'}), choices=[('M', 'Male'), ('F', 'Female')])
+    skills = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'placeholder': 'Select your skills'}), choices=[('HTML', 'HTML'), ('CSS', 'CSS'), ('JavaScript', 'JavaScript'), ('Python', 'Python'), ('Django', 'Django')])
+    hiddenKey = forms.CharField(widget=forms.HiddenInput())
+```

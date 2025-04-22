@@ -1,0 +1,188 @@
+---
+title: Numbers
+description: JS Variables are containers for storing values
+published: true
+---
+
+### Mathematical Operators in JavaScript
+
+* **Addition (`+`)**
+* **Subtraction (`-`)**
+* **Multiplication (`*`)**
+* **Division (`/`)**
+* **Modulus (Remainder) (`%`)**
+* **Exponentiation (`**`)**
+* **Increment (`++`)**
+* **Decrement (`--`)**
+
+### Modulus (Remainder) `%`
+
+The modulus operator returns the remainder of the division of two numbers.
+
+```js
+let a = 10;
+let b = 3;
+let remainder = a % b; // Remainder when 10 is divided by 3
+console.log(remainder); // Output: 1
+```
+
+### Exponentiation `**`
+
+The exponentiation operator raises the base to the power of the exponent.
+
+```js
+let base = 2;
+let exponent = 3;
+let result = base ** exponent; // 2 raised to the power of 3
+console.log(result); // Output: 8
+```
+
+### Increment (`++`)
+
+The increment operator increases the value of a variable by 1.
+
+#### Post-Increment
+
+The value is returned **before** incrementing.
+
+```js
+let a = 5;
+console.log(a++); // Output: 5 (returns value before increment)
+console.log(a);   // Output: 6 (value after increment)
+```
+
+#### Pre-Increment
+
+The value is incremented **before** being returned.
+
+```js
+let b = 5;
+console.log(++b); // Output: 6 (increments first, then returns)
+console.log(b);   // Output: 6
+```
+
+### Decrement (`--`)
+
+The decrement operator decreases the value of a variable by 1.
+
+#### Post-Decrement
+
+The value is returned **before** decrementing.
+
+```js
+let x = 5;
+console.log(x--); // Output: 5 (returns value before decrement)
+console.log(x);   // Output: 4 (value after decrement)
+```
+
+#### Pre-Decrement
+
+The value is decremented **before** being returned.
+
+```js
+let y = 5;
+console.log(--y); // Output: 4 (decrements first, then returns)
+console.log(y);   // Output: 4
+```
+
+> **Note**: Increment and decrement operators (`++` and `--`) can only be used on variables, not on constants or literal values.
+
+### Properties on Math Object
+
+#### 1. Math.PI
+
+```js
+console.log(Math.PI); // 3.141592653589793
+```
+
+Example: Calculate the area of a circle with radius 9 (A = π * r^2):
+
+```js
+let radius = 9;
+let area = Math.PI * radius ** 2;
+console.log(area); // Output: 254.46900494077323
+```
+
+#### 2. Math.E
+
+```js
+console.log(Math.E); // 2.718281828459045
+```
+
+#### 3. Math.SQRT2
+
+```js
+console.log(Math.SQRT2); // 1.4142135623730951
+```
+
+### Methods on Math Object
+
+#### 1. Math.abs(x)
+
+Returns the absolute value of a number.
+
+```js
+console.log(Math.abs(-5));    // 5
+console.log(Math.abs(-4.4));  // 4.4
+console.log(Math.abs(0));     // 0
+console.log(Math.abs(-0.1));  // 0.1
+console.log(Math.abs(3));     // 3
+```
+
+#### 2. Math.round(x)
+
+Rounds a number to the nearest integer.
+
+```js
+console.log(Math.round(2.2)); // 2
+console.log(Math.round(3.9)); // 4
+console.log(Math.round(5.1)); // 5
+console.log(Math.round(-1.1)); // -1
+console.log(Math.round(-1.5)); // -1
+```
+
+#### 3. Math.ceil(x)
+
+Rounds a number up to the nearest integer.
+
+```js
+console.log(Math.ceil(4.2)); // 5
+console.log(Math.ceil(-4.2)); // -4
+```
+
+#### 4. Math.floor(x)
+
+Rounds a number down to the nearest integer.
+
+```js
+console.log(Math.floor(5.95)); // 5
+console.log(Math.floor(5.05)); // 5
+console.log(Math.floor(5));    // 5
+console.log(Math.floor(-5.05)); // -6
+```
+
+#### 5. Math.sqrt(x)
+
+Calculates the square root of a number.
+
+```js
+console.log(Math.sqrt(2)); // 1.4142135623730951
+```
+
+#### 6. Math.pow(x, y)
+
+Raises `x` to the power of `y`.
+
+```js
+console.log(Math.pow(4, 2)); // 16
+```
+
+#### 7. Math.random()
+
+Generates a floating-point number between **0 (inclusive)** and **1 (exclusive)**.
+
+```js
+console.log(Math.random());
+```
+
+---
