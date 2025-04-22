@@ -39,5 +39,5 @@ next-env.d.ts
 .velite
 
 /importantFiles
-
+src/content
 .gitmodules
