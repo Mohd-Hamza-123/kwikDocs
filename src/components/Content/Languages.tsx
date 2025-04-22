@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import { svgIcons } from "../icons";
 import { Button } from "../ui/button";
@@ -26,7 +25,6 @@ const Technologies = () => {
 
   const div = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const dispatch = useAppDispatch();
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [showChatIcon, setShowChatIcon] = useState(false);
 
