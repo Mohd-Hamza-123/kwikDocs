@@ -1,0 +1,108 @@
+---
+title: Stashing (Temporary Commits)
+description: Learn about stashing in Git
+published: true
+---
+
+Stashing in Git is a feature that allows you to temporarily save your uncommitted changes in the working directory so you can switch branches, pull changes, or perform other tasks without losing your progress. You can reapply these changes later from the stash.
+
+---
+
+### **Why Use Stashing?**
+- **Temporary Save**: Safeguards incomplete work without committing.  
+- **Flexibility**: Allows you to switch branches or perform critical tasks.  
+- **Non-Destructive**: Keeps the working directory clean while preserving changes.
+
+---
+
+### **Commands for Stashing**
+
+#### **1. Save Changes to the Stash**
+Temporarily store your changes:
+```bash
+git stash
+```
+This saves all modified tracked files and staged changes. After stashing, your working directory and staging area will be clean.
+
+---
+
+#### **2. Pull Latest Changes (Optional Step)**  
+Once your changes are stashed, you can pull the latest changes from the remote repository without conflicts:  
+```bash
+git pull origin <BRANCH_NAME>
+```
+
+---
+
+#### **3. List Stashed Changes**  
+View all saved stashes:
+```bash
+git stash list
+```
+The output will display stashes with identifiers like `stash@{0}`, `stash@{1}`, etc.
+
+---
+
+#### **4. Apply Stashed Changes**  
+Reapply the most recent stash:  
+```bash
+git stash apply
+```
+> **Note**: This command keeps the stash in the stash list.
+
+---
+
+#### **5. Apply and Remove the Stash**  
+Reapply and remove the stash from the stash list in one step:  
+```bash
+git stash pop
+```
+
+---
+
+#### **6. Clear All Stashes**  
+Remove all saved stashes:  
+```bash
+git stash clear
+```
+
+---
+
+### **Example Workflow**
+1. Modify files in your working directory:
+   - `index.js`
+   - `style.css`
+
+2. Temporarily stash changes:
+   ```bash
+   git stash
+   ```
+
+3. Switch to another branch to pull or work on other tasks:
+   ```bash
+   git checkout main
+   git pull origin main
+   ```
+
+4. Return to your branch and reapply your stashed changes:
+   ```bash
+   git checkout feature
+   git stash pop
+   ```
+
+---
+
+### **Key Notes**
+- **Untracked Files**: By default, `git stash` does not include untracked files. To stash them, use:
+  ```bash
+  git stash -u
+  ```
+
+- **Selective Stashing**: You can stash specific changes by specifying files:
+  ```bash
+  git stash push -m "Message" <file1> <file2>
+  ```
+
+- **Stash Management**: Use `git stash drop stash@{n}` to remove specific stashes.
+
+---

@@ -1,0 +1,41 @@
+---
+title: Model Admin Class
+description: ""
+published: true
+---
+
+The ModelAdmin class in Django is a powerful tool for customizing how a model is displayed and managed in the Django Admin Panel. By subclassing ModelAdmin, you can control features like how fields are displayed, searchable fields, filters, actions, and much more.
+
+```python
+# admin.py
+from django.contrib import admin
+from product.models import Product
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('id','product_name','price',)
+admin.site.register(Product,ProductAdmin)
+```
+
+```python
+# models.py
+from django.db import models
+class Product(models.Model):
+    product_name = models.CharField(max_length=100) 
+    price = models.IntegerField()
+    quantity = models.IntegerField()
+    description = models.TextField()
+```
+
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1744741234/Documentarium/Django/ufppoobn46xruoeyqcxb.png" alt="image"/>
+
+Alternatively, we can use decorater to customize the admin panel.
+
+```python
+# admin.py
+from django.contrib import admin
+from product.models import Product
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('id','product_name','price',)
+```
+
+This will achieve the same result as the previous example.

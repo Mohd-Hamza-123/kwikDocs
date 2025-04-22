@@ -1,0 +1,141 @@
+---
+title: Deep Copy vs Shallow Copy
+description: Understanding the difference between deep copy and shallow copy in JavaScript.
+published: true
+---
+
+### Passing References Do Not Copy the Object
+
+When you assign an object to another variable, only the reference to the object is copied, not the object itself.
+
+```javascript
+const originalObject = {
+    name: "Hamza",
+    phoneNo: 493939,
+    country: "India",
+    isMarried: false,
+};
+
+const copyObject = originalObject; // Passing reference of originalObject to copyObject
+
+copyObject.phoneNo = undefined;
+
+console.log(copyObject.phoneNo);      // undefined
+console.log(originalObject.phoneNo); // undefined
+```
+
+### Shallow Copy
+
+A shallow copy creates a new object and copies the top-level properties of the original object. However, nested objects are still referenced.
+
+#### Example 1: Simple Shallow Copy
+```javascript
+const originalObject = {
+    name: "Hamza",
+    phoneNo: 493939,
+    country: "India",
+    isMarried: false,
+};
+
+const copyObject = { ...originalObject }; 
+// Alternatively: const copyObject = Object.assign({}, originalObject);
+
+copyObject.phoneNo = undefined;
+
+console.log(copyObject.phoneNo);      // undefined
+console.log(originalObject.phoneNo); // 493939
+```
+
+#### Example 2: Nested Objects in Shallow Copy
+```javascript
+const originalObject = {
+    name: "Hamza",
+    phoneNo: 493939,
+    country: "India",
+    social: {
+        instagram: {
+            account1: "insta@gmail.com",
+        },
+        twitter: {
+            account1: "twitter@gmail.com",
+        },
+    },
+};
+
+const copyObject = { ...originalObject };
+
+copyObject.social.instagram.account1 = undefined;
+
+console.log(copyObject.social.instagram.account1);      // undefined
+console.log(originalObject.social.instagram.account1); // undefined
+```
+
+> **Note:** In a shallow copy, nested objects are not duplicated. The copied object holds references to the nested objects of the original.
+
+### Deep Copy
+
+A deep copy creates a completely independent copy of an object, including all nested objects. Changes in the copied object do not affect the original object.
+
+#### Example 1: Using `JSON.parse(JSON.stringify())`
+```javascript
+const originalObject = {
+    name: "Hamza",
+    phoneNo: 493939,
+    country: "India",
+    social: {
+        instagram: {
+            account1: "insta@gmail.com",
+        },
+        twitter: {
+            account1: "twitter@gmail.com",
+        },
+    },
+};
+
+const copyObject = JSON.parse(JSON.stringify(originalObject));
+
+copyObject.social.instagram.account1 = undefined;
+
+console.log(copyObject.social.instagram.account1);      // undefined
+console.log(originalObject.social.instagram.account1); // insta@gmail.com
+```
+
+#### Example 2: Using Recursion
+```javascript
+const originalObject = {
+    name: "Hamza",
+    phoneNo: 493939,
+    country: "India",
+    social: {
+        instagram: {
+            account1: "insta@gmail.com",
+        },
+        twitter: {
+            account1: "twitter@gmail.com",
+        },
+    },
+};
+
+const deepCopy = (obj) => {
+    if (obj === null || typeof obj !== 'object') return obj; // Base case
+
+    const copyObject = Array.isArray(obj) ? [] : {}; // Create a new array or object
+
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            copyObject[key] = deepCopy(obj[key]); // Recursive call
+        }
+    }
+
+    return copyObject;
+};
+
+const copyObject = deepCopy(originalObject);
+
+copyObject.social.instagram.account1 = undefined;
+
+console.log(copyObject.social.instagram.account1);      // undefined
+console.log(originalObject.social.instagram.account1); // insta@gmail.com
+```
+
+> **Tip:** While `JSON.parse(JSON.stringify())` is easy to use, it does not handle special cases like circular references, `undefined` values, or functions. For a more robust solution, consider using libraries like [Lodash](https://lodash.com/) (`_.cloneDeep`).

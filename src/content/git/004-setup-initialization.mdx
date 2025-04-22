@@ -1,0 +1,161 @@
+---
+title: Initializing Repo
+description: "Initializing and cloning repositories"
+published: true
+---
+
+### 🚀 **Initializing a Git Repository**
+
+#### 🔍 **Check If You Are in a Git Repository**
+Before initializing, confirm whether you’re already inside a Git repository:
+
+```bash
+git status
+```
+
+If you are not in a Git repository, you'll see this message:  
+```plaintext
+fatal: not a git repository (or any of the parent directories): .git
+```
+
+---
+
+### 🛠️ **Initialize a New Git Repository**
+To initialize a directory as a Git repository:
+
+1. **Navigate to the desired directory:**
+   ```bash
+   cd /path/to/your/project
+   ```
+
+2. **Run the following command:**
+   ```bash
+   git init
+   ```
+
+   📌 This will:
+   - Create a hidden `.git` directory in the current folder.
+   - Set up Git to track changes in the repository.
+
+---
+
+### 👀 **View the Hidden `.git` Directory**
+Use the following command to see the `.git` folder:  
+
+- **Windows (PowerShell):**
+  ```bash
+  Get-ChildItem -Force
+  ```
+
+- **Linux/Mac:**
+  ```bash
+  ls -a
+  ```
+
+---
+
+### 📂 **Untracked Files**
+🧷 After initializing, all files in the directory are **untracked** by default.  
+
+Use the following command to check the status of untracked files:  
+```bash
+git status
+```
+
+💡 **Untracked files** are files not yet added to Git's version control system.
+
+---
+
+## ✏️ **Adding Files to Version Control**
+
+To track a specific file, use:  
+```bash
+git add <FILE_PATH>
+```
+
+To add all files in the current directory:  
+```bash
+git add .
+```
+
+📋 After adding files, their status changes from **untracked** to **staged**.  
+Verify the status of your repository:  
+```bash
+git status
+```
+
+### 🖼️ Example Screenshots
+
+**Untracked Files :**  
+🌟 Untracked files appear in red.
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1744529167/Documentarium/Git/ac5muf46ixvhjkhuao3j.png" alt="Untracked File" />
+
+**Tracking a single file**
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1742309641/Documentarium/Git/qb0emmu9mevzsedwlr2n.png" alt="Untracked File" />  
+
+**Tracking all files**
+
+✅ Staged files appear in green.  
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1744528829/Documentarium/Git/eoqxkjyyv012pakwzwlm.png" alt="Tracked File" />  
+
+---
+
+## 🛠️ **Viewing Changes with `git diff`**
+
+The `git diff` command shows the differences between various repository states.
+
+### Usage:
+- **Standard Diff Output:**  
+  ```bash
+  git diff
+  ```
+
+- **Bypass the pager (`less`) for direct output:**  
+  ```bash
+  git --no-pager diff
+  ```
+
+### 📋 Example Output:
+```plaintext
+warning: in the working copy of 'main.py', CRLF will be replaced by LF the next time Git touches it
+diff --git a/main.py b/main.py
+index d93a136..5fa4abc 100644
+--- a/main.py
++++ b/main.py
+@@ -1,5 +1,7 @@
+ print("Hello World")
+-
+ def newFunction():
+-    print("New Function")
++    print("Updated Function")
+```
+
+---
+
+## ❌ **Removing Files from Version Control**
+
+To remove a file from version control:  
+```bash
+git rm <FILE_PATH>
+```
+
+📌 **Note:**  
+- The file will also be deleted from your working directory.  
+- To keep the file locally but remove it from Git, use:  
+  ```bash
+  git rm --cached <FILE_PATH>
+  ```
+
+---
+
+### 📝 **Summary of Common Commands**
+| Command                       | Description                                     |
+|-------------------------------|------------------------------------------------|
+| `git init`                    | Initialize a directory as a Git repository.    |
+| `git add <FILE_PATH>`         | Stage a file for version control.              |
+| `git add .`                   | Stage all files in the current directory.      |
+| `git status`                  | Check the status of files in the repository.   |
+| `git diff`                    | Show changes between repository states.        |
+| `git rm <FILE_PATH>`          | Remove a file from version control.            |
+
+---

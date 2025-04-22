@@ -1,0 +1,72 @@
+---
+title: Code Execution
+description: Understanding how JavaScript code is executed.
+published: true
+---
+
+The **code execution process in JavaScript** happens in two main stages: **Compilation Phase** and **Execution Phase**, using an event-driven model powered by the JavaScript engine (e.g., V8 in Chrome).
+
+#### Compilation Phase
+
+During this phase, JavaScript code is parsed and prepared for execution. This involves:
+
+1. **Tokenization**: The source code is broken into tokens, which are small chunks like keywords, operators, or variable names.
+2. **Parsing**: Tokens are converted into an Abstract Syntax Tree (AST) that represents the program's structure.
+3. **Bytecode Generation**: The AST is translated into intermediate code (bytecode) for execution.
+
+Key operations include:
+- **Memory Allocation**: Variables and functions are registered in memory.
+- **Scope Creation**: A Lexical Environment is established for scope resolution.
+
+#### Execution Phase
+
+In this phase, the JavaScript engine executes the bytecode generated in the compilation phase. Key operations include:
+
+1. **Context Creation**:
+   - **Global Execution Context**: Created first and remains throughout the program's lifecycle.
+   - **Function Execution Context**: Created whenever a function is invoked.
+
+2. **Execution of Code**:
+   - JavaScript is executed line-by-line in the **call stack**.
+   - Any asynchronous tasks (like I/O operations) are sent to the **Web APIs**.
+
+#### JavaScript Runtime Components
+
+1. **Call Stack**:
+   - Manages the execution contexts.
+   - Functions are pushed onto the stack when invoked and popped off after completion.
+
+   ```js
+   function foo() {
+     console.log("Inside foo");
+   }
+   foo(); // Call Stack pushes and pops foo()
+   ```
+
+2. **Heap**:
+   - Allocates memory for objects and data structures.
+
+3. **Event Loop**:
+   - Ensures non-blocking execution by constantly checking the **call stack** and **task queue**.
+   - Moves tasks from the **task queue** to the **call stack** when it’s empty.
+
+4. **Web APIs**:
+   - Handle asynchronous operations like `setTimeout`, DOM events, and HTTP requests.
+
+   ```js
+   console.log("Start");
+   setTimeout(() => console.log("Async Task"), 1000);
+   console.log("End");
+   // "Start" -> "End" -> "Async Task" (after delay)
+   ```
+
+#### Hoisting
+
+JavaScript "hoists" variable and function declarations to the top of their scope during the compilation phase.
+
+```js
+console.log(a); // undefined
+var a = 5;
+console.log(a); // 5
+```
+---

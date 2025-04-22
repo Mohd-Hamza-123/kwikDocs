@@ -1,0 +1,33 @@
+---
+title: Memory Management
+description: JS Variables are container for storing values
+published : true
+---
+
+1)
+```js
+    let age = 55; // 'age' is a variable that holds the value 55
+    
+    let x = age;  // 'x' now holds a copy of the value of 'age'
+  ```  
+
+![](https://res.cloudinary.com/dkkifg17t/image/upload/v1736610228/Documentarium/JavaScript/k7mldsnxzqryijymaiax.jpg)
+
+### Key Points:
+
+*   Primitive values are **copied by value**, not by reference.
+*   Each variable gets its **own memory space** with a copy of the value.
+*   **Primitive values (like numbers, strings etc)** are compared by value not compared by reference (memory location)
+
+2)
+```js
+    let name = 'Darkseid';
+    console.log(name); // 'Darkseid'
+    
+    name = 'Mohd Hamza'; // A new memory location is created
+    console.log(name); // 'Mohd Hamza'
+    
+    // 'Darkseid' remains in memory until garbage collected
+``` 
+
+![](https://res.cloudinary.com/dkkifg17t/image/upload/v1736613091/Documentarium/JavaScript/oz8a8kfqsy996on0bb8x.jpg)

@@ -1,0 +1,30 @@
+---
+title: Revert a Commit
+description: ''
+published: true
+---
+
+Before you learn how to revert a commit, it's important to understand what is `HEAD`. 
+
+#### What is HEAD?
+
+HEAD is a reference to the most recent commit in your repository.
+
+```plaintext {2}
+PS E:\Rough\git-tutorial> git log --oneline
+b883828 (HEAD -> master) third commit
+698fa2e second commit
+dd87246 initial commit
+```
+
+In this example, HEAD is pointing to the most recent commit, which is the third commit.
+
+
+### Reverting a Commit
+
+To revert a commit, you need to use the `git revert` command. 
+
+```bash
+git revert <COMMIT_ID>
+```
+
