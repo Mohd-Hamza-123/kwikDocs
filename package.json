@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postinstall": "git submodule update --init --recursive"
+    "lint": "next lint"
   },
   "dependencies": {
     "@codemirror/autocomplete": "^6.18.6",
