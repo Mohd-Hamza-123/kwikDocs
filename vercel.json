@@ -9,6 +9,9 @@
       "build": [
         "git submodule update --init --recursive"
       ]
-    }
+    },
+    "scripts": {
+    "vercel-build": "git submodule update --init --recursive && your-build-command"
+  }
   }
   
