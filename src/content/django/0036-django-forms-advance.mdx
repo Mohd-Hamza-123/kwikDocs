@@ -1,0 +1,49 @@
+---
+title: Django Forms Advance
+description: ""
+published: true
+---
+
+## Django Forms with Request Method
+
+### 1. POST Method
+
+The most common method for submitting forms is the POST method, which sends data to the server for processing.
+
+
+```python
+# appName/forms.py
+from django import forms
+class ContactForm(forms.Form):
+    name = forms.CharField()
+    email = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput())
+```
+
+```html
+<!-- appName/templates/my_app/index.html -->
+<form method="POST">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">Submit</button>
+</form>
+```
+
+In Django, the `csrf_token` is a security measure to prevent Cross-Site Request Forgery attacks. It ensures that the form submission is coming from the same site.
+
+
+```python
+# appName/views.py
+from django.shortcuts import render
+from registration.forms import ContactForm
+def contact_view(request):
+    fm = ContactForm()
+    dict = {"form" : fm}
+    if(request.method == "POST"):
+        print(request.POST)
+        print(request.POST.get('name'))
+        print(request.POST.get('password'))
+        print(request.POST.get('email'))
+    return render(request,"registration/index.html",context=dict)
+```
+
