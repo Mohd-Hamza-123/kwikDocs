@@ -1,8 +1,9 @@
 'use client'
-import React from 'react'
-import { FaArrowCircleDown } from "react-icons/fa";
 import gsap from 'gsap';
+import React from 'react'
 import { useGSAP } from '@gsap/react';
+import { FaArrowCircleDown } from "react-icons/fa";
+
 const WelcomeScrollDown = () => {
 
     useGSAP(() => {
@@ -15,7 +16,9 @@ const WelcomeScrollDown = () => {
     );
 
     return (
-        <div id="home-scroll-down" className="text-center mt-8 flex flex-col gap-2 items-center">
+        <div 
+        id="home-scroll-down" 
+        className="text-center mt-6 flex flex-col gap-2 items-center">
             <p className="text-lg">Scroll Down</p>
             <FaArrowCircleDown />
         </div>
