@@ -126,6 +126,42 @@ no changes added to commit (use "git add" and/or "git commit -a")
 ```bash
 Remove-Item -Recurse -Force .git
 ```
+---
+
+### Reflog 
+
+The reflog is a log of all the commits that have been made to the repository. It is stored in the `.git/logs` directory and is updated every time a commit is made.
+
+To view the reflog, use the following command:
+
+```bash
+git reflog
+```
+
+### Find specific commit
+
+To find a specific commit, use the following command:
+
+```bash
+git reflog <commit-hash>
+```
+
+### Recover lost commits or changes
+
+If you accidentally deleted a branch or made changes that are no longer visible in the commit history, you can often recover them using the reflog. First, find the reference to the commit where the branch or changes existed, and then reset your branch to that reference.
+
+```bash
+git reflog <commit-hash>
+git reset --hard <commit-hash>
+```
+
+or you can use `HEAD@{n}` to reset to the nth commit before the one you want to reset to. 
+
+```bash
+git reflog <commit-hash>
+git reset --hard HEAD@{1}
+```
+---
 
 ## Key Points About Commits:
 
@@ -134,3 +170,4 @@ Remove-Item -Recurse -Force .git
 - **Author Information**: Commits are associated with a specific author.
 - **Timestamp**: Commits are timestamped with the date and time they were made.
 
+---
