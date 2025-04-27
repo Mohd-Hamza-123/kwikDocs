@@ -1,5 +1,5 @@
 ---
-title: Stashing (Temporary Commits)
+title: Stashing
 description: Learn about stashing in Git
 published: true
 ---
@@ -58,9 +58,23 @@ Reapply and remove the stash from the stash list in one step:
 git stash pop
 ```
 
+Apply Specific Stash : 
+
+```bash
+git stash apply stash@{0}
+```
+> **Note**: Replace `stash@{0}` with the desired stash identifier.
+
 ---
 
-#### **6. Clear All Stashes**  
+#### **6. Naming Stashes**
+
+You can name your stashes to help you identify them later:
+```bash
+git stash save "work in progress"
+```
+
+#### **7. Clear All Stashes**  
 Remove all saved stashes:  
 ```bash
 git stash clear

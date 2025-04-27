@@ -1,0 +1,60 @@
+---
+title: Git Tag
+description: Learn about Git tags
+published: true
+---
+
+###  📌 **Git Tags**
+
+Git tags are used to mark specific points in the history of a repository. They are typically used to mark the release of a new version of a project.
+
+
+#### Creating a tag
+
+To create a tag, use the following command:
+
+```bash
+git tag <TAG_NAME>
+```
+
+#### Create an annotated tag
+
+To create an annotated tag, use the following command:
+    
+```bash
+    git tag -a <TAG_NAME> -m "<TAG_MESSAGE>"
+```
+
+#### List all tags
+
+To list all tags in the repository, use the following command:
+    
+```bash
+    git tag
+```
+
+#### Tagging a specific commit
+
+To tag a specific commit, use the following command:
+    
+```bash
+    git tag <TAG_NAME> <COMMIT_HASH>
+```
+
+#### Push tags to remote repository
+
+To push tags to the remote repository, use the following command:
+
+```bash
+git push origin <tag-name>
+```
+
+### Deleting a tag
+
+To delete a tag, use the following command:
+
+```bash
+git tag -d <TAG_NAME>
+```
+
+---

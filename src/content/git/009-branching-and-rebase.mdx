@@ -1,5 +1,5 @@
 ---
-title: Branching
+title: Branching & Rebase
 description: Learn about branching in Git
 published: true
 ---
@@ -106,6 +106,19 @@ git checkout -b feature/new-feature
 
 ---
 
+### **Renaming a Branch**
+To rename a branch, use the following command while on the branch you want to rename:
+```bash
+git branch -m <old-branch-name> <new-branch-name>
+```
+
+### **Deleting a Branch**
+To delete a branch, use the following command while on the branch you want to delete:
+```bash
+git branch -d <branch-name>
+```
+---
+
 ### **Visual Representation of Branching**
 #### **Example Workflow:**
 1. A new branch (`feature/new-feature`) is created to add a feature.
@@ -127,11 +140,11 @@ Include diagrams or flowcharts to visually explain the branching process.
 
 Rebasing is a powerful feature in Git that allows you to integrate changes from one branch into another. It’s often used to keep a clean project history by applying commits from one branch onto another.
 
+**Ensure you are on the branch you want to rebase**
 
 ```bash
-git rebase <branch-name>
-# Example
-git rebase feature/new-feature
+git checkout <sub-branch-name>
+git rebase main
 ```
 
 ### Merge vs Rebase
