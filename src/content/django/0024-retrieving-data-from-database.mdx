@@ -19,6 +19,7 @@ from django.shortcuts import render
 def get_all_products():
     # Fetch all products
     products = Product.objects.all()
+    # print(products.values())
     dict = {
       'data' : products
     }

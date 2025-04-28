@@ -256,19 +256,55 @@ You can also render form fields manually by accessing the fields of the form obj
 </form>
 ```
 
-### widget in form
+### Widgets in form
 
-You can customize the widget of a form field by passing a widget object to the field.
+Widgets determine how a field's input will be displayed in the HTML. They are a way to customize the appearance and behavior of form fields in your web application.
 
 ```python
 from django import forms
 class ContactForm(forms.Form):
-    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter your name'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Enter your password'}))
-    age = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'Enter your age'}))
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Enter your email'}))
-    dob = forms.DateField(widget=forms.DateInput(attrs={'placeholder': 'Enter your date of birth'}))
-    gender = forms.ChoiceField(widget=forms.RadioSelect(attrs={'placeholder': 'Select your gender'}), choices=[('M', 'Male'), ('F', 'Female')])
-    skills = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'placeholder': 'Select your skills'}), choices=[('HTML', 'HTML'), ('CSS', 'CSS'), ('JavaScript', 'JavaScript'), ('Python', 'Python'), ('Django', 'Django')])
+    # Basic Fields Types
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter your name', 'class': 'some-class'}))
+    age = forms.IntegerField(widget=forms.NumberInput())
+    email = forms.EmailField(widget=forms.EmailInput())
+    password = forms.CharField(widget=forms.PasswordInput())
+    # Addtional Fields Types
+    price = forms.DecimalField(max_digits=10, decimal_places=2) # For financial calculations, prices, and data requiring high precision.
+    height = forms.FloatField() # For approximate numerical calculations (e.g., scientific data, measurements).
+    dob = forms.DateField(widget=forms.DateInput())
+    gender = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('M', 'Male'), ('F', 'Female')])
+    skills = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(), choices=[('HTML', 'HTML'), ('CSS', 'CSS'), ('JavaScript', 'JavaScript'), ('Python', 'Python'), ('Django', 'Django')])
     hiddenKey = forms.CharField(widget=forms.HiddenInput())
+    is_subscribe = forms.BooleanField(required=True)
+    # File Fields
+    image = forms.ImageField()
+    some_file = forms.FileField()
+    # URL Field
+    url = forms.URLField()
+    # IP Address Field
+    ip = forms.IPAddressField()
 ```
+
+Learn More about [Django Widgets](https://docs.djangoproject.com/en/5.1/ref/forms/widgets/) 
+
+### Form Fields Arguments
+
+```python
+# appName/forms.py
+name = forms.CharField(
+    label="Name",
+    max_length=100,
+    min_length=5,
+    required=True,
+    initial="John Doe",
+    help_text="Enter your full name.",
+    error_messages={
+        'required': 'This field is required.',
+        'max_length': 'Name cannot exceed 100 characters.',
+        'min_length': 'Name must be at least 5 characters long.'
+    }
+)
+```
+
+
+---
