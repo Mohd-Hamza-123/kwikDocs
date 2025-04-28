@@ -33,23 +33,25 @@ In Django, the `csrf_token` is a security measure to prevent Cross-Site Request 
 
 ```python
 # appName/views.py
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from appName.forms import CreateBlogForm  # Import your form class
+
 def create_blog_view(request):
-    print(request.method) # To check the request method
-    print(request.POST) # To check the data sent in the POST request
+    print(request.method)  # To check the request method
+    print(request.POST)  # To check the data sent in the POST request
     if request.method == "POST":
-        fm = CreateBlogForm(request.POST)
-        if fm.is_valid(): # To validate the form data
-            print(fm.cleaned_data) # To check the cleaned data after validation
+        fm = CreateBlogForm(request.POST)  # Bind form data
+        if fm.is_valid():  # Validate the form data
+            print(fm.cleaned_data)  # To check the cleaned data after validation
             name = fm.cleaned_data.get("name")
             email = fm.cleaned_data.get("email")
             password = fm.cleaned_data.get("password")
-            # print(name, email, password)
-            # perform the action you want to do with the data
-            return HttpResponseRedirect('/success-page/') # Redirect to a success page or another view
-        else:
-            fm = CreateBlogForm() 
+            # Perform the action you want to do with the data
+            return HttpResponseRedirect('/success-page/')  # Redirect to a success page
     else:
-        fm = CreateBlogForm()
-    return render(request, 'appName/index.html', context={'form': fm})
+        fm = CreateBlogForm()  # Instantiate an empty form
+    context = {'form': fm}  # Use a meaningful variable name for the context dictionary
+    return render(request, 'appName/index.html', context=context)  # Render the template with the form
 ```
 
