@@ -32,7 +32,10 @@ def get_all_products():
 Use the `.get()` method with the primary key or another unique field. This will raise a `DoesNotExist` exception if the object is not found.
 
 ```python
-product = Product.objects.get(id=1)
+from myapp.models import Product
+def get_product(request, id):
+   product = Product.objects.get(id=1)
+   print(product)
 ```
 
 ---
