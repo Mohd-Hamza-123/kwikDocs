@@ -42,7 +42,8 @@ def create_blog_view(request):
     print(request.POST)  # To check the data sent in the POST request
     if request.method == "POST":
         fm = CreateBlogForm(request.POST)  # Bind form data
-        if fm.is_valid():  # Validate the form data
+        if fm.is_valid():  # server side validation
+            print(fm.errors)  # To check if there are any validation errors
             print(fm.cleaned_data)  # To check the cleaned data after validation
             name = fm.cleaned_data.get("name")
             email = fm.cleaned_data.get("email")
