@@ -4,7 +4,7 @@ description: Learn how to delete data from the database
 published: true
 ---
 
-In Django, there are multiple ways to delete records from the database. Here’s an overview of various approaches:
+In Django, there are multiple ways to delete records from the database. Here's an overview of various approaches:
 
 ---
 
@@ -14,10 +14,8 @@ To delete a single record, call the `delete()` method on a model instance.
 
 ```python
 from myapp.models import MyModel
-
 # Fetch the object to delete
 obj = MyModel.objects.get(id=1)
-
 # Delete the object
 obj.delete()
 ```
