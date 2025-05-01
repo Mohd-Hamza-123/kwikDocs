@@ -215,7 +215,7 @@ You can also render form fields manually by accessing the fields of the form obj
 
 ```html
 <h2>Contact Form</h2>
-<form action="">
+<form>
        label Tag : {{form.first_name.label_tag}}
        <br>
        lable Id :  {{form.first_name.id_for_label}} 
@@ -229,6 +229,10 @@ You can also render form fields manually by accessing the fields of the form obj
        value attribute : {{form.first_name.value}}
        <br>
        required attribute : {{form.first_name.field.required}}
+       <br>
+       field errors : {{form.first_name.errors}}
+       <br>
+       non-field errors : {{form.non_field_errors}}
 </form>
 ```
 
@@ -253,6 +257,16 @@ You can also render form fields manually by accessing the fields of the form obj
     {% for field in form.hidden_fields %}
         <p>{{ field.label_tag }} : {{ field }}</p>
     {% endfor %}
+
+    <!-- Loop on errors-->
+     {% for error in form.field.errors %}
+        <p>{{ error }}</p>
+     {% endfor %}
+
+     <!-- Loop on non-field errors-->
+      {% for error in form.non_field_errors %}
+        <p>{{ error }}</p>
+      {% endfor %}
 </form>
 ```
 
@@ -261,28 +275,63 @@ You can also render form fields manually by accessing the fields of the form obj
 Widgets determine how a field's input will be displayed in the HTML. They are a way to customize the appearance and behavior of form fields in your web application.
 
 ```python
+# appName/forms.py
 from django import forms
 class ContactForm(forms.Form):
-    # Basic Fields Types
+
+    # Char Fields
     name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter your name', 'class': 'some-class'}))
-    age = forms.IntegerField(widget=forms.NumberInput())
+
+    # email field
     email = forms.EmailField(widget=forms.EmailInput())
+
+    # password field
     password = forms.CharField(widget=forms.PasswordInput())
-    # Addtional Fields Types
-    price = forms.DecimalField(max_digits=10, decimal_places=2) # For financial calculations, prices, and data requiring high precision.
+
+    # number fields
+    age = forms.IntegerField(widget=forms.NumberInput())
+    price = forms.DecimalField() # For financial calculations, prices, and data requiring high precision.
     height = forms.FloatField() # For approximate numerical calculations (e.g., scientific data, measurements).
-    dob = forms.DateField(widget=forms.DateInput())
+
+    # date time fields
+    dob = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}))
+    arrived_at = forms.TimeField(
+        widget=forms.TimeInput(attrs={'type': 'time'})
+    )
+    event_datetime = forms.DateTimeField(
+        widget=forms.DateTimeInput(attrs={'type': 'datetime-local'})
+    )
+
+    # choice fields
     gender = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('M', 'Male'), ('F', 'Female')])
+
     skills = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(), choices=[('HTML', 'HTML'), ('CSS', 'CSS'), ('JavaScript', 'JavaScript'), ('Python', 'Python'), ('Django', 'Django')])
+
+    interest = forms.MultipleChoiceField(choices=[("cricket","Cricket"),("soccer","football"),("basketball","Basketball")])
+
+    # hidden fields
     hiddenKey = forms.CharField(widget=forms.HiddenInput())
-    is_subscribe = forms.BooleanField(required=True)
+
+    # boolean fields
+    is_subscribe = forms.BooleanField(required=True) # Purpose: A field for storing a True or False value
+    agree_terms = forms.NullBooleanField(required=True) # Purpose: A field for storing True, False, or None (null).
+
     # File Fields
-    image = forms.ImageField()
-    some_file = forms.FileField()
+    image = forms.ImageField(widget=forms.FileInput(attrs={'accept': 'image/*','class':'some-class'}))   
+    some_file = forms.FileField(
+        widget=forms.FileInput(
+            attrs={
+                'accept': '.pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx, .jpg, .jpeg, .png, .gif',
+                'class': 'some-class'
+            }
+        )
+    )
+
     # URL Field
-    url = forms.URLField()
-    # IP Address Field
-    ip = forms.IPAddressField()
+    website = forms.URLField(widget=forms.URLInput(attrs={'placeholder': 'http://www.example.com'}))
+
+    # regex field
+    phone_number = forms.RegexField(regex=r'^\+?1?\d{9,15}$')
 ```
 
 Learn More about [Django Widgets](https://docs.djangoproject.com/en/5.1/ref/forms/widgets/) 
@@ -294,7 +343,6 @@ Learn More about [Django Widgets](https://docs.djangoproject.com/en/5.1/ref/form
 name = forms.CharField(
     label="Name",
     max_length=100,
-    min_length=5,
     required=True,
     initial="John Doe",
     help_text="Enter your full name.",
@@ -302,8 +350,44 @@ name = forms.CharField(
         'required': 'This field is required.',
         'max_length': 'Name cannot exceed 100 characters.',
         'min_length': 'Name must be at least 5 characters long.'
-    }
+    },
+    validators=[
+        validators.MinLengthValidator(5),
+        validators.MaxLengthValidator(100),
+        validators.RegexValidator(r'^[a-zA-Z]+$', 'Only letters are allowed.')
+    ],
+    disabled=True, # Disable the field
 )
+
+price = forms.IntegerField(
+    min_value=0,
+    max_value=1000,
+    # other arguments are the same as CharField with some exceptions
+)
+
+phone_number = forms.RegexField(
+        regex=r'^\+?1?\d{9,15}$',
+        error_messages={
+            'invalid': 'Enter a valid phone number in the format: "+999999999". Up to 15 digits allowed.'
+        },
+)
+
+ip = forms.GenericIPAddressField(
+        protocol='both',  # Accepts both IPv4 and IPv6 addresses (default)
+        unpack_ipv4=False,  # Does not convert IPv4-mapped IPv6 addresses
+        required=True,  # Field is mandatory by default
+        error_messages={
+            'invalid': 'Enter a valid IP address.'
+        }
+)
+
+price = forms.DecimalField(
+        max_digits=10,  # Specifies the total number of digits allowed in the number, including both digits before and after the decimal point.
+        decimal_places=2,  # Number of decimal places allowed
+        max_value=1000,  # Maximum value allowed
+        min_value=0,  # Minimum value allowed
+)
+
 ```
 
 

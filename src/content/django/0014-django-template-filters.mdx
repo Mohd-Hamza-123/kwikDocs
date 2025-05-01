@@ -28,6 +28,7 @@ Here are some of the most commonly used filters:
 - `truncatewords`: Truncates a string to a specified number of words.
 - `truncatechars`: Truncates a string to a specified number of characters.
 - `length_is`: Checks if the length of a list is equal to a specified value.
+- `striptags`: Removes HTML tags from a string. 
 
 ### Example
 
@@ -40,6 +41,7 @@ def view_function(request):
         "title": "Django Blog",
         "content": "Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.",
         "email" : None,
+        "html" : "<h1>Django Tutorial</h1>"
     }
     return render(request, "appName/index.html", context=dict)
 ```
@@ -73,6 +75,9 @@ def view_function(request):
     <h2>8) Slice : </h2>
     <h3>Content : {{content|slice:"6"}}</h3>
     <h3>Content : {{content|slice:"7:30"}}</h3>
+
+    <h2>9) Strip HTML Tags : </h2>
+    <h3>Stripped HTML : {{html|striptags}}</h3>
 ```
 ---
 
