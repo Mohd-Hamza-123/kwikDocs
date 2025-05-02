@@ -28,16 +28,56 @@ print(type(z))
 # <class 'float'>  
 # <class 'complex'>
 ```
-**Python Math Module :**
+
+### **Number Functions :**
+
+Python provides a set of built-in functions for performing numeric operations.
+
+**1) round(x,n) Function**
+
+round(x, n): The built-in round function rounds a number x to n decimal places. If n is not provided, it rounds to the nearest integer.
+
+```python
+print(round(2.2))  # Output: 2
+print(round(2.8))  # Output: 3
+print(round(2.5))  # Output: 2
+print(round(2.84919,3)) # Output : 2.849
+```
+
+**2) abs(x) Function**
+
+abs(x): The built-in abs function returns the absolute value of a number.
+
+```python
+print(abs(-1))    # Output: 1
+print(abs(-1.1))  # Output: 1.1
+print(abs(5))     # Output: 5
+```
+
+**3) pow(x,y) Function**
+
+pow(x,y): The built-in pow function returns x to the power of y.
+
+```python
+print(pow(2,3))   # Output: 8
+```
+
+---
+
+### **Python Math Module :**
 
 Python has a built-in module that you can use for mathematical tasks. The `math` module has a set of methods and constants.
 
-**1) Python math.floor() Method**  
-```python
-#Import math library
-import math
+**1) math.pi**
 
-# Round numbers down to the nearest integer
+```python
+import math
+print(math.pi)
+```
+
+**2) math.floor() Method**  
+```python
+import math
 print(math.floor(0.6))   # 0
 print(math.floor(1.4))   # 1
 print(math.floor(5.3))   # 5
@@ -45,7 +85,8 @@ print(math.floor(-5.3))  # -6
 print(math.floor(22.6))  # 22
 print(math.floor(10.0))  # 10
 ```
-**2) Python math.trunc() Method**
+
+**3) math.trunc() Method**
 ```python
 import math
 #  It works similarly to rounding towards zero.
@@ -54,7 +95,40 @@ print(math.trunc(-5.9))  # Output: -5
 print(math.trunc(10))    # Output: 10
 ```
 
-**Python Random Module :**
+**4) math.ceil() Method**
+
+```python
+import math
+print(math.ceil(0.6))   # 1
+print(math.ceil(1.4))   # 2
+print(math.ceil(-5.3))  # -5
+```
+
+**5) math.sqrt() Method**
+
+```python
+import math
+print(math.sqrt(4))   # 2.0
+print(math.sqrt(9))   # 3.0
+```
+
+**6) math.pow() Method**
+```python
+import math
+print(math.pow(2, 3))   # 8.0
+```
+
+**7) math.factorial() Method**
+
+```python
+import math
+print(math.factorial(5))   # 120
+```
+
+
+---
+
+### **Python Random Module :**
 
 **_1)_ Python random.randint( ) Method** 
 ```python
@@ -82,20 +156,20 @@ from decimal import Decimal
 print(Decimal('0.2') + Decimal('0.2') + Decimal('0.2') -Decimal('0.6'))
 # output : 0.0
 ```
-**Python Fractions Module :**
+
+---
+
+### **Python Fractions Module :**
 
 This module provides support for rational number arithmetic. 
 
 **_1)_ Python Fraction( ) Method :**
 ```python
 from fractions import Fraction
-
 print (Fraction(11, 35))
 # returns Fraction(11, 35)
-
 print (Fraction(10, 18))
 # returns Fraction(5, 9)
-
 print (Fraction())
 # returns Fraction(0, 1)
 ```  
