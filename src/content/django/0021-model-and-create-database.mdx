@@ -104,3 +104,16 @@ python manage.py sqlmigrate app1 0001
 # Replace 'app1' with your app name and '0001' with the migration file number.
 ```
 ---
+
+### **Model Fields**
+
+1. **JSONField**
+
+```python
+# app1/models.py
+from django.db import models
+
+class DemoModel(models.Model):
+    thumbnail = models.JSONField(default=dict) # empty dictionary 
+    thumbnail = models.JSONField(default={'key1':'value1', 'key2':'value2'}) # dictionary with key-value pairs
+```

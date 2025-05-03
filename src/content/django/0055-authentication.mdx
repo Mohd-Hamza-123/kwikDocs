@@ -1,0 +1,165 @@
+---
+title: Authentication
+description: How to authenticate users in Django
+published: true
+---
+
+Learn how to handle user authentication in Django, including signup, login, logout, and checking if a user is authenticated.
+
+---
+
+### **1. Signup**
+
+The `UserCreationForm` simplifies the process of creating new users. Here’s how to implement it:
+
+```python
+# views.py
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Automatically log the user in
+            return redirect('/')  # Redirect to the homepage
+    else:
+        # Provide an initial template for the form
+        initial_data = {'username': '', 'password1': '', 'password2': ''}
+        form = UserCreationForm(initial=initial_data)
+
+    return render(request, 'signup.html', {'form': form})
+```
+
+### **Template (`signup.html`)**
+
+```html
+<h2>Sign Up</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sign Up</button>
+</form>
+<p>Already have an account? <a href="{% url 'login' %}">Log in here</a>.</p>
+```
+
+---
+
+### **2. Login**
+
+Authenticate users using Django's `AuthenticationForm`. Here’s an example:
+
+#### **Option 1: Using `AuthenticationForm`**
+
+```python
+# views.py
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login
+from django.shortcuts import render, redirect
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('/')
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'login.html', {'form': form})
+```
+
+#### **Option 2: Using Manual Form Handling**
+
+```python
+# views.py
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/')
+        else:
+            return render(request, 'login.html', {'error': 'Invalid credentials'})
+    return render(request, 'login.html')
+```
+
+### **Template (`login.html`)**
+
+```html
+<h2>Login</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+<p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a>.</p>
+```
+
+---
+
+### **3. Logout**
+
+To log out a user, use Django's `logout()` function:
+
+```python
+# views.py
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+def logout_view(request):
+    logout(request)  # Log out the user
+    return redirect('/')  # Redirect to the homepage
+```
+
+---
+
+### **4. Checking If a User Is Authenticated**
+
+You can check if a user is authenticated using `request.user.is_authenticated`:
+
+```python
+# views.py
+from django.shortcuts import render, redirect
+
+def home_view(request):
+    if request.user.is_authenticated:
+        return render(request, 'home.html')
+    else:
+        return redirect('/login')  # Redirect unauthenticated users to login
+```
+
+---
+
+### **Best Practices**
+
+1. **Use `@login_required` Decorator**: Instead of manually checking authentication, you can use the `@login_required` decorator to protect views.
+
+   ```python
+   from django.contrib.auth.decorators import login_required
+
+   @login_required
+   def dashboard_view(request):
+       return render(request, 'dashboard.html')
+   ```
+
+2. **Redirect URLs in `settings.py`**:
+   Define global redirect URLs for login and logout actions:
+
+   ```python
+   LOGIN_REDIRECT_URL = '/'
+   LOGOUT_REDIRECT_URL = '/login/'
+   ```
+
+3. **Error Handling**:
+   Provide clear messages for invalid credentials or form errors.
+
+---

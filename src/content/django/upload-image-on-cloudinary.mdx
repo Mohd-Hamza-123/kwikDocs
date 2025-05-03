@@ -1,0 +1,269 @@
+---
+title: Uploading Image on Cloudinary
+description: ''
+published: false
+---
+
+### **1. Install Cloudinary Libraries**
+
+First, install the necessary Python libraries for Cloudinary:
+
+```bash
+pip install cloudinary django-cloudinary-storage
+```
+
+---
+
+### **2. Configure Cloudinary in Django**
+
+#### **a. Add Cloudinary Credentials**
+
+Add your Cloudinary credentials in your Django project’s settings file (`settings.py`):
+
+```python
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'your-cloud-name',
+    'API_KEY': 'your-api-key',
+    'API_SECRET': 'your-api-secret'
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+```
+
+* Replace `'your-cloud-name'`, `'your-api-key'`, and `'your-api-secret'` with the credentials from your Cloudinary dashboard.
+
+#### **b. Add `cloudinary` to Installed Apps**
+
+Include `cloudinary` and `cloudinary_storage` in `INSTALLED_APPS`:
+
+```python
+INSTALLED_APPS = [
+    ...
+    'cloudinary',
+    'cloudinary_storage',
+]
+```
+
+---
+
+### **3. Update Media Settings**
+
+Define the media URL and directory for your project in `settings.py`:
+
+```python
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+```
+
+Cloudinary will handle the storage of media files, and Django will still serve them locally for testing purposes.
+
+---
+
+### **4. Modify Your Model to Use Cloudinary**
+
+Update your models to store image metadata efficiently. Here’s an example:
+
+```python
+from django.db import models
+from cloudinary.models import CloudinaryField
+
+class Blog(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    is_published = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    thumbnail = CloudinaryField('thumbnail', blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+```
+
+* The `CloudinaryField` automatically integrates with Cloudinary and stores the necessary metadata.
+
+---
+
+### **5. Upload Images to Cloudinary**
+
+#### **a. Admin Panel**
+
+When adding or updating a blog post in the Django admin panel, you can upload images directly. The uploaded image is automatically stored on Cloudinary.
+
+#### **b. Custom Upload Logic**
+
+If you need to handle uploads programmatically, use the `cloudinary.uploader` module:
+
+```python
+import cloudinary.uploader
+
+response = cloudinary.uploader.upload(
+    'path/to/your/image.png',
+    folder='blog_thumbnails'
+)
+
+# Store the secure URL or public ID in the model
+blog = Blog.objects.create(
+    title='Sample Blog',
+    content='Content goes here...',
+    thumbnail=response['public_id']  # Or 'secure_url' depending on use case
+)
+blog.save()
+```
+
+---
+
+### **6. Fetch Images in Templates**
+
+You can use the `cloudinary` URL in templates to display images:
+
+```html
+<img src="{{ blog.thumbnail.url }}" alt="{{ blog.title }}">
+```
+
+If you need transformations, Cloudinary provides powerful options for resizing, cropping, or applying effects.
+
+---
+
+### **7. Manage Images**
+
+Use the `public_id` to manage images programmatically:
+
+#### **a. Delete Images**
+
+```python
+import cloudinary.uploader
+
+cloudinary.uploader.destroy('blog_thumbnails/sample_image_id')
+```
+
+#### **b. Update Images**
+
+```python
+response = cloudinary.uploader.upload(
+    'path/to/new/image.png',
+    public_id='blog_thumbnails/sample_image_id',
+    overwrite=True
+)
+```
+
+---
+
+### **8. Best Practices**
+
+* **Use `public_id` for Better Control**: Store the `public_id` in the model for easy updates and deletions.
+* **Leverage Cloudinary Transformations**: Optimize images dynamically for size and quality without re-uploading.
+* **Secure Sensitive Data**: Store API keys and secrets securely using environment variables or `django-environ`.
+* **Set Fallback Images**: Use a default image for blog posts without an uploaded thumbnail:
+
+  ```python
+  <img src="{{ blog.thumbnail.url|default:'path/to/default/image.png' }}" alt="{{ blog.title }}">
+  ```
+
+---
+
+### **1. Deleting Images with `cloudinary.uploader.destroy`**
+
+Cloudinary provides the `destroy` method to delete images by their `public_id`. Here's how to implement it:
+
+#### **Example Code**
+
+```python
+import cloudinary.uploader
+
+def delete_cloudinary_image(public_id):
+    try:
+        response = cloudinary.uploader.destroy(public_id)
+        if response.get("result") == "ok":
+            print(f"Image with public_id '{public_id}' has been deleted.")
+        else:
+            print(f"Failed to delete image with public_id '{public_id}': {response}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+```
+
+* **`public_id`**: The unique identifier for the image in Cloudinary. It's stored in the `public_id` field of your model or returned during upload.
+
+---
+
+### **2. Updating the Blog Model to Delete Images Automatically**
+
+To ensure images are deleted when a blog post is deleted, override the `delete` method of your `Blog` model:
+
+#### **Model Implementation**
+
+```python
+from django.db import models
+from cloudinary.models import CloudinaryField
+import cloudinary.uploader
+
+class Blog(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    is_published = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    thumbnail = CloudinaryField('thumbnail', blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+    def delete(self, *args, **kwargs):
+        # Delete the associated Cloudinary image
+        if self.thumbnail:
+            try:
+                cloudinary.uploader.destroy(self.thumbnail.public_id)
+            except Exception as e:
+                print(f"Error deleting Cloudinary image: {e}")
+        super().delete(*args, **kwargs)
+```
+
+* **Purpose**: This ensures that when a blog post is deleted, the associated Cloudinary image is also deleted.
+
+---
+
+### **3. Manual Deletion**
+
+If you need to delete an image manually outside of model deletion:
+
+#### **Example: Deleting by Public ID**
+
+```python
+delete_cloudinary_image("blog_thumbnails/sample_image_id")
+```
+
+---
+
+### **4. Validation Before Deletion**
+
+Before deleting an image, you may want to check if the image exists in Cloudinary:
+
+```python
+import cloudinary.api
+
+def check_and_delete_image(public_id):
+    try:
+        # Check if the image exists
+        response = cloudinary.api.resource(public_id)
+        print(f"Image found: {response}")
+        # Proceed with deletion
+        delete_cloudinary_image(public_id)
+    except cloudinary.exceptions.NotFound:
+        print(f"Image with public_id '{public_id}' does not exist.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+```
+
+---
+
+### **5. Best Practices**
+
+1. **Store Public IDs**: Always store the `public_id` of the uploaded image in your database for easy management.
+2. **Error Handling**: Handle potential errors like network issues or invalid `public_id` gracefully.
+3. **Secure Deletion**: Avoid exposing the `public_id` or sensitive data directly in your application.
+
+---
+
+### **6. Cloudinary Dashboard**
+
+For debugging or verifying image deletions, use the Cloudinary dashboard. It allows you to browse, search, and manually delete images.
+
+
+
