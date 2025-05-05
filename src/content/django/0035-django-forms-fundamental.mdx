@@ -340,7 +340,11 @@ Learn More about [Django Widgets](https://docs.djangoproject.com/en/5.1/ref/form
 
 ```python
 # appName/forms.py
-name = forms.CharField(
+from django.core import validators
+from django import forms
+
+class ContactForm(forms.Form):
+   name = forms.CharField(
     label="Name",
     max_length=100,
     required=True,
@@ -351,11 +355,6 @@ name = forms.CharField(
         'max_length': 'Name cannot exceed 100 characters.',
         'min_length': 'Name must be at least 5 characters long.'
     },
-    validators=[
-        validators.MinLengthValidator(5),
-        validators.MaxLengthValidator(100),
-        validators.RegexValidator(r'^[a-zA-Z]+$', 'Only letters are allowed.')
-    ],
     disabled=True, # Disable the field
 )
 
@@ -387,8 +386,82 @@ price = forms.DecimalField(
         max_value=1000,  # Maximum value allowed
         min_value=0,  # Minimum value allowed
 )
-
 ```
 
+---
+
+### **Built-in Validators & Custom Validators**
+
+Django provides a set of built-in validators that you can use to validate user input. These validators are designed to be used with form fields and can be easily integrated into your forms.
+
+```python
+# appName/forms.py
+from django.core import validators
+from django import forms
+
+def first_letter_uppercase(value):
+    if value and not value[0].isupper():
+        raise ValidationError('First letter must be uppercase.')
+
+name = forms.CharField(
+    validators=[
+        validators.MinLengthValidator(5),
+        validators.MaxLengthValidator(100),
+        validators.RegexValidator(r'^[a-zA-Z]+$', 'Only letters are allowed.'),
+        first_letter_uppercase
+    ])
+```
+
+### **Validate Specific Fields**
+
+You can validate specific fields in a form by using the `validate_<field_name>` method. This method is called automatically when the form is submitted.
+
+```python
+# appName/forms.py
+from django import forms
+
+class ContactForm(forms.Form):
+    name = forms.CharField()
+    email = forms.EmailField()
+
+    def clean_name(self):
+        name = self.cleaned_data.get('name')
+        if name and not name[0].isupper():
+            raise forms.ValidationError('First letter must be uppercase.')
+        return name
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email and not email.endswith('@example.com'):
+            raise forms.ValidationError('Invalid email address.')
+        return email
+```
+
+### **Validate all fields at once**
+
+You can validate all fields in a form at once by using the `full_clean` method. This method is called automatically when the form is submitted.
+
+```python
+# appName/forms.py
+from django import forms
+
+class ContactForm(forms.Form):
+    name = forms.CharField()
+    email = forms.EmailField()
+
+    def clean(self):
+
+        cleaned_data = super().clean()
+        name_value = cleaned_data.get('name')
+        email_value = cleaned_data.get('email')
+
+        if name_value and not name_value[0].isupper():
+            self.add_error('name', 'First letter must be uppercase.')
+
+        if email_value and not email_value.endswith('@example.com'):
+            self.add_error('email', 'Email must end with "@example.com".')
+
+        return cleaned_data
+```
 
 ---
