@@ -1,0 +1,19 @@
+---
+title: Fetching Records from Table
+description: ''
+published: true
+---
+
+### Fetching Records from Table
+
+#### **1. Fetch all records from a table**
+
+```ts
+// app/api/route.ts
+import { NextRequest, NextResponse } from "next/server";
+import db_pool from "@/dbConfig/databaseConfig";
+
+export async function GET(request: NextRequest) {
+        const [rows] = await db_pool.query("SELECT * FROM employee")
+}
+```
