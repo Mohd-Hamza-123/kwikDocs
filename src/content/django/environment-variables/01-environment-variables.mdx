@@ -1,0 +1,49 @@
+---
+title: Environment Variables
+description: Learn how to use environment variables in Django
+published : true
+---
+
+
+Environment variables are key-value pairs used to configure and manage an application's settings and secrets without hardcoding them into the source code. 
+
+## How to use environment variables in Django
+
+### 1. Create a .env file
+
+Create a .env file in the root directory of your project and add the following lines:
+
+```bash
+SECRET_KEY=your-secret-key
+DEBUG=True
+```
+
+### 2. Install python-decouple
+
+Install python-decouple using pip:
+
+```bash
+pip install python-decouple
+```
+
+### 3. Load the environment variables
+
+In your settings.py file, add the following lines:
+
+```python
+# settings.py
+from decouple import config
+
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+```
+
+### 4. Include .env file in your .gitignore
+
+Add the following line to your .gitignore file:
+
+```bash
+# .gitIgnore
+.env
+```
+
