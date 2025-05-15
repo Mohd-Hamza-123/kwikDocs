@@ -1,0 +1,108 @@
+---
+title: Node JS vs JavaScript
+description: Learn about the differences between Node.js and JavaScript
+published: true
+---
+
+Here’s a clear breakdown of the differences between **JavaScript** and **Node.js**:
+
+<table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>JavaScript (Browser JS)</th>
+                <th>Node.js (Server JS)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="feature">Environment</td>
+                <td>Runs in web browsers (Chrome, Firefox)</td>
+                <td>Runs on servers (V8 engine outside browsers)</td>
+            </tr>
+            <tr>
+                <td class="feature">Purpose</td>
+                <td>Frontend development (DOM manipulation, UI)</td>
+                <td>Backend development (APIs, file system, databases)</td>
+            </tr>
+            <tr>
+                <td class="feature">Global Object</td>
+                <td><code>window</code> (e.g., <code>window.alert()</code>)</td>
+                <td><code>global</code> (e.g., <code>global.process</code>)</td>
+            </tr>
+            <tr>
+                <td class="feature">DOM Access</td>
+                <td>Yes (e.g., <code>document.getElementById()</code>)</td>
+                <td>No (no browser DOM)</td>
+            </tr>
+            <tr>
+                <td class="feature">File System</td>
+                <td>Cannot access files (security restriction)</td>
+                <td>Can read/write files (<code>fs</code> module)</td>
+            </tr>
+            <tr>
+                <td class="feature">Modules</td>
+                <td>Uses ES Modules (<code>import/export</code>)</td>
+                <td>Supports both CommonJS (<code>require</code>) and ES Modules</td>
+            </tr>
+            <tr>
+                <td class="feature">APIs</td>
+                <td>Browser APIs (e.g., <code>fetch</code>, <code>localStorage</code>)</td>
+                <td>Node APIs (e.g., <code>http</code>, <code>path</code>, <code>child_process</code>)</td>
+            </tr>
+            <tr>
+                <td class="feature">Event Loop</td>
+                <td>Single-threaded (handles UI events)</td>
+                <td>Non-blocking I/O (optimized for scalability)</td>
+            </tr>
+            <tr>
+                <td class="feature">Dependencies</td>
+                <td>Managed via <code>&lt;script&gt;</code> tags or bundlers (Webpack)</td>
+                <td>Managed via <code>npm</code>/<code>yarn</code> (e.g., <code>npm install express</code>)</td>
+            </tr>
+            <tr>
+                <td class="feature">Example Use</td>
+                <td>Interactive web pages, frontend frameworks (React)</td>
+                <td>Web servers (Express), CLI tools, microservices</td>
+            </tr>
+        </tbody>
+    </table>
+
+### **Key Takeaways:**
+1. **JavaScript** is the core language, while **Node.js** is a runtime to execute JS outside browsers.
+2. **JavaScript** is for client-side, **Node.js** is for server-side.
+3. They share syntax but have different APIs (e.g., no `document` in Node.js, no `fs` in browser JS).
+
+### **Example Code Comparison:**
+#### **Browser JavaScript (Frontend)**
+```javascript
+// Manipulate the DOM
+document.getElementById("btn").addEventListener("click", () => {
+  alert("Hello from the browser!");
+});
+
+// Use browser APIs
+fetch("https://api.example.com/data")
+  .then(response => response.json());
+```
+
+#### **Node.js (Backend)**
+```javascript
+// Create a server
+const http = require('http');
+http.createServer((req, res) => {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello from Node.js!');
+}).listen(3000);
+
+// Access files
+const fs = require('fs');
+fs.readFile('file.txt', 'utf8', (err, data) => {
+  console.log(data);
+});
+```
+
+### **When to Use Which?**
+- Use **JavaScript** for frontend (React, Angular, Vue).
+- Use **Node.js** for backend (Express, NestJS), scripts, or tools (Webpack, ESLint).
+

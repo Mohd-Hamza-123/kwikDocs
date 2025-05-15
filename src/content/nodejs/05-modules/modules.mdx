@@ -1,0 +1,72 @@
+---
+title: Modules
+description: Learn about modules
+published: true
+---
+
+
+A **module** is a reusable piece of code that encapsulates related functionality, variables, and dependencies. Modules help organize code into separate files, making applications more maintainable, scalable, and easier to debug.
+
+---
+
+## **Types of Modules in JavaScript/Node.js**
+There are **two main module systems**:
+
+### **1. CommonJS (Node.js Default)**
+- Used in **Node.js** (before ES Modules were introduced).
+- Uses `require()` to import and `module.exports` to export.
+
+#### **Example: CommonJS Module**
+```javascript
+// math.js (exports)
+const add = (a, b) => a + b;
+module.exports = { add };
+
+// app.js (imports)
+const { add } = require('./math.js');
+console.log(add(2, 3)); // 5
+```
+
+### **2. ES Modules (Modern JavaScript)**
+
+- Standardized in **ECMAScript 6 (ES6)**.
+- Uses `import` and `export` syntax.
+- Supported in **browsers** and **Node.js** (with `"type": "module"` in `package.json`).
+
+#### **Example: ES Module**
+```javascript
+// math.js (exports)
+export const add = (a, b) => a + b;
+
+// app.js (imports)
+import { add } from './math.js';
+console.log(add(2, 3)); // 5
+```
+
+---
+
+## **Key Differences Between CommonJS and ES Modules**
+| Feature        | CommonJS (`require/module.exports`) | ES Modules (`import/export`) |
+|---------------|--------------------------------|------------------------------|
+| **Syntax**    | `require()`, `module.exports` | `import`, `export` |
+| **Loading**   | Synchronous (blocking) | Asynchronous (non-blocking) |
+| **Browser Support** | ❌ No (Node.js only) | ✅ Yes (modern browsers) |
+| **Node.js Support** | ✅ Default | ✅ Needs `"type": "module"` |
+| **Dynamic Imports** | `require()` can be conditional | `import()` (dynamic import) |
+| **Static Analysis** | Harder for bundlers | Easier optimization |
+
+---
+
+## **When to Use Which?**
+- **Node.js (Backend)**:  
+  - Traditionally used **CommonJS**, but now supports **ES Modules** (recommended for new projects).
+  - Use `"type": "module"` in `package.json` to enable ES Modules.
+- **Browser (Frontend)**:  
+  - Always use **ES Modules** (`<script type="module">` in HTML).
+  - Bundlers like **Webpack** or **Vite** convert ES Modules for browser compatibility.
+
+---
+
+
+
+

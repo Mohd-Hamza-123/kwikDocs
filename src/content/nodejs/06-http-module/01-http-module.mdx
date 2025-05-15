@@ -1,0 +1,24 @@
+---
+title: Http Modules
+description: Learn about Http Modules
+published: true
+---
+
+The **http** module is used to create HTTP servers and handle HTTP requests and responses.
+
+### Create a Server
+
+```javascript
+import http from 'http'
+
+const PORT = 8000
+const server = http.createServer((request, response) => {
+    response.write("This is a response from server")
+    response.end()
+})
+
+server.listen(PORT,()=>{
+    console.log("Server is running on port",PORT)
+})
+// Type localhost:8000 in your browser to see the response
+```
