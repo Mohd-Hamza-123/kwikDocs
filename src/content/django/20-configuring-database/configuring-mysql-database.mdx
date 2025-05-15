@@ -1,0 +1,49 @@
+---
+title: Configuring MySQL DB
+description: How to configure MySQL DB in Django
+published: true
+---
+
+Steps to configure MySQL DB in Django:
+
+1. Install MySQL and create a new database.
+
+<a href="https://www.mysql.com/" target='_blank'><img src="https://img.shields.io/badge/MySQL-CC0000?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL"/></a>
+
+
+2. Update the `settings.py` file with the following configuration:
+```python
+# settings.py
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',  # Database backend
+        'NAME': 'your_database_name',          # Name of your MySQL database
+        'USER': 'your_database_user',          # MySQL username
+        'PASSWORD': 'your_database_password',  # MySQL password
+        'HOST': 'localhost',                   # Database host (default is localhost)
+        'PORT': '3306',                        # Database port (default is 3306)
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",  # Recommended SQL mode
+        },
+    }
+}
+```
+
+3. Install the `mysqlclient` package using pip:
+
+```bash
+pip install mysqlclient
+```
+
+4. Run the migrations:
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+5. Run the server:
+
+```bash
+python manage.py runserver
+```
