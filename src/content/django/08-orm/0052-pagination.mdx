@@ -1,0 +1,59 @@
+---
+title: Pagination
+description: Learn how to paginate data in Django
+published: true
+---
+
+
+Django offers the Paginator class in django.core.paginator, which divides a querySet into manageable chunks for pagination.
+
+
+```python
+from django.core.paginator import Paginator
+from django.shortcuts import render
+from .models import YourModel
+
+def paginated_view(request):
+    # Fetch all objects
+    object_list = YourModel.objects.all()
+
+    # Initialize the Paginator
+    paginator = Paginator(object_list, 10)  # Show 10 items per page
+
+    # Get the page number from the request
+    page_number = request.GET.get('page')
+
+    # Get the relevant page
+    page_obj = paginator.get_page(page_number)
+
+    # Pass the page object to the template
+    return render(request, 'your_template.html', {'page_obj': page_obj})
+```
+
+In the template, you can use the page_obj variable to display the paginated data.
+
+```html
+<ul>
+  {% for obj in page_obj %}
+    <li>{{ obj.name }}</li>
+  {% endfor %}
+</ul>
+
+<div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+      <a href="?page=1">&laquo; first</a>
+      <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">next</a>
+      <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+  </span>
+</div>
+```
