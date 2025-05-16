@@ -35,18 +35,19 @@ const server = http.createServer((request, response) => {
 })
 ```
 
-```javascript
-const server = http.createServer((request, response) => {
-    response.setHeader('Content-Type', 'text/css')
-    response.write("body { background-color: red; }")
-    response.end()
-})
-```
 
 #### 2. **JSON and XML**
 
 * `application/json`: JSON data.
 * `application/xml`: XML data.
+
+```javascript
+const server = http.createServer((request, response) => {
+    response.setHeader('Content-Type', 'application/json')
+    response.write(JSON.stringify({ name: 'John', age: 30 }))
+    response.end()
+})
+```
 
 #### 3. **Form Data**
 

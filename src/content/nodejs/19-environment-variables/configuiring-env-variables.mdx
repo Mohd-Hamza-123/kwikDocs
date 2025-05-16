@@ -1,0 +1,45 @@
+---
+title: Environment Variables
+description: Configure Environment Variables
+published: true
+---
+
+
+### 1. Setting Environment Variables
+
+Create a `.env` file in the root directory of your project and add the following lines:
+
+```bash
+MY_VARIABLE=my_value
+```
+
+### 2. Loading Environment Variables
+
+In your Node.js application, you can load the environment variables using the `dotenv` package. To install the `dotenv` package, run the following command:
+
+```bash
+npm install dotenv
+```
+
+Then, in your Node.js application, add the following code to load the environment variables:
+
+```javascript
+import dotenv from 'dotenv';
+dotenv.config();
+// dotenv.config({path: '.env'})
+```
+
+### 3. Accessing Environment Variables
+
+In Node.js, you can access environment variables using the `process.env` object. This object contains all the environment variables set in the operating system or in the shell.
+
+Here's an example of how to access an environment variable:
+
+```javascript
+const myVariable = process.env.MY_VARIABLE;
+```
+
+In this example, `MY_VARIABLE` is the name of the environment variable. You can access any environment variable by its name.
+
+---
+
