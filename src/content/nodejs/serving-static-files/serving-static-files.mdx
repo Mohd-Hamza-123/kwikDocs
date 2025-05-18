@@ -1,0 +1,100 @@
+---
+title: Serving Static Files
+description: Learn about File-Based Rendering or Serving Static Files
+published: true
+---
+
+## Ideal Folder Structure for Serving Static Files
+
+A well-organized folder structure ensures maintainability and scalability when serving static files. Here's an ideal structure:
+
+```plaintext
+project/
+├── public/                  # Publicly accessible files
+│   ├── css/                 # CSS files
+│   │   └── styles.css
+│   ├── js/                  # JavaScript files
+│   │   └── app.js
+│   ├── images/              # Images
+│   │   └── logo.png
+│   ├── templates/           # HTML templates or static HTML files
+│   │   ├── index.html
+│   │   └── about.html
+│   └── assets/              # Fonts, icons, or other assets
+│       └── custom-font.ttf
+├── src/                     # Source code for the server
+│   ├── server.js            # Main server logic
+├── node_modules/            # Dependencies installed via npm
+├── package.json             # Project metadata and dependencies
+└── README.md                # Documentation for the project
+```
+
+## Serving Static Files with Node.js
+
+Below is an example of serving static HTML files using the `http` module in Node.js. Two approaches are demonstrated: a direct relative path approach and a cross-platform compatible approach.
+
+### Code Example
+
+```javascript
+import url from 'url';
+import http from 'http';
+import path from 'path';
+import fs from 'fs/promises';
+
+// Define directory constants
+const __fileName = url.fileURLToPath(import.meta.url);
+const __dirName = path.dirname(__fileName);
+
+const server = http.createServer(async (request, response) => {
+    try {
+        // Direct relative path (Prone to errors)
+        if (request.url === '/') {
+            const filePath = 'public/templates/index.html'; // Prone to errors on different OS or project changes
+            const fileContent = await fs.readFile(filePath, 'utf-8');
+            response.writeHead(200, { 'Content-Type': 'text/html' });
+            response.end(fileContent);
+        }
+        // Cross-platform compatible approach
+        else if (request.url === '/about') {
+            const filePath = path.join(__dirName, 'public', 'templates', 'about.html'); // Reliable across OS and changes
+            const fileContent = await fs.readFile(filePath, 'utf-8');
+            response.writeHead(200, { 'Content-Type': 'text/html' });
+            response.end(fileContent);
+        } else {
+            // Handle 404 errors
+            response.writeHead(404, { 'Content-Type': 'text/plain' });
+            response.end('404: File Not Found');
+        }
+    } catch (error) {
+        // Handle server errors
+        response.writeHead(500, { 'Content-Type': 'text/plain' });
+        response.end('500: Internal Server Error');
+    }
+});
+
+export default server;
+```
+
+### Key Points
+
+* **Direct Relative Path (First Block):**
+
+  * Using relative paths like `'public/templates/index.html'` is prone to errors.
+  * Issues can arise in different environments (e.g., Windows, macOS, Linux) or when the project structure changes.
+
+* **Cross-Platform Compatible Path (Second Block):**
+
+  * Utilizes `path.join` and `__dirName` for constructing paths.
+  * Ensures compatibility across operating systems and is resilient to project structure changes.
+
+* **Error Handling:**
+
+  * Gracefully handles 404 (Not Found) and 500 (Internal Server Error) scenarios to improve user experience.
+
+* **Recommendation:**
+
+  * Always prefer the cross-platform compatible approach using `path.join` for robustness and maintainability.
+
+By following these practices, you can create a robust and maintainable setup for serving static files in Node.js.
+
+---
