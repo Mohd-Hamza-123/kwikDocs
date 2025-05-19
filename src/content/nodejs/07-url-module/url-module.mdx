@@ -120,3 +120,44 @@ const fileUrl = pathToFileURL(filePath);
 
 console.log(fileUrl.toString()); // Outputs: file:///E:/Rough/Node%20JS/server.js
 ```
+
+3. **URL Constructor**
+
+- The URL constructor is used to create a URL object from a string.
+
+```javascript
+const myURL = new URL('https://example.com:8080/path?name=John#section');
+console.log(myURL.hostname); // Output: 'example.com'
+console.log(myURL.port); // Output: '8080'
+console.log(myURL.pathname); // Output: '/path'
+console.log(myURL.search); // Output: '?name=John'
+console.log(myURL.hash); // Output: '#section'
+```
+
+4. **URL Search Params**
+
+
+```javascript
+const params = new URLSearchParams('name=John&age=30');
+console.log(params.get('name')); // Output: 'John'
+console.log(params.has('age')); // Output: true
+
+params.append('city', 'New York');
+params.append('limit', '10');
+console.log(params.toString()); // Output: 'name=John&age=30&city=New+York&limit=10'
+params.delete('age');
+console.log(params.toString()); // Output: 'name=John&city=New+York&limit=10'
+```
+
+5. **url.format()**
+
+- The url.format() method is used to format a URL object into a string.
+
+```javascript
+const myURL = new URL('https://example.com:8080/path?name=John#section'); 
+const formattedURL = url.format(myURL);
+console.log(formattedURL); // Output: 'https://example.com:8080/path?name=John#section'
+```
+
+
+---
