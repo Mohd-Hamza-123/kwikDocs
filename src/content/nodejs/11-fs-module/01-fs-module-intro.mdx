@@ -1,0 +1,114 @@
+---
+title: fs Module Intro
+description: Learn about fs Modules
+published: true
+---
+
+The **fs** module in Node.js is used to interact with the file system. It provides functions for reading, writing, deleting, and manipulating files and directories. The module supports different execution modes to handle file operations efficiently.
+
+---
+
+## Execution Modes
+
+### 1. **Synchronous (Blocking)**
+
+* **Characteristics**:
+
+  * Blocks the execution of subsequent code until the current operation is complete.
+  * Functions have `Sync` in their name.
+
+* **Example: `fs.readFileSync()`**
+
+```javascript
+import fs from 'fs';
+
+try {
+  // Blocking: Execution halts here until the file is read.
+  const data = fs.readFileSync('file.txt', 'utf8');
+  console.log("File content:", data);
+} catch (err) {
+  console.error("Error reading file:", err);
+}
+
+console.log("This logs AFTER the file is read (blocking).");
+```
+
+---
+
+### 2. **Asynchronous (Non-Blocking)**
+
+* **Characteristics**:
+
+  * Does not block the execution of subsequent code.
+  * Uses callbacks to handle the result of the operation.
+  * Functions do **not** have `Sync` in their name.
+
+* **Example: `fs.readFile()`**
+
+```javascript
+import fs from 'fs';
+
+console.log("Start reading file...");
+
+// Non-blocking: Callback will execute when the file reading is complete.
+fs.readFile('file.txt', 'utf8', (err, data) => {
+  if (err) {
+    console.error("Error reading file:", err);
+    return;
+  }
+  console.log("File content:", data);
+});
+
+console.log("This logs IMMEDIATELY (non-blocking).");
+```
+
+---
+
+### 3. **Promise-based (Modern Approach)**
+
+* **Characteristics**:
+
+  * Introduced in Node.js v10.0.0.
+  * Available through the `fs.promises` API.
+  * Works seamlessly with `async/await` for cleaner and more readable asynchronous code.
+
+* **Example: `fs.promises.readFile()`**
+
+```javascript
+import fs from 'fs/promises'; // Import from the fs.promises API
+
+async function readFile() {
+  try {
+    console.log("Start reading file...");
+    // Non-blocking: Waits for the file reading to complete.
+    const data = await fs.readFile('file.txt', 'utf8');
+    console.log("File content:", data);
+  } catch (err) {
+    console.error("Error reading file:", err);
+  }
+}
+
+readFile();
+console.log("This logs IMMEDIATELY (non-blocking).");
+```
+
+---
+
+## Comparison Table
+
+| Execution Mode    | Blocking | Uses Callback | Uses Promise |
+| ----------------- | -------- | ------------- | ------------ |
+| **Synchronous**   | Yes      | No            | No           |
+| **Asynchronous**  | No       | Yes           | No           |
+| **Promise-based** | No       | No            | Yes          |
+
+---
+
+## Best Practices
+
+* Use **Promise-based (`fs.promises`)** methods for modern and clean asynchronous code.
+* Avoid **Synchronous** methods in production environments as they block the event loop.
+* Use **Asynchronous (callback)** methods for older codebases or compatibility.
+
+---
+

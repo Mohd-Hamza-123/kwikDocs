@@ -137,5 +137,32 @@ console.log(path.isAbsolute('/folder/file.txt')); // true
 console.log(path.isAbsolute('folder/file.txt'));  // false
 ```
 
+### **8. `path.parse()`**
+
+* Parses a path string into an object.
+* Returns an object with the following properties:
+
+  * `root`: The root directory of the path.
+  * `dir`: The directory part of the path.
+  * `base`: The base name of the file.
+  * `ext`: The extension of the file.
+  * `name`: The full name of the file.
+
+```javascript
+import path from 'path';
+const filePath = '/folder/subfolder/file.txt';
+const parsedPath = path.parse(filePath);
+console.log(parsedPath);
+// Output:
+// {
+//   root: '/',
+//   dir: 'folder/subfolder',
+//   base: 'file.txt',
+//   ext: '.txt',
+//   name: 'file'
+// }
+```
+
+
 ---
 
