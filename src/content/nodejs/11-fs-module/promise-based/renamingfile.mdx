@@ -1,0 +1,60 @@
+---
+title: Renaming File (Promise)
+description: Rename a file asynchronously in Node.js
+published: true
+---
+
+
+### Syntax of `fs.promises.rename()`
+
+```javascript
+fs.promises.rename(oldPath, newPath);
+```
+
+#### Parameters:
+
+* **`oldPath`**: The current path of the file (string, Buffer, or URL).
+* **`newPath`**: The new path or name for the file (string, Buffer, or URL).
+
+**Returns:** A Promise that resolves once the file is renamed or rejects with an error.
+
+---
+
+#### Example: Rename a File
+
+This example renames a file from `sample.txt` to `new-sample.txt` in the `public` directory:
+
+```javascript
+import fs from 'fs/promises';
+import path from 'path';
+
+const renameFile = async () => {
+    try {
+        const oldFilePath = path.join('public', 'sample.txt');
+        const newFilePath = path.join('public', 'new-sample.txt');
+        await fs.rename(oldFilePath, newFilePath);
+        console.log('File renamed successfully!');
+    } catch (error) {
+        console.error('Error renaming file:', error);
+    }
+};
+
+renameFile();
+```
+
+---
+
+### Notes
+
+1. **Moving Files:**
+   Use this method to move a file to a different directory by providing a new path in `newPath`.
+
+2. **Error Handling:**
+   Common errors include:
+
+   * File not found (`ENOENT`).
+   * Permission denied (`EACCES`).
+
+---
+
+
