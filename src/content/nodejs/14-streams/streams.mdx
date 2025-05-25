@@ -1,0 +1,148 @@
+---
+title: Streams
+description: Node.js streams
+published: true
+---
+
+Streams are a powerful way to handle data in Node.js. They allow you to process data in chunks, rather than loading everything into memory at once. This approach is particularly useful for handling large files or network requests efficiently.
+
+---
+
+## Types of Streams
+
+Node.js provides four main types of streams:
+
+### 1. **Readable Streams**
+
+Streams from which data can be read.
+
+* **Examples:**
+
+  * `fs.createReadStream()`
+  * `http.IncomingMessage`
+
+### 2. **Writable Streams**
+
+Streams to which data can be written.
+
+* **Examples:**
+
+  * `fs.createWriteStream()`
+  * `http.ServerResponse`
+
+### 3. **Duplex Streams**
+
+Streams that are both readable and writable.
+
+* **Examples:**
+
+  * `net.Socket`
+  * `zlib.createGzip()`
+
+### 4. **Transform Streams**
+
+A type of duplex stream where the output is computed based on the input.
+
+* **Examples:**
+
+  * `zlib.createGzip()`
+  * `crypto.createCipher()`
+
+---
+
+## Working with Streams
+
+### Creating a Readable Stream
+
+Use the `fs` module to create a readable stream for reading files:
+
+```javascript
+import fs from 'fs';
+
+const readableStream = fs.createReadStream('example.txt', {
+  encoding: 'utf8',
+  highWaterMark: 16 // Number of bytes to read at a time
+});
+
+readableStream.on('data', (chunk) => {
+  console.log(`Received ${chunk.length} bytes of data.`);
+  console.log(chunk);
+});
+
+readableStream.on('end', () => {
+  console.log('No more data to read.');
+});
+
+readableStream.on('error', (err) => {
+  console.error('Error reading the file:', err);
+});
+```
+
+### Creating a Writable Stream
+
+Writable streams can be used to write data to files:
+
+```javascript
+import fs from 'fs';
+
+const writableStream = fs.createWriteStream('output.txt', {
+  encoding: 'utf8',
+  highWaterMark: 16 // Number of bytes to write at a time
+});
+
+writableStream.write('Hello, World!\n', (err) => {
+  if (err) {
+    console.error('Error writing to the file:', err);
+  } else {
+    console.log('Data written to the file.');
+  }
+});
+
+writableStream.end(() => {
+  console.log('Finished writing to the file.');
+});
+```
+
+### Piping Streams
+
+The `pipe()` method allows you to connect a readable stream to a writable stream, enabling efficient data transfer:
+
+```javascript
+import fs from 'fs';
+
+const readableStream = fs.createReadStream('example.txt');
+const writableStream = fs.createWriteStream('output.txt');
+
+readableStream.pipe(writableStream);
+
+writableStream.on('finish', () => {
+  console.log('Finished writing to the file.');
+});
+```
+
+### Compressing Data with `zlib`
+
+You can use the `zlib` module to compress files with streams. Here's an example of creating a gzip stream:
+
+```javascript
+import fs from 'fs';
+import zlib from 'zlib';
+
+fs.createReadStream('public/sample.txt')
+  .pipe(zlib.createGzip())
+  .pipe(fs.createWriteStream('public/sample.zip'))
+  .on('finish', () => {
+    console.log('File successfully compressed');
+  });
+```
+
+---
+
+## Key Advantages of Streams
+
+* **Memory Efficient:** Handle large data sources without consuming too much memory.
+* **Speed:** Process data in chunks for faster performance.
+* **Flexibility:** Useful for file I/O, network communication, or any scenario requiring incremental data processing.
+
+---
+

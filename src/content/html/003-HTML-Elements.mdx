@@ -1,11 +1,93 @@
 ---
-title: Elements
+title: HTML Elements
 description: Learn the basics of HTML Elements
 published: true
 ---
 
-**HTML elements** are the building blocks of an HTML document. They define the structure and content of a web page. An element typically consists of a start tag, content, and an end tag. Some elements may also be self-closing.
+
+HTML elements are the building blocks of an HTML document. They define the structure and content of a web page. An element typically consists of:
+
+* **Start tag**: Indicates the beginning of the element.
+* **Content**: The content to be displayed or processed.
+* **End tag**: Closes the element (not required for self-closing elements).
+
+### **Syntax:**
 
 ```html
 <tagname attribute="value">Content</tagname>
 ```
+
+---
+
+## **Types of HTML Elements**
+
+### **1. Basic Elements**
+
+* **Paragraph (`<p>`)**: Defines a paragraph.
+
+  ```html
+  <p>This is a paragraph.</p>
+  ```
+* **Heading (`<h1>` to `<h6>`)**: Defines headings.
+
+  ```html
+  <h1>Main Heading</h1>
+  <h2>Subheading</h2>
+  <h3>Subheading</h3>
+  <h4>Subheading</h4>
+  <h5>Subheading</h5>
+  <h6>Subheading</h6>
+  ```
+
+### **2. Self-Closing Elements**
+
+Some elements do not have content and close themselves.
+
+* **Image (`<img>`)**:
+
+  ```html
+  <img src="image.jpg" alt="Description">
+  ```
+* **Line Break (`<br>`)**:
+
+  ```html
+  <p>First line<br>Second line</p>
+  ```
+* **Meta (`<meta>`)**:
+
+  ```html
+  <meta charset="UTF-8">
+  ```
+
+### **3. Container Elements**
+
+These elements contain other elements or content.
+
+* **Div (`<div>`)**: Groups content into sections.
+
+  ```html
+  <div>
+      <h1>Title</h1>
+      <p>Description here.</p>
+  </div>
+  ```
+
+* **Section (`<section>`)**: Groups content into sections.
+
+  ```html
+  <section>
+      <h1>Title</h1>
+      <p>Description here.</p>
+  </section>
+  ```
+
+* **Article (`<article>`)**: Groups content into sections.
+
+```html
+  <article>
+      <h1>Title</h1>
+      <p>Description here.</p>
+  </article>
+```
+
+---
