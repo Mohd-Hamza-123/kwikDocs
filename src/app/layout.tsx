@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import Providers from "./Providers";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Footer, Navbar, Sidebar } from '../index'
+import { Footer, Navbar, Overlay, SearchDocs, Sidebar } from '../index'
 import { Toaster } from "@/components/ui/toaster";
 import OverlayLoader from "@/components/OverlayLoader/OverlayLoader";
 import { siteConfig } from "../../config/site";
@@ -32,12 +32,14 @@ export default function RootLayout({
         className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}
       >
         <Providers>
-          <div className="min-h-dvh bg-background">
+          <div className="min-h-dvh bg-background overflow-hidden">
             <Navbar />
             <Sidebar />
             <Toaster />
+            <Overlay />
+            <SearchDocs />
             <OverlayLoader />
-            <main>{children}</main>
+            <main className="mt-[9dvh]">{children}</main>
             <Footer />
           </div>
         </Providers>

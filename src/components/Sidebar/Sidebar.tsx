@@ -2,15 +2,11 @@
 import {
     Sheet,
     SheetContent,
-    SheetDescription,
     SheetHeader,
-    SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
 import React from 'react'
-import { Input } from '../ui/input';
 import { Button } from '../ui/button';
-import { svgIcons } from "../icons";
 import { toast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { IoMdLogOut } from "react-icons/io";
@@ -20,6 +16,7 @@ import { useTypicalContext } from '@/context/Typical-Context'
 import { useAppDispatch, useAppSelector } from '@/lib/hooks/hooks';
 import { useResponsiveContext } from "@/context/CSS-Context";
 import SidebarLinks from "./SidebarLinks";
+import { ThemeToggle } from "@/index";
 
 const Sidebar = () => {
 
@@ -64,10 +61,7 @@ const Sidebar = () => {
                     <div className="flex flex-col justify-around flex-1 mt-6">
                         <nav className="flex-1 -mx-3 space-y-3 ">
                             <div className="relative mx-3">
-                                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <svgIcons.search className="w-5 h-5 text-gray-400" />
-                                </span>
-                                <Input placeholder='search' className='pl-10' />
+                                  <ThemeToggle />
                             </div>
 
                             <SidebarLinks

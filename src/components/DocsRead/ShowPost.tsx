@@ -1,23 +1,24 @@
 'use client'
-import { MdOutlineZoomOutMap } from "react-icons/md";
-import { Button } from "../ui/button";
-import { MDXContent } from "../mdx-component";
 import Link from "next/link";
+import { Button } from "../ui/button";
 import { posts } from '#site/content'
+import { MDXContent } from "../mdx-component";
+import { MdOutlineZoomOutMap } from "react-icons/md";
 import { useEffect, useMemo, useState } from "react";
-import { PostItemsProps, setActiveSlug, setPosts } from "@/lib/store/features/postSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
+import { PostItemsProps, setActiveSlug, setPosts } from "@/lib/store/features/postSlice";
+
 
 const ShowPost = ({ category }: { category: string }) => {
 
     const dispatch = useAppDispatch()
     const post = useAppSelector((state) => state.post.post);
+    console.log(post)
     const displayPosts = useMemo(() => posts?.filter((post) => post?.slug.indexOf(category) === 0 && post?.published)
-        , [posts,category])
+        , [posts, category])
 
     const [nextPost, setNextPost] = useState(displayPosts[1] || null);
     const [previousPost, setPreviousPost] = useState(displayPosts[displayPosts?.length - 1] || null)
-
 
     const renderPost = (post: PostItemsProps) => {
         dispatch(setPosts({ post: post }))
@@ -45,7 +46,7 @@ const ShowPost = ({ category }: { category: string }) => {
 
                 <Link
                     className="hidden lg:block"
-                    href={`/document/${post?.slugAsParams}`}><MdOutlineZoomOutMap className="h-5 w-5" /></Link>
+                    href={`/document/${post?.slug.split('/')[0]}/${post?.slugAsParams}`}><MdOutlineZoomOutMap className="h-5 w-5" /></Link>
 
             </div>
 
