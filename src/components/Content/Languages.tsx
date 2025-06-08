@@ -22,13 +22,10 @@ export interface I_Language {
 }
 
 const Technologies = () => {
-
   const div = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [showChatIcon, setShowChatIcon] = useState(false);
-
-  // console.log(showChatIcon)
 
   const {
     data: technology = [],
@@ -36,8 +33,6 @@ const Technologies = () => {
     error: technologyError,
     isPending: technologyPending,
     isSuccess: technologySuccess,
-    isFetching: technologyFetching,
-    refetch,
   } = useQuery({
     queryKey: ["technologies"],
     queryFn: getAllTechnology,
@@ -45,67 +40,68 @@ const Technologies = () => {
   });
 
   const handleLearn = (tech: any) => {
-    console.log(tech)
-    const name = tech?.name?.toLowerCase()
-    console.log(name)
+    const name = tech?.name?.toLowerCase();
     router.push(`/docs/${name}`);
-    // router.push(`/read-doc/${tech?._id}`)
-    // dispatch(setDoc({ document: null }));
   };
 
   useEffect(() => {
-    handleScroll()
-
-    div.current?.addEventListener("scroll", handleScroll)
+    handleScroll();
+    div.current?.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
-
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleScroll = () => {
-    console.log(window.scrollY)
     if (window.scrollY > 200) {
-      setShowChatIcon(true)
-    } {
-      setShowChatIcon(false)
+      setShowChatIcon(true);
+    } else {
+      setShowChatIcon(false);
     }
-  }
+  };
 
   if (technologyPending) return <LoadingPage />;
 
   if (technologySuccess)
     return (
-      <div ref={div} className="dark:bg-bgDark bg-gray-100">
-        {!showChatIcon && <Button variant='outline' className="rounded-full w-[50px] h-[50px] fixed bottom-5 right-6">
-          <svgIcons.message className="dark:fill-white" />
-        </Button>}
+      <div ref={div} className="dark:bg-bgDark bg-gray-100 flex flex-col gap-5">
+        {/* {!showChatIcon && (
+          <Button
+            variant="outline"
+            className="rounded-full w-[50px] h-[50px] fixed bottom-5 right-6 transition-transform hover:scale-110"
+          >
+            <svgIcons.message className="dark:fill-white" />
+          </Button>
+        )} */}
         {technology?.map((techObj: any) => {
           return (
-            <section key={techObj?.techType}>
-              <h1 className="text-2xl lg:text-3xl text-center capitalize font-cursive">
+            <section key={techObj?.techType}
+              className="flex flex-col gap-5"
+            >
+              <h1 className="text-2xl lg:text-2xl text-center capitalize font-cursive">
                 {techObj?.techType}
               </h1>
+
               {techObj?.technologies?.map((tech: any, index: number) => (
                 <div
                   key={tech?._id + index}
-                  className={`dark:bg-containerDark rounded-lg bg-white shadow-md my-6 dark:text-white p-5 w-[94%] lg:w-[70%] mx-auto flex flex-col lg:flex-row ${(index + 1) % 2 === 0 ? "lg:flex-row-reverse" : ""
-                    }`}
-                >
-                  <div className="lg:w-[40%] w-full flex justify-center items-center">
+                  className={`dark:bg-containerDark bg-white shadow-lg rounded-lg overflow-hidden transition-transform hover:scale-[1.02] hover:shadow-xl w-[94%] lg:w-[70%] mx-auto flex flex-col md:flex-row ${index % 2 == 0 ? 'md:flex-row-reverse' : ''} items-center`}>
+
+                  <div className="lg:w-[35%] w-full p-3 h-full flex items-center">
                     <Image
-                      className={`rounded-md object-contain h-full w-full object-center`}
+                      className="object-cover w-full h-full rounded-sm"
                       src={tech?.image?.secure_url}
                       alt={`${tech?.name} Image`}
-                      height={200}
-                      width={200}
                       quality={100}
                       priority={true}
+                      width={100}
+                      height={100}
                     />
                   </div>
-                  <div className="flex justify-around flex-col lg:w-[60%] w-full p-3">
-                    <h2 className="mb-2 text-2xl lg:text-3xl font-medium leading-tight text-center">
+
+                  <div className="p-5 w-full lg:w-[65%]">
+                    <h2 className="mb-2 text-xl lg:text-2xl font-semibold text-center">
                       {tech?.name}
                     </h2>
                     <p className="mb-4 text-base text-gray-500 text-justify">
@@ -113,13 +109,16 @@ const Technologies = () => {
                     </p>
                     <Button
                       variant={"outline"}
-                      onClick={() => handleLearn(tech)}
-                    >
+                      className="w-full"
+                      onClick={() => handleLearn(tech)}>
                       Learn {tech?.name}
                     </Button>
                   </div>
+
+
                 </div>
               ))}
+
             </section>
           );
         })}
@@ -129,7 +128,7 @@ const Technologies = () => {
   if (isError)
     return (
       <h1 className="text-center capitalize font-bold mt-3">
-        No Documents Found . Please Check Your Internet Connection
+        No Documents Found. Please Check Your Internet Connection
       </h1>
     );
 };

@@ -20,5 +20,7 @@ import CodeOutput from "./components/Code-Editor/CodeOutput.tsx"
 import VerifyEmailContent from "./components/VerifyEmailContent.tsx"
 import FilteredPostList from "./components/DocsRead/filtered-post-list.tsx"
 import LanguageSelector from "./components/Code-Editor/LanguageSelector.tsx"
-
-export { WelcomeScrollDown, VerifyEmailContent, Welcome, Technologies, Navbar, RTE, MultiSelect, ImageUpload, DocContent, RelatedDocs, LoadingPage, Sidebar, Prism, Spinner, Footer, PostItems, FilteredPostList, ShowPost, CodeEditor, LanguageSelector, CodeOutput, SearchDocs }
+import ThemeToggle from "./components/ThemeToggle.tsx"
+import Overlay from "./components/Overlay.tsx"
+import Branding from "./components/Branding.tsx"
+export { WelcomeScrollDown, VerifyEmailContent, Welcome, Technologies, Navbar, RTE, MultiSelect, ImageUpload, DocContent, RelatedDocs, LoadingPage, Sidebar, Prism, Spinner, Footer, PostItems, FilteredPostList, ShowPost, CodeEditor, LanguageSelector, CodeOutput, SearchDocs, ThemeToggle, Overlay, Branding }

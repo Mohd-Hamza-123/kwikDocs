@@ -1,9 +1,10 @@
 'use client'
+
 import { posts } from '#site/content'
-import { useEffect, useMemo, useState } from "react";
 import PostItems from "../PostItems";
-import { PostItemsProps } from '@/lib/store/features/postSlice';
+import { useEffect, useMemo } from "react";
 import { useResponsiveContext } from "@/context/CSS-Context";
+import { PostItemsProps } from '@/lib/store/features/postSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks/hooks';
 import { setActiveSlug, setPosts } from '@/lib/store/features/postSlice';
 
@@ -11,7 +12,6 @@ const FilteredPostList = ({ category }: { category: string }) => {
 
   const dispatch = useAppDispatch()
 
-  const post = useAppSelector((state) => state.post.post);
   const activeSlug = useAppSelector((state) => state.post.activeSlug);
 
   const { isDocIndexOpen } = useResponsiveContext();
@@ -21,7 +21,7 @@ const FilteredPostList = ({ category }: { category: string }) => {
 
   useEffect(() => {
     dispatch(setPosts({ post: displayPosts[0] }))
-    dispatch(setActiveSlug({ activeSlug: displayPosts[0].slug }))
+    dispatch(setActiveSlug({ activeSlug: displayPosts[0]?.slug }))
   }, [])
 
   const renderPost = (post: PostItemsProps) => {

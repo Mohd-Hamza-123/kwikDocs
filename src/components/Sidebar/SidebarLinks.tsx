@@ -4,6 +4,7 @@ import { CiLogin } from "react-icons/ci";
 import { BiLogInCircle } from "react-icons/bi";
 import { TbPencilCode } from "react-icons/tb";
 import Link from 'next/link'
+import { ThemeToggle } from '../../index';
 
 const SidebarLinks = ({
     userData,
@@ -100,6 +101,8 @@ const SidebarLinks = ({
                     <span className="mx-2 text-sm font-medium">{nav.name}</span>
                 </Link>
             ))}
+
+          
 
             {techLinks?.map((tech) => (
                 <Link

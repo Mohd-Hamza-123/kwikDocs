@@ -3,6 +3,8 @@ import { createContext, useContext } from "react";
 interface I_TypialContext {
     isSideBarOpen: boolean;
     setIsSideBarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    isDocSearchOpen : boolean;
+    setIsDocSearchOpen : React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const TypicalContext = createContext<I_TypialContext | undefined>(undefined);

@@ -19,7 +19,7 @@ const WelcomeScrollDown = () => {
         <div 
         id="home-scroll-down" 
         className="text-center mt-6 flex flex-col gap-2 items-center">
-            <p className="text-lg">Scroll Down</p>
+            <p className="text-lg z-0">Scroll Down</p>
             <FaArrowCircleDown />
         </div>
     )

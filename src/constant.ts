@@ -1,7 +1,18 @@
 export const saltRounds = 10
 export const type_Reset_Email = 'RESET'
 export const type_Verify_Email = 'VERIFY'
-export const technologyEnums = ['coding language', 'framework', 'library', 'DSA', 'none', 'query language']
+export const technologyEnums = [
+  'DSA',
+  'library',
+  'framework',
+  'query language',
+  'World Wide Web',
+  'coding language',
+  'Runtime Environment',
+  'Version Control System',
+]
+
+
 export const LANGUAGE_VERSIONS = {
   javascript: "18.15.0",
   typescript: "5.0.3",

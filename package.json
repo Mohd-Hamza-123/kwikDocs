@@ -1,5 +1,5 @@
 {
-  "name": "Kwik Docs",
+  "name": "kwikdocs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -50,6 +50,7 @@
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.408.0",
     "mongoose": "^8.5.0",
+    "mysql2": "^3.14.1",
     "next": "^14.2.18",
     "next-cloudinary": "^6.6.2",
     "next-mdx-remote": "^5.0.0",
@@ -73,7 +74,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.7",
-    "@types/node": "^20",
+    "@types/node": "^20.17.41",
     "@types/nodemailer": "^6.4.17",
     "@types/prismjs": "^1.26.4",
     "@types/react": "^18",
