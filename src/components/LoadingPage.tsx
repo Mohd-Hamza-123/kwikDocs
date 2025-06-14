@@ -3,45 +3,22 @@ import React from 'react'
 
 const LoadingPage = ({ loadingMsg }: { loadingMsg?: string }) => {
     return (
-        <section className='dark:bg-bgDark min-h-screen bg-gray-100 w-screen fixed top-0 overflow-hidden flex items-center justify-center'>
-           
-                <div className="flex flex-col items-center">
-                    <svg
-                        className="animate-spin-fast h-10 w-10 mb-4 text-yellow-500"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                    >
-                        <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                        ></circle>
-                        <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 0116 0H4z"
-                        ></path>
-                    </svg>
-                    <p className="sm:text-lg text-sm break-words text-gray-700 text-center">{loadingMsg || "Please wait..."}</p>
+        <section className="dark:bg-gradient-to-br dark:from-[#1e1e1e] dark:via-[#121212] dark:to-[#2c2c2c] bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 min-h-screen w-screen fixed top-0 overflow-hidden flex items-center justify-center z-50">
+            <div className="flex flex-col items-center space-y-6">
+                {/* Spinner */}
+                <div className="relative w-16 h-16">
+                    {/* Outer Spinner */}
+                    <div className="absolute inset-0 border-4 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
+                    {/* Inner Spinner */}
+                    <div className="absolute inset-2 border-4 border-t-transparent border-purple-500 rounded-full animate-[spin_2s_linear_infinite_reverse]"></div>
                 </div>
-       
-            <style jsx>{`
-                    .animate-spin-fast {
-                        animation: spin 0.75s linear infinite;
-                    }
-    
-                    @keyframes spin {
-                        to {
-                            transform: rotate(360deg);
-                        }
-                    }
-                `}</style>
-        </section>
 
+                {/* Loading Text */}
+                <p className="text-center text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-100 animate-pulse">
+                    {loadingMsg || "Loading, please wait..."}
+                </p>
+            </div>
+        </section>
     )
 }
 

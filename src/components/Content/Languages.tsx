@@ -86,7 +86,8 @@ const Technologies = () => {
               {techObj?.technologies?.map((tech: any, index: number) => (
                 <div
                   key={tech?._id + index}
-                  className={`dark:bg-containerDark bg-white shadow-lg rounded-lg overflow-hidden transition-transform hover:scale-[1.02] hover:shadow-xl w-[94%] lg:w-[70%] mx-auto flex flex-col md:flex-row ${index % 2 == 0 ? 'md:flex-row-reverse' : ''} items-center`}>
+                  className={`dark:bg-gradient-to-br dark:from-[#1e1e1e] dark:via-[#121212] dark:to-[#2c2c2c] bg-gradient-to-br from-gray-100 via-white to-gray-200 shadow-lg rounded-lg overflow-hidden transition-transform hover:scale-[1.02] hover:shadow-xl w-[94%] lg:w-[70%] mx-auto flex flex-col md:flex-row ${index % 2 == 0 ? 'md:flex-row-reverse' : ''} items-center`}
+                >
 
                   <div className="lg:w-[35%] w-full p-3 h-full flex items-center">
                     <Image
@@ -109,10 +110,13 @@ const Technologies = () => {
                     </p>
                     <Button
                       variant={"outline"}
-                      className="w-full"
-                      onClick={() => handleLearn(tech)}>
+                      className="w-full px-4 py-2 text-lg font-medium text-white bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 rounded-lg shadow-md hover:shadow-lg hover:from-pink-600 hover:via-red-500 hover:to-orange-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all duration-300"
+                      onClick={() => handleLearn(tech)}
+                    >
                       Learn {tech?.name}
                     </Button>
+
+
                   </div>
 
 

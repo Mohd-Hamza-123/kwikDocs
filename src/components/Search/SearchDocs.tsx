@@ -28,7 +28,7 @@ const SearchDocs = () => {
 
     return (
         <form
-            className={`${isDocSearchOpen ? "" : "hidden"} fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[92dvw] lg:w-[40dvw] h-[70dvh] transition-non md:w-1/2 flex gap-2 bg-white dark:bg-black px-3 py-4 z-40`}>
+            className={`${isDocSearchOpen ? "" : "hidden"} fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[92dvw] lg:w-[40dvw] h-[70dvh] transition-non md:w-1/2 flex gap-2 bg-white dark:bg-bgDark px-3 py-4 z-40`}>
             <div className='w-full lg:w-[40dvw] lg:h-[55dvh] transition-none z-50'>
                 <Input
                     ref={searchRef}
@@ -37,7 +37,7 @@ const SearchDocs = () => {
                     placeholder='Search Documentation...'
                 />
 
-                <ul className='overflow-y-scroll h-[85%] mt-2'>
+                <ul className='overflow-y-scroll h-full mt-2'>
                     {searchPosts?.length > 0 ? searchPosts?.map((post: any) => {
                         return <li className='list-none px-3 py-2 hover:bg-gray-100 dark:hover:bg-black' key={post?.slug}>
                             <Link href={`/document/${post?.slug.split('/')[0]}/${post?.slugAsParams}`} className='flex gap-2' onClick={() => setIsDocSearchOpen(false)}>

@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Footer, Navbar, Overlay, SearchDocs, Sidebar } from '../index'
 import { Toaster } from "@/components/ui/toaster";
-import OverlayLoader from "@/components/OverlayLoader/OverlayLoader";
+// import OverlayLoader from "@/components/OverlayLoader/OverlayLoader";
 import { siteConfig } from "../../config/site";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-sans' });
@@ -38,7 +38,7 @@ export default function RootLayout({
             <Toaster />
             <Overlay />
             <SearchDocs />
-            <OverlayLoader />
+            {/* <OverlayLoader /> */}
             <main className="mt-[9dvh]">{children}</main>
             <Footer />
           </div>
