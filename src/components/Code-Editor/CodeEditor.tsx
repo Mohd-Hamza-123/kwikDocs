@@ -1,11 +1,14 @@
 'use client';
-import { CodeOutput } from '@/index'
+import { CodeOutput } from '@/index';
 import { Button } from '../ui/button';
+import { FaRegCopy } from "react-icons/fa";
 import { EditorState } from '@codemirror/state';
 import { oneDark } from '@codemirror/theme-one-dark';
+import copyToClipBoard from '@/utils/copyToClipboard';
 import { javascript } from '@codemirror/lang-javascript';
 import { autocompletion } from '@codemirror/autocomplete';
 import React, { useEffect, useRef, useState } from 'react';
+import LanguageSelector from '@/components/Code-Editor/LanguageSelector';
 import {
     history,
     defaultKeymap,
@@ -66,7 +69,7 @@ const CodeEditor = () => {
                 logs.push(args.map((arg) => String(arg)).join(' '));
             },
         };
-        console.log(customConsole)
+        // console.log(customConsole)
         try {
             // Using Function constructor for safer evaluation
             const func = new Function('console', codeValue);
@@ -78,13 +81,32 @@ const CodeEditor = () => {
     };
 
     return (
-        <section className='flex gap-2 h-full w-full'>
-            {/* Editor Container */}
-            <div ref={editorRef} className='h-full w-1/2 text-lg' />
-            <div className='flex flex-col gap-2 items-center w-1/2 h-full'>
-                <Button onClick={runCode}>Run Code</Button>
-                <CodeOutput output={output} />
+        <section className='flex gap-2 h-full w-full flex-col items-center justify-center'>
+
+            <div className='flex gap-2 w-full justify-center items-center'>
+                <LanguageSelector activeLanguage='javascript' onLanguageChange={() => { }} />
+                <Button
+                    onClick={runCode}
+                    className='w-[85px]'
+                >Run Code</Button>
             </div>
+
+            <div className='flex gap-2 w-full h-full relative'>
+                <Button
+                    onClick={() => copyToClipBoard(codeValue)}
+                    className='w-[45px] absolute z-10 left-2 bottom-2'
+                    variant='destructive'
+                    title="Copy Code">
+                    <FaRegCopy />
+                </Button>
+                <div ref={editorRef} className='h-full flex-1 text-lg' />
+                <CodeOutput
+                    output={output}
+                    className='flex flex-col gap-2 items-center flex-1 h-full'
+                />
+                
+            </div>
+
         </section>
     );
 };

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import {
     Card,
     CardContent,
@@ -9,10 +9,10 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 
-export default function CodeOutput({ output }: { output: string }) {
+export default function CodeOutput({ output , className }: { output: string , className: string }) {
     // console.log(output)
     return (
-        <div className='w-full h-[95%]'>
+        <div className={`${className}`}>
             <Card className='w-full rounded-none h-full'>
                 <CardHeader className='h-full'>
                     <CardTitle>{output ? "Output : " : "Run Code"}</CardTitle>
