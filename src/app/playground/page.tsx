@@ -3,13 +3,13 @@ import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import Image from 'next/image';
 
 const languages = [
-    { name: "HTML, CSS & JavaScript", image: "/languages/Web.png" },
-    { name: "JavaScript", image: "/languages/javascript.jpg" },
-    { name: "TypeScript", image: "/languages/typescript.jpg" },
-    { name: "Python", image: "/languages/python.png" },
-    { name: "Java", image: "/languages/java.png" },
-    { name: "C++", image: "/languages/cpp.png" },
-    { name: "C", image: "/languages/c.png" },
+    { name: "HTML, CSS & JavaScript", image: "/language/Web.png" },
+    { name: "JavaScript", image: "/language/javascript.jpg" },
+    { name: "TypeScript", image: "/language/typescript.jpg" },
+    { name: "Python", image: "/language/python.png" },
+    { name: "Java", image: "/language/java.png" },
+    { name: "C++", image: "/language/cpp.png" },
+    { name: "C", image: "/language/c.png" },
 ];
 
 const Playground = () => {
