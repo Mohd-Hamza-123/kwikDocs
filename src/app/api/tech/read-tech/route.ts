@@ -3,7 +3,7 @@ import TechModel from "@/models/tech.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export const dynamic = 'force-static';
-export const fetchCache = 'default'; 
+export const fetchCache = 'default-cache'; 
 export const revalidate = 60 * 60 * 24 * 28; // cache for 28 days
 
 export async function GET() {
