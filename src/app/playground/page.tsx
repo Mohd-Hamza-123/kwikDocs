@@ -1,6 +1,10 @@
 import React from 'react';
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import Image from 'next/image';
+import { 
+    Card, 
+    CardContent, 
+    CardTitle 
+} from "@/components/ui/card";
 
 const languages = [
     { name: "HTML, CSS & JavaScript", image: "/language/web.png" },
