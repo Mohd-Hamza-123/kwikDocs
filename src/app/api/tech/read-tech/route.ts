@@ -2,9 +2,9 @@ import connectDB from "@/dbConfig/dbConfig";
 import TechModel from "@/models/tech.model";
 import { NextRequest, NextResponse } from "next/server";
 
-export const dynamic = 'force-dynamic';
-export const fetchCache = 'force-no-store';  // This prevents caching
-export const revalidate = 0; // if 60 then data will be cached for 60 seconds
+export const dynamic = 'force-static';
+export const fetchCache = 'default'; 
+export const revalidate = 60 * 60 * 24 * 28; // cache for 28 days
 
 export async function GET() {
     
@@ -33,7 +33,7 @@ export async function GET() {
         }))
 
         const payload = data.filter(Boolean)
-
+        console.log(payload);
         if (payload.length > 0) {
             return NextResponse.json({
                 success: true,

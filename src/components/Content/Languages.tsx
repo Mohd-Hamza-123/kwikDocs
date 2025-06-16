@@ -1,11 +1,9 @@
 "use client";
 import Image from "next/image";
-import { svgIcons } from "../icons";
 import { Button } from "../ui/button";
 import { LoadingPage } from "@/index";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { useAppDispatch } from "@/lib/hooks/hooks";
 import React, { useEffect, useRef, useState } from "react";
 import { getAllTechnology } from "@/lib/API/techAPI/getAllTech";
 
@@ -22,9 +20,9 @@ export interface I_Language {
 }
 
 const Technologies = () => {
+
   const div = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const [showChatIcon, setShowChatIcon] = useState(false);
 
   const {
