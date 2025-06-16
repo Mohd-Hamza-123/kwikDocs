@@ -16,6 +16,8 @@ const Footer = () => {
     }, [pathName, isRender, visiblePaths])
 
 
+    if (!isRender) return null;
+    
     if (isRender)
         return (
             <footer className="dark:bg-bgDark">

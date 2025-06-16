@@ -12,11 +12,6 @@ const LoadingPage = ({ loadingMsg }: { loadingMsg?: string }) => {
                     {/* Inner Spinner */}
                     <div className="absolute inset-2 border-4 border-t-transparent border-purple-500 rounded-full animate-[spin_2s_linear_infinite_reverse]"></div>
                 </div>
-
-                {/* Loading Text */}
-                <p className="text-center text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-100 animate-pulse">
-                    {loadingMsg || "Loading, please wait..."}
-                </p>
             </div>
         </section>
     )
