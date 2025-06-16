@@ -4,6 +4,7 @@ import { Card, CardContent, CardTitle } from "@/components/ui/card";
 const languages = [
     { name: "HTML, CSS & JavaScript", image: "/languages/Web.png" },
     {name : "JavaScript" , image : "/languages/javascript.jpg"},
+    { name : "TypeScript" , image : "/languages/typescript.jpg" },
     { name: "Python", image: "/languages/python.png" },
     { name: "Java", image: "/languages/java.png" },
     { name: "C++", image: "/languages/cpp.png" },
@@ -20,7 +21,7 @@ const Playground = () => {
                 {languages.map((language) => (
                     <Card
                         key={language.name}
-                        className="group relative overflow-hidden rounded-xl shadow-md border border-gray-200 dark:border-gray-700 transition-transform transform hover:scale-105 hover:shadow-lg bg-gradient-to-br from-[#1e1e1e] via-[#121212] to-[#2c2c2c]"
+                        className="group relative overflow-hidden rounded-xl shadow-md border border-gray-200 dark:border-gray-700 transition-transform transform hover:scale-105 hover:shadow-lg bg-gradient-to-br from-white via-gray-100 to-gray-200 dark:from-[#1e1e1e] dark:via-[#121212] dark:to-[#2c2c2c]"
                     >
                         <CardContent className="p-6 flex flex-col items-center text-center">
                             <img
