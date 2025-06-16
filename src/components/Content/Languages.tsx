@@ -109,7 +109,6 @@ const Technologies = () => {
                       {tech?.description}
                     </p>
                     <Button
-                      variant={"outline"}
                       className="w-full px-4 py-2 text-lg font-medium text-white bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 rounded-lg shadow-md hover:shadow-lg hover:from-pink-600 hover:via-red-500 hover:to-orange-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all duration-300"
                       onClick={() => handleLearn(tech)}
                     >

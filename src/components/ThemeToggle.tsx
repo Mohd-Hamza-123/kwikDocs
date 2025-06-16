@@ -1,20 +1,30 @@
 import React from 'react'
 import {
     DropdownMenu,
-    DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
+    DropdownMenuContent,
 } from "@/components/ui/dropdown-menu"
 import { svgIcons } from './icons';
 import { useTheme } from 'next-themes';
 import { MdOutlineNightlightRound } from 'react-icons/md';
 
-const ThemeToggle = () => {
+const ThemeToggle = ({ closeSideBar }: any) => {
     const { setTheme: setNextTheme, theme } = useTheme();
 
-    const darkMode = () => setNextTheme('dark')
-    const lightMode = () => setNextTheme("light")
-    const systemMode = () => setNextTheme("system")
+    const darkMode = () => {
+        setNextTheme('dark')
+        closeSideBar()
+    }
+    const lightMode = () => {
+        setNextTheme("light")
+        closeSideBar()
+    }
+    const systemMode = () => {
+        setNextTheme("system")
+        closeSideBar()
+    }
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
