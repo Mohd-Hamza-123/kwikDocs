@@ -3,7 +3,7 @@ import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import Image from 'next/image';
 
 const languages = [
-    { name: "HTML, CSS & JavaScript", image: "/language/Web.png" },
+    { name: "HTML, CSS & JavaScript", image: "/language/web.png" },
     { name: "JavaScript", image: "/language/javascript.jpg" },
     { name: "TypeScript", image: "/language/typescript.jpg" },
     { name: "Python", image: "/language/python.png" },
