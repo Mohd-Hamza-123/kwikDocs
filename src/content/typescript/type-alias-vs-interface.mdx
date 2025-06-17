@@ -1,0 +1,199 @@
+---
+title: Type Alias vs Interface
+description: ""
+published: true
+---
+
+
+In TypeScript, **`interface`** and **`type`** are both used to define custom types, but they differ in their capabilities, use cases, and syntax. Understanding the differences helps you choose the right one for your scenario.
+
+---
+
+### Key Differences Between `interface` and `type`
+
+| **Feature**                | **`interface`**                             | **`type`**                                   |
+| -------------------------- | ------------------------------------------- | -------------------------------------------- |
+| **Keyword**                | Uses the `interface` keyword                | Uses the `type` keyword                      |
+| **Extensibility**          | Supports extending other interfaces         | Can use intersections (`&`) to combine types |
+| **Declaration Merging**    | Supported (can merge multiple declarations) | Not supported                                |
+| **Union and Tuple Types**  | Not supported                               | Supported                                    |
+| **Utility Types**          | Not directly supported                      | Fully supported                              |
+| **Use for Function Types** | Less concise                                | More concise                                 |
+
+---
+
+### **Examples**
+
+#### 1. **Basic Usage**
+
+**Interface**:
+
+```typescript
+interface User {
+    id: number;
+    name: string;
+    isActive: boolean;
+}
+
+const user: User = {
+    id: 1,
+    name: "Hamza",
+    isActive: true,
+};
+```
+
+**Type**:
+
+```typescript
+type User = {
+    id: number;
+    name: string;
+    isActive: boolean;
+};
+
+const user: User = {
+    id: 1,
+    name: "Hamza",
+    isActive: true,
+};
+```
+
+#### 2. **Extending Other Types**
+
+**Interface**:
+
+```typescript
+interface User {
+    id: number;
+    name: string;
+}
+
+interface Admin extends User {
+    role: string;
+}
+
+const admin: Admin = {
+    id: 1,
+    name: "Hamza",
+    role: "Admin",
+};
+```
+
+**Type** (using intersection):
+
+```typescript
+type User = {
+    id: number;
+    name: string;
+};
+
+type Admin = User & {
+    role: string;
+};
+
+const admin: Admin = {
+    id: 1,
+    name: "Hamza",
+    role: "Admin",
+};
+```
+
+#### 3. **Union Types**
+
+**Type** can define unions, while **interface** cannot.
+
+```typescript
+type Status = "success" | "error" | "loading";
+
+let currentStatus: Status = "loading";
+```
+
+**Interface**:
+
+```typescript
+// Not possible with interface
+```
+
+#### 4. **Function Types**
+
+**Interface**:
+
+```typescript
+interface Greet {
+    (name: string): string;
+}
+
+const sayHello: Greet = (name) => `Hello, ${name}!`;
+```
+
+**Type**:
+
+```typescript
+type Greet = (name: string) => string;
+
+const sayHello: Greet = (name) => `Hello, ${name}!`;
+```
+
+#### 5. **Declaration Merging**
+
+**Interface** supports declaration merging:
+
+```typescript
+interface User {
+    id: number;
+}
+
+interface User {
+    name: string;
+}
+
+const user: User = {
+    id: 1,
+    name: "Hamza",
+};
+```
+
+**Type** does not support declaration merging:
+
+```typescript
+type User = {
+    id: number;
+};
+
+// Error: Duplicate identifier 'User'.
+type User = {
+    name: string;
+};
+```
+
+#### 6. **Utility Types**
+
+Utility types (like `Partial`, `Pick`, etc.) work seamlessly with **type** but not directly with **interface**:
+
+```typescript
+type User = {
+    id: number;
+    name: string;
+    isActive: boolean;
+};
+
+type PartialUser = Partial<User>; // All properties are optional
+```
+
+---
+
+### When to Use **`interface`** vs **`type`**
+
+* **Use `interface`**:
+
+  * When defining the structure of objects or classes.
+  * When you need declaration merging or extending other interfaces.
+  * For library and API design where extensibility is key.
+
+* **Use `type`**:
+
+  * For creating union types, intersections, or function types.
+  * When leveraging utility types.
+  * For more complex type manipulations.
+
+---

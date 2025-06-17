@@ -1,0 +1,339 @@
+---
+title: Functions in TS
+description: ""
+published: true
+---
+
+TypeScript provides many advanced features that enhance the use of functions. Here are some **use cases of TypeScript with functions**:
+
+---
+
+### 1. **Defining Function Types**
+
+TypeScript allows you to define the types of function parameters and return values for better type safety.
+
+```typescript
+function add(a: number, b: number): number {
+    return a + b;
+}
+// add("2", 3); // Error: Argument of type 'string' is not assignable to parameter of type 'number'.
+```
+
+---
+
+### 2. **Optional Parameters**
+
+You can define parameters as optional using the `?` symbol.
+
+```typescript
+function greet(name: string, title?: string): string {
+    return title ? `Hello, ${title} ${name}` : `Hello, ${name}`;
+}
+console.log(greet("Hamza")); // "Hello, Hamza"
+console.log(greet("Hamza", "Mr.")); // "Hello, Mr. Hamza"
+```
+
+---
+
+### 3. **Default Parameters**
+
+TypeScript supports default values for parameters.
+
+```typescript
+function calculatePrice(price: number, tax: number = 0.05): number {
+    return price + price * tax;
+}
+console.log(calculatePrice(100)); // 105
+console.log(calculatePrice(100, 0.1)); // 110
+```
+
+---
+
+### 4. **Function Overloading**
+
+TypeScript allows you to define multiple signatures for a function.
+
+```typescript
+function getInfo(id: number): string;
+function getInfo(name: string): string;
+function getInfo(value: number | string): string {
+    return typeof value === "number" ? `User ID: ${value}` : `User Name: ${value}`;
+}
+console.log(getInfo(123)); // "User ID: 123"
+console.log(getInfo("Hamza")); // "User Name: Hamza"
+```
+
+---
+
+### 5. **Arrow Functions**
+
+Arrow functions in TypeScript also support type annotations.
+
+```typescript
+const multiply = (a: number, b: number): number => a * b;
+console.log(multiply(3, 4)); // 12
+```
+
+---
+
+### 6. **Rest Parameters**
+
+You can use rest parameters for variable-length arguments with types.
+
+```typescript
+function sum(...numbers: number[]): number {
+    return numbers.reduce((total, num) => total + num, 0);
+}
+console.log(sum(1, 2, 3, 4)); // 10
+```
+
+---
+
+### 7. **Callback Functions**
+
+TypeScript allows you to define the type of callback functions.
+
+```typescript
+function processUser(id: number, callback: (userId: number) => void): void {
+    console.log(`Processing user with ID: ${id}`);
+    callback(id);
+}
+
+processUser(1, (userId) => console.log(`User ID: ${userId}`));
+```
+
+---
+
+### 8. **Returning Complex Types**
+
+Functions can return objects, arrays, or tuples with specific types.
+
+```typescript
+function getCoordinates(): [number, number] {
+    return [40.7128, -74.0060];
+}
+
+const [latitude, longitude] = getCoordinates();
+console.log(latitude, longitude); // 40.7128, -74.0060
+```
+
+---
+
+### 9. **Generic Functions**
+
+Generics make functions flexible and reusable for different types.
+
+```typescript
+function identity<T>(value: T): T {
+    return value;
+}
+
+console.log(identity<string>("Hello")); // "Hello"
+console.log(identity<number>(123)); // 123
+```
+
+---
+
+### 10. **Async Functions**
+
+TypeScript supports `async` functions with proper type annotations.
+
+```typescript
+async function fetchData(url: string): Promise<string> {
+    const response = await fetch(url);
+    return await response.text();
+}
+```
+
+---
+
+### 11. **Interfaces for Functions**
+
+You can use interfaces to define the shape of a function.
+
+```typescript
+interface MathOperation {
+    (a: number, b: number): number;
+}
+
+const add: MathOperation = (x, y) => x + y;
+const subtract: MathOperation = (x, y) => x - y;
+```
+
+---
+
+### 12. **Utility Types with Functions**
+
+TypeScript utility types like `ReturnType` and `Parameters` can be used with functions.
+
+```typescript
+function sayHello(name: string, age: number): string {
+    return `Hello, ${name}. You are ${age} years old.`;
+}
+
+type Params = Parameters<typeof sayHello>; // [string, number]
+type Result = ReturnType<typeof sayHello>; // string
+```
+
+---
+
+### 13. **Functions in Classes**
+
+Functions with type safety are common in TypeScript classes.
+
+```typescript
+class Calculator {
+    add(a: number, b: number): number {
+        return a + b;
+    }
+
+    subtract(a: number, b: number): number {
+        return a - b;
+    }
+}
+
+const calc = new Calculator();
+console.log(calc.add(5, 3)); // 8
+```
+
+---
+
+### 14. **Higher-Order Functions**
+
+Functions that take other functions as arguments or return them.
+
+```typescript
+function createMultiplier(multiplier: number): (value: number) => number {
+    return (value) => value * multiplier;
+}
+
+const double = createMultiplier(2);
+console.log(double(5)); // 10
+```
+
+---
+
+## **never vs void**
+
+In TypeScript, both `void` and `never` are types used in function definitions, but they serve different purposes:
+
+
+### **1. `void` in Functions**
+
+The `void` type indicates that a function **does not return any value**.
+
+#### Example: Function with `void`
+
+```typescript
+function logMessage(message: string): void {
+    console.log(message);
+    // No return statement
+}
+
+logMessage("Hello, TypeScript!"); // Output: Hello, TypeScript!
+```
+
+* If you try to return a value from a `void` function, TypeScript will throw an error:
+
+  ```typescript
+  function invalidFunction(): void {
+      // return 42; // Error: Type 'number' is not assignable to type 'void'
+  }
+  ```
+
+---
+
+### **2. `never` in Functions**
+
+The `never` type indicates that a function **never completes**. This is used for functions that:
+
+* Always throw an error.
+* Enter an infinite loop.
+* Have logic paths that make returning impossible.
+
+#### Example: Function with `never`
+
+```typescript
+function throwError(message: string): never {
+    throw new Error(message);
+}
+
+function infiniteLoop(): never {
+    while (true) {
+        console.log("This loop never ends.");
+    }
+}
+
+// Usage of `never`
+try {
+    throwError("An error occurred");
+} catch (e) {
+    console.log("Caught an error");
+}
+```
+
+---
+
+### **Key Differences Between `void` and `never`**
+
+| **Aspect**           | **`void`**                           | **`never`**                                         |
+| -------------------- | ------------------------------------ | --------------------------------------------------- |
+| **Meaning**          | No value is returned.                | The function doesn't terminate normally.            |
+| **Usage**            | Used for side-effect functions.      | Used for error-throwing or infinite-loop functions. |
+| **Return Statement** | Allows an empty `return;` statement. | Does not allow a return statement at all.           |
+
+---
+
+### **Practical Use Cases**
+
+#### **Using `void`**
+
+```typescript
+function notifyUser(message: string): void {
+    console.log(`Notification: ${message}`);
+}
+```
+
+#### **Using `never`**
+
+```typescript
+function assertUnreachable(value: never): never {
+    throw new Error(`Unexpected value: ${value}`);
+}
+
+type Status = "success" | "error";
+function handleStatus(status: Status): string {
+    switch (status) {
+        case "success":
+            return "Operation successful";
+        case "error":
+            return "Operation failed";
+        default:
+            return assertUnreachable(status); // Ensures all cases are handled
+    }
+}
+```
+
+---
+
+### Combining `void` and `never` in the Same Codebase
+
+You can mix these types where appropriate:
+
+```typescript
+function processInput(input: unknown): void | never {
+    if (typeof input === "string") {
+        console.log(`Processing string: ${input}`);
+    } else {
+        throwError("Invalid input type");
+    }
+}
+
+processInput("Valid string"); // Works
+processInput(42);             // Throws error
+```
+
+---
+
+
+
