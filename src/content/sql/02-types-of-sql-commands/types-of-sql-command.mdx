@@ -1,0 +1,151 @@
+---
+title: Types of SQL Commands
+description: ""
+published: true
+---
+
+SQL commands are categorized into different types based on their functionality. Here's a breakdown of the main types:
+
+---
+
+### 1. **Data Definition Language (DDL)**
+
+* Defines the structure of a database and its objects (e.g., tables, indexes).
+* **Commands**:
+
+  * `CREATE`: Create a new database object (e.g., table, database).
+
+    ```sql
+    CREATE TABLE Students (ID INT, Name VARCHAR(50));
+    ```
+  * `ALTER`: Modify an existing database object.
+
+    ```sql
+    ALTER TABLE Students ADD Age INT;
+    ```
+  * `DROP`: Delete a database object permanently.
+
+    ```sql
+    DROP TABLE Students;
+    ```
+  * `TRUNCATE`: Remove all records from a table without logging individual row deletions.
+
+    ```sql
+    TRUNCATE TABLE Students;
+    ```
+
+---
+
+### 2. **Data Manipulation Language (DML)**
+
+* Deals with the manipulation of data within tables.
+* **Commands**:
+
+  * `INSERT`: Add new records to a table.
+
+    ```sql
+    INSERT INTO Students (ID, Name, Age) VALUES (1, 'Alice', 20);
+    ```
+  * `UPDATE`: Modify existing records.
+
+    ```sql
+    UPDATE Students SET Age = 21 WHERE ID = 1;
+    ```
+  * `DELETE`: Remove specific records.
+
+    ```sql
+    DELETE FROM Students WHERE ID = 1;
+    ```
+
+---
+
+### 3. **Data Query Language (DQL)**
+
+* Retrieves data from a database.
+* **Command**:
+
+  * `SELECT`: Fetch data from a table.
+
+    ```sql
+    SELECT * FROM Students;
+    ```
+
+---
+
+### 4. **Transaction Control Language (TCL)**
+
+* Manages database transactions to ensure data integrity.
+* **Commands**:
+
+  * `COMMIT`: Save changes permanently.
+
+    ```sql
+    COMMIT;
+    ```
+  * `ROLLBACK`: Undo changes made in the current transaction.
+
+    ```sql
+    ROLLBACK;
+    ```
+  * `SAVEPOINT`: Create a point within a transaction to roll back to.
+
+    ```sql
+    SAVEPOINT SavePoint1;
+    ```
+  * `SET TRANSACTION`: Define transaction properties (e.g., isolation level).
+
+    ```sql
+    SET TRANSACTION READ ONLY;
+    ```
+
+---
+
+### 5. **Data Control Language (DCL)**
+
+* Controls access to data within the database.
+* **Commands**:
+
+  * `GRANT`: Give privileges to users.
+
+    ```sql
+    GRANT SELECT, INSERT ON Students TO User1;
+    ```
+  * `REVOKE`: Remove privileges from users.
+
+    ```sql
+    REVOKE SELECT, INSERT ON Students FROM User1;
+    ```
+
+---
+
+### 6. **Data Administration Commands (DAC)**
+
+* Used for database administration tasks.
+* **Commands**:
+
+  * `SHOW`: Display database or server information.
+
+    ```sql
+    SHOW TABLES;
+    ```
+  * `DESC`: Describe the structure of a table.
+
+    ```sql
+    DESC Students;
+    ```
+
+---
+
+
+{/* ### **Create Database**
+
+```sql
+CREATE DATABASE database_name;
+```
+
+### **Delete Database**
+
+
+```sql
+DROP DATABASE database_name;
+``` */}

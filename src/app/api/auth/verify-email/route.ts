@@ -2,10 +2,11 @@ import connectDB from "@/dbConfig/dbConfig";
 import UserModel from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 
-connectDB();
+
 
 export async function POST(request: NextRequest) {
     try {
+        await connectDB();
         const body = await request.json();
         const { token } = body;
 
@@ -38,7 +39,7 @@ export async function POST(request: NextRequest) {
         })
 
     } catch (error: any) {
-        
+
         console.log(error);
         return NextResponse.json({
             success: true,

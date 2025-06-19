@@ -1,49 +1,60 @@
+'use client'
+
 import React from 'react'
-import Image from 'next/image'
+import { toast } from '@/hooks/use-toast'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import Link from 'next/link'
+import { emailSchema } from '@/lib/validation/authSchema'
+import validateZodSchema from '@/utils/wrapper/zod-validation/validateSchema'
+import forgotPassword from '@/services/API/auth/forgot-password'
+
 const page = () => {
+
+    const submit = async (e: React.FormEvent<HTMLFormElement>) => {
+
+        e.preventDefault()
+
+        const formData = new FormData(e.currentTarget)
+        const email = formData.get("email")
+
+        const validationResult = validateZodSchema(emailSchema, email)
+
+        if (validationResult.isValid) {
+            const email = validationResult?.data
+            const res = await forgotPassword(email)
+            console.log(res)
+        } else {
+            const errors = validationResult?.errors
+            if (Array.isArray(errors))
+                toast({
+                    title: errors[0]?.message,
+                    variant: 'destructive',
+                })
+            else {
+                toast({
+                    title: 'Unexpected Error',
+                    variant: 'destructive',
+                })
+            }
+        }
+    }
     return (
-        <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-            <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <Image
-                    height={200}
-                    width={200}
-                    className="mx-auto h-12 w-auto"
-                    src="./logo.png"
-                    alt='Image'
-                    quality={100}
+        <form
+            className="space-y-6"
+            onSubmit={submit}
+        >
+            <div className="mt-2">
+                <Input
+                    type='email'
+                    placeholder='email'
+                    name='email'
                 />
-                <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight">Reset Your Password</h2>
             </div>
-            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form
-                    className="space-y-6"
-                // onSubmit={handleSubmit(handleLogin)}
-                >
 
-                    <div className="mt-2">
-                        <Input
-                            type='email'
-                            placeholder='email'
-                        // {...register("email", {
-                        //     required: true
-                        // })}
-                        />
-                    </div>
-
-
-                    <div>
-                        <Button className='w-full' type='submit'>Reset</Button>
-                    </div>
-                </form>
-                <p className="mt-10 text-center text-sm/6 text-gray-500">
-                    Not a User ?
-                    <Link href="/signup" className="font-semibold text-indigo-600 hover:text-indigo-500"> Signup </Link>
-                </p>
+            <div>
+                <Button className='w-full' type='submit'>Reset</Button>
             </div>
-        </div>
+        </form>
     )
 }
 
