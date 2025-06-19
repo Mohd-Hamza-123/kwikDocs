@@ -1,0 +1,60 @@
+---
+title: Create Table
+description: ""
+published: true
+---
+
+### **Syntax for Creating a Table**
+
+* The syntax is similar for both MySQL and PostgreSQL, but there are slight differences in certain data types and constraints.
+
+```sql
+CREATE TABLE table_name (
+    column1_name data_type [constraint],
+    column2_name data_type [constraint],
+    ...
+);
+```
+
+---
+
+### **Creating Table in MySQL**
+
+```sql
+CREATE TABLE employees (
+    employee_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    department VARCHAR(50),
+    salary DECIMAL(10, 2),
+    position VARCHAR(50),
+    hire_date DATE
+);
+```
+
+* **AUTO\_INCREMENT**: Automatically generates a unique value for each row.
+* **VARCHAR(n)**: Defines a variable-length string of up to `n` characters.
+* **DECIMAL(10, 2)**: Represents a decimal number with up to 10 digits, 2 of which are after the decimal point.
+
+---
+
+### **Creating Table in PostgreSQL**
+
+```sql
+CREATE TABLE employees (
+    employee_id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    department VARCHAR(30),
+    salary NUMERIC(10, 2),
+    position VARCHAR(30),
+    hire_date DATE
+);
+```
+
+* **SERIAL**: Auto-increments the column value, similar to `AUTO_INCREMENT` in MySQL.
+* **VARCHAR(n)**: Defines a variable-length string of up to `n` characters.
+* **NUMERIC(10, 2)**: Equivalent to `DECIMAL(10, 2)` in MySQL.
+* **DATE**: Stores date values.
+
+---
+
+

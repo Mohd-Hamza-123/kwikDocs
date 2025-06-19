@@ -93,9 +93,7 @@ const Signup = () => {
           <div>
             <Button className='w-full'>SignIn</Button>
           </div>
-          <div className="text-sm">
-            <Link href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</Link>
-          </div>
+         
         </form>
         <p className="mt-10 text-center text-sm/6 text-gray-500">
           Already have account ?

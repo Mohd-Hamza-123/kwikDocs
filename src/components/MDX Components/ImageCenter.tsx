@@ -9,9 +9,9 @@ interface ImageCenterProps {
 
 const ImageCenter: React.FC<ImageCenterProps> = ({ src, alt = 'Image', className = "", ...props }) => {
     return (
-        <div className={`flex justify-center ${className || ""}`}>
+        <div className={`flex justify-center w-full`}>
             <Image
-                className={`h-auto rounded-md w-auto ${className}`}
+                className={`h-auto rounded-md ${className}`}
                 {...props}
                 src={src}
                 alt={alt}

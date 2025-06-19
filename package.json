@@ -68,7 +68,8 @@
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
     "tinymce": "^7.2.1",
-    "turndown": "^7.2.0"
+    "turndown": "^7.2.0",
+    "zod": "^3.25.67"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
