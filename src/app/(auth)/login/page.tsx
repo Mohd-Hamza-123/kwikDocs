@@ -17,7 +17,7 @@ import { Button } from '@/components/ui/button'
 import { useAppDispatch } from '@/lib/hooks/hooks'
 import Link from 'next/link'
 
-const page = () => {
+const Page = () => {
     
     const router = useRouter();
     const dispatch = useAppDispatch();
@@ -92,4 +92,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
