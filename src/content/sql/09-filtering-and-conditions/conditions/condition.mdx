@@ -1,0 +1,243 @@
+---
+title: Conditions 
+description: ""
+published: true
+---
+
+### 1. **Filtering Data by Equality**
+
+```sql
+SELECT name, salary
+FROM employees
+WHERE salary = 50000;
+```
+
+### 2. **Filtering Data by Inequality**
+
+```sql
+SELECT name, salary
+FROM employees
+WHERE salary <> 50000;
+```
+
+### 3. **Filtering Data by Greater Than**
+
+```sql
+SELECT name, salary
+FROM employees
+WHERE salary > 50000;
+```
+
+### 4. **Filtering Data by Less Than**
+
+```sql
+SELECT name, salary
+FROM employees
+WHERE salary < 50000;
+```
+
+### 5. **Filtering Data by Between**
+
+```sql
+SELECT name, salary
+FROM employees
+WHERE salary BETWEEN 50000 AND 60000;
+```
+
+---
+
+### **6. Filtering Data Using `IN`**
+
+Use `IN` to match a column against a list of values.
+
+```sql
+SELECT name, department
+FROM employees
+WHERE department IN ('HR', 'IT', 'Finance');
+```
+
+---
+
+### **7. Filtering Data Using `NOT IN`**
+
+Exclude rows with specific values.
+
+```sql
+SELECT name, department
+FROM employees
+WHERE department NOT IN ('HR', 'IT');
+```
+
+---
+
+### **8. Filtering Data by `LIKE`**
+
+Filter rows based on pattern matching.
+
+* **Starts With:**
+
+  ```sql
+  SELECT name
+  FROM employees
+  WHERE name LIKE 'A%';
+  ```
+* **Ends With:**
+
+  ```sql
+  SELECT name
+  FROM employees
+  WHERE name LIKE '%n';
+  ```
+* **Contains:**
+
+  ```sql
+  SELECT name
+  FROM employees
+  WHERE name LIKE '%ar%';
+  ```
+
+---
+
+### **9. Filtering Data Using `NOT LIKE`**
+
+Exclude rows that match a pattern.
+
+```sql
+SELECT name
+FROM employees
+WHERE name NOT LIKE 'A%';
+```
+
+---
+
+### **10. Filtering Data by `IS NULL`**
+
+Find rows where the column is null.
+
+```sql
+SELECT name, salary
+FROM employees
+WHERE salary IS NULL;
+```
+
+---
+
+### **11. Filtering Data by `IS NOT NULL`**
+
+Find rows where the column is not null.
+
+```sql
+SELECT name, salary
+FROM employees
+WHERE salary IS NOT NULL;
+```
+
+---
+
+### **12. Filtering Data by `AND`**
+
+Combine multiple conditions with `AND`.
+
+```sql
+SELECT name, salary
+FROM employees
+WHERE salary > 50000 AND department = 'IT';
+```
+
+---
+
+### **13. Filtering Data by `OR`**
+
+Combine multiple conditions with `OR`.
+
+```sql
+SELECT name, salary
+FROM employees
+WHERE salary > 50000 OR department = 'HR';
+```
+
+---
+
+### **14. Filtering Data by `NOT`**
+
+Exclude rows matching a condition.
+
+```sql
+SELECT name, salary
+FROM employees
+WHERE NOT (salary > 50000);
+```
+
+---
+
+### **15. Filtering Data Using Logical Operators**
+
+Combine `AND`, `OR`, and parentheses for complex conditions.
+
+```sql
+SELECT name, salary
+FROM employees
+WHERE (department = 'IT' OR department = 'HR') AND salary > 50000;
+```
+
+---
+
+### **16. Filtering Data Using Comparison with Subqueries**
+
+Use subqueries for dynamic filtering.
+
+```sql
+SELECT name, salary
+FROM employees
+WHERE salary > (SELECT AVG(salary) FROM employees);
+```
+
+---
+
+### **17. Filtering Data Using `EXISTS`**
+
+Check for the existence of rows in a subquery.
+
+```sql
+SELECT name
+FROM employees e
+WHERE EXISTS (
+    SELECT 1
+    FROM departments d
+    WHERE e.department_id = d.id AND d.name = 'HR'
+);
+```
+
+---
+
+### **18. Filtering Data Using `ALL`**
+
+Compare a column to all values in a subquery.
+
+```sql
+SELECT name, salary
+FROM employees
+WHERE salary > ALL (
+    SELECT salary
+    FROM employees
+    WHERE department = 'HR'
+);
+```
+
+---
+
+### **19. Filtering Data Using `ANY`**
+
+Compare a column to any value in a subquery.
+
+```sql
+SELECT name, salary
+FROM employees
+WHERE salary > ANY (
+    SELECT salary
+    FROM employees
+    WHERE department = 'HR'
+);
+```
+
+---
