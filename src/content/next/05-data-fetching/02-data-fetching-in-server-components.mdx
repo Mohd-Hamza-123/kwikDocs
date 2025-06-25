@@ -1,0 +1,17 @@
+---
+title: Data Fetching in Server Components 
+description: ''
+published: true
+---
+
+We can create server components with `async` function as well.
+
+```tsx
+const Posts = async ()=> {
+     const response = await fetch(`API_URL`)
+     const todos = await response.json()
+     return <div>{todos}</div>
+}
+```
+
+---
