@@ -95,7 +95,7 @@ const HtmlEditor = ({ defaultCode = "" }: { defaultCode: string }) => {
             {/* Output Section */}
             <div
                 id="output"
-                className={`${outputToggle ? "block" : "hidden"} w-full mt-4 border rounded-md bg-gray-100 p-4 h-[250px] overflow-auto`}>
+                className={`${outputToggle ? "block" : "hidden"} w-full mt-4 border rounded-md bg-gray-100 h-[250px] overflow-auto`}>
             </div>
 
         </div>
