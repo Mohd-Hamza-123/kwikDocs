@@ -20,8 +20,7 @@ export function Callout({
           "border-yellow-900 bg-yellow-50 dark:prose": type === "warning",
         }
       )}
-      {...props}
-    >
+      {...props}>
       <div>{children}</div>
     </div>
   );
