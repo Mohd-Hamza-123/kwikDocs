@@ -1,24 +1,30 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import Image from 'next/image';
 
 interface ImageCenterProps {
     src: string;
     alt: string;
-    className: string;
+    className?: string;
 }
 
-const ImageCenter: React.FC<ImageCenterProps> = ({ src, alt = 'Image', className = "", ...props }) => {
+const ImageCenter: React.FC<ImageCenterProps> = ({
+    src = "",
+    alt = "",
+    className = "",
+    ...props
+}) => {
     return (
-        <div className={`flex justify-center w-full`}>
-            <Image
-                className={`h-auto rounded-md ${className}`}
-                {...props}
-                src={src}
-                alt={alt}
-                quality={100}
-                height={200}
-                width={400}
-            />
+        <div className='flex justify-center w-full'>
+            <figure>
+                <Image
+                    src={src}
+                    alt={alt}
+                    width={400}
+                    height={100}
+                    className={`h-auto rounded-md ${className}`}
+                    {...props} />
+                    <figcaption className="text-center">{alt}</figcaption>
+            </figure>
         </div>
     )
 }
