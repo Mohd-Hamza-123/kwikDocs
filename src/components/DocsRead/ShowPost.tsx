@@ -13,7 +13,7 @@ const ShowPost = ({ category }: { category: string }) => {
 
     const dispatch = useAppDispatch()
     const post = useAppSelector((state) => state.post.post);
-    console.log(post)
+    // console.log(post)
     const displayPosts = useMemo(() => posts?.filter((post) => post?.slug.indexOf(category) === 0 && post?.published)
         , [posts, category])
 
@@ -27,7 +27,7 @@ const ShowPost = ({ category }: { category: string }) => {
 
     useEffect(() => {
         const index = post && displayPosts?.indexOf(post)
-        console.log(index)
+        // console.log(index)
         // if (!index) return
         setNextPost(displayPosts[index + 1] || null)
         setPreviousPost(displayPosts[index - 1] || null)

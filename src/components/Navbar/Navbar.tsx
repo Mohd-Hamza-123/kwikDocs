@@ -13,7 +13,6 @@ import { svgIcons } from '../icons';
 const Navbar = () => {
 
     const pathName = usePathname();
-
     const hidePaths = ['/login', '/signup', `/forgot-password`];
     const isDocIndexVisible = pathName.includes('/read-doc') || pathName.includes("/docs");
 
@@ -37,8 +36,8 @@ const Navbar = () => {
         <header className="fixed top-0 border-b border-border bg-background/95 backdrop:blur supports-[backdrop-filter]:bg-background/60 z-10 w-full h-[9vh]">
             <nav
                 className="flex justify-between items-center dark:bg-bgDark shadow-xl h-[9dvh] px-3 lg:px-7 w-full"
-                aria-label="Main Navigation"
-            >
+                aria-label="Main Navigation">
+
                 <Branding />
 
                 <div className="space-x-3 lg:space-x-6 text-gray-700 flex items-center w-[30%]">
@@ -55,16 +54,14 @@ const Navbar = () => {
                             <Input
                                 placeholder="Search..."
                                 className="w-full hidden md:block"
-                                onFocus={onInputFocus}
-                            />
+                                onFocus={onInputFocus} />
                         </div>
 
 
                         <Button
                             onClick={sideBarToggle}
                             variant={"outline"}
-                            className="hover:text-indigo-500"
-                        >
+                            className="hover:text-indigo-500">
                             <RxHamburgerMenu className="text-2xl" />
                         </Button>
                     </div>

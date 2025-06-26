@@ -9,11 +9,6 @@ import "prismjs/themes/prism-okaidia.css";
 // import "prismjs/themes/prism-tomorrow.css";
 // import "prismjs/themes/prism-twilight.css";
 // import "prismjs/themes/prism-solarizedlight.css"; 
-
-
-
-
-
 import "prismjs/components/prism-c";
 import "prismjs/components/prism-css";
 import "prismjs/components/prism-jsx";
@@ -28,8 +23,6 @@ import "prismjs/components/prism-docker";
 import "prismjs/components/prism-markdown";
 import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-typescript";
-
-
 
 import { useAppSelector } from "@/lib/hooks/hooks";
 import { docsInterface } from "@/models/docs.model";

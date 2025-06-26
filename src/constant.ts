@@ -1,3 +1,17 @@
+import { oneDark } from '@codemirror/theme-one-dark';
+import { monokai } from '@uiw/codemirror-theme-monokai';
+import { andromeda } from '@uiw/codemirror-theme-andromeda';
+import {
+  dracula,
+  cobalt,
+  tomorrow,
+  coolGlow,
+  solarizedLight,
+  espresso,
+  birdsOfParadise
+} from 'thememirror';
+
+
 export const saltRounds = 10
 export const type_Reset_Email = 'RESET'
 export const type_Verify_Email = 'VERIFY'
@@ -31,3 +45,17 @@ export const CODE_SNIPPETS = {
     'using System;\n\nnamespace HelloWorld\n{\n\tclass Hello { \n\t\tstatic void Main(string[] args) {\n\t\t\tConsole.WriteLine("Hello World in C#");\n\t\t}\n\t}\n}\n',
   html: `<html>\n\t<head>\n\t\t<title>Hello World</title>\n\t</head>\n\t<body>\n\t\t<h1>Hello World</h1>\n\t</body>\n</html>\n`,
 };
+
+
+export const Themes = {
+  monokai: monokai,
+  andromeda: andromeda,
+  oneDark: oneDark,
+  dracula: dracula,
+  cobalt: cobalt,
+  coolGlow: coolGlow,
+  solarizedLight: solarizedLight,
+  tomorrow: tomorrow,
+  espresso: espresso,
+  birdsOfParadise: birdsOfParadise
+}

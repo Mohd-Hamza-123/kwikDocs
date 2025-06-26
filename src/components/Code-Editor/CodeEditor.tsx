@@ -87,7 +87,8 @@ const CodeEditor = () => {
                 <LanguageSelector activeLanguage='javascript' onLanguageChange={() => { }} />
                 <Button
                     onClick={runCode}
-                    className='w-[85px]'
+                    // className='w-[85px]'
+                    variant='default'
                 >Run Code</Button>
             </div>
 
