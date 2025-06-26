@@ -6,7 +6,7 @@ interface CalloutProps {
   type?: "default" | "warning" | "danger";
 }
 
-export function Callout({
+function Callout({
   children,
   type = "default",
   ...props
@@ -25,3 +25,5 @@ export function Callout({
     </div>
   );
 }
+
+export default Callout;
