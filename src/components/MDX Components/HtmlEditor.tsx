@@ -1,20 +1,23 @@
 'use client'
-import React, { useCallback, useEffect, useState } from 'react'
-import { EditorState } from '@codemirror/state';
-import { EditorView, highlightActiveLine, keymap } from '@codemirror/view';
+import { svgIcons } from '../icons';
+import { Button } from '../ui/button';
+import { toast } from '@/hooks/use-toast';
 import { html } from '@codemirror/lang-html';
+import { css } from '@codemirror/lang-css';
+import { EditorState } from '@codemirror/state';
+import { useAppSelector } from '@/lib/hooks/hooks';
 import { CODE_SNIPPETS, Themes } from '@/constant';
+import copyToClipBoard from '@/utils/copyToClipboard';
+import { autocompletion, completionKeymap } from '@codemirror/autocomplete';
+import React, { useCallback, useEffect, useState } from 'react'
+import { EditorView, highlightActiveLine, keymap } from '@codemirror/view';
+import CodeMirrorThemeDropdown from '../Code-Editor/CodeMirrorThemeDropdown';
 import {
     history,
     defaultKeymap,
     historyKeymap
 } from '@codemirror/commands';
-import { toast } from '@/hooks/use-toast';
-import CodeMirrorThemeDropdown from '../Code-Editor/CodeMirrorThemeDropdown';
-import { svgIcons } from '../icons';
-import copyToClipBoard from '@/utils/copyToClipboard';
-import { useAppSelector } from '@/lib/hooks/hooks';
-import { Button } from '../ui/button';
+import createEmmetKeyMap from '../Code-Editor/HTML/Emmet';
 
 const HtmlEditor = ({ defaultCode = "", isCodeEditable = true }: { defaultCode: string, isCodeEditable?: boolean }) => {
 
@@ -29,19 +32,26 @@ const HtmlEditor = ({ defaultCode = "", isCodeEditable = true }: { defaultCode: 
             doc: code,
             extensions: [
                 html(),
+                css(),
                 Themes[theme],
-                highlightActiveLine(),
                 history(),
+                autocompletion(),
+                highlightActiveLine(),
+                keymap.of([
+                    ...defaultKeymap,
+                    ...historyKeymap,
+                    ...completionKeymap,
+                    // ...closeBracketsKeymap,
+                    createEmmetKeyMap('html'),
+                    createEmmetKeyMap('css'),
+                ]),
                 EditorState.readOnly.of(!isCodeEditable),
                 EditorView.updateListener.of((update) => {
                     // console.log(update)
                     // console.log(update.docChanged)
                     // console.log(update.state.doc?.toString()) // how ? 
-
                     setCode(update.state.doc?.toString())
-
                 }),
-                keymap.of([...defaultKeymap, ...historyKeymap]),
                 EditorView.theme({
                     "&": {
                         height: "100%",
@@ -89,7 +99,7 @@ const HtmlEditor = ({ defaultCode = "", isCodeEditable = true }: { defaultCode: 
             <div
                 ref={editor}
                 className='w-full h-[325px] rounded-md shadow-md relative'>
-                <div className='absolute top-2 right-2 z-10'>
+                <div className='absolute top-2 right-4 z-10'>
                     <svgIcons.copy
                         onClick={() => copyToClipBoard(code)} className="h-6 w-6 fill-gray-500 cursor-pointer hover:fill-blue-400 mb-4 border border-gray-500 p-1 rounded-sm" />
                     <CodeMirrorThemeDropdown />

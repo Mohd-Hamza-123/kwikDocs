@@ -84,8 +84,7 @@ const Technologies = () => {
               {techObj?.technologies?.map((tech: any, index: number) => (
                 <div
                   key={tech?._id + index}
-                  className={`dark:bg-gradient-to-br dark:from-[#1e1e1e] dark:via-[#121212] dark:to-[#2c2c2c] bg-gradient-to-br from-gray-100 via-white to-gray-200 shadow-lg rounded-lg overflow-hidden transition-transform hover:scale-[1.02] hover:shadow-xl w-[94%] lg:w-[70%] mx-auto flex flex-col md:flex-row ${index % 2 == 0 ? 'md:flex-row-reverse' : ''} items-center`}
-                >
+                  className={`dark:bg-gradient-to-br dark:from-[#1e1e1e] dark:via-[#121212] dark:to-[#2c2c2c] bg-gradient-to-br from-gray-100 via-white to-gray-200 shadow-lg rounded-lg overflow-hidden transition-transform hover:scale-[1.02] hover:shadow-xl w-[94%] lg:w-[70%] mx-auto flex flex-col md:flex-row ${index % 2 == 0 ? 'md:flex-row-reverse' : ''} items-center`}>
 
                   <div className="lg:w-[35%] w-full p-3 h-full flex items-center">
                     <Image
@@ -128,7 +127,7 @@ const Technologies = () => {
 
   if (isError)
     return (
-      <h1 className="text-center capitalize font-bold mt-3">
+      <h1 className="text-center capitalize font-bold mt-3 dark:bg-bgDark bg-gray-100">
         No Documents Found. Please Check Your Internet Connection
       </h1>
     );

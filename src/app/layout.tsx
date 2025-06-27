@@ -5,7 +5,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Footer, Navbar, Overlay, SearchDocs, Sidebar } from '../index'
 import { Toaster } from "@/components/ui/toaster";
-// import OverlayLoader from "@/components/OverlayLoader/OverlayLoader";
 import { siteConfig } from "../../config/site";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-sans' });
@@ -26,11 +25,9 @@ export default function RootLayout({
 
   return (
     <html lang="en" className="scroll-pt-[3.5rem]">
-
       <body
         suppressHydrationWarning={true}
-        className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}
-      >
+        className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
         <Providers>
           <div className="min-h-dvh bg-background overflow-hidden">
             <Navbar />
@@ -38,7 +35,6 @@ export default function RootLayout({
             <Toaster />
             <Overlay />
             <SearchDocs />
-            {/* <OverlayLoader /> */}
             <main className="mt-[9dvh]">{children}</main>
             <Footer />
           </div>

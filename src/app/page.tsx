@@ -1,7 +1,6 @@
-import {Welcome, Technologies } from "..";
+import { Welcome, Technologies } from "..";
 
 const Home = () => {
-  
   return (
     <>
       <Welcome />
