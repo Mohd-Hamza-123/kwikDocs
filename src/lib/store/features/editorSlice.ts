@@ -15,7 +15,7 @@ export const editorSlice = createSlice({
     name: 'editor',
     initialState,
     reducers: {
-        changeTheme: (state, action) => state.theme = action.payload.theme
+        changeTheme: (state, action) => void (state.theme = action.payload.theme),
     },
 })
 
