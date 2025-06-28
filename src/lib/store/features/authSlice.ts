@@ -1,4 +1,4 @@
-import { IUser } from '@/models/user.model'
+import { IUser } from '@/types/models.type'
 import { createSlice } from '@reduxjs/toolkit'
 
 export interface CounterState {

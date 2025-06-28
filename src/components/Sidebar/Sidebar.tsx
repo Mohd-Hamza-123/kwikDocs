@@ -14,7 +14,7 @@ import logoutAPI from '@/lib/API/Auth/logout';
 import { logout } from '@/lib/store/features/authSlice';
 import { useTypicalContext } from '@/context/Typical-Context'
 import { useAppDispatch, useAppSelector } from '@/lib/hooks/hooks';
-import { useResponsiveContext } from "@/context/CSS-Context";
+// import { useResponsiveContext } from "@/context/CSS-Context";
 import SidebarLinks from "./SidebarLinks";
 import { ThemeToggle } from "@/index";
 
@@ -25,7 +25,7 @@ const Sidebar = () => {
     const userData = useAppSelector((state) => state.auth.userData);
     const userStatus = useAppSelector((state) => state.auth.userStatus)
     const { isSideBarOpen, setIsSideBarOpen } = useTypicalContext();
-    const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
+    // const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
 
     const closeSideBar = () => setIsSideBarOpen(false)
 
@@ -68,7 +68,6 @@ const Sidebar = () => {
                                 userData={userData}
                                 userStatus={userStatus}
                                 closeSideBar={closeSideBar}
-                                setIsDocIndexOpen={setIsDocIndexOpen}
                             />
                         </nav>
 
