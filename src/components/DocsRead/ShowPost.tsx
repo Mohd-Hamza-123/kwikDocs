@@ -9,16 +9,14 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { PostItemsProps, setActiveSlug, setPosts } from "@/lib/store/features/postSlice";
 
 
-const ShowPost = ({ category }: { category: string }) => {
+const ShowPost = ({ tech, allPost }: { tech: string, allPost: any }) => {
 
     const dispatch = useAppDispatch()
     const post = useAppSelector((state) => state.post.post);
-    // console.log(post)
-    const displayPosts = useMemo(() => posts?.filter((post) => post?.slug.indexOf(category) === 0 && post?.published)
-        , [posts, category])
 
-    const [nextPost, setNextPost] = useState(displayPosts[1] || null);
-    const [previousPost, setPreviousPost] = useState(displayPosts[displayPosts?.length - 1] || null)
+
+    const [nextPost, setNextPost] = useState(allPost[1] || null);
+    const [previousPost, setPreviousPost] = useState(allPost[allPost?.length - 1] || null)
 
     const renderPost = (post: PostItemsProps) => {
         dispatch(setPosts({ post: post }))
@@ -26,11 +24,11 @@ const ShowPost = ({ category }: { category: string }) => {
     }
 
     useEffect(() => {
-        const index = post && displayPosts?.indexOf(post)
+        const index = post && allPost?.indexOf(post)
         // console.log(index)
         // if (!index) return
-        setNextPost(displayPosts[index + 1] || null)
-        setPreviousPost(displayPosts[index - 1] || null)
+        setNextPost(allPost[index + 1] || null)
+        setPreviousPost(allPost[index - 1] || null)
     }, [post])
 
     return <section className="w-full lg:w-[60%] overflow-y-scroll" >
@@ -68,8 +66,7 @@ const ShowPost = ({ category }: { category: string }) => {
             <Button
                 variant={'outline'}
                 className={`flex flex-col py-10 w-full lg:w-1/3 lg:text-base ${nextPost ? '' : 'invisible'}`}
-                onClick={() => renderPost(nextPost)}
-            >
+                onClick={() => renderPost(nextPost)}>
                 <span className="font-extralight">Next</span>
                 <p className="font-bold lg:text-md text-sm text-wrap underline">{nextPost?.title}</p>
             </Button>
