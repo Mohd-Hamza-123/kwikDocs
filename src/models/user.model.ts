@@ -1,18 +1,5 @@
-import mongoose, { Schema, Types } from "mongoose";
-
-export interface IUser {
-    _id: string;
-    username: string;
-    email: string;
-    password: string;
-    isAdmin: boolean;
-    isVerified: boolean;
-    bookmark?: Types.ObjectId[];
-    forgotPasswordToken?: string;
-    forgetPasswordTokenExpiry?: Date;
-    verifyToken?: string;
-    verifyTokenExpiry?: Date;
-}
+import mongoose, { Schema } from "mongoose";
+import { IUser } from "@/types/models.type";
 
 const userSchema = new Schema<IUser>({
     username: {
