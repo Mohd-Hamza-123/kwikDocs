@@ -8,18 +8,21 @@ import { EditorState } from '@codemirror/state';
 import { useAppSelector } from '@/lib/hooks/hooks';
 import { CODE_SNIPPETS, Themes } from '@/constant';
 import copyToClipBoard from '@/utils/copyToClipboard';
-import { autocompletion, completionKeymap } from '@codemirror/autocomplete';
+import createEmmetKeyMap from '../Code-Editor/HTML/Emmet';
 import React, { useCallback, useEffect, useState } from 'react'
 import { EditorView, highlightActiveLine, keymap } from '@codemirror/view';
+import { autocompletion, completionKeymap } from '@codemirror/autocomplete';
 import CodeMirrorThemeDropdown from '../Code-Editor/CodeMirrorThemeDropdown';
 import {
     history,
     defaultKeymap,
     historyKeymap
 } from '@codemirror/commands';
-import createEmmetKeyMap from '../Code-Editor/HTML/Emmet';
 
-const HtmlEditor = ({ defaultCode = "", isCodeEditable = true }: { defaultCode: string, isCodeEditable?: boolean }) => {
+const HtmlEditor = ({
+    defaultCode = "",
+    isCodeEditable = true
+}: { defaultCode: string, isCodeEditable?: boolean }) => {
 
     const theme = useAppSelector((state) => state.editorSlice.theme)
     const [code, setCode] = useState(defaultCode || CODE_SNIPPETS?.html)
