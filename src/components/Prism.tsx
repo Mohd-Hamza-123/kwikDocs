@@ -9,6 +9,7 @@ import "prismjs/themes/prism-okaidia.css";
 // import "prismjs/themes/prism-tomorrow.css";
 // import "prismjs/themes/prism-twilight.css";
 // import "prismjs/themes/prism-solarizedlight.css"; 
+
 import "prismjs/components/prism-c";
 import "prismjs/components/prism-css";
 import "prismjs/components/prism-jsx";
@@ -29,17 +30,28 @@ import { docsInterface } from "@/models/docs.model";
 
 const Prism = ({ children }: any) => {
 
-  const [theme, setTheme] = useState<string>("okaidia");
+  const theme = useAppSelector((state) => state.editorSlice.prismTheme)
 
   const doc: docsInterface | null = useAppSelector((state) => state.docs?.document);
+
+  const loadTheme = () => {
+    const link = document.getElementById("prism-theme");
+    if(link) link.remove()
+    const createLink = document.createElement("link")
+    createLink.id = "prism-theme"
+    createLink.rel = "stylesheet"
+    createLink.href = `/themes/prism-${theme}.css`
+    document.head.appendChild(createLink)
+  }
 
   useEffect(() => {
 
     if (prism) {
+      loadTheme()
       prism?.highlightAll();
     }
- 
-  }, [doc]);
+
+  }, [doc, theme]);
 
 
   return <div>{children}</div>;

@@ -5,10 +5,12 @@ export type ThemeKeys = keyof typeof Themes;
 
 interface EditorState {
     theme: ThemeKeys;
+    prismTheme: string;
 }
 
 const initialState: EditorState = {
-    theme: 'monokai'
+    theme: 'monokai',
+    prismTheme: 'okaidia',
 }
 
 export const editorSlice = createSlice({
@@ -16,10 +18,11 @@ export const editorSlice = createSlice({
     initialState,
     reducers: {
         changeTheme: (state, action) => void (state.theme = action.payload.theme),
-    },
+        changePrismTheme: (state, action) => void (state.prismTheme = action.payload.prismTheme)
+    }
 })
 
 
-export const { changeTheme } = editorSlice.actions
+export const { changeTheme, changePrismTheme } = editorSlice.actions
 
 export default editorSlice.reducer
