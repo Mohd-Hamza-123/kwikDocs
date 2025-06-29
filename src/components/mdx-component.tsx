@@ -3,6 +3,7 @@ import * as runtime from "react/jsx-runtime";
 import Callout from "./MDX Components/Callout";
 import HtmlEditor from "./MDX Components/HtmlEditor";
 import ImageCenter from "./MDX Components/ImageCenter";
+import CopyCode from "./MDX Components/CopyCode";
 
 const useMDXComponent = (code: string) => {
     const fn = new Function(code);
@@ -13,6 +14,7 @@ const components = {
     Callout,
     ImageCenter,
     HtmlEditor,
+    CopyCode,
 };
 
 interface MdxProps {

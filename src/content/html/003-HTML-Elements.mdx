@@ -1,26 +1,39 @@
 ---
-title: HTML Elements
-description: Learn the basics of HTML Elements
+title: HTML Elements & Its Types
+description: ''
 published: true
 ---
 
-HTML elements are the building blocks of an HTML document. They define the structure and content of a web page. An element typically consists of:
+HTML elements are the building blocks of an HTML document. They define the structure and content of a web page.
 
-* **Start tag**: Indicates the beginning of the element.
-* **Content**: The content to be displayed or processed.
-* **End tag**: Closes the element (not required for self-closing elements).
+Example : 
 
-### **Syntax:**
+```html
+<p>This is a paragraph.</p>
+<h1>This is a heading.</h1>
+```
+
+### **Syntax of HTML Elements:**
 
 ```html
 <tagname attribute="value">Content</tagname>
 ```
 
+```html
+<tagname attribute="value"/>
+```
+
+An element typically consists of:
+
+* **Start tag**: Indicates the beginning of the element.
+* **Content**: The content to be displayed or processed.
+* **End tag**: Closes the element (not required for self-closing elements).
+
 ---
 
 ## **Types of HTML Elements**
 
-### **1. Basic Elements**
+### **1. Non-Self-Closing (Container) Tags**
 
 * **Paragraph (`<p>`)**: Defines a paragraph.
 
@@ -38,7 +51,7 @@ HTML elements are the building blocks of an HTML document. They define the struc
 <h6>Subheading</h6>
 ```
 
-### **2. Self-Closing Elements**
+### **2. Self-Closing (Void) Tags**
 
 Some elements do not have content and close themselves.
 
@@ -52,6 +65,7 @@ Some elements do not have content and close themselves.
   ```html
   <p>First line<br>Second line</p>
   ```
+
 * **Meta (`<meta>`)**:
 
   ```html
