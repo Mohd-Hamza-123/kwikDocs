@@ -32,11 +32,22 @@ The HTML boilerplate code is the starting template for creating any web page. It
 
   - Declares the document type and version (HTML5 in this case).
   - Ensures the browser interprets the document as HTML5.
+ 
 
 * **`<html lang="en">`**
 
   * The root tag of the HTML document.
-  * Specifies the primary language of the content (English here).
+  * lang="en" : Specifies the primary language of the content (English here).
+  * If you to write in another language in content you can change the value the `lang` attribute.
+
+  ```html
+  <html>
+    <p lang="ar">كُلُّ نَفْسٍ ذَائِقَةُ الْمَوْتِ</p>
+    <p lang="hi">हर दिन एक नई शुरुआत है।</p>
+    <p lang="ja">全員が幸せなのです。</p>
+    <p lang="ko">모두가 즐거운 것이에요.</p>
+  </html>
+  ```
 
 * **`<head>`**
 
@@ -49,6 +60,16 @@ The HTML boilerplate code is the starting template for creating any web page. It
 * **`<meta charset="UTF-8">`**
 
   * Specifies the character encoding as UTF-8, ensuring support for a wide range of symbols and languages.
+  * Without this tag, the browser may not display certain characters correctly.
+
+```html
+<html>
+Greek: α, β, γ (alpha, beta, gamma)
+Cyrillic: Д, Ж, Ю
+Arabic: ب, ش, ق
+Hebrew: ש, ל, כ
+</html>
+```
 
 * **`<meta name="viewport" content="width=device-width, initial-scale=1.0">`**
 
