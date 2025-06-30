@@ -21,9 +21,10 @@ import {
 
 const HtmlEditor = ({
     defaultCode = "",
-    isCodeEditable = true
-}: { defaultCode: string, isCodeEditable?: boolean }) => {
-
+    isCodeEditable = true,
+    id = 0,
+}: { defaultCode: string, isCodeEditable?: boolean, id: number }) => {
+    // console.log(defaultCode)
     const theme = useAppSelector((state) => state.editorSlice.theme)
     const [code, setCode] = useState(defaultCode || CODE_SNIPPETS?.html)
     const [outputToggle, setOutputToggle] = useState(false)
@@ -71,13 +72,16 @@ const HtmlEditor = ({
         return () => view.destroy()
     }, [theme])
 
-    const executeCode = useCallback(() => {
+    const executeCode = () => {
         try {
+
             const iframe = document.createElement('iframe')
             iframe.style.width = "100%"
             iframe.style.height = "100%"
+            console.log(code)
             iframe.srcdoc = code
-            const output = document.getElementById('output')
+
+            const output = document.getElementById(`output${id ? id : 0}`)
             if (output) {
                 output.innerHTML = ''
                 output.appendChild(iframe)
@@ -92,8 +96,7 @@ const HtmlEditor = ({
                 description: error?.message || "Something went wrong",
             })
         }
-
-    }, [code])
+    }
 
     return (
 
@@ -101,15 +104,13 @@ const HtmlEditor = ({
 
             <div
                 ref={editor}
-                className='w-full h-[325px] rounded-md shadow-md relative'>
-                <div className='absolute top-2 right-4 z-10'>
-                    <svgIcons.copy
-                        onClick={() => copyToClipBoard(code)} className="h-6 w-6 fill-gray-500 cursor-pointer hover:fill-blue-400 mb-4 border border-gray-500 p-1 rounded-sm" />
-                    <CodeMirrorThemeDropdown />
-                </div>
+                className='w-full min-h-[80px] max-h-[325px] rounded-md shadow-md relative overflow-y-scroll'>
             </div>
 
-            <div className="flex justify-end">
+            <div className="flex justify-end items-center gap-2">
+                <svgIcons.copy
+                        onClick={() => copyToClipBoard(code)} className="h-8 w-8 fill-gray-500 cursor-pointer hover:fill-blue-400 border border-gray-500 p-1 rounded-sm" />
+                <CodeMirrorThemeDropdown />
                 <Button
                     variant='outline'
                     onClick={executeCode}
@@ -118,7 +119,7 @@ const HtmlEditor = ({
                 </Button>
             </div>
             <div
-                id="output"
+                id={`output${id ? id : 0}`}
                 className={`${outputToggle ? "block" : "hidden"} w-full mt-4 border rounded-md bg-gray-100 h-[250px] overflow-auto`}>
             </div>
 

@@ -75,8 +75,8 @@ const Technologies = () => {
         {technology?.map((techObj: any) => {
           return (
             <section key={techObj?.techType}
-              className="flex flex-col gap-5"
-            >
+              className="flex flex-col gap-5">
+                
               <h1 className="text-2xl lg:text-2xl text-center capitalize font-cursive">
                 {techObj?.techType}
               </h1>
@@ -127,7 +127,7 @@ const Technologies = () => {
 
   if (isError)
     return (
-      <h1 className="text-center capitalize font-bold mt-3 dark:bg-bgDark bg-gray-100">
+      <h1 className="text-center capitalize font-bold dark:bg-bgDark bg-gray-100">
         No Documents Found. Please Check Your Internet Connection
       </h1>
     );

@@ -23,7 +23,7 @@ const CodeMirrorThemeDropdown = () => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className='w-fit outline-none '>
-                <svgIcons.brush className="h-6 w-6 fill-gray-500 cursor-pointer hover:fill-blue-400 border border-gray-500 rounded-sm p-1" />
+                <svgIcons.brush className="h-8 w-8 fill-gray-500 cursor-pointer hover:fill-blue-400 border border-gray-500 rounded-sm p-1" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className='h-[200px] overflow-y-scroll'>
                 {Object.entries(Themes).map(([key, value]) => (
