@@ -1,13 +1,14 @@
 ---
 title: Tables
-description: ''
+description: Tables are used to organize and display data in a structured format.
 published: true
 ---
 
 A table in HTML consists of table cells inside rows and columns.
 
 ### Basic Table Example:
-```html
+
+<HtmlEditor id={1} defaultCode={`
 <table border="2">
   <tr>
     <th>Person 1</th>
@@ -25,7 +26,7 @@ A table in HTML consists of table cells inside rows and columns.
     <td>10</td>
   </tr>
 </table>
-```
+`}/>
 
 ### Table Tags Description:
 
@@ -42,7 +43,7 @@ A table in HTML consists of table cells inside rows and columns.
 
 ### Example Table with Header, Body, and Footer:
 
-```html
+<HtmlEditor id={2} defaultCode={`
 <table border="2">
   <caption>Student Grades Table</caption>
 
@@ -83,5 +84,6 @@ A table in HTML consists of table cells inside rows and columns.
     </tr>
   </tfoot>
 </table>
-```
+`}/>
+
 --- 

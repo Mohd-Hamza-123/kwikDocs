@@ -10,18 +10,24 @@ The `<img>` tag has two required attributes:  
 
 *   src - Specifies the path to the image
 *   alt - Specifies an alternate text for the image
+
 ```html
 <img src="url" alt="alternatetext">
 ```
+
 **1) Absolute Image Path**
 
-```html
-<img src="https://www.example.com/images/photo.jpg" alt="Example Photo">
-```
+<HtmlEditor defaultCode={`<img src="https://images.pexels.com/photos/13725650/pexels-photo-13725650.jpeg" width="200" height="200" alt="Example Photo">`}/>
+
+---
 
 **2) Relative Image Path**
 
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1751260399/Screenshot_2025-06-30_104117_kazu1u.jpg" alt="Relative Image Path"/>
+
 ```html
-<img src="good_morning.jpg" alt="Good Morning Friends"/>   
-<img src="images/photo.jpg" alt="Photo">
+<img src="images/flower.jpg" alt="flower">
+<img src="./images/flower.jpg" alt="flower">
 ```
+
+---

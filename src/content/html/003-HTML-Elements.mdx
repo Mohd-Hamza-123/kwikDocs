@@ -31,25 +31,26 @@ An element typically consists of:
 
 ---
 
-## **Types of HTML Elements**
+### **Types of HTML Elements**
 
 ### **1. Non-Self-Closing (Container) Tags**
 
 * **Paragraph (`<p>`)**: Defines a paragraph.
 
-```html
-<p>This is a paragraph.</p>
- ```
+<HtmlEditor id={1} defaultCode={`<p>This is a paragraph.</p>`}/>
+
 * **Heading (`<h1>` to `<h6>`)**: Defines headings.
 
-```html
+<HtmlEditor id={2} defaultCode={`
+<html>
 <h1>Main Heading</h1>
-<h2>Subheading</h2>
-<h3>Subheading</h3>
-<h4>Subheading</h4>
-<h5>Subheading</h5>
-<h6>Subheading</h6>
-```
+<h2>Subheading 2</h2>
+<h3>Subheading 3</h3>
+<h4>Subheading 4</h4>
+<h5>Subheading 5</h5>
+<h6>Subheading 6</h6>
+</html>
+`}/>
 
 ### **2. Self-Closing (Void) Tags**
 
@@ -57,19 +58,20 @@ Some elements do not have content and close themselves.
 
 * **Image (`<img>`)**:
 
-  ```html
-  <img src="image.jpg" alt="Description">
-  ```
+<HtmlEditor id={3} defaultCode={`<html lang="en">
+<body>
+  <img src="https://images.pexels.com/photos/29914981/pexels-photo-29914981.jpeg" alt="cameraman" width="200" height="200"/>
+</body>
+</html>`}/>
+
 * **Line Break (`<br>`)**:
 
-  ```html
-  <p>First line<br>Second line</p>
-  ```
+<HtmlEditor id={4} defaultCode={`<p>First line<br>Second line</p>`}/>
 
 * **Meta (`<meta>`)**:
 
-  ```html
-  <meta charset="UTF-8">
-  ```
+```html
+<meta charset="UTF-8">
+```
 
 ---

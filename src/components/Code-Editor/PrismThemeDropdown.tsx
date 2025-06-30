@@ -10,12 +10,23 @@ import { useAppDispatch } from '@/lib/hooks/hooks'
 import { changePrismTheme } from '@/lib/store/features/editorSlice'
 
 const PrismThemeDropdown = () => {
-    const dispatch = useAppDispatch()
-    const options = ['okaidia', 'coy', 'dark', 'funky', 'tomorrow', 'twilight', 'solarizedlight', 'holi-theme', 'laserwave', 'atom-dark']
 
-    const themeSwitcher = (theme: string) => {
-        dispatch(changePrismTheme({ prismTheme: theme }))
-    }
+    const dispatch = useAppDispatch()
+    const options = [
+        'coy',
+        'dark',
+        'funky',
+        'okaidia',
+        'tomorrow',
+        'twilight',
+        'laserwave',
+        'atom-dark',
+        'holi-theme',
+        'solarizedlight',
+    ]
+
+    const themeSwitcher = (theme: string) => dispatch(changePrismTheme({ prismTheme: theme }));
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
@@ -25,7 +36,8 @@ const PrismThemeDropdown = () => {
                 {options?.map((theme) => (
                     <DropdownMenuItem
                         onClick={() => themeSwitcher(theme)}
-                        key={theme}>{theme}</DropdownMenuItem>
+                        key={theme}>{theme}
+                    </DropdownMenuItem>
                 ))}
             </DropdownMenuContent>
         </DropdownMenu>
