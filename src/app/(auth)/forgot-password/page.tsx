@@ -41,8 +41,7 @@ const page = () => {
     return (
         <form
             className="space-y-6"
-            onSubmit={submit}
-        >
+            onSubmit={submit}>
             <div className="mt-2">
                 <Input
                     type='email'

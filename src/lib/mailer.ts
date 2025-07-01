@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt'
 import conf from '@/conf/conf';
 import nodemailer from 'nodemailer'
 import UserModel from '@/models/user.model';
+import { randomBytes } from 'crypto';
 
 import {
     saltRounds,
@@ -42,7 +43,7 @@ const sendEmail = async ({ email, emailType, userId }: I_Email) => {
             }
         });
 
-        const link = emailType === type_Verify_Email ? `${conf.api_end_point}verify-email?token=${token}` : `${conf.api_end_point}forgot-password?token=${token}`
+        const link = emailType === type_Verify_Email ? `${conf.api_end_point}verify-email?token=${token}` : `${conf.api_end_point}reset-password?token=${token}`
         console.log("link", link);
 
         const mailOptions = {

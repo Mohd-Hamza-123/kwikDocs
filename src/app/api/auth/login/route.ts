@@ -8,14 +8,14 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
     try {
-        
+
         await connectDB();
         const body = await request.json();
 
         const { email, password } = body;
 
         const user = await UserModel.findOne({ email });
-        // console.log(user)
+
         if (!user) {
             return NextResponse.json({
                 success: false,
@@ -24,6 +24,8 @@ export async function POST(request: NextRequest) {
         }
 
         const isPasswordCorrect = await bcrypt.compare(password, user?.password);
+
+        console.log(isPasswordCorrect)
 
         if (!isPasswordCorrect) {
             return NextResponse.json({
@@ -38,7 +40,11 @@ export async function POST(request: NextRequest) {
             username: user?.username
         }
 
-        const token = jwt.sign(tokenData, conf.token_secret, { expiresIn: '24h' });
+        const token = jwt.sign(
+            tokenData,
+            conf.token_secret,
+            { expiresIn: '24h' }
+        );
         // console.log(token);
 
         const response = NextResponse.json({

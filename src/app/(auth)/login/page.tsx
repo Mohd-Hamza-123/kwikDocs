@@ -49,12 +49,11 @@ const Page = () => {
         onSuccess: (data, variables, context) => {
             router.push('/')
             getUserData();
-            toast({
-                title: "You are Logged In",
-            });
+            toast({title: "You are Logged In"});
         },
         onSettled: (data, error, variables, context) => {
             dispatch(overlayLoadingIsFalseReducer());
+            console.log(data)
         },
     })
 

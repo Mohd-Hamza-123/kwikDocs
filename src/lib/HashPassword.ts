@@ -12,6 +12,5 @@ const hashPassword = async (password: string) => {
         console.log(error)
         return null
     }
-
 }
 export default hashPassword

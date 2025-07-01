@@ -2,8 +2,6 @@ import connectDB from "@/dbConfig/dbConfig";
 import UserModel from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 
-
-
 export async function POST(request: NextRequest) {
     try {
         await connectDB();
