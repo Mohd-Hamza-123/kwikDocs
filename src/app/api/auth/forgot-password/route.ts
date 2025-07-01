@@ -18,6 +18,7 @@ export async function POST(request: NextRequest) {
                 message: "Invalid Email"
             }, { status: 400 })
         }
+
         const sender = await sendEmail({ email, emailType: type_Reset_Email, userId: user?._id.toString() })
         console.log(sender)
 
@@ -38,6 +39,5 @@ export async function POST(request: NextRequest) {
             success: false,
             error: error?.message || "Internal Server Error"
         }, { status: 500 })
-
     }
 }

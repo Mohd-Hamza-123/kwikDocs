@@ -1,8 +1,8 @@
-import { type_Verify_Email } from "@/constant";
-import connectDB from "@/dbConfig/dbConfig";
-import hashPassword from "@/lib/HashPassword";
 import sendEmail from "@/lib/mailer";
+import connectDB from "@/dbConfig/dbConfig";
 import UserModel from "@/models/user.model";
+import hashPassword from "@/lib/HashPassword";
+import { type_Verify_Email } from "@/constant";
 import { NextRequest, NextResponse } from "next/server";
 
 connectDB();

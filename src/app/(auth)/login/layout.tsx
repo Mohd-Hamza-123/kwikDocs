@@ -10,7 +10,7 @@ const Login = ({ children }: any) => {
             <Image
                 height={200}
                 width={200}
-                className="mx-auto h-12 w-auto"
+                className="mx-auto h-12 w-auto dark:invert"
                 src="./logo.png"
                 alt='Image'
                 quality={100}
