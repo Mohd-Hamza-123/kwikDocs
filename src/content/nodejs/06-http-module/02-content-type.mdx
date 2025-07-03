@@ -74,28 +74,5 @@ const server = http.createServer((request, response) => {
 * `text/event-stream`: For Server-Sent Events (SSE).
 * `application/javascript`: JavaScript files.
 
-### Example: Setting Content-Type in Node.js
 
-When using the `http` module, you set the `Content-Type` header in the response using the `setHeader` method or directly with `writeHead`.
-
-```javascript
-import http from 'http';
-
-const server = http.createServer((req, res) => {
-})
-
-server.listen(3000, () => {
-    console.log('Server running at http://localhost:3000/');
-});
-```
-
-### Why Content-Type Is Important
-
-* **Client Parsing**: Ensures the client correctly interprets the data (e.g., JSON vs. HTML).
-* **API Compatibility**: Necessary for APIs to convey the type of data (e.g., `application/json`).
-* **Security**: Prevents certain types of exploits (e.g., ensuring a browser doesn’t execute untrusted code as JavaScript).
-
-
-```javascript
-
-```
+---

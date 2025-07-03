@@ -4,16 +4,13 @@ import UserModel from "@/models/user.model";
 import hashPassword from "@/lib/HashPassword";
 import { type_Verify_Email } from "@/constant";
 import { NextRequest, NextResponse } from "next/server";
-
 connectDB();
 
 export async function POST(request: NextRequest) {
 
     try {
-
         const body = await request.json();
         const { username, email, password } = body;
-
         const user = await UserModel.findOne({
             $or: [{ username }, { email }]
         });
