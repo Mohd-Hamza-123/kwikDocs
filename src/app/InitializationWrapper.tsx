@@ -12,26 +12,26 @@ const InitializationWrapper = ({ children }: { children: ReactNode }) => {
 
     const dispatch = useAppDispatch();
 
-    const {
-        error,
-        isError,
-        isPending,
-        isSuccess,
-        data: userProfile,
-    } = useQuery({
-        queryKey: ["userProfile"],
-        queryFn: () => getProfile(),
-        staleTime: Infinity
-    });
+    // const {
+    //     error,
+    //     isError,
+    //     isPending,
+    //     isSuccess,
+    //     data: userProfile,
+    // } = useQuery({
+    //     queryKey: ["userProfile"],
+    //     queryFn: () => getProfile(),
+    //     staleTime: Infinity
+    // });
 
-    if (isSuccess) {
-        dispatch(login({ userData: userProfile }));
-    }
+    // if (isSuccess) {
+    //     dispatch(login({ userData: userProfile }));
+    // }
 
-    if (isError) {
-        logoutAPI()
-            .then(() => dispatch(logout()))
-    }
+    // if (isError) {
+    //     logoutAPI()
+    //         .then(() => dispatch(logout()))
+    // }
 
     useEffect(() => {
         const EditorTheme = localStorage.getItem("editorTheme") || 'monokai'
