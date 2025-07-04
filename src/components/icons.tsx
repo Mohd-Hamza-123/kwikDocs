@@ -1,8 +1,16 @@
 type iconsProps = React.HTMLAttributes<SVGElement>
 import { FaRegCopy } from "react-icons/fa";
 import { GiLargePaintBrush } from "react-icons/gi";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 export const svgIcons = {
+    arrowDropDown: (props: iconsProps) => (
+        <MdOutlineKeyboardArrowDown {...props} />
+    ),
+    arrowDropRight: (props: iconsProps) => (
+        <MdOutlineKeyboardArrowRight {...props} />
+    ),
     brush: (props: iconsProps) => (
         <GiLargePaintBrush {...props} />
     ),
