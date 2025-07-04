@@ -1,12 +1,16 @@
 import { docsInterface } from '@/models/docs.model'
+import { DocumentType } from '@/types/docs.type'
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 interface I_document {
-    document: docsInterface | null
+    document: DocumentType | null,
+    allDocuments : DocumentType[] | []
 }
+
 const initialState: I_document = {
-    document: null
+    document: null,
+    allDocuments : []
 }
 
 export const docsSlice = createSlice({
@@ -14,11 +18,14 @@ export const docsSlice = createSlice({
     initialState,
     reducers: {
         setDoc: (state, action) => {
-            state.document = action.payload.document;
+            state.document = action.payload.document
         },
+        setAllDocs: (state,action)=>{
+            state.allDocuments = action.payload.allDocuments
+        }
     },
 })
 
-export const { setDoc } = docsSlice.actions
+export const { setDoc,setAllDocs } = docsSlice.actions
 
 export default docsSlice.reducer

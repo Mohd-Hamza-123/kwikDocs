@@ -3,12 +3,11 @@
 import { useState } from "react";
 import { svgIcons } from "../icons";
 import type { FileNode } from "@/services/helpers/getContentTree";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
+import { setDoc } from "@/lib/store/features/docsSlice";
 
 const FilteredPostList = ({ nodes }: { nodes: FileNode[] }) => {
-  console.log(nodes)
-
   return (
-
     <ul className="list-none w-full">
       {nodes?.map((node: FileNode) => (
         <TreeNode node={node} key={node.name} />
@@ -21,7 +20,16 @@ export default FilteredPostList
 
 function TreeNode({ node }: { node: FileNode }) {
 
+  const dispatch = useAppDispatch()
   const [isExpanded, setIsExpanded] = useState(false)
+  const allPosts = useAppSelector((state) => state.docs.allDocuments)
+  console.log(allPosts)
+  const handleDocument = (slug: string | undefined) => {
+    
+    const document = allPosts.find((doc) => doc.slug === slug)
+    dispatch(setDoc({ document }))
+  }
+
   const expand = () => setIsExpanded((prev) => !prev)
   if (node.type === "directory") {
     const name = (node.name).replaceAll("-", " ")
@@ -30,16 +38,21 @@ function TreeNode({ node }: { node: FileNode }) {
         onClick={expand}
         className="px-2 py-2 capitalize font-semibold poppins flex justify-between items-center cursor-pointer">
         <span>{name}</span>
-        <span><svgIcons.arrowDropRight/></span>
-        </li>
+        <span><svgIcons.arrowDropRight /></span>
+      </li>
       {isExpanded && <FilteredPostList nodes={node.children} />}
     </>
   }
 
   if (node.type === "file") {
+
+    console.log(node)
     let name = (node.name).replaceAll("-", " ")
-    if(name.endsWith(".mdx")) name = name.replaceAll(".mdx","")
-    return <li className="w-full px-1 py-1 capitalize"><span className="ml-5">{name}</span></li>
+    if (name.endsWith(".mdx")) name = name.replaceAll(".mdx", "")
+    return <li
+      className="w-full px-1 py-1 capitalize"
+      onClick={() => handleDocument(node?.slug)}
+    ><span className="ml-5 cursor-pointer">{name}</span></li>
   }
 }
 
