@@ -2,6 +2,7 @@
 import React from 'react'
 import { useResponsiveContext } from '@/context/CSS-Context';
 import { memo } from 'react';
+
 const PostItems = ({
     post,
     renderPost,

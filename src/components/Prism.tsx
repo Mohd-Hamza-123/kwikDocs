@@ -26,13 +26,13 @@ import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-typescript";
 
 import { useAppSelector } from "@/lib/hooks/hooks";
-import { docsInterface } from "@/models/docs.model";
+
 
 const Prism = ({ children }: any) => {
 
   const theme = useAppSelector((state) => state.editorSlice.prismTheme)
 
-  const doc: docsInterface | null = useAppSelector((state) => state.docs?.document);
+  const doc = useAppSelector((state) => state.docs?.document);
 
   const loadTheme = () => {
     const link = document.getElementById("prism-theme");
