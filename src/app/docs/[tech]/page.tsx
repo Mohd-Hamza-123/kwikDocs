@@ -21,11 +21,13 @@ export default function DocPage({ params }: { params: { tech: string } }) {
   useEffect(() => {
     dispatch(setPosts({ post: allPost[0] }))
     dispatch(setActiveSlug({ activeSlug: allPost[0]?.slug }))
-    getContentTree(`./src/content/${tech}`)
+    fetch(`/api/content-tree/${tech}`)
+      .then(res => res.json())
       .then((res) => {
         if (res) setNodes(res)
         else setNodes(null)
       })
+
   }, [])
 
   if (nodes) {
