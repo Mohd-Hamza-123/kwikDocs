@@ -2,29 +2,29 @@
 import React, { useEffect } from 'react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { useRouter, useSearchParams } from 'next/navigation'
+// import { useRouter, useSearchParams } from 'next/navigation'
 
 const ResetPassword = () => {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const token = searchParams.get("token")
-  console.log(token)
+  // const router = useRouter()
+  // const searchParams = useSearchParams()
+  // const token = searchParams.get("token")
+  // console.log(token)
 
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!token) {
-      router.push('/')
-      return
-    }
+    // if (!token) {
+    //   router.push('/')
+    //   return
+    // }
     const formData = new FormData(e.currentTarget)
     console.log(formData)
   }
 
   useEffect(() => {
-    if (!token) {
-      router.push('/')
+    // if (!token) {
+    //   router.push('/')
       return
-    }
+    // }
   }, [])
 
   return (
