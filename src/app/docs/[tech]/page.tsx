@@ -24,7 +24,7 @@ export default function DocPage({ params }: { params: { tech: string } }) {
     fetch(`/api/content-tree/${tech}`)
       .then(res => res.json())
       .then((res) => {
-        if (res) setNodes(res)
+        if (res?.tree) setNodes(res?.tree)
         else setNodes(null)
       })
 
