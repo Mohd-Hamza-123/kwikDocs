@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-const page = () => {
+const ResetPassword = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const token = searchParams.get("token")
@@ -52,4 +52,4 @@ const page = () => {
   )
 }
 
-export default page
+export default ResetPassword
