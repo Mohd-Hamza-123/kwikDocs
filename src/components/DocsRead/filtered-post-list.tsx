@@ -1,57 +1,45 @@
 'use client'
 
-import { posts } from '#site/content'
-import PostItems from "../PostItems";
-import { useEffect, useMemo } from "react";
-import { useResponsiveContext } from "@/context/CSS-Context";
-import { PostItemsProps } from '@/lib/store/features/postSlice';
-import { useAppDispatch, useAppSelector } from '@/lib/hooks/hooks';
-import { setActiveSlug, setPosts } from '@/lib/store/features/postSlice';
+import { useState } from "react";
+import { svgIcons } from "../icons";
+import type { FileNode } from "@/services/helpers/getContentTree";
 
-const FilteredPostList = ({ category }: { category: string }) => {
-
-  const dispatch = useAppDispatch()
-
-  const activeSlug = useAppSelector((state) => state.post.activeSlug);
-
-  const { isDocIndexOpen } = useResponsiveContext();
-
-  const displayPosts = useMemo(() => posts?.filter((post) => post?.slug.indexOf(category) === 0 && post?.published)
-    , [posts]);
-
-  useEffect(() => {
-    dispatch(setPosts({ post: displayPosts[0] }))
-    dispatch(setActiveSlug({ activeSlug: displayPosts[0]?.slug }))
-  }, [])
-
-  const renderPost = (post: PostItemsProps) => {
-    dispatch(setPosts({ post: post }))
-    dispatch(setActiveSlug({ activeSlug: post?.slug }))
-  }
+const FilteredPostList = ({ nodes }: { nodes: FileNode[] }) => {
+  console.log(nodes)
 
   return (
-    <section className={`w-[100%] lg:w-[20%] border border-r-3 max-h-[91vh] overflow-y-scroll absolute lg:sticky top-0 bg-slate-50 dark:bg-bgDark z-20 py-2 dark:border-gray-700 lg:block ${isDocIndexOpen ? "block" : "hidden"} lg:block`}>
-      <p className="mt-4 text-center font-semibold capitalize">{category}</p>
 
-      <ul className="flex flex-col gap-1 mt-5">
-        {displayPosts?.map((post) => (
-          <PostItems
-            post={post}
-            key={post?.slug}
-            category={category}
-            renderPost={renderPost}
-            activeSlug={activeSlug}
-          />
-        ))}
-      </ul>
-
-      <span className="text-center text-sm mx-auto block my-2">
-        No documents found.
-      </span>
-
-    </section>
+    <ul className="list-none w-full">
+      {nodes?.map((node: FileNode) => (
+        <TreeNode node={node} key={node.name} />
+      ))}
+    </ul>
   );
 };
 
-export default FilteredPostList;
+export default FilteredPostList
+
+function TreeNode({ node }: { node: FileNode }) {
+
+  const [isExpanded, setIsExpanded] = useState(false)
+  const expand = () => setIsExpanded((prev) => !prev)
+  if (node.type === "directory") {
+    const name = (node.name).replaceAll("-", " ")
+    return node.children && <>
+      <li
+        onClick={expand}
+        className="px-2 py-2 capitalize font-semibold poppins flex justify-between items-center cursor-pointer">
+        <span>{name}</span>
+        <span><svgIcons.arrowDropRight/></span>
+        </li>
+      {isExpanded && <FilteredPostList nodes={node.children} />}
+    </>
+  }
+
+  if (node.type === "file") {
+    let name = (node.name).replaceAll("-", " ")
+    if(name.endsWith(".mdx")) name = name.replaceAll(".mdx","")
+    return <li className="w-full px-1 py-1 capitalize"><span className="ml-5">{name}</span></li>
+  }
+}
 
