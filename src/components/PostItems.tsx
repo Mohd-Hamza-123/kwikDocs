@@ -1,17 +1,16 @@
 'use client'
 import React from 'react'
 import { useResponsiveContext } from '@/context/CSS-Context';
-import { PostItemsProps } from '@/lib/store/features/postSlice';
 import { memo } from 'react';
 const PostItems = ({
     post,
     renderPost,
     activeSlug }: {
-        post: PostItemsProps,
+        post: any,
         renderPost: any,
         activeSlug: string
     }) => {
-        
+
     const { setIsDocIndexOpen } = useResponsiveContext();
 
     const handleClick = () => {
