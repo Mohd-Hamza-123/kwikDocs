@@ -5,6 +5,7 @@ import { svgIcons } from "../icons";
 import type { FileNode } from "@/services/helpers/getContentTree";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { setDoc } from "@/lib/store/features/docsSlice";
+import { useResponsiveContext } from "@/context/CSS-Context";
 
 const FilteredPostList = ({ nodes }: { nodes: FileNode[] }) => {
   return (
@@ -23,11 +24,13 @@ function TreeNode({ node }: { node: FileNode }) {
   const dispatch = useAppDispatch()
   const [isExpanded, setIsExpanded] = useState(false)
   const allPosts = useAppSelector((state) => state.docs.allDocuments)
+  const { setIsDocIndexOpen } = useResponsiveContext();
   console.log(allPosts)
   const handleDocument = (slug: string | undefined) => {
-    
+
     const document = allPosts.find((doc) => doc.slug === slug)
     dispatch(setDoc({ document }))
+    setIsDocIndexOpen(false)
   }
 
   const expand = () => setIsExpanded((prev) => !prev)
@@ -36,8 +39,8 @@ function TreeNode({ node }: { node: FileNode }) {
     return node.children && <>
       <li
         onClick={expand}
-        className="px-2 py-2 capitalize font-semibold poppins flex justify-between items-center cursor-pointer">
-        <span>{name}</span>
+        className="px-2 py-1 capitalize flex justify-between items-center cursor-pointer">
+        <span className="text-[16px]">📂 {name}</span>
         <span><svgIcons.arrowDropRight /></span>
       </li>
       {isExpanded && <FilteredPostList nodes={node.children} />}
@@ -52,7 +55,7 @@ function TreeNode({ node }: { node: FileNode }) {
     return <li
       className="w-full px-1 py-1 capitalize"
       onClick={() => handleDocument(node?.slug)}
-    ><span className="ml-5 cursor-pointer">{name}</span></li>
+    ><span className="cursor-pointer text-[15px] text-gray-700 dark:text-gray-300">{name}</span></li>
   }
 }
 
