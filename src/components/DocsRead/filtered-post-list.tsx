@@ -59,7 +59,7 @@ function TreeNode({ node }: { node: FileNode }) {
     name = removeStartingNumber(name)
     if (name.endsWith(".mdx")) name = name.replaceAll(".mdx", "")
     return <li
-      className="w-full px-2 py-1 capitalize cursor-pointer hover:bg-black text-[15px] text-gray-700 dark:text-gray-300"
+      className="w-full px-2 py-1 capitalize cursor-pointer dark:hover:bg-black text-[15px] text-gray-700 dark:text-gray-300"
       onClick={() => handleDocument(node?.slug)}
     >{name}</li>
   }
