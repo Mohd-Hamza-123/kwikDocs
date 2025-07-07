@@ -1,0 +1,116 @@
+---
+title: Data Types  
+description: Familiarize yourself with the data types in Java  
+published: true  
+---
+
+In Java, **data types** are used to define the kind of data a variable can hold. Java has **two main categories** of data types:
+
+---
+
+## 🟢 Primitive Data Types
+
+Primitive data types are the **building blocks** of data manipulation in Java. They are not objects and represent **raw values**.
+
+<table border="1" cellspacing="0" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Size</th>
+      <th>Default Value</th>
+      <th>Range</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>byte</code></td>
+      <td>8-bit signed integer</td>
+      <td>1 byte</td>
+      <td><code>0</code></td>
+      <td>-128 to 127</td>
+    </tr>
+    <tr>
+      <td><code>short</code></td>
+      <td>16-bit signed integer</td>
+      <td>2 bytes</td>
+      <td><code>0</code></td>
+      <td>-32,768 to 32,767</td>
+    </tr>
+    <tr>
+      <td><code>int</code></td>
+      <td>32-bit signed integer</td>
+      <td>4 bytes</td>
+      <td><code>0</code></td>
+      <td>-2,147,483,648 to 2,147,483,647</td>
+    </tr>
+    <tr>
+      <td><code>long</code></td>
+      <td>64-bit signed integer</td>
+      <td>8 bytes</td>
+      <td><code>0L</code></td>
+      <td>-9,223,372,036,854,775,808 to 9,223,372,036,854,775,807</td>
+    </tr>
+    <tr>
+      <td><code>float</code></td>
+      <td>32-bit floating-point</td>
+      <td>4 bytes</td>
+      <td><code>0.0f</code></td>
+      <td>~±3.4e−38 to ±3.4e+38</td>
+    </tr>
+    <tr>
+      <td><code>double</code></td>
+      <td>64-bit floating-point</td>
+      <td>8 bytes</td>
+      <td><code>0.0d</code></td>
+      <td>~±1.7e−308 to ±1.7e+308</td>
+    </tr>
+    <tr>
+      <td><code>char</code></td>
+      <td>16-bit Unicode character</td>
+      <td>2 bytes</td>
+      <td><code>'\u0000'</code></td>
+      <td>0 to 65,535 (Unicode values)</td>
+    </tr>
+    <tr>
+      <td><code>boolean</code></td>
+      <td>true or false value</td>
+      <td>~1 bit*</td>
+      <td><code>false</code></td>
+      <td><code>true</code> or <code>false</code></td>
+    </tr>
+  </tbody>
+</table>
+<p><em>Size of boolean is JVM-dependent (usually 1 byte).</em></p>
+                        
+---
+
+### 🔵 Non-Primitive Data Types
+
+Non-primitive types are **reference types**. They refer to objects and have more complex structures.
+
+| Type      | Description                                  | Default Value |
+|-----------|----------------------------------------------|----------------|
+| `String`  | Sequence of characters                       | `null`         |
+| `Array`   | Collection of similar data types             | `null`         |
+| `Class`   | Blueprint for creating objects               | `null`         |
+| `Interface`| Reference to interface methods              | `null`         |
+| `Object`  | Root class of all Java classes               | `null`         |
+
+> 🔸 All non-primitive types are stored by **reference** (not by value) and can be assigned `null`.
+
+---
+
+### 📌 Visual Overview
+
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1751739473/diagram-export-05-07-2025-23_41_56_s7tkck.jpg" alt="Data Types in Java" className='w-full' />
+
+---
+
+### ✅ Summary
+
+- **Primitive types**: Simple, fixed-size data like `int`, `char`, `boolean`
+- **Non-Primitive types**: Complex structures like `String`, `Array`, and user-defined types
+- Primitive types have **default values** and fixed sizes; non-primitives are **reference types** and default to `null`
+
+---

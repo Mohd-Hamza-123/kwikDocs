@@ -38,9 +38,6 @@ export default function DocPage({ params }: { params: { tech: string } }) {
           <FilteredPostList nodes={nodes} />
         </section>
         <ShowPost />
-        <section className="w-full lg:w-[20%] border">
-
-        </section>
       </>
     )
   } else {

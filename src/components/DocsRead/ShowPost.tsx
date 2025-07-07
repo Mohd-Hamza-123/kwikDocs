@@ -9,7 +9,7 @@ const ShowPost = () => {
 
     const post = useAppSelector((state) => state.docs.document);
 
-    return <section className="w-full lg:w-[60%] overflow-y-scroll" >
+    return <section className="w-full lg:w-[80%] overflow-y-scroll" >
 
         {post && <article className="py-3 prose dark:prose-invert max-w-[100%] px-3">
             <div className="flex justify-between items-center">

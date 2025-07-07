@@ -1,0 +1,39 @@
+---
+title: Literals  
+description: Literal values in Java
+published: true  
+---
+
+In Java, **literals** are the fixed values assigned directly to variables or used in expressions.
+
+### 🔹 Types of Literals in Java
+
+| Type                       | Example                        | Description                                                                     |
+| -------------------------- | ------------------------------ | ------------------------------------------------------------------------------- |
+| **Integer literal**        | `10`, `-50`, `0b1010`, `0x1A`  | Whole numbers (decimal, binary `0b`, octal `0`, or hexadecimal `0x`)            |
+| **Floating-point literal** | `3.14`, `-0.01`, `1e3`, `2.5f` | Decimal numbers. Add `f` or `F` for `float`, `d` or `D` (optional) for `double` |
+| **Character literal**      | `'A'`, `'9'`, `'@'`, `'\n'`    | Single characters enclosed in single quotes                                     |
+| **String literal**         | `"Hello"`, `"123"`, `""`       | Sequence of characters enclosed in double quotes                                |
+| **Boolean literal**        | `true`, `false`                | Only two possible values                                                        |
+| **Null literal**           | `null`                         | Represents the null reference (used for objects)                                |
+
+---
+
+🔸 **Examples**
+
+```java
+int age = 25;             // Integer literal
+double pi = 3.14159;      // Floating-point literal
+char grade = 'A';         // Character literal
+String name = "Hamza";    // String literal
+boolean isJavaFun = true; // Boolean literal
+```
+
+🔸 **Special Notes**
+
+* **Numeric literals** can be written with underscores for readability: `int billion = 1_000_000_000;`
+* **Character literals** support escape sequences: `'\n'`, `'\t'`, `'\u0041'` (Unicode for 'A')
+* **String literals** are objects of the `String` class
+* `null` is **not** a data type—it’s a literal that denotes *no object reference*
+
+---

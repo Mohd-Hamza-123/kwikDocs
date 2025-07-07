@@ -25,7 +25,7 @@ function TreeNode({ node }: { node: FileNode }) {
   const [isExpanded, setIsExpanded] = useState(false)
   const allPosts = useAppSelector((state) => state.docs.allDocuments)
   const { setIsDocIndexOpen } = useResponsiveContext();
-  console.log(allPosts)
+  
   const handleDocument = (slug: string | undefined) => {
 
     const document = allPosts.find((doc) => doc.slug === slug)
