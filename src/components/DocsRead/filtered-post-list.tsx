@@ -6,6 +6,7 @@ import type { FileNode } from "@/services/helpers/getContentTree";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { setDoc } from "@/lib/store/features/docsSlice";
 import { useResponsiveContext } from "@/context/CSS-Context";
+import removeStartingNumber from "@/utils/RemoveStartingNumber";
 
 const FilteredPostList = ({ nodes }: { nodes: FileNode[] }) => {
   return (
@@ -25,7 +26,7 @@ function TreeNode({ node }: { node: FileNode }) {
   const [isExpanded, setIsExpanded] = useState(false)
   const allPosts = useAppSelector((state) => state.docs.allDocuments)
   const { setIsDocIndexOpen } = useResponsiveContext();
-  
+
   const handleDocument = (slug: string | undefined) => {
 
     const document = allPosts.find((doc) => doc.slug === slug)
@@ -35,7 +36,10 @@ function TreeNode({ node }: { node: FileNode }) {
 
   const expand = () => setIsExpanded((prev) => !prev)
   if (node.type === "directory") {
-    const name = (node.name).replaceAll("-", " ")
+
+    let name = removeStartingNumber(node.name)
+    name = (name).replaceAll("-", " ")
+
     return node.children && <>
       <li
         onClick={expand}
@@ -50,12 +54,14 @@ function TreeNode({ node }: { node: FileNode }) {
   if (node.type === "file") {
 
     console.log(node)
+
     let name = (node.name).replaceAll("-", " ")
+    name = removeStartingNumber(name)
     if (name.endsWith(".mdx")) name = name.replaceAll(".mdx", "")
     return <li
-      className="w-full px-1 py-1 capitalize"
+      className="w-full px-2 py-1 capitalize cursor-pointer hover:bg-black text-[15px] text-gray-700 dark:text-gray-300"
       onClick={() => handleDocument(node?.slug)}
-    ><span className="cursor-pointer text-[15px] text-gray-700 dark:text-gray-300">{name}</span></li>
+    >{name}</li>
   }
 }
 
