@@ -88,7 +88,7 @@ const Technologies = () => {
 
                   <div className="lg:w-[35%] w-full p-3 h-full flex items-center">
                     <Image
-                      className="object-cover w-full h-full rounded-sm"
+                      className="object-cover w-full rounded-sm"
                       src={tech?.image?.secure_url}
                       alt={`${tech?.name} Image`}
                       quality={100}
