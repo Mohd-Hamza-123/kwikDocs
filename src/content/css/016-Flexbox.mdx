@@ -41,6 +41,7 @@ The flex container becomes flexible by setting the `display` property to `flex`:
 - **`flex-wrap`**
 - **`justify-content`**
 - **`align-items`**
+- **`align-content`**
 
 ---
 
@@ -55,7 +56,7 @@ This property specifies the display direction of flex items in the flex containe
 }
 ```
 
-![Flex Direction](https://res.cloudinary.com/dkkifg17t/image/upload/v1737019819/Documentarium/JavaScript/k3hdyxnkz1klfkso6idy.jpg)
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1737019819/Documentarium/JavaScript/k3hdyxnkz1klfkso6idy.jpg" alt="Flex Direction" />
 
 ---
 
@@ -70,7 +71,7 @@ The `flex-wrap` property specifies whether the flex items should wrap or not.
 }
 ```
 
-![Flex Wrap](https://res.cloudinary.com/dkkifg17t/image/upload/v1737019967/Documentarium/JavaScript/gsbcxnfqnx4uweepmlqs.png)
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1737019967/Documentarium/JavaScript/gsbcxnfqnx4uweepmlqs.png" alt="Flex Wrap" />
 
 ---
 
@@ -85,7 +86,7 @@ The `justify-content` property is used to align the flex items when they do not 
 }
 ```
 
-![Justify Content](https://res.cloudinary.com/dkkifg17t/image/upload/v1737020026/Documentarium/JavaScript/ggw40hzsm9j7s96ctabj.png)
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1737020026/Documentarium/JavaScript/ggw40hzsm9j7s96ctabj.png" alt="Justify Content" />
 
 ---
 
@@ -100,3 +101,31 @@ The `align-items` property is used to align the flex items when they do not use 
   align-items: center;
 }
 ```
+
+#### **5. Align Content**
+
+The `align-content` property is used to align the flex items when they do not use all available space on the cross axis (vertically).
+
+
+```css showLineNumbers {5}
+.flex-container {
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: row;
+   align-content: center;
+   justify-content: center;
+}
+```
+
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1752487098/Screenshot_2025-07-14_152552_so86nu.png" alt="Align Content" />
+
+You can use different values for `align-content` property:
+
+- `flex-start`
+- `flex-end`
+- `space-between`
+- `space-around`
+
+
+---
+
