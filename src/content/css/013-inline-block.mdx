@@ -1,7 +1,109 @@
 ---
 title: Inline & Block Elements
 description: ''
-published: false
+published: true
 ---
 
-# hello
+
+In HTML, elements are categorized into **inline** and **block-level** elements based on how they behave in the document flow.
+
+---
+
+### 🧱 Block-Level Elements
+
+A **block-level element** always starts on a **new line** and takes up the **full width** available (by default). It essentially forms a block or a box on the page.
+
+### ✳️ Characteristics
+
+- Begins on a new line.
+- Expands to fill the container's width by default.
+- Can contain **other block** and **inline** elements.
+- Typically used for **structural layout**.
+
+### ✅ Common Block Elements
+
+```html
+<div></div>
+<p></p>
+<h1></h1> to <h6></h6>
+<ol></ol>, <ul></ul>, <li></li>
+<header></header>, <footer></footer>
+<section></section>, <article></article>
+<main></main>, <nav></nav>, <aside></aside>
+```
+
+---
+
+### 🔡 Inline Elements
+
+An **inline element** does **not start on a new line** and only takes up as much width as necessary. It flows alongside other elements like words in a sentence.
+
+### ✳️ Characteristics
+
+* Does **not break** the line.
+* Only takes up as much width as required.
+* Cannot contain **block-level** elements (only text or other inline elements).
+* Commonly used for **text formatting**.
+
+### ✅ Common Inline Elements
+
+```html
+<span></span>
+<a></a>
+<strong></strong>, <em></em>
+<b></b>, <i></i>
+<img />
+<code></code>
+<abbr></abbr>, <cite></cite>
+```
+
+---
+
+## 🆚 Block vs Inline (Quick Comparison)
+
+| Feature             | Block Element  | Inline Element           |
+| ------------------- | -------------- | ------------------------ |
+| Starts on new line  | ✅ Yes          | ❌ No                     |
+| Takes full width    | ✅ Yes          | ❌ No (only needed width) |
+| Can contain blocks  | ✅ Yes          | ❌ No                     |
+| Can contain inlines | ✅ Yes          | ✅ Yes                    |
+| Examples            | `<div>`, `<p>` | `<span>`, `<a>`          |
+
+---
+
+## 🧪 Example
+
+```html
+<!-- Block-level example -->
+<div>
+  <h2>This is a heading</h2>
+  <p>This is a paragraph inside a div.</p>
+</div>
+
+<!-- Inline example -->
+<p>
+  This is <strong>bold</strong> and <em>italic</em> text inside a paragraph.
+</p>
+```
+
+---
+
+## 🧠 Tip
+
+You can change an element’s display behavior using CSS:
+
+```css
+/* Turn an inline element into a block */
+a {
+  display: block;
+}
+
+/* Turn a block element into inline */
+div {
+  display: inline;
+}
+```
+
+---
+
+
