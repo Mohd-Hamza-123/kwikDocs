@@ -19,7 +19,7 @@ const ImageCenter: React.FC<ImageCenterProps> = ({
                 <Image
                     src={src}
                     alt={alt}
-                    width={400}
+                    width={500}
                     height={100}
                     className={`h-auto rounded-md ${className}`}
                     {...props} />
