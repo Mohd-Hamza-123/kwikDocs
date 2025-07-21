@@ -1,0 +1,94 @@
+---
+title: Type Operator
+published: true
+---
+
+The `typeof` operator is used to **determine the data type** of a value or variable.
+It returns a string such as `"number"`, `"string"`, `"boolean"`, etc.
+
+---
+
+### ✅ Syntax:
+
+```js
+typeof value
+```
+
+```js
+typeof(variable)
+```
+
+---
+
+### 🔸 Example 1: Basic Types
+
+```js
+let name = "Hamza";
+let age = 21;
+let isActive = true;
+
+console.log(typeof name);     // Output: "string"
+console.log(typeof age);      // Output: "number"
+console.log(typeof isActive); // Output: "boolean"
+```
+
+---
+
+### 🔸 Example 2: Special Cases
+
+```js
+let nothing = null;
+let notDefined;
+
+console.log(typeof nothing);     // Output: "object" ❗ (this is a known JavaScript quirk)
+console.log(typeof notDefined);  // Output: "undefined"
+```
+
+📝 `typeof null` returns `"object"` due to a legacy bug in JavaScript.
+
+---
+
+### 🔸 Example 3: Objects and Arrays
+
+```js
+let user = { name: "Hamza" };
+let hobbies = ["reading", "coding"];
+
+console.log(typeof user);    // Output: "object"
+console.log(typeof hobbies); // Output: "object"
+```
+
+📝 To check if a value is specifically an array:
+
+```js
+Array.isArray(hobbies); // Output: true
+```
+
+---
+
+### 🔸 Example 4: Function Type
+
+```js
+function greet() {
+  return "Hello";
+}
+
+console.log(typeof greet); // Output: "function"
+```
+
+---
+
+### ✅ Summary Table
+
+| Value           | `typeof` result |
+| --------------- | --------------- |
+| `"hello"`       | `"string"`      |
+| `42`            | `"number"`      |
+| `true`          | `"boolean"`     |
+| `undefined`     | `"undefined"`   |
+| `null`          | `"object"` ❗    |
+| `{}`            | `"object"`      |
+| `[]`            | `"object"`      |
+| `function() {}` | `"function"`    |
+
+---

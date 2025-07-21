@@ -1,0 +1,105 @@
+---
+title: Comparison Operators
+published: true
+---
+
+Comparison operators compare two values and return `true` or `false`. Below are the most commonly used comparison operators with real-world-style variable examples.
+
+
+#### **1. `==` (Equal To)**
+
+Compares two values after type conversion.
+
+```js
+let a = 5;
+let b = "5";
+
+console.log(a == b); // true — values are equal after type coercion
+```
+
+---
+
+#### **2. `===` (Strict Equal To)**
+
+Checks both value and type (no type conversion).
+
+```js
+let a = 5;
+let b = "5";
+
+console.log(a === b); // false — same value, different types
+```
+
+---
+
+#### **3. `!=` (Not Equal To)**
+
+Returns true if values are not equal (after type coercion).
+
+```js
+let x = 10;
+let y = "10";
+
+console.log(x != y); // false — values are equal after coercion
+```
+
+---
+
+#### **4. `!==` (Strict Not Equal To)**
+
+Returns true if values or types are not equal.
+
+```js
+let x = 10;
+let y = "10";
+
+console.log(x !== y); // true — same value, but different types
+```
+
+---
+
+#### **5. `>` (Greater Than)**
+
+```js
+let score = 85;
+let passMark = 50;
+
+console.log(score > passMark); // true
+```
+
+---
+
+#### **6. `<` (Less Than)**
+
+```js
+let currentTemp = 30;
+let thresholdTemp = 35;
+
+console.log(currentTemp < thresholdTemp); // true
+```
+
+---
+
+#### **7. `>=` (Greater Than or Equal To)**
+
+```js
+let age = 18;
+let minAge = 18;
+
+console.log(age >= minAge); // true
+```
+
+---
+
+#### **8. `<=` (Less Than or Equal To)**
+
+```js
+let fileSize = 9.8;
+let maxAllowedSize = 10;
+
+console.log(fileSize <= maxAllowedSize); // true
+```
+
+---
+
+

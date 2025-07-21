@@ -1,0 +1,87 @@
+---
+title: Nullish Coalescing Operator
+published: true
+---
+
+
+The `??` operator returns the **right-hand value only if the left-hand value is `null` or `undefined`**.
+
+It is used to provide **default values** for variables that might be `null` or `undefined`, without mistakenly treating values like `0`, `""` (empty string), or `false` as missing.
+
+---
+
+### ✅ Syntax:
+
+```js
+let result = value ?? defaultValue;
+```
+
+If `value` is `null` or `undefined`, `result` will be `defaultValue`.
+Otherwise, `result` will be `value`.
+
+---
+
+### 🔸 Example 1: Basic Usage
+
+```js
+let userName = null;
+
+let finalName = userName ?? "Guest";
+
+console.log(finalName); // Output: Guest
+```
+
+📝 `userName` is `null`, so `finalName` becomes `"Guest"`.
+
+---
+
+### 🔸 Example 2: When left value is not null/undefined
+
+```js
+let userName = "Hamza";
+
+let finalName = userName ?? "Guest";
+
+console.log(finalName); // Output: Hamza
+```
+
+📝 `userName` is not null/undefined, so we keep the actual value.
+
+---
+
+### 🔸 Example 3: Difference from `||`
+
+```js
+let score = 0;
+
+let finalScore = score || 10;
+let safeScore = score ?? 10;
+
+console.log(finalScore); // Output: 10   (because 0 is falsy)
+console.log(safeScore);  // Output: 0    (because 0 is not null/undefined)
+```
+
+📝 `||` treats `0` as false, but `??` does **not**.
+
+---
+
+### ✅ When to Use
+
+Use `??` **when you want to provide a fallback only if the value is truly missing** (`null` or `undefined`), and **not** when it’s just falsy like `0` or `""`.
+
+---
+
+### 🔒 Common Use Case: Default Settings
+
+```js
+let userSettings = {
+  theme: null,
+};
+
+let theme = userSettings.theme ?? "light";
+
+console.log(theme); // Output: light
+```
+
+---
+
