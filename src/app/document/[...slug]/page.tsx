@@ -33,9 +33,6 @@ export default function PostPage({ params }: any) {
 
     return <article className="container py-6 prose dark:prose-invert max-w-[100dvw] lg:max-w-[75dvw] mx-auto">
         <h1 className="text-xl">{post?.title}</h1>
-        {post?.description ? (
-            <p className="text-md mt-0 text-muted-foreground">{post?.description}</p>
-        ) : null}
         <hr className="my-3" />
         <MDXContent code={post?.body!} />
     </article>

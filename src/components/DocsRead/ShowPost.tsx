@@ -13,17 +13,12 @@ const ShowPost = () => {
 
         {post && <article className="py-3 prose dark:prose-invert max-w-[100%] px-3">
             <div className="flex justify-between items-center">
-                <div>
-                    <h1 className="mb-2 text-xl">{post?.title}</h1>
-                    {post?.description ? (
-                        <p className="text-md mt-0 text-muted-foreground">{post?.description}</p>
-                    ) : null}
-                </div>
+
+                <h1 className="mb-2 text-xl">{post?.title}</h1>
 
                 <Link
                     className="hidden lg:block"
                     href={`/document/${post?.slug.split('/')[0]}/${post?.slugAsParams}`}><MdOutlineZoomOutMap className="h-5 w-5" /></Link>
-
             </div>
 
             <hr className="my-4" />
