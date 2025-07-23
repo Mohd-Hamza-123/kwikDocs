@@ -1,0 +1,26 @@
+---
+title: Handle loading state while fetching data 
+published: true
+---
+
+Suppose you are fetching some data on server component
+
+```tsx
+const Posts = async ()=> {
+     const response = await fetch(`API_URL`)
+     const todos = await response.json()
+     return <div>{todos}</div>
+}
+export default Posts
+```
+
+To handle loading State make a loading.tsx file parallel to the component you want to load.
+
+```tsx
+const loading = () => {
+    return <p> Please wait... </p>
+}
+export default loading;
+```
+
+---

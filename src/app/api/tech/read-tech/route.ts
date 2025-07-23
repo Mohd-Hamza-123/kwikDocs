@@ -1,19 +1,20 @@
 import connectDB from "@/dbConfig/dbConfig";
 import TechModel from "@/models/tech.model";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 export const dynamic = 'force-static';
-export const fetchCache = 'default-cache'; 
+export const fetchCache = 'default-cache';
 export const revalidate = 60 * 60 * 24 * 28; // cache for 28 days
 
 export async function GET() {
-    
+    console.log("ehhhhhhhhhhhhhhhhhhhhhhhhh")
     try {
+        console.log("ehhhhhhhhhhhhhhhhhhhhhhhhh")
         await connectDB();
 
         const allTech = await TechModel.find({}, { techType: 1, _id: 0 }).distinct('techType').exec();
 
-        console.log(allTech);
+        // console.log(allTech);
 
         if (!Array.isArray(allTech) || allTech?.length <= 0) {
             return NextResponse.json({
@@ -33,7 +34,7 @@ export async function GET() {
         }))
 
         const payload = data.filter(Boolean)
-        console.log(payload);
+        // console.log(payload);
         if (payload.length > 0) {
             return NextResponse.json({
                 success: true,
@@ -48,8 +49,7 @@ export async function GET() {
         }
 
     } catch (error: any) {
-
-        console.log("error : ", error?.message);
+        // console.log("error : ", error?.message);
         return NextResponse.json({
             success: false,
             message: "failed to get data",
