@@ -1,8 +1,8 @@
-
+import conf from "@/conf/conf";
 export const getAllTechnology = async () => {
     try {
-
-        const res = await fetch(`http://localhost:3000/api/tech/read-tech`, {
+        
+        const res = await fetch(`${conf.api_end_point}/api/tech/read-tech`, {
             method: "GET",
         });
         if (res.ok) {
