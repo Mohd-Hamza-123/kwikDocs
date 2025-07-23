@@ -1,0 +1,27 @@
+---
+title: Handle error in server components 
+published: true
+---
+
+
+Suppose you are fetching some data on server component and an error might be occurred.
+
+```tsx
+const Posts = async ()=> {
+     const response = await fetch(`API_URL`)
+     const todos = await response.json()
+     // todos can throw error
+     return <div>{todos}</div>
+}
+export default Posts
+```
+
+To handle error make a error.tsx/.jsx/.js file parallel to the component you want to load.
+
+```tsx
+// error.tsx
+const error = () => {
+    return <p> Please wait... </p>
+}
+export default error;
+```
