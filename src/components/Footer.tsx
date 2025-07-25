@@ -17,33 +17,31 @@ const Footer = () => {
 
 
     if (!isRender) return null;
-    
+
     if (isRender)
         return (
-            <footer className="dark:bg-bgDark">
-                <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-                    <hr className="my-5 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-                    <div className="sm:flex sm:items-center sm:justify-between">
-                        <span className="text-md text-gray-500 sm:text-center dark:text-gray-400">&copy; {new Date().getFullYear()} <strong>Kwik Docs </strong>. All Rights Reserved.
-                        </span>
-                        <div className="flex mt-4 sm:justify-center sm:mt-0 gap-4">
 
-                            <svgIcons.github
-                                className="w-7 h-7 text-gray-500 hover:text-gray-900 dark:fill-white cursor-pointer"
-                            />
-                            <svgIcons.twitter
-                                className="w-7 h-7 text-gray-500 hover:text-gray-900 dark:fill-white cursor-pointer"
-                            />
+            <footer className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 h-[15dvh] dark:bg-bgDark">
+                <hr className="border-gray-200 sm:mx-auto dark:border-gray-700" />
+                <div className="sm:flex sm:items-center sm:justify-between pt-4">
+                    <span className="text-md text-gray-500 sm:text-center dark:text-gray-400">&copy; {new Date().getFullYear()} <strong>Kwik Docs </strong>. All Rights Reserved.
+                    </span>
+                    <div className="flex mt-4 sm:justify-center sm:mt-0 gap-4">
 
-                            <svgIcons.instagram
-                                className="w-7 h-7 text-gray-500 hover:text-gray-900 dark:hover:text-white cursor-pointer"
-                            />
+                        <svgIcons.github
+                            className="w-7 h-7 text-gray-500 hover:text-gray-900 dark:fill-white cursor-pointer"
+                        />
+                        <svgIcons.twitter
+                            className="w-7 h-7 text-gray-500 hover:text-gray-900 dark:fill-white cursor-pointer"
+                        />
 
-                        </div>
+                        <svgIcons.instagram
+                            className="w-7 h-7 text-gray-500 hover:text-gray-900 dark:hover:text-white cursor-pointer"
+                        />
+
                     </div>
                 </div>
             </footer>
-
 
         )
 }
