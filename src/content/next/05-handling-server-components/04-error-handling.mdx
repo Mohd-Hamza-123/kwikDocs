@@ -1,27 +1,159 @@
 ---
-title: Handle error in server components 
+title: Handle Errors in Server Components
 published: true
 ---
 
+When working with **server components** in Next.js (App Router), errors can occur in two main phases:
 
-Suppose you are fetching some data on server component and an error might be occurred.
+1. While **fetching data**
+2. While **rendering JSX**
 
-```tsx
-const Posts = async ()=> {
-     const response = await fetch(`API_URL`)
-     const todos = await response.json()
-     // todos can throw error
-     return <div>{todos}</div>
-}
-export default Posts
-```
+Handling both correctly is essential to avoid crashes and provide a good user experience.
 
-To handle error make a error.tsx/.jsx/.js file parallel to the component you want to load.
+---
+
+### ❌ Example Without Error Handling
 
 ```tsx
-// error.tsx
-const error = () => {
-    return <p> Please wait... </p>
-}
-export default error;
+const Posts = async () => {
+  const response = await fetch("API_URL");
+  const todos = await response.json();
+
+  return (
+    <div>
+      <h2>{todos.title}</h2>
+      <p>{todos.content}</p>
+    </div>
+  );
+};
+
+export default Posts;
 ```
+
+### What Can Go Wrong:
+
+* If the **API call fails** (e.g., network issue, bad response), the component throws before rendering.
+* If the API returns an **empty object or invalid data**, accessing `todos.title` or `todos.content` may throw a **render-time error**.
+
+---
+
+### ✅ What is a Render-Time Error?
+
+A **render-time error** occurs **while JSX is being rendered** — after the component logic runs, but before HTML is sent to the browser.
+
+### 🧪 Example:
+
+```tsx
+const Home = () => {
+  const user = undefined;
+
+  return <h1>{user.name}</h1>; // ❌ Throws: Cannot read 'name' of undefined
+};
+```
+
+This will **crash during rendering** and is considered a **render-time error**.
+
+---
+
+### ❌ API Failure ≠ Render-Time Error
+
+If the API call itself fails:
+
+```tsx
+const response = await fetch("API_URL"); // ❌ Network error or non-2xx response
+```
+
+This is a **data-fetching error**, not a render-time error — it happens **before JSX rendering** begins.
+
+Such errors must be handled with a `try/catch`. Otherwise, they’ll crash the component **before** render-time and may fallback to `error.tsx` depending on propagation.
+
+---
+
+## ✅ Correct Way: Handle Both
+
+### `Posts.tsx`
+
+```tsx
+const Posts = async () => {
+  try {
+    const response = await fetch("API_URL");
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch posts");
+    }
+
+    const todos = await response.json();
+
+    return (
+      <div className="p-4">
+        <h2 className="text-xl font-bold">{todos.title}</h2>
+        <p className="text-gray-700">{todos.content}</p>
+      </div>
+    );
+  } catch (error) {
+    return (
+      <div className="text-red-500 text-center">
+        Error loading posts. Please try again later.
+      </div>
+    );
+  }
+};
+
+export default Posts;
+```
+
+---
+
+### ✅ Handle Render-Time Errors with `error.tsx`
+
+Next.js App Router supports `error.tsx` to catch **render-time errors** like this:
+
+```tsx
+const Component = () => {
+  throw new Error("Boom!"); // Will trigger error.tsx
+};
+```
+
+### `app/posts/error.tsx`
+
+```tsx
+"use client";
+
+export default function Error({ error, reset }: { error: Error; reset: () => void }) {
+  return (
+    <div className="text-center text-red-600 py-6">
+      <h2 className="text-xl font-bold">Something went wrong!</h2>
+      <p>{error.message}</p>
+      <button
+        onClick={() => reset()}
+        className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+      >
+        Try again
+      </button>
+    </div>
+  );
+}
+```
+
+🟡 This only catches **errors during rendering**, not `fetch()` failures unless you allow them to propagate.
+
+---
+
+### 🧠 Summary: When and How to Handle Errors
+
+| Situation                               | Type of Error       | Handle with `try/catch` | Caught by `error.tsx` |
+| --------------------------------------- | ------------------- | ----------------------- | --------------------- |
+| `fetch()` throws (network failure)      | Data-fetching error | ✅ Yes                   | ❌ No                  |
+| `response.ok === false`                 | API response error  | ✅ Yes                   | ❌ No                  |
+| Accessing `undefined.title` in JSX      | Render-time error   | ❌ No                    | ✅ Yes                 |
+| `throw new Error()` in component render | Render-time error   | ❌ No                    | ✅ Yes                 |
+
+---
+
+#### ✅ Best Practices
+
+* ✅ Always wrap `fetch()` and `.json()` in a `try/catch` block
+* ✅ Use `error.tsx` for unexpected crashes during JSX rendering
+* ✅ Safely access properties (e.g., `todos?.title ?? "Untitled"`)
+
+---
