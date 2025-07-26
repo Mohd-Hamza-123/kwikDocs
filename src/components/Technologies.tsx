@@ -5,7 +5,7 @@ import { getAllTechnology } from "@/lib/API/techAPI/getAllTech";
 const Technologies = async () => {
 
   const technology = await getAllTechnology();
-
+  console.log(technology)
   if (!technology) {
     return (
       <div className="text-center text-red-600 py-10">
