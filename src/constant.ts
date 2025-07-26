@@ -25,6 +25,7 @@ export const technologyEnums = [
   'coding language',
   'Runtime Environment',
   'Version Control System',
+  "Containerization Platform",
 ]
 
 export const LANGUAGE_VERSIONS = {

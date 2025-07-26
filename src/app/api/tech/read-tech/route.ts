@@ -7,9 +7,8 @@ export const fetchCache = 'default-cache';
 export const revalidate = 60 * 60 * 24 * 28; // cache for 28 days
 
 export async function GET() {
-    console.log("ehhhhhhhhhhhhhhhhhhhhhhhhh")
+   
     try {
-        console.log("ehhhhhhhhhhhhhhhhhhhhhhhhh")
         await connectDB();
 
         const allTech = await TechModel.find({}, { techType: 1, _id: 0 }).distinct('techType').exec();
