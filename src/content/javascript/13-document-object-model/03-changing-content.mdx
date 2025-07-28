@@ -1,0 +1,47 @@
+---
+title: Changing Content
+published: true
+---
+
+In JavaScript, there are several ways to change or update the content of the DOM (Document Object Model).
+
+### ✅ 1. `innerHTML`
+
+Changes HTML content (can include tags):
+
+```js
+element.innerHTML = "<b>Hello</b>";
+```
+
+---
+
+### ✅ 2. `textContent`
+
+Changes only the text (ignores tags):
+
+```js
+element.textContent = "Hello World";
+```
+
+---
+
+### ✅ 3. `innerText`
+
+Changes visible text (similar to `textContent`, but considers CSS):
+
+```js
+element.innerText = "Hi there!";
+```
+
+---
+
+### ✅ 4. `value`
+
+Used for form inputs:
+
+```js
+inputElement.value = "New input text";
+```
+
+---
+

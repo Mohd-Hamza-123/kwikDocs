@@ -1,0 +1,66 @@
+---
+title: Changing Attribute
+published: true
+---
+
+Here’s how you can **get**, **set**, and **remove** attributes of HTML elements using JavaScript.
+
+---
+
+### ✅ 1. **Get Attribute**
+
+Use `getAttribute(attributeName)` to read an attribute.
+
+**Example:**
+
+```js
+let link = document.getElementById("myLink");
+let hrefValue = link.getAttribute("href");
+console.log(hrefValue); // e.g. "https://example.com"
+```
+
+---
+
+### ✅ 2. **Set (Change) Attribute**
+
+Use `setAttribute(attributeName, value)` to set or change an attribute.
+
+**Example:**
+
+```js
+let link = document.getElementById("myLink");
+link.setAttribute("href", "https://newsite.com");
+```
+
+---
+
+### ✅ 3. **Remove Attribute**
+
+Use `removeAttribute(attributeName)` to remove an attribute.
+
+**Example:**
+
+```js
+let input = document.getElementById("myInput");
+input.removeAttribute("disabled");
+```
+
+---
+
+### ✅ 4. **Check if Attribute Exists**
+
+Use `hasAttribute(attributeName)` to check if an attribute is present.
+
+**Example:**
+
+```js
+let input = document.getElementById("myInput");
+
+if (input.hasAttribute("readonly")) {
+  console.log("Input is readonly");
+}
+```
+
+---
+
+
