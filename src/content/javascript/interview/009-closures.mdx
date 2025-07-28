@@ -1,0 +1,18 @@
+---
+title: Closures
+published: true
+---
+
+A **closure** is created when a function remembers its outer variables even after the outer function has finished executing.
+
+**Example:**
+
+```javascript
+function outerFunction(outerVariable) {
+    return function innerFunction(innerVariable) {
+        console.log(`Outer: ${outerVariable}, Inner: ${innerVariable}`);
+    };
+}
+const closureFunc = outerFunction("outside");
+closureFunc("inside"); // Output: Outer: outside, Inner: inside
+```
