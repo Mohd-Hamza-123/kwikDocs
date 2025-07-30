@@ -1,12 +1,12 @@
 'use client'
-import "@/styles/mdx.css"
-import { posts } from '#site/content'
+import "@/styles/mdx.css";
+import { posts } from '#site/content';
 import { useAppDispatch } from '@/lib/hooks/hooks';
-import React, { useEffect, useMemo, useState } from 'react'
-import { setAllDocs, setDoc } from "@/lib/store/features/docsSlice";
+import React, { useEffect, useMemo, useState } from 'react';
 import { useResponsiveContext } from "@/context/CSS-Context";
-import type { FileNode } from "@/services/helpers/getContentTree"
-import { FilteredPostList, LoadingPage, ShowPost } from "@/index"
+import { FilteredPostList, LoadingPage, ShowPost } from "@/index";
+import type { FileNode } from "@/services/helpers/getContentTree";
+import { setAllDocs, setDoc } from "@/lib/store/features/docsSlice";
 
 export default function DocPage({ params }: { params: { tech: string } }) {
 

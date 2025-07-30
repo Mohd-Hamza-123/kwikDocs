@@ -2,12 +2,12 @@ import connectDB from "@/dbConfig/dbConfig";
 import TechModel from "@/models/tech.model";
 import { NextResponse } from "next/server";
 
-export const dynamic = 'force-static';
-export const fetchCache = 'default-cache';
-export const revalidate = 60 * 60 * 24 * 28; // cache for 28 days
+// export const dynamic = 'force-static';
+// export const fetchCache = 'default-cache';
+// export const revalidate = 60 * 60 * 24 * 28; // cache for 28 days
 
 export async function GET() {
-   
+   console.log("Hello")
     try {
         await connectDB();
 
@@ -33,7 +33,7 @@ export async function GET() {
         }))
 
         const payload = data.filter(Boolean)
-        // console.log(payload);
+        console.log(payload);
         if (payload.length > 0) {
             return NextResponse.json({
                 success: true,

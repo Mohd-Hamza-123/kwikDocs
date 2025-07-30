@@ -53,7 +53,7 @@ function TreeNode({ node }: { node: FileNode }) {
 
   if (node.type === "file") {
 
-    console.log(node)
+    // console.log(node)
 
     let name = (node.name).replaceAll("-", " ")
     name = removeStartingNumber(name)
