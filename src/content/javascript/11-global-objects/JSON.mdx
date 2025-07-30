@@ -1,0 +1,56 @@
+---
+title : JSON Object
+published : true
+---
+
+The `JSON` object in JavaScript is a **built-in global object** that provides two main methods for working with JSON data:
+
+
+### ✅ **Core Methods of the JSON Object**
+
+| Method             | Description                                                                       |
+| ------------------ | --------------------------------------------------------------------------------- |
+| `JSON.stringify()` | Converts a JavaScript object/array to a JSON-formatted **string** (serialization) |
+| `JSON.parse()`     | Converts a JSON **string** back to a JavaScript object/array (deserialization)    |
+
+---
+
+### 📌 Syntax and Usage
+
+#### 🔹 `JSON.stringify(value, replacer, space)`
+
+```js
+const obj = { name: "Hamza", age: 23 };
+const jsonStr = JSON.stringify(obj);
+```
+
+**Optional Parameters**:
+
+* `replacer`: Function or array to filter properties.
+* `space`: Adds indentation for readability.
+
+```js
+JSON.stringify(obj, null, 2);  // Pretty print with 2 spaces
+```
+
+---
+
+#### 🔹 `JSON.parse(text, reviver)`
+
+```js
+const json = '{"name":"Hamza","age":23}';
+const obj = JSON.parse(json);
+```
+
+**Optional `reviver` function** to transform values while parsing:
+
+```js
+JSON.parse(json, (key, value) => {
+  if (key === "age") return value + 1;
+  return value;
+});
+```
+
+---
+
+
