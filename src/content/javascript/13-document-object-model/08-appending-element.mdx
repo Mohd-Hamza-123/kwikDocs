@@ -1,0 +1,306 @@
+---
+title: Appending Element
+published: true
+---
+
+We have learned how to create elements and append them to the DOM. Now, let's learn how to append elements using various methods.
+
+### ✅ 1. `appendChild()`
+
+* **Accepts:** Only **one node** (element or text node).
+* **Supports Strings:** ❌ No
+* **Returns:** The appended node
+* **Use case:** Simple, single-node appending (older but widely supported).
+
+**Before:**
+
+```html
+<body>
+</body>
+```
+
+**JavaScript:**
+
+```js
+const div = document.createElement("div");
+div.textContent = "Appended with appendChild";
+document.body.appendChild(div);
+```
+
+**After:**
+
+```html
+<body>
+  <div>Appended with appendChild</div>
+</body>
+```
+
+---
+
+### ✅ 2. `append()`
+
+* **Accepts:** **Multiple nodes and/or strings**
+* **Supports Strings:** ✅ Yes
+* **Returns:** ❌ Nothing
+* **Use case:** When you want to append multiple elements or mixed text + elements.
+
+**Before:**
+
+```html
+<body>
+</body>
+```
+
+**JavaScript:**
+
+```js
+const div = document.createElement("div");
+const span = document.createElement("span");
+span.textContent = "Span inside";
+div.append("Text before ", span);
+document.body.append(div);
+```
+
+**After:**
+
+```html
+<body>
+  <div>Text before <span>Span inside</span></div>
+</body>
+```
+
+---
+
+## ✅ 3. `prepend()`
+
+* **Accepts:** Multiple nodes and/or strings
+* **Supports Strings:** ✅ Yes
+* **Returns:** ❌ Nothing
+* **Use case:** To add content at the beginning of a container.
+
+**Before:**
+
+```html
+<body>
+  <p>Existing content</p>
+</body>
+```
+
+**JavaScript:**
+
+```js
+const h1 = document.createElement("h1");
+h1.textContent = "Prepended Heading";
+document.body.prepend(h1);
+```
+
+**After:**
+
+```html
+<body>
+  <h1>Prepended Heading</h1>
+  <p>Existing content</p>
+</body>
+```
+
+---
+
+## ✅ 4. `insertBefore()`
+
+* **Accepts:** One node (element or text)
+* **Supports Strings:** ❌ No
+* **Returns:** The inserted node
+* **Use case:** Precise control — insert before a specific node.
+
+**Before:**
+
+```html
+<body>
+  <div id="refElement">Reference Element</div>
+</body>
+```
+
+**JavaScript:**
+
+```js
+const newDiv = document.createElement("div");
+newDiv.textContent = "Inserted Before Reference";
+const ref = document.getElementById("refElement");
+document.body.insertBefore(newDiv, ref);
+```
+
+**After:**
+
+```html
+<body>
+  <div>Inserted Before Reference</div>
+  <div id="refElement">Reference Element</div>
+</body>
+```
+
+---
+
+## ✅ 5. `insertAdjacentElement()`
+
+* **Accepts:** One element
+* **Supports Strings:** ❌ No
+* **Returns:** The inserted element
+* **Use case:** Precise positioning (`beforebegin`, `afterbegin`, `beforeend`, `afterend`)
+
+**Before:**
+
+```html
+<div id="target">
+  <p>Some text</p>
+</div>
+```
+
+**JavaScript:**
+
+```js
+const el = document.createElement("div");
+el.textContent = "Inserted with insertAdjacentElement";
+const target = document.getElementById("target");
+target.insertAdjacentElement("beforeend", el);
+```
+
+**After:**
+
+```html
+<div id="target">
+  <p>Some text</p>
+  <div>Inserted with insertAdjacentElement</div>
+</div>
+```
+
+---
+
+## ✅ 6. `insertAdjacentHTML()`
+
+* **Accepts:** A string of valid HTML
+* **Supports Strings:** ✅ Only string
+* **Returns:** ❌ Nothing
+* **Use case:** Add raw HTML at specific positions.
+
+**Before:**
+
+```html
+<div id="target">
+  <p>Before HTML insert</p>
+</div>
+```
+
+**JavaScript:**
+
+```js
+const target = document.getElementById("target");
+target.insertAdjacentHTML("beforeend", "<p><strong>HTML Inserted</strong></p>");
+```
+
+**After:**
+
+```html
+<div id="target">
+  <p>Before HTML insert</p>
+  <p><strong>HTML Inserted</strong></p>
+</div>
+```
+
+---
+
+## ✅ 7. `innerHTML +=`
+
+* **Accepts:** A string of HTML
+* **Supports Strings:** ✅ Yes
+* **Returns:** ❌ Nothing
+* **Use case:** Quick, dirty way to append HTML. Use with caution (risk of XSS if input is from user).
+
+**Before:**
+
+```html
+<body>
+  <h2>Existing</h2>
+</body>
+```
+
+**JavaScript:**
+
+```js
+document.body.innerHTML += "<div>Appended with innerHTML</div>";
+```
+
+**After:**
+
+```html
+<body>
+  <h2>Existing</h2>
+  <div>Appended with innerHTML</div>
+</body>
+```
+
+---
+
+## ✅ 8. `outerHTML`
+
+* **Accepts:** String of HTML
+* **Supports Strings:** ✅ Yes
+* **Returns:** ❌ Nothing
+* **Use case:** Replaces the selected element entirely.
+
+**Before:**
+
+```html
+<div id="oldEl">Old Content</div>
+```
+
+**JavaScript:**
+
+```js
+const old = document.getElementById("oldEl");
+old.outerHTML = "<div>Replaced using outerHTML</div>";
+```
+
+**After:**
+
+```html
+<div>Replaced using outerHTML</div>
+```
+
+---
+
+## ✅ 9. `cloneNode()`
+
+* **Accepts:** No arguments (but accepts `true` or `false` to control deep clone)
+* **Supports Strings:** ❌ No
+* **Returns:** The cloned node
+* **Use case:** Reuse or duplicate an existing element structure.
+
+**Before:**
+
+```html
+<div id="toClone">
+  <p>Hello</p>
+</div>
+```
+
+**JavaScript:**
+
+```js
+const original = document.getElementById("toClone");
+const clone = original.cloneNode(true);
+document.body.appendChild(clone);
+```
+
+**After:**
+
+```html
+<div id="toClone">
+  <p>Hello</p>
+</div>
+<div id="toClone">
+  <p>Hello</p>
+</div>
+```
+
+---
+

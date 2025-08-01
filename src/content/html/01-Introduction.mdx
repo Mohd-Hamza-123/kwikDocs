@@ -1,6 +1,5 @@
 ---
 title: Introduction
-description: Introduction to the world of web development
 published: true
 ---
 
@@ -9,11 +8,16 @@ Before diving into the world of web development, it's essential to understand wh
 
 ### **1) Client**
 
-A **client** is a device or software that requests information or services from a server. Clients include:
+A **client** is a device or software that request and receives data or services from a server. Clients include :
 
 * **Web browsers** like Google Chrome, Firefox, and Safari, which request web pages from servers.
 * **Mobile apps** that retrieve data from servers like youtube or facebook.
+* **Desktop Applications** 
+* **Command Line Tools** : Curl, git etc
+* **Game Clients** : PUBG, Fortnite client
 * **IoT devices** such as smart thermostats or home assistants that request updates or send data to servers.
+
+In general any **Software** or **Device** that initiates a request to a server is a client.
 
 ---
 
@@ -33,22 +37,19 @@ Servers can be:
 
 Client-server architecture is a model where clients request services, and servers fulfill those requests.
 
-### **Diagram:**
-
 <ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1748193265/ChatGPT_Image_May_25_2025_10_38_15_PM_obt5vs.png" alt="Client-Server Architecture"/>
 
-### **How it works:**
+**How it works:**
 
-1. **Client sends a request**: A web browser requests a webpage.
+1. **Client sends a request** 
 2. **Server processes the request**: The server retrieves the requested data or computes the result.
-3. **Server sends a response**: The server sends the data (e.g., HTML content) back to the client.
-4. **Client displays the response**: The browser renders the webpage.
+3. **Server sends a response**: The server sends the data back to the client.
+4. **Client displays the response**
 
 ---
 
 <Callout>
 To build the client side of a web application, you typically need:
-
 1. **HTML** for structure.
 2. **CSS** for styling.
 3. **JavaScript** for interactivity.
@@ -59,7 +60,7 @@ To build the client side of a web application, you typically need:
 
 **HTML (HyperText Markup Language)** is the standard markup language used to create web pages. It provides the basic structure of a website, which is then styled with CSS and made interactive with JavaScript.
 
-#### **Example Code:**
+**Example Code:**
 
 <HtmlEditor defaultCode={`<html lang="en">
 <body>
