@@ -1,0 +1,94 @@
+---
+title: setInterval Function
+published: true
+---
+
+The `setInterval()` function in JavaScript is used to **run a function repeatedly** at a specified time interval (in milliseconds).
+
+
+**🧪 Syntax**
+
+```js
+setInterval(callback, delay);
+```
+
+* `callback` → The function to run.
+* `delay` → Time in **milliseconds** between each execution.
+
+---
+
+**Example:**
+
+```js
+setInterval(() => {
+  console.log("Repeats every 2 seconds");
+}, 2000);
+```
+
+🧾 **Output (every 2 seconds):**
+
+```
+Repeats every 2 seconds
+Repeats every 2 seconds
+...
+```
+
+> It keeps running **until you manually stop it** using `clearInterval()`.
+
+---
+
+### 📦 Example with Named Function
+
+```js
+function sayHello() {
+  console.log("Hello!");
+}
+
+const id = setInterval(sayHello, 1000);
+```
+
+---
+
+### ❌ Stop an Interval with `clearInterval()`
+
+```js
+const intervalId = setInterval(() => {
+  console.log("Running...");
+}, 1000);
+
+setTimeout(() => {
+  clearInterval(intervalId);
+  console.log("Stopped interval");
+}, 5000);
+```
+
+🧾 **Output:**
+
+```
+Running...
+Running...
+Running...
+Running...
+Stopped interval
+```
+
+> After 5 seconds, `clearInterval()` stops further execution.
+
+---
+
+**🧠 Things to Know**
+
+* `setInterval()` is **asynchronous** and non-blocking.
+* Use `clearInterval()` to prevent infinite loops.
+* Useful for real-time clocks, repeated animations, polling data, etc.
+
+---
+
+**🔄 Real-World Use Cases**
+
+* Updating a live clock on the webpage.
+* Slideshow transitions every few seconds.
+* Repeated API polling (not always recommended).
+
+---
+
