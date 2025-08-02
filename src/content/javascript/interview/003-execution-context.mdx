@@ -1,0 +1,130 @@
+---
+title : Execution Context
+published : true
+---
+
+When JavaScript runs your code, it does so within an **Execution Context**. There are **two main types**:
+
+1. **Global Execution Context (GEC)**
+2. **Function Execution Context (FEC)**
+
+Each context goes through two phases: **Memory Creation** and **Code Execution**.
+
+
+### 🌍 1. Global Execution Context (GEC)
+
+This is the first execution context created when your script runs.
+
+### 🔁 Phase 1: Memory Creation
+
+* JavaScript sets up memory for all global variables and functions.
+* `var` variables → hoisted and initialized to `undefined`.
+* `let` and `const` → hoisted but remain in the **TDZ** (Temporal Dead Zone) means they are not initialized. Accessing them will result in a `ReferenceError`.
+* Function declarations → hoisted entirely (function body is stored).
+* `this` → set to the global object (`window` in browsers).
+
+### ▶️ Phase 2: Code Execution
+
+* Code is executed line by line.
+* Variables are assigned values.
+* Functions are invoked.
+* If a function is called, a new **Function Execution Context** is created and pushed onto the **call stack**.
+
+---
+
+## 🧪 Example (Global Scope):
+
+```js
+console.log(x);     // undefined
+// console.log(y);  // ❌ ReferenceError (TDZ)
+var x = 10;
+let y = 20;
+
+function greet() {
+  console.log("Hello from GEC!");
+}
+
+greet();
+```
+
+---
+
+## 🔄 2. Function Execution Context (FEC)
+
+A new **Function Execution Context** is created **every time a function is invoked**.
+
+Each FEC also goes through:
+
+### 🔁 Phase 1: Memory Creation
+
+* Arguments object is created.
+* `var` variables → hoisted to `undefined`.
+* `let` and `const` → hoisted but kept in TDZ. Means they are not initialized. Accessing them will result in a `ReferenceError`.
+* Function declarations inside the function → hoisted.
+* `this` → depends on how the function is called (global, object method, etc.).
+
+### ▶️ Phase 2: Code Execution
+
+* Local variables are assigned.
+* Inner functions may be called.
+* Once done, the context is popped off the call stack.
+
+---
+
+## 🧪 Example (Function Scope):
+
+```js
+function testScope(a, b) {
+  console.log(x);     // undefined
+  // console.log(y);  // ❌ ReferenceError
+  var x = a + b;
+  let y = x * 2;
+
+  function inner() {
+    console.log("Inner function");
+  }
+
+  inner();
+}
+
+testScope(3, 4);
+```
+
+### 💡 In `testScope`’s Execution Context:
+
+* `a`, `b` → assigned via arguments
+* `x` → hoisted as `undefined`, then assigned to `a + b` → `7`
+* `y` → hoisted (TDZ), then assigned `x * 2` → `14`
+* `inner()` → hoisted and called
+
+---
+
+## 🧠 Call Stack Overview
+
+JavaScript uses a **call stack** to manage execution contexts:
+
+1. Global Execution Context is pushed first.
+2. When `greet()` or `testScope()` is called, a new FEC is pushed.
+3. When a function finishes, its context is popped off.
+
+```
+Call Stack:
+---------------------
+| testScope()       |
+| global()          |
+---------------------
+```
+
+---
+
+## 📌 Summary Table
+
+| Feature             | Global Execution Context         | Function Execution Context        |
+| ------------------- | -------------------------------- | --------------------------------- |
+| Created             | When script first runs           | When a function is invoked        |
+| `this`              | Global object (`window`, etc.)   | Depends on how function is called |
+| Arguments object    | ❌ Not available                  | ✅ Available                       |
+| Hoisting behavior   | Applies to global vars/functions | Applies to local vars/functions   |
+| Lives in Call Stack | Always at the bottom             | Pushed/popped as functions run    |
+
+---
