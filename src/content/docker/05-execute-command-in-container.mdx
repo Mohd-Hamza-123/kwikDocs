@@ -1,0 +1,19 @@
+---
+title: Execute a Command in a Container
+published: true
+---
+
+Once you have a container running, you can execute commands inside it using:
+
+```bash
+docker exec -it <container-id or name> <command>
+```
+
+Example:
+
+```bash
+# Run a Node.js REPL in a container
+docker exec -t 843F39ekd node
+```
+
+---
