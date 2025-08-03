@@ -1,0 +1,111 @@
+---
+title: Running Multiple Containers of the Same Image
+published: true
+---
+
+Running multiple containers from the same Docker image is one of Docker’s most powerful features — and it’s super easy!
+
+
+### 🔄 Reusing the Same Image
+
+Each time you run:
+
+```bash
+docker run <image-name>
+```
+
+Docker creates a **new container** from that image. You can run as many containers as you want from the same image — they are completely **isolated** from each other.
+
+---
+
+### ✅ Example: Run Multiple Ubuntu Containers
+
+Run the first container:
+
+```bash
+docker run -it ubuntu
+```
+
+Now open another terminal and run:
+
+```bash
+docker run -it ubuntu
+```
+
+This launches a **second** independent Ubuntu container.
+
+---
+
+### 🏷️ Naming Containers for Easier Control
+
+You can assign names to containers using `--name`:
+
+```bash
+docker run -it --name container1 ubuntu
+docker run -it --name container2 ubuntu
+```
+
+This makes it easier to start, stop, and reference them later.
+
+---
+
+### 📋 View Running and Stopped Containers
+
+List only running containers:
+
+```bash
+docker ps
+```
+
+List **all** containers (including stopped ones):
+
+```bash
+docker ps -a
+```
+
+---
+
+## 🔌 Start, Stop, and Remove Containers
+
+### ▶️ Start a Stopped Container
+
+```bash
+docker start <container-id or name>
+```
+
+### ⏹️ Stop a Running Container
+
+```bash
+docker stop <container-id or name>
+```
+
+### ❌ Remove a Container
+
+```bash
+docker rm <container-id or name>
+```
+
+You can also chain commands:
+
+```bash
+docker stop container1
+docker rm container1
+```
+
+---
+
+
+### ⚠️ Important Notes
+
+Even though all containers use the **same image**, each container is:
+
+* Fully isolated
+* Has its own filesystem
+* Uses separate memory and CPU resources
+* Has a unique process ID
+
+They do **not** affect each other unless explicitly connected (e.g., using Docker networks or shared volumes).
+
+---
+
+

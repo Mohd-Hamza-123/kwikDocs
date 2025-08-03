@@ -1,0 +1,61 @@
+---
+title: Container vs Images
+published: true
+---
+
+
+* Docker Image = Set of code + dependencies + instructions (but not running)
+* Docker Container = That code actually running (a real, live process)
+
+
+Let’s simplify it with a **very basic real-world example** you can relate to.
+
+### 🍳 Real-Life Analogy: **Cooking from a Recipe**
+
+### 🧾 **Docker Image** = Recipe
+
+* It tells you **what ingredients** to use
+* It explains **how to cook** the dish
+* But the recipe itself is **not food**
+* You **cannot eat a recipe**
+
+➡️ **Image** is a fixed set of instructions and files, but **not yet running**
+
+---
+
+### 🍽️ **Docker Container** = Cooked Dish
+
+* When you **follow the recipe**, you **create food**
+* You can **serve** it, **eat** it, **throw it away**, or **make another one**
+* If you mess up, no problem — just cook again using the same recipe
+
+➡️ **Container** is the **running, live instance** created from the image
+
+---
+
+### 🖥️ Technical Analogy (Code Example)
+
+Let’s say you want to run a Python program:
+
+* You use this image: `python:3.11`
+* It contains Python preinstalled — like a recipe
+* You run:
+
+```bash
+docker run -it python:3.11
+```
+
+* Now you’re **inside a running container** with Python available
+* You can use it, modify it, then stop or delete it
+
+---
+
+### 📌 Summary
+
+| Term             | Real-Life Example     | Meaning                       |
+| ---------------- | --------------------- | ----------------------------- |
+| Docker Image     | Recipe (instructions) | Stored template for the app   |
+| Docker Container | Cooked food           | Live, running copy of the app |
+
+---
+

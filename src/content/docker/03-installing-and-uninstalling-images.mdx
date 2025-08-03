@@ -1,0 +1,119 @@
+---
+title: Installing and Removing Docker Images
+published: true
+---
+
+Docker provides access to a wide range of pre-built **images** via [Docker Hub](https://hub.docker.com/). These images can be pulled and used to create containers for running applications or development environments.
+
+
+### 📥 Installing (Pulling) Docker Images
+
+To download an image without running it:
+
+```bash
+docker pull <image-name>
+```
+
+Example:
+
+```bash
+docker pull ubuntu
+```
+
+This command downloads the latest `ubuntu` image from Docker Hub.
+
+---
+
+### 🚀 Running an Image (Automatically Pulls If Needed)
+
+```bash
+docker run -it <image-name>
+```
+
+This command:
+
+* Pulls the image (if not already downloaded)
+* Creates and runs a new container
+
+Example:
+
+```bash
+docker run -it ubuntu
+```
+
+This opens an interactive terminal (`-it`) inside a new Ubuntu container.
+
+---
+
+### 📌 Pulling a Specific Version (Tag)
+
+You can also pull a specific version of an image using a tag:
+
+```bash
+docker pull node:18
+```
+
+This downloads Node.js version 18.
+
+---
+
+### 🗑️ Removing Docker Images
+
+To uninstall (delete) a Docker image from your system:
+
+```bash
+docker rmi <image-name or image-id>
+```
+
+Example:
+
+```bash
+docker rmi ubuntu
+```
+
+If you see an error that the image is being used by a container, you must remove the container first.
+
+---
+
+### 📦 List Installed Images
+
+You can see which images are installed using:
+
+```bash
+docker images
+```
+
+This shows a table with the repository name, tag, image ID, and size.
+
+---
+
+### 🧹 Optional Cleanup
+
+Remove all unused images to free up space:
+
+```bash
+docker image prune
+```
+
+Remove **all** images (be careful!):
+
+```bash
+docker rmi $(docker images -q)
+```
+
+---
+
+### ✅ Summary
+
+| Task                     | Command                          |
+| ------------------------ | -------------------------------- |
+| Pull image               | `docker pull <image>`            |
+| Run image (auto pull)    | `docker run -it <image>`         |
+| Remove image             | `docker rmi <image>`             |
+| List installed images    | `docker images`                  |
+| Remove all unused images | `docker image prune`             |
+| Force remove all images  | `docker rmi $(docker images -q)` |
+
+---
+
+
