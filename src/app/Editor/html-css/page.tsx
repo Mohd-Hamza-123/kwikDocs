@@ -24,7 +24,7 @@ const Page = ({
     defaultCode = "",
     isCodeEditable = true,
     id = 0,
-}: { defaultCode: string, isCodeEditable?: boolean, id: number }) => {
+}: { defaultCode: any, isCodeEditable?: any, id: any }) => {
     // console.log(defaultCode)
     const theme = useAppSelector((state) => state.editorSlice.theme)
     const [code, setCode] = useState(defaultCode || CODE_SNIPPETS?.html)
