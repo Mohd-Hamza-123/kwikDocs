@@ -105,42 +105,7 @@ document.body.prepend(h1);
 
 ---
 
-## ✅ 4. `insertBefore()`
-
-* **Accepts:** One node (element or text)
-* **Supports Strings:** ❌ No
-* **Returns:** The inserted node
-* **Use case:** Precise control — insert before a specific node.
-
-**Before:**
-
-```html
-<body>
-  <div id="refElement">Reference Element</div>
-</body>
-```
-
-**JavaScript:**
-
-```js
-const newDiv = document.createElement("div");
-newDiv.textContent = "Inserted Before Reference";
-const ref = document.getElementById("refElement");
-document.body.insertBefore(newDiv, ref);
-```
-
-**After:**
-
-```html
-<body>
-  <div>Inserted Before Reference</div>
-  <div id="refElement">Reference Element</div>
-</body>
-```
-
----
-
-### ✅ 5. `insertAdjacentElement()`
+### ✅ 4. `insertAdjacentElement()`
 
 * **Accepts:** One element
 * **Supports Strings:** ❌ No
@@ -175,7 +140,7 @@ target.insertAdjacentElement("beforeend", el);
 ---
 
 
-### ✅ 6. `insertAdjacentHTML()`
+### ✅ 5. `insertAdjacentHTML()`
 
 This method lets you insert **HTML text** into the DOM **at a specific position** relative to an existing element.
 
@@ -234,7 +199,7 @@ container.insertAdjacentHTML("afterend", "<p>After container</p>");
 
 ---
 
-### ✅ 8. `outerHTML`
+### ✅ 6. `outerHTML`
 
 * **Accepts:** String of HTML
 * **Supports Strings:** ✅ Yes
@@ -261,3 +226,7 @@ old.outerHTML = "<div>Replaced using outerHTML</div>";
 ```
 
 ---
+
+### Methods to Study
+
+* `insertBefore()`

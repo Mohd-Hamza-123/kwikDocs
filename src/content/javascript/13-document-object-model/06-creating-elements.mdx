@@ -31,30 +31,7 @@ document.getElementById("container").appendChild(newDiv);
 
 ---
 
-### ✅ 2. `document.createTextNode()`
-
-Creates a text node (no tags, only text).
-
-**Example:**
-
-```html
-<p id="para"></p>
-```
-
-```js
-const textNode = document.createTextNode("This is plain text.");
-document.getElementById("para").appendChild(textNode);
-```
-
-**Output in DOM:**
-
-```html
-<p id="para">This is plain text.</p>
-```
-
----
-
-### ✅ 3. `document.createDocumentFragment()`
+### ✅ 2. `document.createDocumentFragment()`
 
 Used to add multiple elements efficiently in one go.
 
@@ -88,7 +65,7 @@ document.getElementById("list").appendChild(fragment);
 
 ---
 
-### ✅ 4. `element.cloneNode()`
+### ✅ 3. `element.cloneNode()`
 
 The method **`cloneNode()`** is used to make a **copy** of a DOM element.
 
@@ -193,7 +170,7 @@ const copy = element.cloneNode(deep);
 
 ---
 
-### ✅ 5. `innerHTML` (for creating via string)
+### ✅ 4. `innerHTML` (for creating via string)
 
 Creates HTML structure directly using string.
 
@@ -218,4 +195,9 @@ document.getElementById("box").innerHTML = "<p>A new paragraph</p>";
 > ⚠️ This method **replaces all previous content** inside the element.
 
 ---
+
+
+### More Methods to Study 
+
+* document.createTextNode()
 
