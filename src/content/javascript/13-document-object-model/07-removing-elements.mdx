@@ -10,7 +10,6 @@ JavaScript provides multiple ways to **remove elements** from the DOM — whethe
 ### ✅ 1. `element.remove()`
 
 Removes the element itself from the DOM.  
-✅ **Simple and modern** way.
 
 **Example:**
 ```html
@@ -29,34 +28,8 @@ document.getElementById("toRemove").remove();
 
 ---
 
-### ✅ 2. `parent.removeChild(child)`
 
-Removes a child element from its parent.
-✅ Works in older browsers (like IE11).
-
-**Example:**
-
-```html
-<div id="parent">
-  <p id="child">I will be removed</p>
-</div>
-```
-
-```js
-const parent = document.getElementById("parent");
-const child = document.getElementById("child");
-parent.removeChild(child);
-```
-
-**Output in DOM:**
-
-```html
-<div id="parent"></div>
-```
-
----
-
-### ✅ 3. `element.innerHTML = ""`
+### ✅ 2. `element.innerHTML = ""`
 
 Removes **all child elements and text** inside a container.
 
@@ -81,7 +54,7 @@ document.getElementById("wrapper").innerHTML = "";
 
 ---
 
-### ✅ 4. `element.textContent = ""`
+### ✅ 3. `element.textContent = ""`
 
 Also removes all child nodes, but is used when you're sure it’s only text (and may be slightly faster).
 
@@ -107,7 +80,7 @@ document.getElementById("info").textContent = "";
 
 ---
 
-### ✅ 5. `parent.replaceChild(newNode, oldNode)`
+### ✅ 4. `parent.replaceChild(newNode, oldNode)`
 
 Replaces an element — effectively **removes** the old one.
 
@@ -139,7 +112,7 @@ container.replaceChild(newP, old);
 
 ---
 
-### ✅ 6. Using `while (element.firstChild)`
+### ✅ 5. Using `while (element.firstChild)`
 
 Removes **all children** one by one.
 
@@ -169,4 +142,6 @@ while (menu.firstChild) {
 
 ---
 
+### Methods to Study 
 
+* parent.removeChild(child)
