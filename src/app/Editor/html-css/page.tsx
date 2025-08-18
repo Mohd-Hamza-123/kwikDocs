@@ -20,7 +20,7 @@ import {
 } from '@codemirror/commands';
 import sanitizeHtml from '@/utils/Sanitize-html';
 
-const page = ({
+const Page = ({
     defaultCode = "",
     isCodeEditable = true,
     id = 0,
@@ -176,4 +176,4 @@ const page = ({
     )
 }
 
-export default page
+export default Page
