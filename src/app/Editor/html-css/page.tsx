@@ -20,12 +20,11 @@ import {
 } from '@codemirror/commands';
 import sanitizeHtml from '@/utils/Sanitize-html';
 
-const Page = ({
-    defaultCode = "",
-    isCodeEditable = true,
-    id = 0,
-}: { defaultCode: any, isCodeEditable?: any, id: any }) => {
+const Page = () => {
     // console.log(defaultCode)
+    const defaultCode = ""
+    const isCodeEditable = true
+    const id = 0
     const theme = useAppSelector((state) => state.editorSlice.theme)
     const [code, setCode] = useState(defaultCode || CODE_SNIPPETS?.html)
     const [outputToggle, setOutputToggle] = useState(false)
