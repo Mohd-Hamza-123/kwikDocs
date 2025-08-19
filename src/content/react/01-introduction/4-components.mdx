@@ -1,0 +1,94 @@
+---
+title: Components
+published: true
+---
+
+
+Components are the building blocks of React applications. Think of them like LEGO pieces that you can combine to build a complete user interface. Each component is a reusable piece of code that represents a part of your user interface.
+
+### Types of Components
+
+#### 1. Function Components
+
+The modern and recommended way to write components. They are simple JavaScript functions that return JSX.
+
+```jsx
+function Greeting() {
+  return <h1>Hello, World!</h1>;
+}
+```
+
+#### 2. Class Components
+
+The traditional way to define components using JavaScript classes.
+
+```jsx
+class Greeting extends React.Component {
+  render() {
+    return <h1>Hello, World!</h1>;
+  }
+}
+```
+
+---
+
+## What is JSX?
+
+JSX (JavaScript XML) is a syntax extension for JavaScript that looks similar to HTML. It makes writing React components more intuitive.
+
+### JSX Basics
+
+- JSX lets you write HTML-like code in your JavaScript
+- It gets transformed into regular JavaScript during the build process
+- It makes your React code more readable and easier to write
+
+```jsx
+// This is JSX
+const element = <h1>Hello, JSX!</h1>;
+
+// It gets transformed into something like this
+const element = React.createElement('h1', null, 'Hello, JSX!');
+```
+
+### JSX Rules
+
+1. **Every JSX element must be closed**
+```jsx
+   <img src="image.jpg" /> {/* Self-closing tag */}
+   <div>Content</div> {/* Regular closing tag */}
+```
+
+2. **Return a single root element**
+```jsx
+   // Correct - Single root element
+   return (
+     <div>
+       <h1>Title</h1>
+       <p>Paragraph</p>
+     </div>
+   );
+
+   // Also correct - Using Fragment
+   return (
+     <>
+       <h1>Title</h1>
+       <p>Paragraph</p>
+     </>
+   );
+```
+
+3. **Use camelCase for attributes**
+
+```jsx
+   <div className="container" onClick={handleClick}></div>
+```
+
+4. **Embed JavaScript expressions with curly braces**
+
+```jsx
+   const name = "React";
+   return <h1>Hello, {name}!</h1>;
+```
+
+---
+
