@@ -1,0 +1,41 @@
+---
+title: State
+published: true
+---
+
+State is a way to store and manage data inside a component.  
+Unlike props (which come from outside), **state is managed by the component itself** and can change over time.
+
+```jsx
+// Counter.jsx
+import React, { useState } from 'react'
+
+const Counter = () => {
+  // Declare a state variable 'count' with initial value 0
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <h2>Count: {count}</h2>
+      {/* Update state using setCount */}
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setCount(count - 1)}>Decrement</button>
+    </div>
+  )
+}
+
+export default Counter
+```
+
+---
+
+### ✅ Key Points about State
+
+* State is **data that belongs to a component**.
+* State can **change over time** (e.g., user input, button clicks).
+* When state changes, the component **re-renders automatically**.
+* State is created using the **`useState` hook** in functional components.
+* Unlike props, **a component can update its own state**.
+
+---
+
