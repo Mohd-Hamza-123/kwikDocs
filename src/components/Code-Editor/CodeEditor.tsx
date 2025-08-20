@@ -100,7 +100,10 @@ const CodeEditor = () => {
                     title="Copy Code">
                     <FaRegCopy />
                 </Button>
+
+                
                 <div ref={editorRef} className='h-full flex-1 text-lg' />
+
                 <CodeOutput
                     output={output}
                     className='flex flex-col gap-2 items-center flex-1 h-full'

@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
 import {
     Card,
     CardContent,
@@ -9,7 +8,7 @@ import {
 } from "@/components/ui/card";
 
 const languages = [
-    { name: "HTML & CSS", image: "language/html-css.png", path: "/Editor/html-css" },
+    { name: "HTML & CSS", image: "language/html-css.png", path: "/editor/html-css" },
     { name: "HTML, CSS & JavaScript", image: "/language/web.png", path: "/Editor/web" },
     { name: "Node JS", image: "/language/javascript.jpg", path: "/Editor/nodejs" },
     { name: "TypeScript", image: "/language/typescript.jpg", path: "/Editor/typescript" },
@@ -31,8 +30,7 @@ const Playground = () => {
                 {languages.map((language) => (
                     <Link href={language.path} key={language.name}>
                         <Card
-                            className="group relative overflow-hidden rounded-xl shadow-md border border-gray-200 dark:border-gray-700 transition-transform transform hover:scale-105 hover:shadow-lg bg-gradient-to-br from-white via-gray-100 to-gray-200 dark:from-[#1e1e1e] dark:via-[#121212] dark:to-[#2c2c2c]"
-                        >
+                            className="group relative overflow-hidden rounded-xl shadow-md border border-gray-200 dark:border-gray-700 transition-transform transform hover:scale-105 hover:shadow-lg bg-gradient-to-br from-white via-gray-100 to-gray-200 dark:from-[#1e1e1e] dark:via-[#121212] dark:to-[#2c2c2c]">
                             <CardContent className="p-6 flex flex-col items-center text-center">
                                 <Image
                                     height={100}
