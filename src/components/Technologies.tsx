@@ -9,7 +9,7 @@ const Technologies = async () => {
   if (!technology) {
     return (
       <div className="text-center text-red-600 py-10">
-        <p>⚠️ Failed to load technologies. Please try again later.</p>
+        <p>⚠️ Failed to load technologies. Check your Internet Connection or try again later.</p>
       </div>
     );
   }

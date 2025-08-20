@@ -78,7 +78,6 @@ const HtmlEditor = ({
             const iframe = document.createElement('iframe')
             iframe.style.width = "100%"
             iframe.style.height = "100%"
-            console.log(code)
             iframe.srcdoc = code
 
             const output = document.getElementById(`output${id ? id : 0}`)
