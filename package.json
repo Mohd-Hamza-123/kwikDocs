@@ -98,5 +98,11 @@
     "ts-node": "^10.9.2",
     "typescript": "^5",
     "velite": "^0.2.2"
+  },
+  "overrides": {
+    "@tinymce/tinymce-react": {
+      "react": "^19.0.0",
+      "react-dom": "^19.0.0"
+    }
   }
 }
