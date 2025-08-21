@@ -8,7 +8,7 @@ import { FilteredPostList, LoadingPage, ShowPost } from "@/index";
 import type { FileNode } from "@/services/helpers/getContentTree";
 import { setAllDocs, setDoc } from "@/lib/store/features/docsSlice";
 
-export default function DocPage({ params }: { params: { tech: string } }) {
+export default function DocPage({ params }: any) {
 
   const { tech } = params
   const dispatch = useAppDispatch()

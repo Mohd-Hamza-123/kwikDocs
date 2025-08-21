@@ -1,12 +1,11 @@
 import { NextResponse } from 'next/server';
 import Doc from "@/models/docs.model";
-import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 import connectDB from '@/dbConfig/dbConfig';
 import TechModel from '@/models/tech.model';
 
 
 connectDB()
-export async function PUT(request: any, { params }: Params) {
+export async function PUT(request: any, { params }: any) {
     const { id } = params
     try {
 
@@ -28,7 +27,7 @@ export async function PUT(request: any, { params }: Params) {
     }
 }
 
-export async function GET(request: Request, { params }: Params) {
+export async function GET(request: Request, { params }: any) {
     try {
         const { id } = params;
 
