@@ -8,12 +8,12 @@ import { EditorState } from '@codemirror/state';
 import sanitizeHtml from '@/utils/Sanitize-html';
 import { useAppSelector } from '@/lib/hooks/hooks';
 import { CODE_SNIPPETS, Themes } from '@/constant';
-import injectCssIntoHtml from '@/utils/InjectCssIntoHtml';
 import copyToClipBoard from '@/utils/copyToClipboard';
+import injectCssIntoHtml from '@/utils/InjectCssIntoHtml';
 import createEmmetKeyMap from '@/components/Code-Editor/HTML/Emmet';
 import React, { useCallback, useEffect, useState, useRef } from 'react'
 import { EditorView, highlightActiveLine, keymap } from '@codemirror/view';
-import { autocompletion, closeBracketsKeymap, completionKeymap , closeBrackets } from '@codemirror/autocomplete';
+import { autocompletion, closeBracketsKeymap, completionKeymap, closeBrackets } from '@codemirror/autocomplete';
 import CodeMirrorThemeDropdown from '@/components/Code-Editor/CodeMirrorThemeDropdown';
 import {
     history,
@@ -25,7 +25,6 @@ import { createCssPropertyKeyMap } from '@/utils/codeMirror/automaticClose';
 
 const Page = () => {
 
-
     const isCodeEditable = true
     const editor = useRef<HTMLDivElement>(null)
     const cssEditor = useRef<HTMLDivElement>(null)
@@ -35,7 +34,6 @@ const Page = () => {
     const [cssCode, setCssCode] = useState(CODE_SNIPPETS?.css)
     const [htmlCode, setHtmlCode] = useState(CODE_SNIPPETS?.html)
     // console.log(htmlCode)
-
     const theme = useAppSelector((state) => state.editorSlice.theme)
 
     const htmlState = () => {
@@ -93,7 +91,7 @@ const Page = () => {
                     ...defaultKeymap,
                     ...historyKeymap,
                     ...completionKeymap,
-                     ...closeBracketsKeymap,
+                    ...closeBracketsKeymap,
                     createEmmetKeyMap('css'),
                 ]),
                 EditorState.readOnly.of(!isCodeEditable),
