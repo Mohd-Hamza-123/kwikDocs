@@ -30,10 +30,10 @@ const Page = () => {
     const cssEditor = useRef<HTMLDivElement>(null)
     const outputRef = useRef<HTMLDivElement>(null)
     const htmlViewRef = useRef<EditorView | null>(null)
+    const [visible, setVisible] = useState<'html' | 'css' | 'output'>('html')
     const [outputToggle, setOutputToggle] = useState(false)
     const [cssCode, setCssCode] = useState(CODE_SNIPPETS?.css)
     const [htmlCode, setHtmlCode] = useState(CODE_SNIPPETS?.html)
-    // console.log(htmlCode)
     const theme = useAppSelector((state) => state.editorSlice.theme)
 
     const htmlState = () => {
@@ -135,6 +135,7 @@ const Page = () => {
 
     const executeCode = () => {
         try {
+            setVisible('output')
             const sanitizedHtml = sanitizeHtml(htmlCode)
             setHtmlCode(sanitizedHtml)
             if (htmlViewRef.current) {
@@ -172,29 +173,52 @@ const Page = () => {
 
     return (
         <div className='w-full flex flex-col gap-4 p-4 poppins'>
+
+            <div className="flex justify-center items-center gap-3 p-2 rounded-xl shadow-md sticky top-0 bg-black/40 backdrop-blur-md border border-gray-700">
+                <Button
+                    onClick={() => setVisible('html')}
+                    variant={visible === 'html' ? 'default' : 'secondary'}
+                    className="flex items-center gap-2">
+                    <svgIcons.html className="w-4 h-4" /> HTML
+                </Button>
+                <Button
+                    variant={visible === 'css' ? 'default' : 'secondary'}
+                    className="flex items-center gap-2"
+                    onClick={() => setVisible('css')}>
+                    <svgIcons.css className="w-4 h-4" /> CSS
+                </Button>
+                <Button
+                    variant={visible === 'output' ? 'outline' : 'secondary'}
+                    onClick={executeCode}
+                    className="px-4 py-2 flex items-center gap-2 font-semibold bg-green-500 hover:bg-green-600 text-white rounded-lg shadow-lg">
+                    <svgIcons.play className="w-4 h-4" /> Run Code
+                </Button>
+                <CodeMirrorThemeDropdown triggerType="button" />
+            </div>
+
+
             <div
                 ref={editor}
-                className='w-full h-[80dvh] rounded-md shadow-md relative overflow-y-scroll'>
+                className={`w-full h-[80dvh] rounded-md shadow-md relative overflow-y-scroll ${visible === 'html' ? 'block' : 'hidden'}`}>
+                <svgIcons.copy
+                    onClick={() => copyToClipBoard(htmlCode)}
+                    className="h-9 w-9 bg-gray-800 text-gray-300 hover:text-blue-400 hover:bg-gray-700 cursor-pointer p-2 rounded-full absolute top-3 right-3 shadow-md transition z-10"
+                />
+
             </div>
             <div
                 ref={cssEditor}
-                className='w-full h-[80dvh] rounded-md shadow-md relative overflow-y-scroll'>
+                className={`w-full h-[80dvh] rounded-md shadow-md relative overflow-y-scroll ${visible === 'css' ? 'block' : 'hidden'}`}>
+                <svgIcons.copy
+                    onClick={() => copyToClipBoard(cssCode)}
+                    className="h-9 w-9 bg-gray-800 text-gray-300 hover:text-blue-400 hover:bg-gray-700 cursor-pointer p-2 rounded-full absolute top-3 right-3 shadow-md transition z-10"
+                />
+
             </div>
 
-            <div className="flex justify-end items-center gap-2">
-                <svgIcons.copy
-                    onClick={() => copyToClipBoard(htmlCode)} className="h-8 w-8 fill-gray-500 cursor-pointer hover:fill-blue-400 border border-gray-500 p-1 rounded-sm" />
-                <CodeMirrorThemeDropdown />
-                <Button
-                    variant='outline'
-                    onClick={executeCode}
-                    className="px-4 py-2 font-medium rounded-md transition-all">
-                    Run Code
-                </Button>
-            </div>
             <div
                 ref={outputRef}
-                className={`${outputToggle ? "block" : "hidden"} w-full mt-4 border rounded-md h-[250px] overflow-auto bg-white`}>
+                className={`${outputToggle ? "block" : "hidden"} w-full mt-4 border rounded-md h-[87dvh] overflow-auto bg-white ${visible === 'output' ? 'block' : 'hidden'}`}>
             </div>
 
         </div>

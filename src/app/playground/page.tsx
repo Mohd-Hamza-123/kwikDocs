@@ -9,14 +9,14 @@ import {
 
 const languages = [
     { name: "HTML & CSS", image: "language/html-css.png", path: "/editor/html-css" },
-    { name: "HTML, CSS & JavaScript", image: "/language/web.png", path: "/Editor/web" },
-    { name: "Node JS", image: "/language/javascript.jpg", path: "/Editor/nodejs" },
-    { name: "TypeScript", image: "/language/typescript.jpg", path: "/Editor/typescript" },
-    { name: "Python", image: "/language/python.png", path: "/Editor/python" },
-    { name: "Java", image: "/language/java.png", path: "/Editor/java" },
-    { name: "C++", image: "/language/cpp.png", path: "/Editor/cpp" },
-    { name: "C", image: "/language/c.png", path: "/Editor/c" },
-    { name: "Markdown", image: "/language/markdown.png", path: "/Editor/markdown" },
+    { name: "HTML, CSS & JavaScript", image: "/language/web.png", path: "/editor/web" },
+    { name: "Node JS", image: "/language/javascript.jpg", path: "/editor/nodejs" },
+    { name: "TypeScript", image: "/language/typescript.jpg", path: "/editor/typescript" },
+    { name: "Python", image: "/language/python.png", path: "/editor/python" },
+    { name: "Java", image: "/language/java.png", path: "/editor/java" },
+    { name: "C++", image: "/language/cpp.png", path: "/editor/cpp" },
+    { name: "C", image: "/language/c.png", path: "/editor/c" },
+    { name: "Markdown", image: "/language/markdown.png", path: "/editor/markdown" },
 ];
 
 
