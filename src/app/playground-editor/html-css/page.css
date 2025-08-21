@@ -1,0 +1,8 @@
+#playground-editor-html-css-navigation::-webkit-scrollbar {
+    display: none;
+}
+
+#playground-editor-html-css-navigation button{
+    width: 70px;
+    height: 45px;
+}

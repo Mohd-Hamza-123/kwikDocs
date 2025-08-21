@@ -1,4 +1,5 @@
 'use client'
+import './page.css'
 import { toast } from '@/hooks/use-toast';
 import { css } from '@codemirror/lang-css';
 import { html } from '@codemirror/lang-html';
@@ -13,6 +14,7 @@ import injectCssIntoHtml from '@/utils/InjectCssIntoHtml';
 import createEmmetKeyMap from '@/components/Code-Editor/HTML/Emmet';
 import React, { useCallback, useEffect, useState, useRef } from 'react'
 import { EditorView, highlightActiveLine, keymap } from '@codemirror/view';
+import { createCssPropertyKeyMap } from '@/utils/codeMirror/automaticClose';
 import { autocompletion, closeBracketsKeymap, completionKeymap, closeBrackets } from '@codemirror/autocomplete';
 import CodeMirrorThemeDropdown from '@/components/Code-Editor/CodeMirrorThemeDropdown';
 import {
@@ -20,7 +22,6 @@ import {
     defaultKeymap,
     historyKeymap
 } from '@codemirror/commands';
-import { createCssPropertyKeyMap } from '@/utils/codeMirror/automaticClose';
 
 
 const Page = () => {
@@ -35,6 +36,7 @@ const Page = () => {
     const [cssCode, setCssCode] = useState(CODE_SNIPPETS?.css)
     const [htmlCode, setHtmlCode] = useState(CODE_SNIPPETS?.html)
     const theme = useAppSelector((state) => state.editorSlice.theme)
+
 
     const htmlState = () => {
         if (!editor.current) return
@@ -172,55 +174,52 @@ const Page = () => {
     }
 
     return (
-        <div className='w-full flex flex-col gap-4 p-4 poppins'>
+        <div className='w-full flex flex-col lg:flex-row gap-4 p-4 poppins'>
 
-            <div className="flex justify-center items-center gap-3 p-2 rounded-xl shadow-md sticky top-0 bg-black/40 backdrop-blur-md border border-gray-700">
+            <div id='playground-editor-html-css-navigation' className="flex flex-row lg:flex-col justify-center items-center gap-5 p-2 rounded-xl shadow-md sticky top-0 bg-black/40 backdrop-blur-md border border-gray-700 overflow-x-scroll">
                 <Button
                     onClick={() => setVisible('html')}
                     variant={visible === 'html' ? 'default' : 'secondary'}
                     className="flex items-center gap-2">
-                    <svgIcons.html className="w-4 h-4" /> HTML
+                    <svgIcons.html className="w-7 h-7" />
                 </Button>
                 <Button
                     variant={visible === 'css' ? 'default' : 'secondary'}
                     className="flex items-center gap-2"
                     onClick={() => setVisible('css')}>
-                    <svgIcons.css className="w-4 h-4" /> CSS
+                    <svgIcons.css className="w-7 h-7" />
                 </Button>
                 <Button
                     variant={visible === 'output' ? 'outline' : 'secondary'}
                     onClick={executeCode}
                     className="px-4 py-2 flex items-center gap-2 font-semibold bg-green-500 hover:bg-green-600 text-white rounded-lg shadow-lg">
-                    <svgIcons.play className="w-4 h-4" /> Run Code
+                    <svgIcons.play className="w-7 h-7" />
                 </Button>
                 <CodeMirrorThemeDropdown triggerType="button" />
             </div>
 
-
-            <div
-                ref={editor}
-                className={`w-full h-[80dvh] rounded-md shadow-md relative overflow-y-scroll ${visible === 'html' ? 'block' : 'hidden'}`}>
-                <svgIcons.copy
-                    onClick={() => copyToClipBoard(htmlCode)}
-                    className="h-9 w-9 bg-gray-800 text-gray-300 hover:text-blue-400 hover:bg-gray-700 cursor-pointer p-2 rounded-full absolute top-3 right-3 shadow-md transition z-10"
-                />
-
-            </div>
-            <div
-                ref={cssEditor}
-                className={`w-full h-[80dvh] rounded-md shadow-md relative overflow-y-scroll ${visible === 'css' ? 'block' : 'hidden'}`}>
-                <svgIcons.copy
-                    onClick={() => copyToClipBoard(cssCode)}
-                    className="h-9 w-9 bg-gray-800 text-gray-300 hover:text-blue-400 hover:bg-gray-700 cursor-pointer p-2 rounded-full absolute top-3 right-3 shadow-md transition z-10"
-                />
-
-            </div>
-
-            <div
-                ref={outputRef}
-                className={`${outputToggle ? "block" : "hidden"} w-full mt-4 border rounded-md h-[87dvh] overflow-auto bg-white ${visible === 'output' ? 'block' : 'hidden'}`}>
-            </div>
-
+            <section className='w-full'>
+                <div
+                    ref={editor}
+                    className={`w-full h-[80dvh] rounded-md shadow-md relative overflow-y-scroll ${visible === 'html' ? 'block' : 'hidden'}`}>
+                    <svgIcons.copy
+                        onClick={() => copyToClipBoard(htmlCode)}
+                        className="h-9 w-9 bg-gray-800 text-gray-300 hover:text-blue-400 hover:bg-gray-700 cursor-pointer p-2 rounded-full absolute top-3 right-3 shadow-md transition z-10"
+                    />
+                </div>
+                <div
+                    ref={cssEditor}
+                    className={`w-full h-[80dvh] rounded-md shadow-md relative overflow-y-scroll ${visible === 'css' ? 'block' : 'hidden'}`}>
+                    <svgIcons.copy
+                        onClick={() => copyToClipBoard(cssCode)}
+                        className="h-9 w-9 bg-gray-800 text-gray-300 hover:text-blue-400 hover:bg-gray-700 cursor-pointer p-2 rounded-full absolute top-3 right-3 shadow-md transition z-10"
+                    />
+                </div>
+                <div
+                    ref={outputRef}
+                    className={`${outputToggle ? "block" : "hidden"} w-full border rounded-md h-[80dvh] overflow-auto bg-white ${visible === 'output' ? 'block' : 'hidden'}`}>
+                </div>
+            </section>
         </div>
     )
 }
