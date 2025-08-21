@@ -3,8 +3,9 @@ import { FaRegCopy } from "react-icons/fa";
 import { GiLargePaintBrush } from "react-icons/gi";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-
+import { FaPlay } from "react-icons/fa";
 export const svgIcons = {
+    play : (props: iconsProps) => <FaPlay {...props} />,
     arrowDropDown: (props: iconsProps) => (
         <MdOutlineKeyboardArrowDown {...props} />
     ),

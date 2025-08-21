@@ -11,8 +11,10 @@ import { useAppDispatch } from '@/lib/hooks/hooks'
 import { svgIcons } from '../icons'
 import { changeTheme as themeSwitcher } from '@/lib/store/features/editorSlice'
 import { useAppSelector } from '@/lib/hooks/hooks'
+import { Button } from '../ui/button'
 
-const CodeMirrorThemeDropdown = () => {
+const CodeMirrorThemeDropdown = ({ triggerType = 'svg' }: { triggerType?: string }) => {
+    
     const dispatch = useAppDispatch()
     const theme = useAppSelector((state) => state.editorSlice.theme)
     const changeTheme = (theme: string) => {
@@ -23,7 +25,8 @@ const CodeMirrorThemeDropdown = () => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className='w-fit outline-none '>
-                <svgIcons.brush className="h-8 w-8 fill-gray-500 cursor-pointer hover:fill-blue-400 border border-gray-500 rounded-sm p-1" />
+                {triggerType === 'svg' && <svgIcons.brush className="h-8 w-8 fill-gray-500 cursor-pointer hover:fill-blue-400 border border-gray-500 rounded-sm p-1" />}
+                {triggerType === 'button' && <Button variant='outline'>Themes</Button>}
             </DropdownMenuTrigger>
             <DropdownMenuContent className='h-[200px] overflow-y-scroll'>
                 {Object.entries(Themes).map(([key, value]) => (
