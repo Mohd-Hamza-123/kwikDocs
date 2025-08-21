@@ -26,13 +26,13 @@ interface Params {
     };
 }
 
-export async function GET(request: Request, { params }: Params) {
-    const { title } = params;
+export async function GET(request: Request,context: any) {
+    const { title } = context?.params;
     try {
        
-        console.log("Searching for title:", title);
+     
         const docs = await Doc.find({ title: { $regex: title, $options: 'i' } })
-        console.log("Found documents:", docs);
+     
         if (docs.length === 0) {
             return NextResponse.json({ message: "No documents found" }, { status: 404 })
         }

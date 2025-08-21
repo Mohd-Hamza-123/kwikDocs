@@ -4,12 +4,11 @@ import { NextResponse } from "next/server"
 
 connectDB()
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, context : any) {
     try {
         console.log("Request received:", req.url);
-        console.log('lkj;kj')
-        console.log(params)
-        const { id } = params
+ 
+        const { id } = context.params
         console.log("id", id)
         const deleteDoc = await Doc.findByIdAndDelete(id)
         if (deleteDoc) {
