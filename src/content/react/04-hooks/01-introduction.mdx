@@ -1,0 +1,69 @@
+---
+title : Introduction to Hooks
+published: true
+---
+
+### 📖 **Official React Docs Definition of Hooks**
+
+> *“Hooks are functions that let you ‘hook into’ React state and lifecycle features from function components. Hooks don’t work inside classes — they let you use React without classes.”*
+> (From [React Docs](https://react.dev/reference/react))
+
+**🟢 Simplified Version**
+
+* Hooks are **special functions** from React.
+* They allow **functional components** (not classes) to:
+
+  * **store values** (`useState`)
+  * **run code at specific times** (`useEffect`)
+  * **share data** (`useContext`)
+  * and more.
+
+👉 Without hooks, functional components were just “dumb UI.”
+👉 With hooks, functional components became **smart and powerful**.
+
+### Some Hooks 
+
+**List of important React hooks** and what they do.
+
+#### 🔹 Basic Hooks
+
+* **`useState`** → Lets a component **remember values** between renders (like a memory notebook).
+* **`useEffect`** → Runs code **after React updates the screen** (good for fetching data, timers, subscriptions).
+* **`useContext`** → Allows components to **read global data** without passing props manually.
+
+---
+
+#### 🔹 Additional Hooks
+
+* **`useRef`** → Keeps a **value or DOM reference** that doesn’t reset on re-render.
+* **`useReducer`** → Like `useState`, but for **more complex state logic** (similar to Redux-style reducers).
+* **`useCallback`** → Remembers a **function** so it doesn’t get recreated every render.
+* **`useMemo`** → Remembers a **calculated value** so it doesn’t get recalculated every render.
+* **`useImperativeHandle`** → Lets you control what is exposed when using `ref` in a custom component.
+* **`useLayoutEffect`** → Like `useEffect`, but runs **synchronously after DOM changes** (for measurements/DOM adjustments).
+* **`useDebugValue`** → Helps label custom hooks for debugging in React DevTools.
+
+---
+
+#### 🔹 Newer/Advanced Hooks (React 18+)
+
+* **`useId`** → Generates a **unique ID** that stays stable between renders (useful for accessibility).
+* **`useTransition`** → Marks state updates as **non-urgent** (helps with performance for slow UI updates).
+* **`useDeferredValue`** → Lets you **defer a value update** so the UI stays responsive.
+* **`useSyncExternalStore`** → Used for subscribing to **external stores** (e.g., Redux, Zustand).
+* **`useInsertionEffect`** → Special hook for **CSS-in-JS libraries** to insert styles before paint.
+
+---
+
+👉 In short:
+
+* **State-related**: `useState`, `useReducer`
+* **Side effects**: `useEffect`, `useLayoutEffect`, `useInsertionEffect`
+* **Performance**: `useMemo`, `useCallback`
+* **Refs/DOM**: `useRef`, `useImperativeHandle`
+* **Concurrency (React 18)**: `useTransition`, `useDeferredValue`
+* **Context/Stores**: `useContext`, `useSyncExternalStore`
+
+
+---
+
