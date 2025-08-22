@@ -1,0 +1,111 @@
+---
+title: Getting Form Values
+published: true
+---
+
+In React, you can access form values using the FormData API (just like in vanilla JS). This is handy when you don’t want to make each field a controlled component.
+
+```tsx
+import { FormEvent } from "react";
+
+function FormDataExample() {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // prevent reload
+
+    const formData = new FormData(e.currentTarget);
+
+    // Single values
+    const name = formData.get("name"); 
+    const email = formData.get("email");
+    const gender = formData.get("gender");
+
+    // Multiple values (checkboxes, multi-select)
+    const hobbies = formData.getAll("hobbies"); 
+    const skills = formData.getAll("skills");
+
+    console.log("Name:", name);
+    console.log("Email:", email);
+    console.log("Gender:", gender);
+    console.log("Hobbies:", hobbies);   // array of checked hobbies
+    console.log("Skills:", skills);     // array of selected skills
+
+    // Convert everything into an object (⚠️ getAll() values stay as arrays)
+    const values = Object.fromEntries(formData.entries());
+    console.log("All form values:", values);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" name="name" placeholder="Enter name" />
+      <input type="email" name="email" placeholder="Enter email" />
+
+      <fieldset>
+        <legend>Gender</legend>
+        <label>
+          <input type="radio" name="gender" value="Male" /> Male
+        </label>
+        <label>
+          <input type="radio" name="gender" value="Female" /> Female
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Hobbies</legend>
+        <label>
+          <input type="checkbox" name="hobbies" value="Reading" /> Reading
+        </label>
+        <label>
+          <input type="checkbox" name="hobbies" value="Sports" /> Sports
+        </label>
+        <label>
+          <input type="checkbox" name="hobbies" value="Music" /> Music
+        </label>
+      </fieldset>
+
+      <label>
+        Skills (multi-select): 
+        <select name="skills" multiple>
+          <option value="JS">JavaScript</option>
+          <option value="React">React</option>
+          <option value="Node">Node.js</option>
+        </select>
+      </label>
+
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+export default FormDataExample;
+```
+
+---
+
+🔎 Key Takeaways
+
+* **`.get("field")`** → returns the **first** matching value (string or `File`).
+* **`.getAll("field")`** → returns **all values** as an array. Useful for:
+
+  * ✅ Checkboxes with the same `name`.
+  * ✅ `<select multiple>` elements.
+
+Example output if user enters:
+
+* Name: `Hamza`
+* Email: `hamza@example.com`
+* Gender: `Male`
+* Hobbies: `Reading`, `Music`
+* Skills: `React`, `Node`
+
+👉 Console output:
+
+```bash
+Name: Hamza
+Email: hamza@example.com
+Gender: Male
+Hobbies: ["Reading", "Music"]
+Skills: ["React", "Node"]
+```
+
+---
+

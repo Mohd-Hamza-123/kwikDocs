@@ -1,0 +1,58 @@
+---
+title: Controlled Component
+published: true
+---
+
+In **React**, a **controlled component** is a form element (like `<input>`, `<textarea>`, or `<select>`) whose value is **controlled by React state** instead of the DOM.
+
+That means:
+
+* The **source of truth** is React state (`useState`, Redux, etc.).
+* The form element only **displays** the value from state.
+* When the user types or changes something, React updates the state, and then the state updates the input.
+
+---
+
+### 🔹 Example: Controlled Component
+
+```tsx
+import { useState } from "react";
+
+function ControlledInput() {
+  const [name, setName] = useState(""); // React state controls input value
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={name}                 // value comes from state
+        onChange={(e) => setName(e.target.value)} // updates state on change
+      />
+      <p>Hello, {name}!</p>
+    </div>
+  );
+}
+
+export default ControlledInput;
+```
+
+👉 Here, the **`ControlledInput` component is a controlled component** because:
+
+* The `<input>` is bound to `name` (React state).
+* The input’s value is always determined by `name`.
+* User input triggers `onChange`, which updates the state and re-renders.
+
+---
+
+### 🔹 Uncontrolled Component (for contrast)
+
+If you don’t bind the value to React state, it’s **uncontrolled**:
+
+```tsx
+function UncontrolledInput() {
+  return <input type="text" />;
+}
+```
+
+
+---
