@@ -1,0 +1,80 @@
+---
+title: Checkboxes Form
+published: true
+---
+
+In React, you can use the `checked` attribute to determine if a checkbox is checked or not.
+
+
+```tsx
+import { useState } from "react";
+
+function SkillsForm() {
+  const [skills, setSkills] = useState<string[]>([]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = e.target;
+
+    if (checked) {
+      setSkills((prev) => [...prev, value]); // add skill
+    } else {
+      setSkills((prev) => prev.filter((skill) => skill !== value)); // remove skill
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Selected Skills:", skills);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <h3>Select Your Skills</h3>
+
+      <input
+        type="checkbox"
+        id="php"
+        value="php"
+        checked={skills.includes("php")}
+        onChange={handleChange}
+      />
+      <label htmlFor="php">PHP</label>
+   
+
+      <input
+        type="checkbox"
+        id="js"
+        value="JS"
+        checked={skills.includes("JS")}
+        onChange={handleChange}
+      />
+      <label htmlFor="js">JS</label>
+
+
+      <input
+        type="checkbox"
+        id="node"
+        value="node"
+        checked={skills.includes("node")}
+        onChange={handleChange}
+      />
+      <label htmlFor="node">Node</label>
+
+
+      <input
+        type="checkbox"
+        id="java"
+        value="java"
+        checked={skills.includes("java")}
+        onChange={handleChange}
+      />
+      <label htmlFor="java">JAVA</label>
+   
+
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+export default SkillsForm;
+```
