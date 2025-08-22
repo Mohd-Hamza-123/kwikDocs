@@ -9,7 +9,6 @@ const Footer = () => {
     const pathName = usePathname();
     const [isRender, setIsRender] = useState(true)
 
-
     useEffect(() => {
         const isVisible = visiblePaths.some((path) => path === pathName);
         setIsRender(isVisible)
@@ -21,7 +20,7 @@ const Footer = () => {
     if (isRender)
         return (
 
-            <footer className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 h-[15dvh] dark:bg-bgDark">
+            <footer className="w-screen p-4 py-6 lg:py-8 h-[15dvh] dark:bg-bgDark">
                 <hr className="border-gray-200 sm:mx-auto dark:border-gray-700" />
                 <div className="sm:flex sm:items-center sm:justify-between pt-4">
                     <span className="text-md text-gray-500 sm:text-center dark:text-gray-400">&copy; {new Date().getFullYear()} <strong>Kwik Docs </strong>. All Rights Reserved.

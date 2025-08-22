@@ -1,18 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getAllTechnology } from "@/lib/API/techAPI/getAllTech";
 
-const Technologies = async () => {
 
-  const technology = await getAllTechnology();
+const Technologies = async ({ technology }: any) => {
 
-  if (!technology) {
-    return (
-      <div className="text-center text-red-600 py-10">
-        <p>⚠️ Failed to load technologies. Check your Internet Connection or try again later.</p>
-      </div>
-    );
-  }
 
   return <div className="dark:bg-bgDark bg-gray-100 flex flex-col gap-5">
     {technology?.map((techObj: any) => {

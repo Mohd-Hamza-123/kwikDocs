@@ -13,11 +13,11 @@ import Branding from "./components/Branding.tsx"
 import Sidebar from "./components/Sidebar/Sidebar"
 import ThemeToggle from "./components/ThemeToggle.tsx"
 import Technologies from "./components/Technologies.tsx"
+import EmptyTechnologies from "./components/Technologies/EmpytTechnologies.tsx"
 import ShowPost from "./components/DocsRead/ShowPost.tsx"
 import DocContent from "./components/DocsRead/ShowPost.tsx"
 import RelatedDocs from "./components/DocsRead/RelatedDocs"
 import SearchDocs from "./components/Search/SearchDocs.tsx"
-import WelcomeScrollDown from "./components/WelcomeScollDown"
 import CodeEditor from "./components/Code-Editor/CodeEditor.tsx"
 import CodeOutput from "./components/Code-Editor/CodeOutput.tsx"
 import VerifyEmailContent from "./components/VerifyEmailContent.tsx"
@@ -26,4 +26,4 @@ import LanguageSelector from "./components/Code-Editor/LanguageSelector.tsx"
 
 
 
-export { WelcomeScrollDown, VerifyEmailContent, Welcome, Technologies, Navbar, RTE, MultiSelect, ImageUpload, DocContent, RelatedDocs, LoadingPage, Sidebar, Prism, Spinner, Footer, PostItems, FilteredPostList, ShowPost, CodeEditor, LanguageSelector, CodeOutput, SearchDocs, ThemeToggle, Overlay, Branding }
+export { VerifyEmailContent, Welcome, Technologies, Navbar, RTE, MultiSelect, ImageUpload, DocContent, RelatedDocs, LoadingPage, Sidebar, Prism, Spinner, Footer, PostItems, FilteredPostList, ShowPost, CodeEditor, LanguageSelector, CodeOutput, SearchDocs, ThemeToggle, Overlay, Branding , EmptyTechnologies }
