@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 // export const revalidate = 60 * 60 * 24 * 28; // cache for 28 days
 
 export async function GET() {
-   console.log("Hello")
+//    console.log("Hello")
     try {
         await connectDB();
 
@@ -33,7 +33,7 @@ export async function GET() {
         }))
 
         const payload = data.filter(Boolean)
-        console.log(payload);
+        // console.log(payload);
         if (payload.length > 0) {
             return NextResponse.json({
                 success: true,
@@ -48,7 +48,7 @@ export async function GET() {
         }
 
     } catch (error: any) {
-        // console.log("error : ", error?.message);
+        console.log("error : ", error?.message);
         return NextResponse.json({
             success: false,
             message: "failed to get data",

@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-pt-[3.5rem]">
       <body
         suppressHydrationWarning={true}
-        className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
+        className={cn("min-h-screen bg-background font-sans antialiased dark:bg-bgDark", inter.variable)}>
         <Providers>
           <div className="min-h-dvh bg-background overflow-hidden">
             <Navbar />

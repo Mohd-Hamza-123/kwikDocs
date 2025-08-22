@@ -1,5 +1,4 @@
 import React from "react";
-import { WelcomeScrollDown } from '..';
 
 const Welcome = () => {
 
@@ -16,7 +15,6 @@ const Welcome = () => {
                     Not Sure Where To Begin ?
                 </p>
             </div>
-            <WelcomeScrollDown />
         </div>
     )
 }

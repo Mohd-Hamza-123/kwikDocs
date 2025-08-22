@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 const Error = ({ error, reset }: { error: Error, reset: () => void }) => {
 
     return (
-        <div className="flex flex-col justify-center items-center p-10 text-red-600 h-[76dvh]">
+        <div className="dark:bgDark flex flex-col justify-center items-center p-10 text-red-600 h-[76dvh]">
             <h2 className="text-2xl font-bold mb-4">Something went wrong!</h2>
             {process.env.NODE_ENV === "development" && <p>{error.message}</p>}
             <Button

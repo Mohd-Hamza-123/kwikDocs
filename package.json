@@ -49,7 +49,6 @@
     "codemirror": "^6.0.1",
     "emmet": "^2.4.11",
     "gray-matter": "^4.0.3",
-    "gsap": "^3.12.5",
     "html-react-parser": "^5.1.10",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.408.0",
