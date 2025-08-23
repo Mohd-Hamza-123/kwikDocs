@@ -1,0 +1,121 @@
+---
+title : useState Hook
+published : true
+---
+
+`useState` is a **React Hook** that lets you add state (data that can change) to functional components.
+
+Syntax:
+
+```tsx
+const [state, setState] = useState(initialValue);
+```
+
+* `state` → the current value.
+* `setState` → a function to update it.
+* `initialValue` → the default state when the component first renders.
+
+**🔹 Example**
+
+A counter button:
+
+```tsx
+import { useState } from "react";
+
+export default function Counter() {
+  const [count, setCount] = useState(0); // initial state = 0
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click Me</button>
+    </div>
+  );
+}
+```
+
+Here:
+
+* `count` is the state value.
+* `setCount` updates it.
+* React re-renders the component whenever `setCount` is called.
+
+---
+
+### Update state from previous state
+
+If your new state depends on the **previous state**, always use the functional update form.
+This ensures React uses the latest value even if updates are batched.
+
+```tsx
+const [count, setCount] = useState(0);
+
+// ✅ Correct: use function form
+setCount((prevCount) => prevCount + 1);
+
+// Example: toggle state
+setIsOpen((prev) => !prev);
+
+// Example: add item to array
+setTodos((prev) => [...prev, newTodo]);
+
+// Example: update object
+setUser((prev) => ({ ...prev, name: "Hamza" }));
+```
+
+---
+
+### 🔹 When to use `useState`
+
+Use it when you need **local state** inside a component, such as:
+
+* Form inputs (`const [email, setEmail] = useState("")`)
+* Toggles (`const [isOpen, setIsOpen] = useState(false)`)
+* Counters or timers
+* Dynamic UI changes (e.g., switching tabs, modal open/close)
+
+---
+
+### 🔹 When NOT to use `useState`
+
+* If the state is **global** across many components → use **Context** or a state manager (Redux, Zustand).
+* If the state can be **derived from props** → don’t duplicate it, just compute from props.
+* If it’s **server data** (fetched from API) → often better with React Query, SWR, or Next.js server components.
+
+---
+
+✅ **Think of `useState` like this:**
+
+* Use it when a component needs to **remember something between renders**.
+* It’s like a **“memory cell”** that React keeps for you.
+
+---
+
+Complete Example
+
+```tsx
+import { useState } from "react";
+
+export default function Example() {
+  const [count, setCount] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div>
+      <h2>Count: {count}</h2>
+      <button onClick={() => setCount((prev) => prev + 1)}>+1</button>
+      <button onClick={() => setCount(0)}>Reset</button>
+
+      <hr />
+
+      <button onClick={() => setIsOpen((prev) => !prev)}>
+        {isOpen ? "Hide" : "Show"} Message
+      </button>
+
+      {isOpen && <p>Hello, I am visible!</p>}
+    </div>
+  );
+}
+```
+
+---

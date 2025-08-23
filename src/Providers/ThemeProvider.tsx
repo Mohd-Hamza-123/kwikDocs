@@ -1,5 +1,5 @@
 'use client'
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode} from 'react'
 import { ThemeProvider as NextThemeProvider } from 'next-themes'
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {

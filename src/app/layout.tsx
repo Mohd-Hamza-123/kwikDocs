@@ -1,6 +1,6 @@
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import Providers from "./Providers";
+import Providers from "../Providers/Providers";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Footer, Navbar, Overlay, SearchDocs, Sidebar } from '../index'
