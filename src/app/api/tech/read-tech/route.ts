@@ -33,7 +33,7 @@ export async function GET() {
         }))
 
         const payload = data.filter(Boolean)
-        // console.log(payload);
+        
         if (payload.length > 0) {
             return NextResponse.json({
                 success: true,

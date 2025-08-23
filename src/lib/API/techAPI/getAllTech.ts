@@ -1,25 +1,41 @@
 import conf from "@/conf/conf";
+const REVALIDATE_TIME = 60 * 60 * 24 * 14;
+import { TechnologyCategory } from "@/types/docs.type";
 
-export const getAllTechnology = async () => {
+type ApiResponse =
+    { success: true; message: string; payload: TechnologyCategory[]; }
+    | { success: false; message: string; error?: string }
+
+export const getAllTechnology = async (): Promise<TechnologyCategory[] | null> => {
+
     try {
-
         const res = await fetch(`${conf.api_end_point}api/tech/read-tech`, {
             method: "GET",
-            next : {
-                revalidate : process.env.NODE_ENV === "development" ? 0 : 60 * 60 * 24 * 14
-            }
+            ...(process.env.NODE_ENV === 'development' ?
+                { cache: 'no-store' as const } :
+                {
+                    next: {
+                        revalidate: REVALIDATE_TIME
+                    }
+                })
         });
-        
-        if (!res.ok) throw new Error("Failed to fetch tech data");
 
-        const data = await res.json();
-    
-        console.log("end")
-        return data?.payload || null
+        if (!res.ok) {
+            throw new Error(`Failed to fetch tech data: ${res.status} ${res.statusText}`);
+        }
 
-    } catch (error: any) {
-        console.log(error?.message);
+        const data: ApiResponse = await res.json();
+
+        if (data.success && Array.isArray(data.payload)) {
+            return data.payload
+        }
+
         return null
+
+    } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : "Unknown error";
+        console.error("[getAllTechnology] Error:", message);
+        return null;
     }
 
 };

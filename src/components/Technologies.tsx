@@ -1,12 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Technology, TechnologyCategory } from "@/types/docs.type";
 
+type Props = {
+  technology: TechnologyCategory[]
+}
 
-const Technologies = async ({ technology }: any) => {
-
+const Technologies = async ({ technology }: Props) => {
 
   return <div className="dark:bg-bgDark bg-gray-100 flex flex-col gap-5">
-    {technology?.map((techObj: any) => {
+    {technology?.map((techObj: TechnologyCategory) => {
       return (
         <section key={techObj?.techType}
           className="flex flex-col gap-5">
@@ -15,7 +18,7 @@ const Technologies = async ({ technology }: any) => {
             {techObj?.techType}
           </h1>
 
-          {techObj?.technologies?.map((tech: any, index: number) => (
+          {techObj?.technologies?.map((tech: Technology, index: number) => (
             <div
               key={tech?._id + index}
               className={`dark:bg-gradient-to-br dark:from-[#1e1e1e] dark:via-[#121212] dark:to-[#2c2c2c] bg-gradient-to-br from-gray-100 via-white to-gray-200 shadow-lg rounded-lg overflow-hidden transition-transform hover:scale-[1.02] hover:shadow-xl w-[94%] lg:w-[70%] mx-auto flex flex-col md:flex-row ${index % 2 == 0 ? 'md:flex-row-reverse' : ''} items-center`}>
