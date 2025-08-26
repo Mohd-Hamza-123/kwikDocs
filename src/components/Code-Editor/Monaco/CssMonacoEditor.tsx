@@ -78,5 +78,5 @@ const CssMonacoEditor = forwardRef((props: Props, ref) => {
   )
 }
 )
-
+CssMonacoEditor.displayName = "CssMonacoEditor"
 export default CssMonacoEditor
