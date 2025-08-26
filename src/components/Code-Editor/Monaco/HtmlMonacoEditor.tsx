@@ -84,6 +84,6 @@ const HtmlMonacoEditor = forwardRef((props: Props, ref) => {
 }
 )
 
-
+HtmlMonacoEditor.displayName = "HtmlMonacoEditor"
 
 export default HtmlMonacoEditor
