@@ -1,0 +1,77 @@
+---
+title : Express.js Intro
+published : true
+---
+
+**Express.js** is a **backend web framework** for **Node.js** that helps you build web applications and APIs more easily.
+
+
+### 🔹 What Express.js is
+
+* A **minimal** and **flexible** framework built on top of **Node.js**.
+* It provides a **simpler way** to handle things like:
+
+  * Creating a web server
+  * Defining routes (`GET /`, `POST /users`, etc.)
+  * Handling requests and responses
+  * Using **middlewares** (functions that process requests before sending a response)
+* Instead of writing raw Node.js server code, Express gives you a cleaner API.
+
+---
+
+### 🔹 Why we use Express.js
+
+Without Express, a simple Node.js server looks like this:
+
+```js
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+  if (req.url === "/") {
+    res.write("Hello World");
+    res.end();
+  }
+});
+
+server.listen(3000);
+```
+
+With **Express.js**, it becomes:
+
+```ts
+import express from "express";
+
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
+app.listen(3000, () => {
+  console.log("Server running at http://localhost:3000");
+});
+```
+
+Much cleaner ✅
+
+---
+
+### 🔹 Key Features
+
+1. **Routing system** – define endpoints (`/login`, `/products/:id`) easily.
+2. **Middleware support** – add functions for logging, authentication, validation, error handling.
+3. **Template engines** – render HTML dynamically (e.g., EJS, Pug, Handlebars).
+4. **JSON & Form handling** – parse request bodies with `express.json()` and `express.urlencoded()`.
+5. **Extensible** – tons of plugins and third-party packages.
+
+---
+
+### 🔹 When to use Express.js
+
+* Building **REST APIs** (e.g., for mobile/web apps).
+* Creating **backend servers** for frontend frameworks (React, Next.js, Angular, etc.).
+* Making small to medium **web applications**.
+* As a foundation before moving to larger frameworks like **NestJS**.
+
+---
+

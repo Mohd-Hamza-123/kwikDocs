@@ -1,0 +1,44 @@
+---
+title: Configuring CORS
+published: true
+---
+
+Cross-Origin Resource Sharing (CORS) is a mechanism that allows restricted resources on a web page to be requested from another domain outside the domain from which the first resource was served.
+
+
+### 1) Install the `cors` package
+
+```bash
+npm install cors
+```
+
+
+### 2) Configure CORS
+
+In your application, configure CORS using the `cors` package:
+
+```ts
+import express from "express";
+import cors from "cors";
+
+const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:8000", // or your frontend URL use "*" for all
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // if using cookies/auth headers
+  })
+);
+
+app.get("/", (req, res) => {
+  res.json({ message: "Hello World" });
+});
+
+app.listen(3000, () => {
+  console.log("Server running on http://localhost:3000");
+});
+```
+
+
+---
