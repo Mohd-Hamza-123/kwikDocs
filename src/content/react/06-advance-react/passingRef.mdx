@@ -1,0 +1,38 @@
+---
+title: Passing Reference
+published: true
+---
+
+In React 19 , here is the way to pass a reference from parent component to child component.
+
+**Parent Component**
+
+```jsx
+import {useRef} from 'react'
+function App() {
+
+  const inputRef = useRef(null);
+  const getValue = ()=>{
+   const value = inputRef.current.value
+  }
+
+  return <>
+  <form>
+  <FancyInput ref={inputRef} />;
+  <button onClick={getValue}>Get Value</button>
+  </form>
+  </>
+}
+```
+
+**Child Component**
+
+```jsx
+function FancyInput(props) {
+    const {ref} = props
+  return <input ref={ref} type='text' />;
+}
+```
+
+
+---
