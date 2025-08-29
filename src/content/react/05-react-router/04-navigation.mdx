@@ -1,0 +1,24 @@
+---
+title: Navigation
+published: true
+---
+
+`useNavigate` is React Router’s way to redirect (or move) a user to another route, but in a programmatic way.
+
+```jsx
+import { useNavigate } from "react-router-dom";
+function Home() {
+  const navigate = useNavigate();
+
+  const goToAbout = () => {
+    navigate("/about");  // redirects to /about
+  };
+
+  return (
+    <button onClick={goToAbout}>
+      Go to About Page
+    </button>
+  );
+}
+}
+```
