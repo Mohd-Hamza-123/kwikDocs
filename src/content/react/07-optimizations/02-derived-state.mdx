@@ -1,0 +1,174 @@
+---
+title : Derived State
+published : true
+---
+
+
+**Derived state** means:
+👉 A piece of state in your component that can be **calculated (derived)** from existing `props` or `state`, instead of storing it separately.
+
+* You don’t need to store it in `useState`.
+* Instead, compute it *on the fly* inside `render` (or in variables) whenever needed.
+
+⚡ React’s rule of thumb:
+
+> If you can calculate something from existing state/props, don’t duplicate it as another state variable.
+
+---
+
+**🔹 Example 1: Count and Double Value**
+
+❌ **Wrong way (extra state):**
+
+```jsx
+import React, { useState } from "react";
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+  const [double, setDouble] = useState(0); // ❌ derived state
+
+  function increment() {
+    const newCount = count + 1;
+    setCount(newCount);
+    setDouble(newCount * 2); // keeping in sync manually
+  }
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <p>Double: {double}</p>
+      <button onClick={increment}>+1</button>
+    </div>
+  );
+}
+```
+
+👉 Here, `double` is **derived** from `count`.
+We’re duplicating state unnecessarily and must manually keep them in sync.
+
+✅ **Better way (derive inside render):**
+
+```jsx
+import React, { useState } from "react";
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+
+  const double = count * 2; // derived value
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <p>Double: {double}</p>
+      <button onClick={() => setCount(count + 1)}>+1</button>
+    </div>
+  );
+}
+```
+
+👉 `double` is now derived from `count` — no need for extra state.
+
+---
+
+**🔹 Example 2: Filtering a List**
+
+❌ **Wrong way (store filtered list in state):**
+
+```jsx
+function UserList({ users }) {
+  const [search, setSearch] = useState("");
+  const [filtered, setFiltered] = useState(users); // ❌ redundant
+
+  function handleSearch(e) {
+    const query = e.target.value;
+    setSearch(query);
+    setFiltered(users.filter((u) => u.includes(query))); // syncing manually
+  }
+
+  return (
+    <div>
+      <input value={search} onChange={handleSearch} />
+      <ul>
+        {filtered.map((u) => (
+          <li key={u}>{u}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+✅ **Better way (derive filtered list dynamically):**
+
+```jsx
+function UserList({ users }) {
+  const [search, setSearch] = useState("");
+
+  const filtered = users.filter((u) =>
+    u.toLowerCase().includes(search.toLowerCase())
+  ); // derived state
+
+  return (
+    <div>
+      <input value={search} onChange={(e) => setSearch(e.target.value)} />
+      <ul>
+        {filtered.map((u) => (
+          <li key={u}>{u}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+👉 Now `filtered` is recalculated each render instead of being stored in state.
+
+---
+
+**🔹 Example 3: Props → Derived State**
+
+❌ **Wrong way:**
+
+```jsx
+function Welcome({ name }) {
+  const [greeting, setGreeting] = useState(`Hello, ${name}`); // ❌ unnecessary
+
+  return <h1>{greeting}</h1>;
+}
+```
+
+✅ **Better way:**
+
+```jsx
+function Welcome({ name }) {
+  const greeting = `Hello, ${name}`; // derived from props
+  return <h1>{greeting}</h1>;
+}
+```
+
+---
+
+### 🔹 When to Use Derived State?
+
+✅ Use **derived values (variables)** instead of extra state when:
+
+* The value can be calculated from `props` or `state`.
+* It doesn’t need to be “remembered” across renders.
+
+⚠️ But **sometimes you DO need state** if:
+
+* The derived value is expensive to calculate (then use `useMemo`).
+* You want to "capture" a value at a certain time instead of always recalculating.
+* Example: storing **form input** or **server response**.
+
+---
+
+### 🔹 Summary
+
+* **Derived state** = data you can compute from existing `props` or `state`.
+* Avoid duplicating state → it leads to bugs (data gets out of sync).
+* Use **computed variables** (or `useMemo`) instead of extra `useState`.
+
+👉 Rule of thumb: **“If you can derive it, don’t store it.”**
+
+
