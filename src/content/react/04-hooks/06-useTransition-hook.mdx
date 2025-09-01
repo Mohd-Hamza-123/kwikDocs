@@ -1,0 +1,103 @@
+---
+title : useTransition Hook
+published : true
+---
+
+`useTransition` is a **React hook** that helps you mark some state updates as **“low priority”** (transitions).
+
+👉 Example:
+
+* Typing in a search box should feel instant.
+* Filtering a huge list based on that text can be slow.
+* `useTransition` lets you update the input immediately (urgent), and run the expensive filtering in the background (transition).
+
+---
+
+### ✅ Syntax of `useTransition`
+
+```tsx
+const [isPending, startTransition] = useTransition();
+```
+
+* **`isPending`** → `true` while the transition is running.
+* **`startTransition(fn)`** → run `fn` as a transition (non-blocking).
+
+
+```jsx
+import React, { useState, useTransition } from "react";
+
+export default function Search() {
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const [isPending, startTransition] = useTransition();
+
+  function handleChange(e) {
+    const value = e.target.value;
+    setQuery(value);
+
+    // expensive update runs as a transition
+    startTransition(() => {
+      const filtered = bigList.filter((item) =>
+      // assume bigList is an array of 5000 items
+        item.toLowerCase().includes(value.toLowerCase())
+      );
+      setResults(filtered);
+    });
+  }
+
+  return (
+    <div>
+      <input value={query} onChange={handleChange} placeholder="Search..." />
+      {isPending && <p>Loading...</p>}
+      <ul>
+        {results.map((r, i) => (
+          <li key={i}>{r}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+👉 Typing feels smooth even with 5000 items, because React defers the heavy work.
+
+---
+
+### 🔹 `useFormStatus`
+
+* Works only inside a **form’s child component**.
+* Tells you whether a form is **submitting or idle** (`pending`).
+* Powered by React’s new **form actions API** (React 19 / Next.js 13+).
+* Example: disabling a **Submit button** while the form submits.
+
+```tsx
+import { useFormStatus } from "react-dom";
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <button type="submit" disabled={pending}>
+      {pending ? "Submitting..." : "Submit"}
+    </button>
+  );
+}
+```
+
+---
+
+# 🔹 Key Differences
+
+| Feature           | `useTransition`                                            | `useFormStatus`                                        |
+| ----------------- | ---------------------------------------------------------- | ------------------------------------------------------ |
+| **Scope**         | Any async or heavy state update                            | Only inside a `<form>`                                 |
+| **Purpose**       | Mark updates as low-priority so UI stays responsive        | Track submission state of a form                       |
+| **Return values** | `[isPending, startTransition]`                             | `{ pending, data, method, action }`                    |
+| **Where used**    | Anywhere in React                                          | Inside a component nested in a `<form>`                |
+| **Use case**      | Smooth UI during slow renders (e.g. filtering, navigation) | Disable buttons / show spinners when submitting a form |
+
+---
+
+🔹 Super Simple Analogy
+
+* **`useTransition`** → “I want this update to feel smooth, even if it takes time.”
+* **`useFormStatus`** → “I want to know if this form is submitting right now.”
