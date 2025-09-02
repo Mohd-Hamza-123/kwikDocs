@@ -1,14 +1,12 @@
 ---
 title: CSS Font Family
-description: Learn how to use the `font-family` property in CSS to specify fonts for text.
 published: true
 ---
 
 In CSS, we use the `font-family` property to specify the font of a text.
 
----
 
-### 🎨 CSS Example:
+**Example:**
 
 ```css
 .p1 {
@@ -23,4 +21,33 @@ In CSS, we use the `font-family` property to specify the font of a text.
   font-family: "Lucida Console", "Courier New", monospace; /* Specifies a monospace font */
 }
 ```
+
+**Example:**
+
+<HtmlEditor id={1} defaultCode={`
+<html>
+  <head>
+    <style>
+      .p1 {
+        font-family: "Times New Roman", Times, serif;
+      }
+
+      .p2 {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .p3 {
+        font-family: "Lucida Console", "Courier New", monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="p1">This is a paragraph with a serif font.</p>
+    <p class="p2">This is a paragraph with a sans-serif font.</p>
+    <p class="p3">This is a paragraph with a monospace font.</p>
+  </body>
+</html>
+`}/>
+
+
 ---

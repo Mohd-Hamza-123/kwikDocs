@@ -1,19 +1,15 @@
 ---
 title: Inline & Block Elements
-description: ''
 published: true
 ---
 
-
 In HTML, elements are categorized into **inline** and **block-level** elements based on how they behave in the document flow.
-
----
 
 ### 🧱 Block-Level Elements
 
 A **block-level element** always starts on a **new line** and takes up the **full width** available (by default). It essentially forms a block or a box on the page.
 
-### ✳️ Characteristics
+**Characteristics**
 
 - Begins on a new line.
 - Expands to fill the container's width by default.
@@ -32,13 +28,31 @@ A **block-level element** always starts on a **new line** and takes up the **ful
 <main></main>, <nav></nav>, <aside></aside>
 ```
 
+**Example:**
+
+<HtmlEditor id={1} defaultCode={`<html>
+  <head>
+    <style>
+      .block {
+        border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="block">I am div </div>
+    <p class="block">I am paragraph </p>
+    <h1 class="block">I am h1 </h1>
+  </body>
+</html>
+`}/>
+
 ---
 
 ### 🔡 Inline Elements
 
 An **inline element** does **not start on a new line** and only takes up as much width as necessary. It flows alongside other elements like words in a sentence.
 
-### ✳️ Characteristics
+**Characteristics**
 
 * Does **not break** the line.
 * Only takes up as much width as required.
@@ -50,16 +64,34 @@ An **inline element** does **not start on a new line** and only takes up as much
 ```html
 <span></span>
 <a></a>
-<strong></strong>, <em></em>
+<strong></strong>
 <b></b>, <i></i>
 <img />
 <code></code>
-<abbr></abbr>, <cite></cite>
 ```
+
+**Example:**
+
+<HtmlEditor id={2} defaultCode={`<html>
+  <head>
+    <style>
+      .inline {
+        border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <span class="inline">I am span </span>
+    <a class="inline">I am a </a>
+    <b class="inline">I am b </b>
+    <i class="inline">I am i </i>
+  </body>
+</html> 
+`}/>
 
 ---
 
-## 🆚 Block vs Inline (Quick Comparison)
+#### Block vs Inline
 
 | Feature             | Block Element  | Inline Element           |
 | ------------------- | -------------- | ------------------------ |
@@ -71,24 +103,8 @@ An **inline element** does **not start on a new line** and only takes up as much
 
 ---
 
-## 🧪 Example
 
-```html
-<!-- Block-level example -->
-<div>
-  <h2>This is a heading</h2>
-  <p>This is a paragraph inside a div.</p>
-</div>
-
-<!-- Inline example -->
-<p>
-  This is <strong>bold</strong> and <em>italic</em> text inside a paragraph.
-</p>
-```
-
----
-
-## 🧠 Tip
+### 🌟 Display Property
 
 You can change an element’s display behavior using CSS:
 
@@ -103,6 +119,34 @@ div {
   display: inline;
 }
 ```
+
+**Example:**
+
+<HtmlEditor id={3} defaultCode={`<html>
+  <head>
+    <style>
+      .inline {
+        border: 2px solid black;
+        display: inline;
+      }
+      .block {
+        border: 2px solid black;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="block">I am a </a>
+    <b class="block">I am b </b>
+    <i class="block">I am i </i>
+    <span class="block">I am span </span>
+    <hr>
+    <h1 class="inline">I am h1 </h1>
+    <div class="inline">I am div </div>
+    <p class="inline">I am paragraph </p>
+  </body>
+</html> 
+`}/>
 
 ---
 

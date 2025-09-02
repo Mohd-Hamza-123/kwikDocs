@@ -1,36 +1,105 @@
 ---
 title: CSS Margin and Padding
-description: Learn how to use the `margin` and `padding` properties in CSS to control spacing around and within elements.
 published: true
 ---
 
-The CSS `margin` and `padding` properties are used to create space around and within elements, respectively.
+### Padding 
 
----
+The `padding` property is used to add space inside the border of an element. It is a shorthand property for `padding-top`, `padding-right`, `padding-bottom`, and `padding-left`.
 
-### 🎨 CSS Example:
+**Example:**
 
 ```css
 .container {
-  margin: 20px; /* Adds space outside the element */
-  padding: 15px; /* Adds space inside the element */
-  background-color: lightgray; /* Adds a light gray background for visualization */
+  padding: 10px; /* Adds 10px of padding to all sides */
 }
 
-.child {
-  margin: 10px 5px; /* Adds 10px vertically and 5px horizontally outside the element */
-  padding: 8px 12px; /* Adds 8px vertically and 12px horizontally inside the element */
-  background-color: white; /* Adds a white background for visualization */
+.container {
+  padding: 10px 20px; /* Adds 10px of padding to the top and bottom, and 20px of padding to the left and right */
 }
+
+.container {
+  padding: 10px 20px 30px; /* Adds 10px of padding to the top, 20px of padding to the right, and 30px of padding to the bottom */
+}
+
+.container {
+  padding: 10px 20px 30px 40px; /* Adds 10px of padding to the top, 20px of padding to the right, 30px of padding to the bottom, and 40px of padding to the left */
+}
+.container {
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+  padding-left: 40px;
+} 
 ```
+
+**Example:**
+<HtmlEditor id={1} defaultCode={`<html>
+  <head>
+    <style>
+      .container {
+        padding: 20px;
+        border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      I am container
+    </div>
+  </body>
+</html>
+`}/>
 
 ---
 
-### 📝 HTML Example:
+### Margin
 
-```html
-<div class="container">
-  Parent Container
-  <div class="child">Child Element</div>
-</div>
+The `margin` property is used to add space outside the border of an element. It is a shorthand property for `margin-top`, `margin-right`, `margin-bottom`, and `margin-left`.
+
+**Example:**
+
+```css
+.container {
+  margin: 10px; /* Adds 10px of margin to all sides */
+}
+
+.container {
+  margin: 10px 20px; /* Adds 10px of margin to the top and bottom, and 20px of margin to the left and right */
+}
+
+.container {
+  margin: 10px 20px 30px; /* Adds 10px of margin to the top, 20px of margin to the right, and 30px of margin to the bottom */
+}
+
+.container {
+  margin: 10px 20px 30px 40px; /* Adds 10px of margin to the top, 20px of margin to the right, 30px of margin to the bottom, and 40px of margin to the left */
+} 
+
+.container {
+  margin-top: 10px;
+  margin-right: 20px;
+  margin-bottom: 30px;
+  margin-left: 40px;
+}
 ```
+
+**Example:**
+<HtmlEditor id={2} defaultCode={`<html>
+  <head>
+    <style>
+      .container {
+        margin: 20px;
+        border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      I am container
+    </div>
+  </body>
+</html>
+`}/>
+
+---

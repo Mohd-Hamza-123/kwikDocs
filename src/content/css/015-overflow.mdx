@@ -1,7 +1,122 @@
 ---
 title: Overflow
-description: ''
-published: false
+published: true
 ---
 
-# hello
+The **`overflow`** property in CSS controls what happens when content inside an element is **too big** to fit into the element’s box (its width/height).
+
+By default, if text or content is larger than the box, it just spills out — but with `overflow`, you can control this behavior.
+
+
+### **Syntax**
+
+```css
+selector {
+  overflow: visible | hidden | scroll | auto | clip;
+}
+```
+
+---
+
+### **Values of `overflow`**
+
+1. **`visible`** (default)
+
+   * Content is not clipped and may overflow outside the element's box.
+   * Example: text spilling out of a div.
+
+2. **`hidden`**
+
+   * Extra content is clipped, and not visible outside the box.
+   * No scrollbar is shown.
+
+3. **`scroll`**
+
+   * Extra content is clipped, **but scrollbars are always visible** (horizontal and vertical).
+   * Even if content fits, scrollbars stay.
+
+4. **`auto`**
+
+   * Scrollbars appear **only when needed**.
+   * If content fits → no scrollbar.
+   * If content overflows → scrollbar appears.
+
+5. **`clip`** (newer)
+
+   * Similar to `hidden`, but it does not allow scrolling at all (content is clipped to the element’s box).
+
+---
+
+**Example**
+
+<HtmlEditor id={1} defaultCode={`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overflow Example</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 100px;
+      border: 2px solid black;
+      margin: 10px;
+      padding: 5px;
+    }
+
+    .visible {
+      overflow: visible;
+    }
+
+    .hidden {
+      overflow: hidden;
+    }
+
+    .scroll {
+      overflow: scroll;
+    }
+
+    .auto {
+      overflow: auto;
+    }
+  </style>
+</head>
+<body>
+  <h2>CSS Overflow Examples</h2>
+
+  <div class="box visible">
+    <strong>visible:</strong> Content is not clipped. It overflows outside the box.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </div>
+
+  <div class="box hidden">
+    <strong>hidden:</strong> Extra content is clipped.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </div>
+
+  <div class="box scroll">
+    <strong>scroll:</strong> Always has scrollbars, even if not needed.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </div>
+
+  <div class="box auto">
+    <strong>auto:</strong> Scrollbars appear only when necessary.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </div>
+
+</body>
+</html>`}/>
+
+---
+
+📌 In short:
+
+* `visible` → lets content overflow.
+* `hidden` → clips overflow, no scroll.
+* `scroll` → always adds scrollbars.
+* `auto` → adds scrollbars only if needed.
+* `clip` → strictly clips, no scrollbars.
+
+---
+
+
