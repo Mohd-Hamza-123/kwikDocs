@@ -4,10 +4,8 @@ import { toast } from '@/hooks/use-toast';
 import { svgIcons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import sanitizeHtml from '@/utils/Sanitize-html';
-import { useAppSelector } from '@/lib/hooks/hooks';
-import { CODE_SNIPPETS, Themes } from '@/constant';
-import injectCssIntoHtml from '@/utils/InjectCssIntoHtml';
-import React, { useCallback, useEffect, useState, useRef } from 'react'
+import { injectCssIntoHtml } from '@/utils/InjectCssIntoHtml';
+import React, { useState, useRef } from 'react'
 import HtmlMonacoEditor from '@/components/Code-Editor/Monaco/HtmlMonacoEditor';
 import CssMonacoEditor from '@/components/Code-Editor/Monaco/CssMonacoEditor';
 
