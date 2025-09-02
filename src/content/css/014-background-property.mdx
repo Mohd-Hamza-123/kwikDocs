@@ -1,17 +1,14 @@
 ---
 title: Background Property
-description: ''
 published: true
 ---
-
 
 The `background` property in CSS is used to set the background of an element, including color, image, position, size, and more.
 
 It’s a **shorthand property** that allows you to set multiple background-related values at once.
 
----
 
-## 🧱 Syntax
+### 🧱 Syntax
 
 ```css
 background: [background-color] [background-image] [background-position] / [background-size] [background-repeat] [background-attachment] [background-origin] [background-clip];
@@ -21,7 +18,7 @@ background: [background-color] [background-image] [background-position] / [backg
 
 ---
 
-## 🔑 Background Sub-Properties
+### 🔑 Background Sub-Properties
 
 ### 1. `background-color`
 
@@ -31,8 +28,6 @@ Sets the background color of an element.
 background-color: lightblue;
 ```
 
----
-
 ### 2. `background-image`
 
 Sets an image as the background.
@@ -40,8 +35,6 @@ Sets an image as the background.
 ```css
 background-image: url('image.jpg');
 ```
-
----
 
 ### 3. `background-repeat`
 
@@ -54,8 +47,6 @@ background-repeat: repeat-x;
 background-repeat: repeat-y;
 ```
 
----
-
 ### 4. `background-position`
 
 Specifies the position of the background image.
@@ -65,8 +56,6 @@ background-position: center;
 background-position: top left;
 background-position: 50% 20%;
 ```
-
----
 
 ### 5. `background-size`
 
@@ -78,8 +67,6 @@ background-size: contain;   /* Fit within area */
 background-size: 100px 200px;
 ```
 
----
-
 ### 6. `background-attachment`
 
 Specifies whether the background scrolls with the page.
@@ -89,8 +76,6 @@ background-attachment: scroll;     /* Default */
 background-attachment: fixed;      /* Stays in place */
 background-attachment: local;
 ```
-
----
 
 ### 7. `background-origin`
 
@@ -102,8 +87,6 @@ background-origin: border-box;
 background-origin: content-box;
 ```
 
----
-
 ### 8. `background-clip`
 
 Determines how far the background extends (clip area).
@@ -114,9 +97,7 @@ background-clip: padding-box;
 background-clip: content-box;
 ```
 
----
-
-## 🧪 Example: Full Shorthand
+**🧪 Example: Full Shorthand**
 
 ```css
 .example {
@@ -124,14 +105,6 @@ background-clip: content-box;
 }
 ```
 
----
-
-## ✅ Best Practices
-
-* Use `background-color` as a fallback when using images.
-* Optimize background images for performance.
-* Use `background-size: cover` for full-screen backgrounds.
-* Always consider readability when overlaying content on backgrounds.
 
 ---
 
