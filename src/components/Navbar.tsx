@@ -1,14 +1,14 @@
 'use client'
 import React from 'react';
 import { Branding } from '@/index';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
+import { Input } from './ui/input';
+import { Button } from './ui/button';
 import { usePathname } from 'next/navigation';
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoListCircleOutline } from "react-icons/io5";
 import { useResponsiveContext } from '@/context/CSS-Context';
 import { useTypicalContext } from '@/context/Typical-Context';
-import { svgIcons } from '../icons';
+import { svgIcons } from './icons';
 
 const Navbar = () => {
 

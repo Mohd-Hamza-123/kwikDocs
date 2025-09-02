@@ -9,7 +9,7 @@ import {
 
 const languages = [
     { name: "HTML & CSS", image: "language/html-css.png", path: "/playground-editor/html-css" },
-    // { name: "HTML, CSS & JavaScript", image: "/language/web.png", path: "/playground-editor/web" },
+    // { name: "HTML, CSS & JavaScript", image: "/language/web.png", path: "/playground-editor/html-css-javascript" },
     // { name: "Node JS", image: "/language/javascript.jpg", path: "/playground-editor/nodejs" },
     // { name: "TypeScript", image: "/language/typescript.jpg", path: "/playground-editor/typescript" },
     // { name: "Python", image: "/language/python.png", path: "/playground-editor/python" },

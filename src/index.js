@@ -4,7 +4,7 @@ import Footer from "./components/Footer"
 import Welcome from "./components/Welcome"
 import Overlay from "./components/Overlay.tsx"
 import PostItems from "./components/PostItems"
-import Navbar from "./components/Navbar/Navbar"
+import Navbar from "./components/Navbar"
 import MultiSelect from "./components/MultiSelect"
 import ImageUpload from "./components/ImageUpload"
 import LoadingPage from "./components/LoadingPage"
@@ -21,7 +21,7 @@ import SearchDocs from "./components/Search/SearchDocs.tsx"
 import CodeOutput from "./components/Code-Editor/CodeOutput.tsx"
 import VerifyEmailContent from "./components/VerifyEmailContent.tsx"
 import FilteredPostList from "./components/DocsRead/filtered-post-list.tsx"
+import JavaScriptTerminal from "./components/Terminal/JavaScriptTerminal.tsx"
 
 
-
-export { VerifyEmailContent, Welcome, Technologies, Navbar, RTE, MultiSelect, ImageUpload, DocContent, RelatedDocs, LoadingPage, Sidebar, Prism, Spinner, Footer, PostItems, FilteredPostList, ShowPost, CodeOutput, SearchDocs, ThemeToggle, Overlay, Branding, EmptyTechnologies }
+export { VerifyEmailContent, Welcome, Technologies, Navbar, RTE, MultiSelect, ImageUpload, DocContent, RelatedDocs, LoadingPage, Sidebar, Prism, Spinner, Footer, PostItems, FilteredPostList, ShowPost, CodeOutput, SearchDocs, ThemeToggle, Overlay, Branding, EmptyTechnologies , JavaScriptTerminal}
