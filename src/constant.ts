@@ -57,8 +57,23 @@ export const CODE_SNIPPETS = {
       <h1>Hello World</h1>
 
     </body>
-</html>`,
+</html>`
 };
+
+export const CSP = `
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'none';
+  script-src * 'unsafe-inline' 'unsafe-eval';
+  style-src * 'unsafe-inline';
+  img-src * data: blob:;
+  connect-src *;
+  font-src *;
+  media-src *;
+  frame-src *;
+  base-uri 'none';
+  form-action *;
+  ">
+`
 
 
 export const Themes = {
