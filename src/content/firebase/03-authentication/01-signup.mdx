@@ -1,0 +1,77 @@
+---
+title: Sign Up in Firebase
+published: true
+---
+
+### 1) In Your Firebase configuration
+
+```js
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyD-1-2-3",
+  .
+  .
+  .
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+// Initialize Auth (optional)
+const firebaseAuth = getAuth(app);
+
+export { app, firebaseAuth };
+```
+
+### 2) In Your React Component
+
+Now, you can use the `firebaseAuth` instance in your React component:
+
+```jsx
+// Signup.jsx/tsx
+import React from "react";
+import {firebaseAuth} from "../firebase.js"; 
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
+export default function Register() {
+
+  const register = async (e) => {
+    e.preventDefault(); 
+
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        firebaseAuth,
+        email,
+        password
+      );
+
+      const user = userCredential.user;
+      console.log("User registered:", user);
+
+    } catch (error) {
+      console.error("Error registering:", error.message);
+      alert(error.message);
+    }
+  };
+
+  return (
+    <div>
+      <h3>Register</h3>
+      <hr />
+      <form onSubmit={register}>
+        <input type="text" name="email" placeholder="Email"/>
+        <br />
+        <input type="password" name="password" placeholder="Password"/>
+        <br />
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  );
+}
+
+```
