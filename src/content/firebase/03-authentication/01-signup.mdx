@@ -3,7 +3,7 @@ title: Sign Up in Firebase
 published: true
 ---
 
-### 1) In Your Firebase configuration
+**In Your Firebase configuration**
 
 ```js
 import { initializeApp } from "firebase/app";
@@ -25,9 +25,10 @@ const firebaseAuth = getAuth(app);
 export { app, firebaseAuth };
 ```
 
-### 2) In Your React Component
 
-Now, you can use the `firebaseAuth` instance in your React component:
+### 1) Signup with Email and Password
+
+
 
 ```jsx
 // Signup.jsx/tsx
@@ -73,5 +74,37 @@ export default function Register() {
     </div>
   );
 }
-
 ```
+
+
+**Add a displayName to the user:**
+
+You can add a displayName after the user is created:
+
+```js
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+
+const userCredential = await createUserWithEmailAndPassword(
+  firebaseAuth,
+  email,
+  password
+);
+
+const user = userCredential.user;
+await updateProfile(user,{
+  displayName: "mohd_hamza",
+});
+```
+
+
+<Callout>
+For more information about Signup , visit <a href="https://firebase.google.com/docs/auth/web/start#sign_up_new_users" target="_blank">Firebase Signup</a> 
+</Callout>
+
+
+**Important Points**
+
+* Don't forgot to enable authentication in your firebase project before signup. Else signup won't work.
+
+
+---
