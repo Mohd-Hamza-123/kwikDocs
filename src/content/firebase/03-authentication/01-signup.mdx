@@ -25,10 +25,7 @@ const firebaseAuth = getAuth(app);
 export { app, firebaseAuth };
 ```
 
-
 ### 1) Signup with Email and Password
-
-
 
 ```jsx
 // Signup.jsx/tsx
@@ -41,8 +38,9 @@ export default function Register() {
   const register = async (e) => {
     e.preventDefault(); 
 
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
 
     try {
       const userCredential = await createUserWithEmailAndPassword(

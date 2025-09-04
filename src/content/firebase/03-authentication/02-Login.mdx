@@ -1,0 +1,50 @@
+---
+title: Login in Firebase
+published: true
+---
+
+### 1) Login with Email and Password
+
+```jsx
+// Login.jsx/tsx
+import React from "react";
+import {firebaseAuth} from "../firebase.js";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
+export default function Login() {
+
+  const login = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        firebaseAuth,
+        email,
+        password
+      );
+
+      const user = userCredential.user;
+      console.log("User logged in:", user);
+
+    } catch (error) {
+      console.error("Error logging in:", error.message);
+      alert(error.message);
+    }
+  }
+
+  return (
+    <div>
+      <h3>Login</h3>
+      <hr />
+      <form onSubmit={login}>
+        <input type="text" name="email" placeholder="Email"/>
+        <input type="password" name="password" placeholder="Password"/>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
+}
+```
