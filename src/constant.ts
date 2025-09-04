@@ -24,6 +24,7 @@ export const technologyEnums = [
   'World Wide Web',
   'coding language',
   'Runtime Environment',
+  'Backend As a Service',
   'Version Control System',
   "Containerization Platform",
 ]
