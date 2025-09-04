@@ -4,12 +4,14 @@ Welcome to the Documentation Website project! This repository contains all the n
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- [Documentation Website](#documentation-website)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Introduction
 
@@ -26,7 +28,7 @@ This project aims to provide a simple and efficient way to create and maintain d
 To get started, clone the repository and install the necessary dependencies:
 
 ```bash
-git clone https://github.com/yourusername/documentation-website.git
+git clone https://github.com/kashan16/kwikDocs.git
 cd documentation-website
 npm install
 ```
