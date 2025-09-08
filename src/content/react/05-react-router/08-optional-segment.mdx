@@ -1,0 +1,53 @@
+---
+title : Optional Segment in react-router-dom
+published : true
+---
+
+In **React Router DOM** (v6 and v7), an **optional segment** is a part of the route path that may or may not be present in the URL.
+
+For example, suppose you have a route like:
+
+```jsx
+<Route path="/users/:id?" element={<User />} />
+```
+
+Here:
+
+* `:id` is a **URL parameter**.
+* The `?` makes it **optional**.
+
+  * `/users` ✅ will match.
+  * `/users/123` ✅ will also match.
+
+**How it works**
+
+* Without `?`, `/users` would not match `/users/:id`.
+* With `?`, React Router accepts both cases.
+
+**Example**
+
+```jsx
+import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
+
+function User() {
+  const { id } = useParams();
+  return <h1>{id ? `User ID: ${id}` : "No user selected"}</h1>;
+}
+
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/users/:id?" element={<User />} />
+      </Routes>
+    </Router>
+  );
+}
+```
+
+**Usage**
+
+* `/users` → Renders: **"No user selected"**
+* `/users/42` → Renders: **"User ID: 42"**
+
+

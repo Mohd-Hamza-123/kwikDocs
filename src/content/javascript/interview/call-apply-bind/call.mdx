@@ -1,0 +1,68 @@
+---
+title : call Function
+published : true
+---
+
+The call method lets you invoke a function immediately, while setting:
+
+- A custom this value (context).
+- Arguments passed individually (not in an array like apply).
+
+### Syntax of Call 
+
+```js
+func.call(thisArg, arg1, arg2, ...);
+```
+
+* func → function you want to call.
+* thisArg → the value you want to use as this.
+* arg1, arg2, ... → arguments passed separately.
+
+
+**Example 1:**
+```js
+const person1 = {
+    name : 'Mohammad hamza',
+    age : 32,
+    pinCode : 211016,
+    getDetails : function(){
+        console.log(this)
+    }
+}
+
+const person2 = {
+    name : "Shakib",
+    age : 44,
+    pinCode : 20022
+}
+
+person1.getDetails()
+person1.getDetails.call(person2)
+```
+
+**Example 2:**
+
+```js
+function greet(greeting, punctuation) {
+  console.log(greeting + ", " + this.name + punctuation);
+}
+
+const person = { name: "Hamza" };
+
+greet.call(person, "Hello", "!"); 
+// Output: "Hello, Hamza!"
+```
+
+**Example 3:**
+
+```js
+const person1 = { name: "Hamza" };
+const person2 = { name: "Ali" };
+
+function sayHello() {
+  console.log("Hello " + this.name);
+}
+
+sayHello.call(person1); // "Hello Hamza"
+sayHello.call(person2); // "Hello Ali"
+```
