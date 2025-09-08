@@ -3,9 +3,9 @@ title: Setup React Router
 published: true
 ---
 
-
 ### 1) Import `BrowserRouter` in you `main.jsx/tsx` file
 
+> BrowserRouter is a wrapper component that enables `client side routing` in your application. It use browser history API to keep track of the URL.
 
 ```jsx
 // main.jsx
@@ -23,24 +23,25 @@ createRoot(document.getElementById('root')).render(
 )
 ```
 
-
 ### 2) Import `Routes` and `Route` in you `App.jsx/tsx` file
 
 ```jsx
 // App.jsx
-import { useState } from "react";
-import { Route, Routes } from "react-router";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
 import Home from "./pages/Home";
+import { useState } from "react";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import { Route, Routes } from "react-router";
 
 const App = () => {
 
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" Component={Login} />
+      {/* use Component when you don't want to pass props */} 
       <Route path="/signup" element={<Signup />} />
+      {/* use element when you want to pass props */}
     </Routes>
   )
 }
