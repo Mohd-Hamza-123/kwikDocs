@@ -1,0 +1,44 @@
+---
+title: Logout in Firebase
+published: true
+---
+
+Logging out from Firebase Auth is very straightforward. You just call the `signOut` function from `firebase/auth`.
+
+
+### 🔹 Step 1: Import `signOut`
+
+```js
+import { signOut } from "firebase/auth";
+import { firebaseAuth } from "../firebase/firebase"; 
+// make sure this is your initialized getAuth(app)
+```
+
+
+### 🔹 Step 2: Call it when user clicks logout
+
+```js
+const handleLogout = async () => {
+  try {
+    await signOut(firebaseAuth);
+    console.log("User logged out");
+
+    // redirect user
+    navigate("/login");
+  } catch (error) {
+    console.error("Error logging out:", error.message);
+  }
+};
+```
+
+### 🔹 Step 3: Add it to a button
+
+```jsx
+<button onClick={handleLogout}>Logout</button>
+```
+
+<Callout>
+For more information : <a href="https://firebase.google.com/docs/auth/web/password-auth#next_steps" target="_blank">Sign out users</a>
+</Callout>
+
+---
