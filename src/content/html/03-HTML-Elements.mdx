@@ -5,38 +5,72 @@ published: true
 
 HTML elements are the building blocks of an HTML document. They define the structure and content of a web page.
 
-#### **Syntax of HTML Elements:**
-
-```html
-<tagname attribute="value">Content</tagname>
-```
-
-```html
-<tagname attribute1="value1" attribute2="value2">Content</tagname>
-```
-
-```html
-<tagname attribute="value"/>
-```
-
-Example : 
-
-```html
-<p>This is a paragraph.</p>
-<h1>This is a heading.</h1>
-```
-
 An element typically consists of:
 
 * **Start tag**: Indicates the beginning of the element.
 * **Content**: The content to be displayed or processed.
 * **End tag**: Closes the element (not required for self-closing elements).
 
+
+#### **Syntax of HTML Elements:**
+
+```html
+<tagname>Content</tagname>
+```
+
+**Example :**
+
+```html
+<p>This is a paragraph.</p>
+<h1>This is a heading.</h1>
+```
+
+---
+
+```html
+<tagname attribute="value">Content</tagname>
+```
+
+**Example :**
+
+```html
+<p class="top">This is a paragraph with a class attribute.</p>
+<h3 id="some-id">This is a heading with an id attribute.</h3>
+```
+
+---
+
+```html
+<tagname attribute1="value1" attribute2="value2">Content</tagname>
+```
+
+**Example :**
+
+```html
+<p style="color: red;" class="center">This is a paragraph with a style attribute.</p>
+<h1 id="primary" class="box">This is a heading with a data attribute.</h1>
+```
+
+---
+
+```html
+<tagname attribute="value">
+```
+
+**Example :**
+
+```html
+<input type="text">
+<input type="email" placeholder="Enter your email">
+```
+
 ---
 
 ### **Types of HTML Elements**
 
 ### **1. Non-Self-Closing (Container) Tags**
+
+These elements must have an opening and a closing tag.
 
 * **Paragraph (`<p>`)**: Defines a paragraph.
 
@@ -57,7 +91,7 @@ An element typically consists of:
 
 ### **2. Self-Closing (Void) Tags**
 
-Some elements do not have content and close themselves.
+Elements that do not require a closing tag.
 
 * **Image (`<img>`)**:
 
