@@ -1,0 +1,80 @@
+---
+title: Email Verification
+published: true
+---
+
+
+```jsx
+
+import React, { useState } from "react";
+import { sendEmailVerification } from "firebase/auth";
+import { auth } from "../firebase/firebase"; // your firebase config
+
+export default function VerifyEmail() {
+  const [message, setMessage] = useState("");
+
+  const handleVerify = async () => {
+    try {
+      if (auth.currentUser) {
+        await sendEmailVerification(auth.currentUser);
+        setMessage("✅ Verification email sent! Check your inbox.");
+      } else {
+        setMessage("❌ No user is logged in.");
+      }
+    } catch (error) {
+      console.error(error.message);
+      setMessage("⚠️ " + error.message);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Email Verification</h2>
+      <button onClick={handleVerify}>Send Verification Email</button>
+      {message && <p>{message}</p>}
+    </div>
+  );
+}
+```
+
+
+### 🔹 Checking if the Email is Verified
+
+You can also add a button to refresh and check:
+
+```jsx
+import React, { useState } from "react";
+import { auth } from "../firebase/firebase";
+
+export default function CheckVerification() {
+  const [verified, setVerified] = useState(null);
+
+  const checkStatus = async () => {
+    if (auth.currentUser) {
+      await auth.currentUser.reload(); // refresh user data
+      setVerified(auth.currentUser.emailVerified);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Check Email Verification</h2>
+      <button onClick={checkStatus}>Check Status</button>
+      {verified !== null && (
+        <p>{verified ? "✅ Email is verified" : "❌ Email not verified yet"}</p>
+      )}
+    </div>
+  );
+}
+```
+
+---
+
+👉 You can now use both components:
+
+* `<VerifyEmail />` → lets user request a new verification email anytime.
+* `<CheckVerification />` → lets user check if their email is verified.
+
+---
+
+Do you want me to **combine both in one page** (so user can send + check verification in one place)?
