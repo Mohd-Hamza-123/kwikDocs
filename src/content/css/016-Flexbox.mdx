@@ -4,7 +4,7 @@ published: true
 ---
 
 Flexbox is short for the Flexible Box Layout module. It is a layout method for arranging items in rows or columns.
-
+An Element become flexbox by setting the `display` property to `flex`.
 
 ### 🌟 CSS Flexbox Components
 
@@ -13,25 +13,38 @@ A flexbox always consists of:
 - **Flex Container**: The parent (container).
 - **Flex Items**: The items inside the container.
 
-```html
-<div class="flex-container">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-</div>
-```
 
-The flex container becomes flexible by setting the `display` property to `flex`:
+In below example , the div with class `flex-container` is the flex container(parent) and the div with class `flex-items` are the flex items(child).
 
-```css
-.flex-container {
-  display: flex;
-}
-```
+<HtmlEditor id={0} defaultCode={`<html>
+<head>
+  <style>
+    .flex-container {
+      display: flex;
+    }
+    .flex-items {
+    height: 50px;
+    width: 50px;
+    background-color: lightblue;
+    border: 2px solid black;
+    }
+  </style>
+</head>
+<body>
+  <div class="flex-container">
+    <div class="flex-items">1</div>
+    <div class="flex-items">2</div>
+    <div class="flex-items">3</div>
+  </div>
+</body>
+</html>
+`}/>
 
----
 
-### 🚀 CSS Properties for Flex Containers
+When the Element become flexbox, all its children directions are set to `row` by default.
+
+
+### 🚀 CSS Properties for Flex Container
 
 - **`flex-direction`**
 - **`flex-wrap`**
@@ -39,7 +52,6 @@ The flex container becomes flexible by setting the `display` property to `flex`:
 - **`align-items`**
 - **`align-content`**
 
----
 
 #### **1. Flex Direction**
 
@@ -53,6 +65,96 @@ This property specifies the display direction of flex items in the flex containe
 ```
 
 <ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1737019819/Documentarium/JavaScript/k3hdyxnkz1klfkso6idy.jpg" alt="Flex Direction" />
+
+**Example:** 
+
+<HtmlEditor id={1} defaultCode={`<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flex Direction Example</title>
+<style>
+  body {
+    padding: 5px;
+  }
+
+  section {
+    border: 2px solid red;
+    display: flex;
+    height: 200px;
+    width: 250px;
+  }
+
+  section div {
+  
+    border: 2px solid black;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+  }
+
+  /* Flex direction variations */
+  .row {
+    flex-direction: row;
+  }
+
+  .row-reverse {
+    flex-direction: row-reverse;
+  }
+
+  .column {
+    flex-direction: column;
+  }
+
+  .column-reverse {
+    flex-direction: column-reverse;
+  }
+</style>
+</head>
+<body>
+
+<div>
+  <h2>Row (default)</h2>
+  <section class="row">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+  </section>
+</div>
+
+<div>
+  <h2>Row Reverse</h2>
+  <section class="row-reverse">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+  </section>
+</div>
+
+<div>
+  <h2>Column</h2>
+  <section class="column">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+  </section>
+</div>
+
+<div>
+  <h2>Column Reverse</h2>
+  <section class="column-reverse">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+  </section>
+</div>
+
+</body>
+</html>
+`}/>
 
 ---
 
@@ -69,6 +171,77 @@ The `flex-wrap` property specifies whether the flex items should wrap or not.
 
 <ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1737019967/Documentarium/JavaScript/gsbcxnfqnx4uweepmlqs.png" alt="Flex Wrap" />
 
+
+<HtmlEditor id={2} defaultCode={`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flex Wrap Example</title>
+  <style>
+    body {
+     padding:5px;
+    }
+
+    section {
+      border: 2px solid red;
+      display: flex;
+      flex-direction: row; /* default is row */
+      /* height: 200px; */
+      width: 350px;
+    }
+
+    section div {
+      border: 2px solid black;
+      padding: 5px;
+      width: 100px; /* fixed width so wrapping is visible */
+      text-align: center;
+    }
+
+    /* Flex-wrap variations */
+    .nowrap {
+      flex-wrap: nowrap;
+    }
+
+    .wrap {
+      flex-wrap: wrap;
+    }
+
+    .wrap-reverse {
+      flex-wrap: wrap-reverse;
+    }
+  </style>
+</head>
+<body>
+
+  <div>
+    <h2>No Wrap (default)</h2>
+    <section class="nowrap">
+      <div>1</div><div>2</div><div>3</div><div>4</div>
+      <div>5</div><div>6</div><div>7</div><div>8</div>
+    </section>
+  </div>
+
+  <div>
+    <h2>Wrap</h2>
+    <section class="wrap">
+      <div>1</div><div>2</div><div>3</div><div>4</div>
+      <div>5</div><div>6</div><div>7</div><div>8</div>
+    </section>
+  </div>
+
+  <div>
+    <h2>Wrap Reverse</h2>
+    <section class="wrap-reverse">
+      <div>1</div><div>2</div><div>3</div><div>4</div>
+      <div>5</div><div>6</div><div>7</div><div>8</div>
+    </section>
+  </div>
+
+</body>
+</html>
+`}/>
+
 ---
 
 #### **3. Justify Content**
@@ -84,6 +257,74 @@ The `justify-content` property is used to align the flex items when they do not 
 
 <ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1737020026/Documentarium/JavaScript/ggw40hzsm9j7s96ctabj.png" alt="Justify Content" />
 
+<HtmlEditor id={4} defaultCode={`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Justify Content Example</title>
+  <style>
+
+
+    section {
+      border: 2px solid red;
+      display: flex;
+      flex-direction: row;
+      height: 100px;
+      width: 300px;
+    }
+
+    section div {
+      border: 2px solid black;
+      padding: 10px;
+      text-align: center;
+      width: 40px;
+    }
+
+    .start { justify-content: flex-start; }
+    .end { justify-content: flex-end; }
+    .center { justify-content: center; }
+    .between { justify-content: space-between; }
+    .around { justify-content: space-around; }
+    .evenly { justify-content: space-evenly; }
+  </style>
+</head>
+<body>
+
+  <div>
+    <h2>justify-content : flex-start</h2>
+    <section class="start"><div>1</div><div>2</div><div>3</div></section>
+  </div>
+
+  <div>
+    <h2>justify-content : flex-end</h2>
+    <section class="end"><div>1</div><div>2</div><div>3</div></section>
+  </div>
+
+  <div>
+    <h2>justify-content : center</h2>
+    <section class="center"><div>1</div><div>2</div><div>3</div></section>
+  </div>
+
+  <div>
+    <h2>justify-content : space-between</h2>
+    <section class="between"><div>1</div><div>2</div><div>3</div></section>
+  </div>
+
+  <div>
+    <h2>justify-content : space-around</h2>
+    <section class="around"><div>1</div><div>2</div><div>3</div></section>
+  </div>
+
+  <div>
+    <h2>justify-content : space-evenly</h2>
+    <section class="evenly"><div>1</div><div>2</div><div>3</div></section>
+  </div>
+
+</body>
+</html>
+`}/>
+
 ---
 
 #### **4. Align Items**
@@ -97,6 +338,67 @@ The `align-items` property is used to align the flex items when they do not use 
   align-items: center;
 }
 ```
+
+<HtmlEditor id={5} defaultCode={`<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+
+    section {
+      border: 2px solid red;
+      display: flex;
+      flex-direction: row;
+      height: 150px;
+      width: 300px;
+    }
+
+    section div {
+      border: 2px solid black;
+      padding: 10px;
+      text-align: center;
+      width: 50px;
+    }
+
+    /* Align-items variations */
+    .stretch { align-items: stretch; }
+    .start   { align-items: flex-start; }
+    .end     { align-items: flex-end; }
+    .center  { align-items: center; }
+  </style>
+</head>
+<body>
+
+  <div>
+    <h2>align-items: stretch; (default)</h2>
+    <section class="stretch">
+      <div>1</div><div>2</div><div>3</div>
+    </section>
+  </div>
+
+  <div>
+    <h2>align-items: flex-start;</h2>
+    <section class="start">
+      <div>1</div><div>2</div><div>3</div>
+    </section>
+  </div>
+
+  <div>
+    <h2>align-items: flex-end;</h2>
+    <section class="end">
+      <div>1</div><div>2</div><div>3</div>
+    </section>
+  </div>
+
+  <div>
+    <h2>align-items: center;</h2>
+    <section class="center">
+      <div>1</div><div>2</div><div>3</div>
+    </section>
+  </div>
+
+</body>
+</html>
+`}/>
 
 #### **5. Align Content**
 
@@ -115,12 +417,174 @@ The `align-content` property is used to align the flex items when they do not us
 
 <ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1752487098/Screenshot_2025-07-14_152552_so86nu.png" alt="Align Content" />
 
-You can use different values for `align-content` property:
+<HtmlEditor id={6} defaultCode={`<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Align Content Example</title>
+  <style>
 
-- `flex-start`
-- `flex-end`
-- `space-between`
-- `space-around`
+    section {
+      border: 2px solid red;
+      display: flex;
+      flex-wrap: wrap; /* needed for align-content */
+      flex-direction: row;
+      height: 250px; /* taller so we see cross-axis spacing */
+      width: 250px;
+    }
+
+    section div {
+      border: 2px solid black;
+      padding: 10px;
+      text-align: center;
+      width: 60px; /* forces wrapping */
+    }
+
+    /* Align-content variations */
+    .stretch      { align-content: stretch; }
+    .start        { align-content: flex-start; }
+    .end          { align-content: flex-end; }
+    .center       { align-content: center; }
+    .between      { align-content: space-between; }
+    .around       { align-content: space-around; }
+    .evenly       { align-content: space-evenly; }
+  </style>
+</head>
+<body>
+
+  <div>
+    <h2>align-content: stretch; (default)</h2>
+    <section class="stretch">
+      <div>1</div><div>2</div><div>3</div><div>4</div>
+      <div>5</div><div>6</div><div>7</div><div>8</div>
+    </section>
+  </div>
+
+  <div>
+    <h2>align-content: flex-start;</h2>
+    <section class="start">
+      <div>1</div><div>2</div><div>3</div><div>4</div>
+      <div>5</div><div>6</div><div>7</div><div>8</div>
+    </section>
+  </div>
+
+  <div>
+    <h2>align-content: flex-end;</h2>
+    <section class="end">
+      <div>1</div><div>2</div><div>3</div><div>4</div>
+      <div>5</div><div>6</div><div>7</div><div>8</div>
+    </section>
+  </div>
+
+  <div>
+    <h2>align-content: center;</h2>
+    <section class="center">
+      <div>1</div><div>2</div><div>3</div><div>4</div>
+      <div>5</div><div>6</div><div>7</div><div>8</div>
+    </section>
+  </div>
+
+  <div>
+    <h2>align-content: space-between;</h2>
+    <section class="between">
+      <div>1</div><div>2</div><div>3</div><div>4</div>
+      <div>5</div><div>6</div><div>7</div><div>8</div>
+    </section>
+  </div>
+
+  <div>
+    <h2>align-content: space-around;</h2>
+    <section class="around">
+      <div>1</div><div>2</div><div>3</div><div>4</div>
+      <div>5</div><div>6</div><div>7</div><div>8</div>
+    </section>
+  </div>
+
+  <div>
+    <h2>align-content: space-evenly;</h2>
+    <section class="evenly">
+      <div>1</div><div>2</div><div>3</div><div>4</div>
+      <div>5</div><div>6</div><div>7</div><div>8</div>
+    </section>
+  </div>
+
+</body>
+</html>
+`}/>
+
+
+### **6. Gap**
+
+The `gap` property in flexbox is used to set the gaps between the flex items, which is the space between the rows or columns.
+
+```css
+.flex-container {
+  display: flex;
+  gap: 10px;
+}
+```
+
+<HtmlEditor id={7} defaultCode={`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexbox Gap Example</title>
+  <style>
+
+
+    section {
+      border: 2px solid red;
+      display: flex;
+      flex-wrap: wrap;
+      width: 300px;
+      height: 300px;
+    }
+
+    section div {
+      border: 2px solid black;
+      width: 70px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Different gap setups */
+    .no-gap { gap: 0; }
+    .gap10 { gap: 10px; }
+    .gap-rowcol { gap: 20px 40px; } /* row-gap: 20px, column-gap: 40px */
+  </style>
+</head>
+<body>
+
+  <div>
+    <h2>gap: 0; (default)</h2>
+    <section class="no-gap">
+      <div>1</div><div>2</div><div>3</div><div>4</div>
+      <div>5</div><div>6</div><div>7</div><div>8</div>
+    </section>
+  </div>
+
+  <div>
+    <h2>gap: 10px;</h2>
+    <section class="gap10">
+      <div>1</div><div>2</div><div>3</div><div>4</div>
+      <div>5</div><div>6</div><div>7</div><div>8</div>
+    </section>
+  </div>
+
+  <div>
+    <h2>gap: 20px 40px;</h2>
+    <section class="gap-rowcol">
+      <div>1</div><div>2</div><div>3</div><div>4</div>
+      <div>5</div><div>6</div><div>7</div><div>8</div>
+    </section>
+  </div>
+
+</body>
+</html>
+`}/>
 
 
 ---
