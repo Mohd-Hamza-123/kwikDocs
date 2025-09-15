@@ -1,0 +1,79 @@
+---
+title: Creating a Document
+published: true
+---
+
+### Configure Firestore Database
+
+```js
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
+const firebaseConfig = {
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  .
+  .
+  .
+  .
+};
+
+const app = initializeApp(firebaseConfig);
+
+export const firestoreDb = getFirestore(app,"database name");
+```
+
+### Create a document
+
+```jsx
+import { fireStoreDb } from '@/firebase/firebase.js';
+import { collection, addDoc, serverTimestamp, getDoc } from "firebase/firestore";
+
+const CreatePost = () => {
+
+    const handleSubmit = async (e) => {
+        try {
+            e.preventDefault()
+            const formData = new FormData(e.target)
+            const title = formData.get('title')
+            const content = formData.get('content')
+         
+            const document = await addDoc(collection(fireStoreDb, "posts"), {
+                title,
+                content,
+                createdAt: serverTimestamp(),
+                like: 0,
+                image: {
+                    secure_url: "",
+                    public_id: ""
+                },
+                isPublished: true,
+            })
+
+            const docSnap = await getDoc(document)
+            if (docSnap.exists()) {
+                console.log(docSnap.data())
+            } else {
+                alert("Post not Created")
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
+    return (
+        <div>
+            <h1>Create Post</h1>
+            <form onSubmit={handleSubmit}>
+                <input type="text" placeholder="Title" name='title' />
+                <textarea placeholder="Content" name='content' />
+                <button type='submit' className='block bg-green-500 text-white'>Submit</button>
+            </form>
+        </div>
+    )
+}
+
+export default CreatePost
+```
