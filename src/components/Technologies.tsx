@@ -29,7 +29,6 @@ const Technologies = async ({ technology }: Props) => {
   flex flex-col md:flex-row ${index % 2 == 0 ? 'md:flex-row-reverse' : ''} 
   items-center border border-gray-200 dark:border-gray-800`}
             >
-
               {/* Image Section */}
               <div className="lg:w-[40%] w-full h-full flex items-center justify-center  p-6">
                 <Image

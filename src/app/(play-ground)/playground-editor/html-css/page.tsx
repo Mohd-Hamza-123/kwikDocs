@@ -92,8 +92,10 @@ const Page = () => {
                 />
                 <div
                     ref={outputRef}
+                    id='playground-editor-html-css-output'
                     className={`${outputToggle ? "block" : "hidden"} w-full border rounded-md h-full overflow-auto bg-white ${visible === 'output' ? 'block' : 'hidden'}`}>
                 </div>
+              
             </section>
         </div>
     )

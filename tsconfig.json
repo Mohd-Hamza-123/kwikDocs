@@ -24,6 +24,6 @@
       "#site/content": ["./.velite"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts","src/**/*", "importantFiles/z-Else.mdx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts","src/**/*"],
   "exclude": ["node_modules","dist"]
 }

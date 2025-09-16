@@ -4,6 +4,7 @@ import {
     SheetContent,
     SheetHeader,
     SheetTrigger,
+    SheetTitle,
 } from "@/components/ui/sheet"
 import React from 'react'
 import { Button } from '../ui/button';
@@ -58,6 +59,7 @@ const Sidebar = () => {
             <SheetTrigger asChild>Open</SheetTrigger>
             <SheetContent side={"right"}>
                 <SheetHeader>
+                    <SheetTitle></SheetTitle>
                     <div className="flex flex-col justify-around flex-1 mt-6">
                         <nav className="flex-1 -mx-3 space-y-3 ">
                             <div className="relative mx-3">

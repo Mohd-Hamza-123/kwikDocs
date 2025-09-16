@@ -10,10 +10,9 @@ const Branding = () => {
                 <Image
                     height={200}
                     width={200}
-                    className="mx-auto lg:h-10 w-auto dark:invert h-8 "
+                    className="mx-auto lg:h-16 w-auto h-8"
                     src="/logo.png"
-                    alt='logo'
-                />
+                    alt='logo'/>
                 <figcaption className="font-semibold text-lg lg:text-xl">
                     <h1 className='text-base lg:text-xl'>{siteConfig.name}</h1>
                 </figcaption>

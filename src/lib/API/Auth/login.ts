@@ -1,13 +1,20 @@
-import conf from "@/conf/conf";
-import axios from "axios";
 
 const LoginUser = async (userData: any) => {
-
-    const res = await axios.post(`${conf.api_end_point}api/auth/login`, userData);
-    if (res.data?.success) {
-        return res.data
+    console.log(userData)
+    const response = await fetch(`/api/auth/login`, {
+        method: 'POST',
+        headers: {
+            contentType: 'application/json',
+        },
+        body: JSON.stringify(userData)
+    });
+    const data = await response.json()
+    console.log(data)
+    if (data?.success) {
+        return data
     }
     return null
 };
 
 export default LoginUser
+

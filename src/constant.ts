@@ -32,9 +32,12 @@ export const technologyEnums = [
 
 export const CODE_SNIPPETS = {
   css: `*{
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
   box-sizing: border-box;
+  }
+  li{
+  list-style-position: inside;
   }
 
   html,body{
@@ -43,10 +46,12 @@ export const CODE_SNIPPETS = {
   overflow-x:hidden;
   }
   `,
-  javascript: `\nfunction greet(name) {\n\tconsole.log("Hello, " + name + "!");\n}\n\ngreet("Alex");\n`,
-  typescript: `\ntype Params = {\n\tname: string;\n}\n\nfunction greet(data: Params) {\n\tconsole.log("Hello, " + data.name + "!");\n}\n\ngreet({ name: "Alex" });\n`,
-  python: `\ndef greet(name):\n\tprint("Hello, " + name + "!")\n\ngreet("Alex")\n`,
-  java: `\npublic class HelloWorld {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println("Hello World");\n\t}\n}\n`,
+  javascript: `console.log("Hello Hamza")`,
+  typescript: `console.log("Hello Hamza")`,
+  python: `print("Hello Hamza")`,
+  java: `public static void main(string[] args){
+    System.out.println("Hello World");
+  }`,
   html: `<html>
     <head>
         <meta charset="UTF-8">
@@ -89,3 +94,5 @@ export const Themes = {
   espresso: espresso,
   birdsOfParadise: birdsOfParadise
 }
+
+

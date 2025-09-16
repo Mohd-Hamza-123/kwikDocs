@@ -15,6 +15,7 @@ const Home = async () => {
     </> : <EmptyTechnologies />
 
   } catch (error) {
+    console.log(error)
     return <EmptyTechnologies />
   }
 };

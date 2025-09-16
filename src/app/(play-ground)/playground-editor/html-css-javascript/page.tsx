@@ -1,48 +1,50 @@
 'use client'
 import { toast } from '@/hooks/use-toast';
+import { JavaScriptTerminal } from '@/index';
 import { svgIcons } from '@/components/icons';
 import sanitizeHtml from '@/utils/Sanitize-html';
-import React, { useState, useRef } from 'react'
-import HtmlMonacoEditor from '@/components/Code-Editor/Monaco/HtmlMonacoEditor';
-import CssMonacoEditor from '@/components/Code-Editor/Monaco/CssMonacoEditor';
-import JavascriptMonacoEditor from '@/components/Code-Editor/Monaco/JavascriptMonacoEditor';
+import { useAppDispatch } from '@/lib/hooks/hooks';
+import React, { useState, useRef, useEffect } from 'react';
 import injectCssAndJavascriptIntoHtml from '@/utils/InjectCssIntoHtml';
-import { JavaScriptTerminal } from '@/index'
+import CssMonacoEditor from '@/components/Code-Editor/Monaco/CssMonacoEditor';
+import HtmlMonacoEditor from '@/components/Code-Editor/Monaco/HtmlMonacoEditor';
+import { addJavaScriptLogs, clearJavaScriptLogs } from '@/lib/store/features/logsSlice';
+import JavascriptMonacoEditor from '@/components/Code-Editor/Monaco/JavascriptMonacoEditor';
 
 const Page = () => {
 
-    const htmlRef = useRef<any>(null)
+    const dispatch = useAppDispatch()
+
     const cssRef = useRef<any>(null)
+    const htmlRef = useRef<any>(null)
     const javascriptRef = useRef<any>(null)
     const outputRef = useRef<HTMLDivElement>(null)
     const [outputToggle, setOutputToggle] = useState(false)
     const [visible, setVisible] = useState<'html' | 'css' | 'javascript' | 'output' | 'terminal'>('html')
 
-
     const executeCode = () => {
         try {
-
+            dispatch(clearJavaScriptLogs())
             const htmlCode = htmlRef.current?.getValue?.() ?? ''
             const cssCode = cssRef.current?.getValue?.() ?? ''
             const javascriptCode = javascriptRef.current?.getValue() ?? ''
 
-            // console.log(javascriptCode)
             setVisible('output')
             const sanitizedHtml = sanitizeHtml(htmlCode)
 
-
             const iframe = document.createElement('iframe')
-            iframe.sandbox = "allow-scripts allow-forms allow-modals allow-same-origin"
-            iframe.referrerPolicy = 'no-referrer'
-            //  sandbox="allow-scripts allow-forms" → iframe can run JS + submit forms, but can’t access your parent page or escape the sandbox.
-            // referrerPolicy="no-referrer" → prevents the iframe from leaking your site’s URL when making requests.
-
+            iframe.sandbox = "allow-scripts allow-forms"
+            // iframe.referrerPolicy = 'no-referrer'
 
             iframe.style.width = "100%"
             iframe.style.height = "100%"
             const finalHtmlCode = injectCssAndJavascriptIntoHtml(sanitizedHtml, cssCode, javascriptCode)
-            iframe.srcdoc = finalHtmlCode
-            // console.log(finalHtmlCode)
+            // iframe.srcdoc = finalHtmlCode
+            const encodeFinalHtml = encodeURIComponent(finalHtmlCode)
+            iframe.src = `https://kwikdocs-preview.vercel.app/render?finalHtml=${encodeFinalHtml}`
+            // iframe.src = `http://localhost:3001/render?finalHtml=${encodeFinalHtml}`
+            // iframe.srcdoc = finalHtmlCode
+
             if (outputRef.current) {
                 outputRef.current.innerHTML = ''
                 outputRef.current.appendChild(iframe)
@@ -62,10 +64,26 @@ const Page = () => {
         }
     }
 
+    const handler = (event: MessageEvent) => {
+        if (event.data.type === 'iframe-console') {
+            const log = {
+                type: event.data.logType,
+                value: event.data.value
+            }
+            console.log(log)
+            dispatch(addJavaScriptLogs({ javaScriptLogs: log }))
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener("message", handler);
+        return () => window.removeEventListener("message", handler);
+    }, []);
+
     return (
         <div className='w-full flex flex-col lg:flex-row gap-2 md:gap-4 p-2 md:p-4 poppins border h-[91dvh]'>
 
-            <div id='playground-editor-html-css-navigation' className="flex flex-row lg:flex-col justify-center items-center gap-8 p-2 rounded-md shadow-md  bg-black/40 backdrop-blur-md border border-gray-700 overflow-y-hidden overflow-x-scroll md:overflow-hidden">
+            <div id='playground-editor-html-css-navigation' className="flex flex-row lg:flex-col justify-center items-center gap-8 p-2 rounded-md shadow-md  bg-black/40 backdrop-blur-md border border-gray-700 overflow-y-hidden overflow-x-auto md:overflow-hidden">
 
                 <div
                     onClick={() => setVisible('html')}
@@ -92,9 +110,9 @@ const Page = () => {
                     <svgIcons.play className="w-4 h-4 md:w-5 md:h-5" />
                 </div>
 
-                <div 
-                onClick={()=> setVisible('terminal')}
-                className='border px-3 py-3 rounded-sm'>
+                <div
+                    onClick={() => setVisible('terminal')}
+                    className='border px-3 py-3 rounded-sm'>
                     <svgIcons.terminal className="w-4 h-4 md:w-5 md:h-5" />
                 </div>
 

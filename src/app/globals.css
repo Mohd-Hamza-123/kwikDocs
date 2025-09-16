@@ -78,7 +78,9 @@
 
 .mixed-color-text {
   background: linear-gradient(90deg, red, blue, green);
-  -webkit-background-clip: text; /* Clip background to text */
-  -webkit-text-fill-color: transparent; /* Make text fill transparent */
+  -webkit-background-clip: text;
+  /* Clip background to text */
+  -webkit-text-fill-color: transparent;
+  /* Make text fill transparent */
 }
 

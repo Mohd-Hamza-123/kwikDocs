@@ -18,14 +18,13 @@ import { useAppDispatch } from '@/lib/hooks/hooks'
 import Link from 'next/link'
 
 const Page = () => {
-    
+
     const router = useRouter();
     const dispatch = useAppDispatch();
     const { register, handleSubmit } = useForm();
 
     const getUserData = async () => {
         const user = await getProfile();
-        console.log(user);
         if (user) {
             dispatch(login({ userData: user }));
         } else {
@@ -40,16 +39,17 @@ const Page = () => {
             dispatch(overlayLoadingIsTrueReducer({ overlayLoadingMsg: "Please wait you are logging In" }));
         },
         onError: (error: any, variables, context) => {
+            console.log(error)
             toast({
                 variant: "destructive",
                 title: "Login failed. Try again",
-                description: error?.message
+                description: process.env.NODE_ENV === "development" ? error?.message : ""
             })
         },
         onSuccess: (data, variables, context) => {
             router.push('/')
             getUserData();
-            toast({title: "You are Logged In"});
+            toast({ title: "You are Logged In" });
         },
         onSettled: (data, error, variables, context) => {
             dispatch(overlayLoadingIsFalseReducer());
