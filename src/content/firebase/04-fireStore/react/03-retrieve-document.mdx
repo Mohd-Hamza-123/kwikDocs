@@ -42,9 +42,10 @@ const getAllPosts = async () => {
     // Reference to the "posts" collection
     const querySnapshot = await getDocs(collection(firestoreDb, "posts"));
 
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, "=>", doc.data());
-    });
+    const documents = querySnapshot.docs.map((doc) => {
+      return { ...doc.data(), id: doc.id }
+      })
+
   } catch (error) {
     console.error("Error fetching documents:", error);
   }
@@ -69,9 +70,9 @@ const getPublishedPosts = async () => {
 
     const querySnapshot = await getDocs(q);
 
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, "=>", doc.data());
-    });
+    const documents = querySnapshot.docs.map((doc) => {
+      return { ...doc.data(), id: doc.id }
+      })
   } catch (error) {
     console.error("Error fetching filtered documents:", error);
   }
@@ -96,10 +97,10 @@ const getFilteredPosts = async () => {
     );
 
     const querySnapshot = await getDocs(q);
-
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, "=>", doc.data());
-    });
+    const documents = querySnapshot.docs.map((doc) => {
+      return { ...doc.data(), id: doc.id }
+      })
+      
   } catch (error) {
     console.error("Error fetching filtered documents:", error);
   }
@@ -123,10 +124,9 @@ const getRecentPosts = async () => {
     );
 
     const querySnapshot = await getDocs(q);
-
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, "=>", doc.data());
-    });
+    const documents = querySnapshot.docs.map((doc) => {
+      return { ...doc.data(), id: doc.id }
+      })
   } catch (error) {
     console.error("Error fetching ordered documents:", error);
   }
