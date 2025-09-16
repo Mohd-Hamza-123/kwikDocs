@@ -24,8 +24,7 @@ const Page = () => {
 
             const htmlCode = htmlRef.current?.getValue?.() ?? ''
             const cssCode = cssRef.current?.getValue?.() ?? ''
-            console.log(htmlCode)
-            console.log(cssCode)
+        
             setVisible('output')
             const sanitizedHtml = sanitizeHtml(htmlCode)
             // setHtmlCode(sanitizedHtml)
