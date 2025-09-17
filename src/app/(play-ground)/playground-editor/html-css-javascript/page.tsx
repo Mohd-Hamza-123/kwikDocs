@@ -1,15 +1,17 @@
 'use client'
+import dynamic from 'next/dynamic'
 import { toast } from '@/hooks/use-toast';
 import { JavaScriptTerminal } from '@/index';
 import { svgIcons } from '@/components/icons';
 import sanitizeHtml from '@/utils/Sanitize-html';
 import { useAppDispatch } from '@/lib/hooks/hooks';
 import React, { useState, useRef, useEffect } from 'react';
-import injectCssAndJavascriptIntoHtml from '@/utils/InjectCssIntoHtml';
-import CssMonacoEditor from '@/components/Code-Editor/Monaco/CssMonacoEditor';
-import HtmlMonacoEditor from '@/components/Code-Editor/Monaco/HtmlMonacoEditor';
 import { addJavaScriptLogs, clearJavaScriptLogs } from '@/lib/store/features/logsSlice';
-import JavascriptMonacoEditor from '@/components/Code-Editor/Monaco/JavascriptMonacoEditor';
+import injectCssAndJavascriptIntoHtml from '@/utils/InjectCssIntoHtml';
+const HtmlMonacoEditor = dynamic(() => import('@/components/Code-Editor/Monaco/HtmlMonacoEditor'), { ssr: false })
+const CssMonacoEditor = dynamic(() => import('@/components/Code-Editor/Monaco/CssMonacoEditor'), { ssr: false })
+const JavascriptMonacoEditor = dynamic(() => import('@/components/Code-Editor/Monaco/JavascriptMonacoEditor'), { ssr: false })
+
 
 const Page = () => {
 
