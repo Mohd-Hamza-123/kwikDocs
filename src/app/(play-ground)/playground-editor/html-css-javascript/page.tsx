@@ -1,13 +1,14 @@
 'use client'
 import dynamic from 'next/dynamic'
 import { toast } from '@/hooks/use-toast';
-import { JavaScriptTerminal } from '@/index';
+// import { JavaScriptTerminal } from '@/index';
 import { svgIcons } from '@/components/icons';
 import sanitizeHtml from '@/utils/Sanitize-html';
 import { useAppDispatch } from '@/lib/hooks/hooks';
 import React, { useState, useRef, useEffect } from 'react';
 import { addJavaScriptLogs, clearJavaScriptLogs } from '@/lib/store/features/logsSlice';
 import injectCssAndJavascriptIntoHtml from '@/utils/InjectCssIntoHtml';
+const JavaScriptTerminal = dynamic(() => import('@/index').then(mod => mod.JavaScriptTerminal), { ssr: false })
 const HtmlMonacoEditor = dynamic(() => import('@/components/Code-Editor/Monaco/HtmlMonacoEditor'), { ssr: false })
 const CssMonacoEditor = dynamic(() => import('@/components/Code-Editor/Monaco/CssMonacoEditor'), { ssr: false })
 const JavascriptMonacoEditor = dynamic(() => import('@/components/Code-Editor/Monaco/JavascriptMonacoEditor'), { ssr: false })
