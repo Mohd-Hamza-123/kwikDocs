@@ -6,8 +6,11 @@ import { Button } from '@/components/ui/button';
 import sanitizeHtml from '@/utils/Sanitize-html';
 import { injectCssIntoHtml } from '@/utils/InjectCssIntoHtml';
 import React, { useState, useRef } from 'react'
-import HtmlMonacoEditor from '@/components/Code-Editor/Monaco/HtmlMonacoEditor';
-import CssMonacoEditor from '@/components/Code-Editor/Monaco/CssMonacoEditor';
+import dynamic from 'next/dynamic';
+
+const HtmlMonacoEditor = dynamic(()=> import('@/components/Code-Editor/Monaco/HtmlMonacoEditor'), {ssr : false})
+const CssMonacoEditor = dynamic(()=> import('@/components/Code-Editor/Monaco/CssMonacoEditor'), {ssr : false})
+
 
 
 const Page = () => {
