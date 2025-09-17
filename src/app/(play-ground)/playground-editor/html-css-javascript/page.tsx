@@ -42,8 +42,7 @@ const Page = () => {
             // iframe.srcdoc = finalHtmlCode
             const encodeFinalHtml = encodeURIComponent(finalHtmlCode)
             iframe.src = `https://kwikdocs-preview.vercel.app/render?finalHtml=${encodeFinalHtml}`
-            // iframe.src = `http://localhost:3001/render?finalHtml=${encodeFinalHtml}`
-            // iframe.srcdoc = finalHtmlCode
+
 
             if (outputRef.current) {
                 outputRef.current.innerHTML = ''
@@ -76,8 +75,10 @@ const Page = () => {
     }
 
     useEffect(() => {
+        if (typeof window === 'undefined') return
         window.addEventListener("message", handler);
         return () => window.removeEventListener("message", handler);
+
     }, []);
 
     return (
