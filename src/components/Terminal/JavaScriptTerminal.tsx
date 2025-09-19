@@ -20,7 +20,8 @@ export default function JavaScriptTerminal() {
   const { theme } = useTheme();
 
   return (
-    <div className="w-full h-full overflow-auto bg-black/40 p-4 rounded-md font-mono text-sm">
+    <div className="w-full h-full overflow-auto bg-black p-4 rounded-md font-mono text-md border dark:border-gray-700 border-gray-300">
+      {logs.length === 0 && <div className="text-center text-gray-500">No logs yet</div>}
       {logs.map((log, i) => {
         let color = "white";
         if (log.type === "error") color = "red";

@@ -13,7 +13,7 @@ export async function GET() {
 
         const allTech = await TechModel.find({}, { techType: 1, _id: 0 }).distinct('techType').exec();
 
-        // console.log(allTech);
+        console.log(allTech);
 
         if (!Array.isArray(allTech) || allTech?.length <= 0) {
             return NextResponse.json({
@@ -33,6 +33,7 @@ export async function GET() {
         }))
 
         const payload = data.filter(Boolean)
+        console.log(payload);
         
         if (payload.length > 0) {
             return NextResponse.json({

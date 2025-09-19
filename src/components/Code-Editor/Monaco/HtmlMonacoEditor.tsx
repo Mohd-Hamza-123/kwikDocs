@@ -17,10 +17,8 @@ const HtmlMonacoEditor = forwardRef((props: Props, ref) => {
   const { visible, className } = props
   const defaultValue = CODE_SNIPPETS.html
 
-
   const disposeRef = useRef<null | (() => void)>(null)
   const editorRef = useRef<monacoType.editor.IStandaloneCodeEditor | null>(null)
-
 
   const beforeMount: BeforeMount = (monaco) => {
     disposeRef.current = emmetHTML(monaco, ['html'])
@@ -78,6 +76,7 @@ const HtmlMonacoEditor = forwardRef((props: Props, ref) => {
         defaultLanguage="html"
         beforeMount={beforeMount}
         defaultValue={defaultValue}
+        onChange={(newHtml)=> console.log(newHtml)}
       />
     </section>
   )

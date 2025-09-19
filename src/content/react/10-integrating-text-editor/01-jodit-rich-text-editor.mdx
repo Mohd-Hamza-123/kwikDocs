@@ -1,0 +1,125 @@
+---
+title : Jodit Rich Text Editor
+published : true
+---
+
+Jodit is a free, open-source, and multi-language rich text editor for the web. It is written in JavaScript and uses Vue.js as its framework.
+
+### Install Jodit Editor 
+
+```bash
+npm install jodit-react
+```
+
+### Import Jodit Editor In Component 
+
+```jsx
+import React, { useState } from 'react'
+import JoditEditor from 'jodit-react';
+
+const CreatePost = () => {
+
+    const handleSubmit = async (e) => {
+   
+            e.preventDefault()
+            const formData = new FormData(e.target)
+            const title = formData.get('title')
+            const content = formData.get('content')
+            console.log(title, content)
+    }
+
+    return (
+            <h1>Create Post</h1>
+            <form onSubmit={handleSubmit}>
+                <input 
+                type="text" 
+                placeholder="Title" 
+                name='title' 
+                className='border' 
+                />
+                <JoditEditor name='content' />
+                <button type='submit'>Submit</button>
+            </form>
+    )
+}
+
+export default CreatePost
+```
+
+### Real Time Data 
+
+```jsx
+import React, { useState } from 'react'
+import JoditEditor from 'jodit-react';
+
+
+const CreatePost = () => {
+
+    const[content , setContent] = useState("")
+
+    const handleSubmit = async (e) => {
+     
+            e.preventDefault()
+            const formData = new FormData(e.target)
+            const title = formData.get('title')
+            console.log(title)
+            console.log(content)
+    }
+
+    return (
+        <div>
+            <h1>Create Post</h1>
+            <form onSubmit={handleSubmit}>
+                <input type="text" placeholder="Title" name='title' className='border' />
+                <JoditEditor
+                    name='content'
+                    onChange={(newContent) => {setContent(newContent)}}
+                />
+                <button type='submit' className='block bg-green-500 text-white'>Submit</button>
+            </form>
+            <div className='text-red-500'>{error}</div>
+        </div>
+    )
+}
+
+export default CreatePost
+```
+
+### Configuration 
+
+```jsx 
+
+import React, { useState } from 'react'
+import JoditEditor from 'jodit-react';
+
+const config = {
+  readonly: false,
+  placeholder: 'Write your article here...',
+  theme: 'default',
+  height: 400,
+  toolbarButtonSize: 'middle',
+  buttons: [
+    'bold', 'italic', 'underline', '|',
+    'ul', 'ol', '|',
+    'link', 'image', 'table', '|',
+    'undo', 'redo', 'source'
+  ],
+  showCharsCounter: true,
+  showWordsCounter: true,
+  uploader: {
+    insertImageAsBase64URI: true
+  },
+  enter: 'p',
+  spellcheck: true
+};
+
+
+const CreatePost = () => {
+
+    return (
+        <JoditEditor config={config} name='content' />
+    )
+}
+
+export default CreatePost
+```
