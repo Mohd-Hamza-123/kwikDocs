@@ -9,7 +9,8 @@ type ApiResponse =
 export const getAllTechnology = async (): Promise<TechnologyCategory[] | null> => {
 
     try {
-        const res = await fetch(`http://localhost:3000/api/tech/read-tech`, {
+        const END_POINT = process.env.NODE_ENV === "development" ? "http://locahost:3000/" : conf.api_end_point
+        const res = await fetch(`${END_POINT}api/tech/read-tech`, {
             method: "GET",
             ...(process.env.NODE_ENV === 'development' ?
                 { cache: 'no-store' as const } :
