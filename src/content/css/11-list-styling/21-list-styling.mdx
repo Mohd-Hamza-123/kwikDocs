@@ -1,0 +1,116 @@
+---
+title: List Styling
+published: true
+---
+
+
+There are **three main properties** for list styling:
+
+
+### 🔹 1. `list-style-type` (built-in bullets & numbering)
+
+Controls the **shape/type** of bullets or numbering.
+
+**For unordered lists (`<ul>`):**
+
+* `disc` (default) ●
+* `circle` ○
+* `square` ■
+* `none` (removes bullets)
+
+**For ordered lists (`<ol>`):**
+
+* `decimal` → 1, 2, 3
+* `decimal-leading-zero` → 01, 02, 03
+* `lower-roman` → i, ii, iii
+* `upper-roman` → I, II, III
+* `lower-alpha` → a, b, c
+* `upper-alpha` → A, B, C
+* `lower-greek`, `armenian`, `georgian`, etc.
+
+```css
+ul { list-style-type: square; }
+ol { list-style-type: upper-roman; }
+```
+
+### 🔹 2. `list-style-image` (custom image as bullet)
+
+Replaces the bullet with an image.
+⚠️ Limitation: **You cannot resize the image** — it shows in its original size.
+
+```css
+ul {
+  list-style-image: url("bullet.png");
+}
+```
+
+
+### 🔹 3. `list-style-position`
+
+Defines where the bullet appears:
+
+* `outside` (default) → bullet outside content box
+* `inside` → bullet inside, text aligns under bullet
+
+```css
+ul { list-style-position: inside; }
+```
+
+
+### 🔹 4. Shorthand: `list-style`
+
+You can combine type, position, and image in one line:
+
+```css
+ul {
+  list-style: square inside url("bullet.png");
+}
+```
+
+
+### 🔹 5. Using `::marker` (modern, direct marker styling)
+
+Lets you style or replace the **marker itself**.
+
+```css
+li::marker {
+  content: "👉 ";   /* custom symbol/emoji */
+  color: red;
+  font-size: 20px;
+}
+```
+
+✅ Pros: Can style color, size, content
+❌ Cons: Limited styling (e.g., can’t use background images properly in all browsers)
+
+
+### 🔹 6. Fully custom bullets (using `::before`)
+
+Most powerful approach → lets you **resize images or use icons**.
+
+```css
+ul {
+  list-style: none;
+  padding-left: 20px;
+}
+li {
+  position: relative;
+  padding-left: 30px;
+}
+li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: url("bullet.png") no-repeat center/cover;
+}
+```
+
+✅ Pros: Works everywhere, fully customizable
+❌ Cons: More CSS code compared to `list-style-type`
+
+
+---

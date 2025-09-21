@@ -10,7 +10,8 @@ const conf = {
     cloudinary_api_secret: String(process.env.CLOUDINARY_API_SECRET),
     mail_user: String(process.env.MAIL_USER),
     mail_password: String(process.env.MAIL_PASSWORD),
-    token_secret: String(process.env.TOKEN_SECRET)
+    token_secret: String(process.env.TOKEN_SECRET),
+    preview : String(process.env.NEXT_PUBLIC_PREVIEW),
 }
 
 export default conf

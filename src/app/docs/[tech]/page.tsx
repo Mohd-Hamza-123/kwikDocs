@@ -34,7 +34,7 @@ export default function DocPage({ params }: any) {
   if (nodes) {
     return (
       <>
-        <section className={`w-[100%] lg:w-[20%] border border-r-3 max-h-[91vh] overflow-y-scroll absolute lg:sticky top-0 bg-slate-50 dark:bg-bgDark z-20 py-2 dark:border-gray-700 lg:block ${isDocIndexOpen ? "block" : "hidden"} lg:block`}>
+        <section className={`w-[100%] lg:w-[20%] max-h-[91vh] overflow-y-scroll absolute lg:sticky top-0 bg-slate-50 dark:bg-bgDark z-20 py-2 lg:block ${isDocIndexOpen ? "block" : "hidden"} lg:block`}>
           <FilteredPostList nodes={nodes} />
         </section>
         <ShowPost />

@@ -2,15 +2,15 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { toast } from '@/hooks/use-toast'
+import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
 import { Input } from "@/components/ui/input"
 import { Button } from '@/components/ui/button'
-import { useForm } from 'react-hook-form'
+import { useAppDispatch } from '@/lib/hooks/hooks'
 import { useMutation } from '@tanstack/react-query'
 import { registerUser } from '@/lib/API/Auth/register'
-import { useAppDispatch } from '@/lib/hooks/hooks'
 import { overlayLoadingIsFalseReducer, overlayLoadingIsTrueReducer } from '@/lib/store/features/overlayLoaderSlice'
-import { toast } from '@/hooks/use-toast'
-import { useRouter } from 'next/navigation'
 
 const Signup = () => {
   const router = useRouter()

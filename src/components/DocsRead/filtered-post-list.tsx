@@ -28,7 +28,6 @@ function TreeNode({ node }: { node: FileNode }) {
   const { setIsDocIndexOpen } = useResponsiveContext();
 
   const handleDocument = (slug: string | undefined) => {
-
     const document = allPosts.find((doc) => doc.slug === slug)
     dispatch(setDoc({ document }))
     setIsDocIndexOpen(false)

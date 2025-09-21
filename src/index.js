@@ -1,4 +1,3 @@
-import RTE from "./components/RTE.tsx"
 import Prism from "./components/Prism"
 import Footer from "./components/Footer"
 import Welcome from "./components/Welcome"
@@ -24,4 +23,4 @@ import FilteredPostList from "./components/DocsRead/filtered-post-list.tsx"
 import JavaScriptTerminal from "./components/Terminal/JavaScriptTerminal.tsx"
 
 
-export { VerifyEmailContent, Welcome, Technologies, Navbar, RTE, MultiSelect, ImageUpload, DocContent, RelatedDocs, LoadingPage, Sidebar, Prism, Spinner, Footer, PostItems, FilteredPostList, ShowPost, CodeOutput, SearchDocs, ThemeToggle, Overlay, Branding, EmptyTechnologies , JavaScriptTerminal}
+export { VerifyEmailContent, Welcome, Technologies, Navbar, MultiSelect, ImageUpload, DocContent, RelatedDocs, LoadingPage, Sidebar, Prism, Spinner, Footer, PostItems, FilteredPostList, ShowPost, CodeOutput, SearchDocs, ThemeToggle, Overlay, Branding, EmptyTechnologies , JavaScriptTerminal}

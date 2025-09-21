@@ -37,7 +37,6 @@ const consoleBridge = `
 import { CSP } from "@/constant";
 
 
-
 export default function injectCssAndJavascriptIntoHtml(
   html: string,
   css: string,

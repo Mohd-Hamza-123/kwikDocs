@@ -8,6 +8,7 @@ import { useAppDispatch } from '@/lib/hooks/hooks';
 import React, { useState, useRef, useEffect } from 'react';
 import injectCssAndJavascriptIntoHtml from '@/utils/InjectCssIntoHtml';
 import { addJavaScriptLogs, clearJavaScriptLogs } from '@/lib/store/features/logsSlice';
+import conf from '@/conf/conf';
 const JavaScriptTerminal = dynamic(() => import('@/index').then(mod => mod.JavaScriptTerminal), { ssr: false })
 const HtmlMonacoEditor = dynamic(() => import('@/components/Code-Editor/Monaco/HtmlMonacoEditor'), { ssr: false })
 const CssMonacoEditor = dynamic(() => import('@/components/Code-Editor/Monaco/CssMonacoEditor'), { ssr: false })
@@ -32,32 +33,50 @@ const Page = () => {
             const javascriptCode = javascriptRef.current?.getValue() ?? ''
 
             setVisible('output')
+
             const sanitizedHtml = sanitizeHtml(htmlCode)
 
             const iframe = document.createElement('iframe')
-            iframe.sandbox = "allow-scripts allow-forms allow-same-origin"
-
-
+            // iframe.sandbox = "allow-scripts allow-forms allow-same-origin"
             iframe.style.width = "100%"
             iframe.style.height = "100%"
-            const finalHtmlCode = injectCssAndJavascriptIntoHtml(sanitizedHtml, cssCode, javascriptCode)
-
-            const encodeFinalHtml = encodeURIComponent(finalHtmlCode)
-            finalCode.current = finalHtmlCode
-            // iframe.src = `https://kwikdocs-preview.vercel.app/render?finalHtml=${encodeFinalHtml}`
-            
-            iframe.addEventListener("load", () => {
-                iframe.contentWindow?.postMessage({ type: 'parent-message', code: finalHtmlCode }, "https://kwikdocs-preview.vercel.app/render")
-            }, { once: true })
-            
-            iframe.src = `https://kwikdocs-preview.vercel.app/render`
-
+            iframe.id = "preview-iframe";
+            const Code = injectCssAndJavascriptIntoHtml(sanitizedHtml, cssCode, javascriptCode)
 
             if (outputRef.current) {
                 outputRef.current.innerHTML = ''
                 outputRef.current.appendChild(iframe)
                 setOutputToggle(true)
             }
+
+            const environment = process.env.NODE_ENV
+            const previewOrigin = environment === "development"? "http://localhost:3001": conf.preview
+            console.log(conf.preview)
+            
+            const onParentMessage = (event: MessageEvent) => {
+                try {
+                    const data = event.data
+                    if (!data || typeof data !== "object") return;
+                    if (data.type === "child-ready") {
+                        console.log("Parent: child is ready — sending code");
+                        // send the HTML code to child
+                        iframe.contentWindow?.postMessage({ type: "parent-message", code: Code }, previewOrigin);
+                        // remove this listener; we only needed the ready handshake
+                        window.removeEventListener("message", onParentMessage);
+                    }
+                    if (data.type === "child-ack") {
+                        console.log("Parent got child-ack:", data);
+                    }
+                } catch (error) {
+                    console.error("parent handler error", error);
+                }
+            }
+            window.addEventListener("message", onParentMessage)
+           
+            // finalCode.current = Code
+           
+            iframe.src = environment === "development" ? 'http://localhost:3001/render' : conf.preview + '/render'
+           
 
         } catch (error: unknown) {
             if (error instanceof Error) {
@@ -71,6 +90,8 @@ const Page = () => {
             setOutputToggle(false)
         }
     }
+
+
     const handler = (event: MessageEvent) => {
         if (event.data.type === 'iframe-console') {
             const log = {
@@ -80,9 +101,6 @@ const Page = () => {
             dispatch(addJavaScriptLogs({ javaScriptLogs: log }))
         }
     }
-
-
-
 
 
     useEffect(() => {
@@ -128,11 +146,11 @@ const Page = () => {
                     <svgIcons.terminal className="w-4 h-4 md:w-5 md:h-5" />
                 </div>
 
-                <Link href={`https://kwikdocs-preview.vercel.app/render?finalHtml=${finalCode.current}`} target="_blank">
+                {/* <Link href={`https://kwikdocs-preview.vercel.app/render?finalHtml=${finalCode.current}`} target="_blank">
                     <div className='border px-3 py-3 rounded-sm'>
                         <svgIcons.newWindow className="w-4 h-4 md:w-5 md:h-5" />
                     </div>
-                </Link>
+                </Link> */}
 
             </div>
 

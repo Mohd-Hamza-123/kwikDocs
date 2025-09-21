@@ -1,5 +1,5 @@
 "use client";
-import { Prism, RTE } from "../../index";
+import { Prism } from "../../index";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
@@ -196,7 +196,7 @@ const CreatePage = ({ post }: any) => {
             {...register("title", { required: true })}
           />
         </div>
-        <div className="mt-3">
+        {/* <div className="mt-3">
           <RTE
             setBookMark={setBookMark}
             bookMark={bookMark}
@@ -205,7 +205,7 @@ const CreatePage = ({ post }: any) => {
             defaultValue={getValues("description")}
             getBookMark={getBookMark}
           />
-        </div>
+        </div> */}
         <Prism />
       </section>
       <section className="md:w-[23%] w-full">
