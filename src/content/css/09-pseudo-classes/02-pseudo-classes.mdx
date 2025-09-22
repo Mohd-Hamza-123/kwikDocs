@@ -1,0 +1,134 @@
+---
+title : CSS Pseudo-Classes
+published: true
+---
+
+In CSS, **pseudo-classes** let you style elements based on their state, position, or relation to other elements. Here are some common examples with explanations:
+
+
+### 1. **`:hover`**
+
+Applies styles when the user hovers over an element.
+
+```css
+button:hover {
+  background-color: blue;
+  color: white;
+}
+```
+
+---
+
+### 2. **`:active`**
+
+Applies styles when an element is being clicked.
+
+```css
+button:active {
+  transform: scale(0.95);
+}
+```
+
+---
+
+### 3. **`:focus`**
+
+Applies styles when an element, like an input, is focused.
+
+```css
+input:focus {
+  border-color: green;
+  outline: none;
+}
+```
+
+---
+
+### 4. **`:first-child`**
+
+Targets the first child of a parent element.
+
+```css
+ul li:first-child {
+  font-weight: bold;
+}
+```
+
+---
+
+### 5. **`:last-child`**
+
+Targets the last child of a parent element.
+
+```css
+ul li:last-child {
+  color: red;
+}
+```
+
+---
+
+### 6. **`:nth-child(n)`**
+
+Targets the nth child (or pattern) of a parent.
+
+```css
+ul li:nth-child(2) {
+  color: orange;
+}
+
+ul li:nth-child(odd) {
+  background-color: #f0f0f0;
+}
+```
+
+---
+
+### 7. **`:not(selector)`**
+
+Selects elements that do **not** match the given selector.
+
+```css
+button:not(.primary) {
+  background-color: gray;
+}
+```
+
+---
+
+### 8. **`:checked`**
+
+Targets checked checkboxes or radio buttons.
+
+```css
+input[type="checkbox"]:checked {
+  accent-color: green;
+}
+```
+
+---
+
+### 9. **`:disabled`**
+
+Targets disabled form elements.
+
+```css
+input:disabled {
+  background-color: #ddd;
+}
+```
+
+---
+
+### 10. **`:empty`**
+
+Selects elements with no children.
+
+```css
+div:empty {
+  display: none;
+}
+```
+
+---
+

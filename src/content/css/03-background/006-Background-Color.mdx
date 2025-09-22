@@ -22,4 +22,26 @@ published: true
 
 <div class="bg-color2">BG 2</div>
 ```
+
+**Important Point** 
+
+
+* `background-color` is **not inherited** by child elements.
+* By default, a child’s background is **transparent**.
+* This transparency makes the **parent’s background color visible** through the child.
+* If you set a `background-color` on the child, it will **override** the parent’s background in that area.
+
+Child looks like it has the same background only because of transparency, not inheritance.
+
+**Important Point**
+
+#### background-color on `<html>` tag covers the whole screen
+
+* **Background on `<html>`** → Special CSS rule: it paints the **whole viewport**, not just the content box.
+
+#### border on `<html>` tag does not covers the whole screen
+
+* **Border on `<html>`** → Normal box model rule: it only surrounds the **element’s box**, which grows only as tall as the content.
+
+
 ---

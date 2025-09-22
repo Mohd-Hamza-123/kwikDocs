@@ -53,3 +53,15 @@ app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
 ```
+
+### 4) Optional 
+
+```ts
+import express from "express";
+import dotenv from "dotenv";
+
+// Load environment variables from .env
+dotenv.config({
+  path : "./src/private/.env", // Specify a custom path for the .env file (default is ".env")
+});
+```

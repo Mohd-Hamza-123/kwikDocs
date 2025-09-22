@@ -50,3 +50,9 @@ export default defineConfig({
     remarkPlugins: [],
   }
 })
+
+
+//  export default defineConfig({
+//     root: './src/content/firebase',
+//     collections: {},
+//   })

@@ -5,106 +5,68 @@ published: true
 
 In React, you can access form values using the FormData API (just like in vanilla JS). This is handy when you don’t want to make each field a controlled component.
 
+### 1) use `onSubmit` event
+
 ```tsx
-import { FormEvent } from "react";
+function App() {
 
-function FormDataExample() {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // prevent reload
-
-    const formData = new FormData(e.currentTarget);
-
-    // Single values
-    const name = formData.get("name"); 
+  async function register(e) {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const username = formData.get("username");
     const email = formData.get("email");
-    const gender = formData.get("gender");
-
-    // Multiple values (checkboxes, multi-select)
-    const hobbies = formData.getAll("hobbies"); 
-    const skills = formData.getAll("skills");
-
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Gender:", gender);
-    console.log("Hobbies:", hobbies);   // array of checked hobbies
-    console.log("Skills:", skills);     // array of selected skills
-
-    // Convert everything into an object (⚠️ getAll() values stay as arrays)
-    const values = Object.fromEntries(formData.entries());
-    console.log("All form values:", values);
-  };
+    const password = formData.get("password");
+    console.log(username)
+    console.log(email)
+    console.log(password)
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="name" placeholder="Enter name" />
-      <input type="email" name="email" placeholder="Enter email" />
-
-      <fieldset>
-        <legend>Gender</legend>
-        <label>
-          <input type="radio" name="gender" value="Male" /> Male
-        </label>
-        <label>
-          <input type="radio" name="gender" value="Female" /> Female
-        </label>
-      </fieldset>
-
-      <fieldset>
-        <legend>Hobbies</legend>
-        <label>
-          <input type="checkbox" name="hobbies" value="Reading" /> Reading
-        </label>
-        <label>
-          <input type="checkbox" name="hobbies" value="Sports" /> Sports
-        </label>
-        <label>
-          <input type="checkbox" name="hobbies" value="Music" /> Music
-        </label>
-      </fieldset>
-
-      <label>
-        Skills (multi-select): 
-        <select name="skills" multiple>
-          <option value="JS">JavaScript</option>
-          <option value="React">React</option>
-          <option value="Node">Node.js</option>
-        </select>
-      </label>
-
-      <button type="submit">Submit</button>
-    </form>
-  );
+    <>
+      <form onSubmit={register}>
+        <input type="text" name="username" placeholder="Username" />
+        <input type="email" name="email" placeholder="Email" />
+        <input type="password" name="password" placeholder="Password" />
+        <button type="submit">
+          Register
+        </button>
+      </form>
+    </>
+  )
 }
 
-export default FormDataExample;
+export default App
 ```
 
----
+### 2) use `action` attribute 
 
-🔎 Key Takeaways
+```jsx
+function App() {
 
-* **`.get("field")`** → returns the **first** matching value (string or `File`).
-* **`.getAll("field")`** → returns **all values** as an array. Useful for:
+  async function register(formData) {
+    const username = formData.get("username");
+    const email = formData.get("email");
+    const password = formData.get("password");
+    console.log(username)
+    console.log(email)
+    console.log(password)
+  }
 
-  * ✅ Checkboxes with the same `name`.
-  * ✅ `<select multiple>` elements.
+  return (
+    <>
+      <form action={register}>
+        <input type="text" name="username" placeholder="Username" />
+        <input type="email" name="email" placeholder="Email" />
+        <input type="password" name="password" placeholder="Password" />
+        <button type="submit">
+          Register
+        </button>
+      </form>
+    </>
+  )
+}
 
-Example output if user enters:
-
-* Name: `Hamza`
-* Email: `hamza@example.com`
-* Gender: `Male`
-* Hobbies: `Reading`, `Music`
-* Skills: `React`, `Node`
-
-👉 Console output:
-
-```bash
-Name: Hamza
-Email: hamza@example.com
-Gender: Male
-Hobbies: ["Reading", "Music"]
-Skills: ["React", "Node"]
+export default App
 ```
 
 ---

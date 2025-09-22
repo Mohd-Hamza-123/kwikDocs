@@ -11,7 +11,7 @@ npm init
 
 You will be prompted with the following questions:
 
-```
+```plaintext
 package name: (my-express-app)  my-express-app
 version: (1.0.0)  1.0.0
 description: A simple Express.js app
@@ -132,6 +132,7 @@ Update the `package.json` file to include the following scripts:
 
 ```json
 {
+  "type": "module",
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/index.js"
