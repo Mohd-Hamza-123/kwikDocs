@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env VELITE_WATCH=false next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "velite:build": "velite build"
   },
   "dependencies": {
     "@codemirror/autocomplete": "^6.18.6",
@@ -84,6 +85,7 @@
     "@types/react-modal": "^3.16.3",
     "@types/turndown": "^5.0.5",
     "babel-plugin-prismjs": "^2.1.0",
+    "cross-env": "^10.0.0",
     "daisyui": "^4.12.14",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",

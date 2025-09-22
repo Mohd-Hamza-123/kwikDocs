@@ -1,12 +1,13 @@
 'use client'
-import React, { ReactNode} from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import { ThemeProvider as NextThemeProvider } from 'next-themes'
+import LoadingPage from '@/components/LoadingPage'
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    // const [mounted, setMounted] = useState(false);
-    // useEffect(() => setMounted(true), [])
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), [])
 
-    // if (!mounted) return <>{children}</>
+    if (!mounted) return <LoadingPage/>
 
     return (
         <NextThemeProvider

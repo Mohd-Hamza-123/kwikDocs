@@ -56,8 +56,7 @@ const Technologies = async ({ technology }: Props) => {
       bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 
       rounded-xl shadow-md hover:shadow-xl 
       hover:from-pink-600 hover:via-red-500 hover:to-orange-400 
-      transition-all duration-300"
-                >
+      transition-all duration-300">
                   Learn {tech?.name}
                 </Link>
               </div>

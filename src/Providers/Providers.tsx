@@ -22,7 +22,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
                     </CSS_Context_Provider_Wrapper>
                 </TypicalContextProviderWrapper>
             </StoreProvider>
-        </ThemeProvider>
+         </ThemeProvider>
     );
 };
 

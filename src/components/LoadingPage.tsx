@@ -2,6 +2,7 @@
 import React from 'react'
 
 const LoadingPage = ({ loadingMsg }: { loadingMsg?: string }) => {
+    
     return (
         <section className="dark:bg-gradient-to-br dark:from-[#1e1e1e] dark:via-[#121212] dark:to-[#2c2c2c] bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 min-h-screen w-screen fixed top-0 overflow-hidden flex items-center justify-center z-50">
             <div className="flex flex-col items-center space-y-6">

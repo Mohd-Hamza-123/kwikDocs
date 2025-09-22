@@ -22,7 +22,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  console.log("helo")
+  
   return (
     <html lang="en" className="scroll-pt-[3.5rem]">
       <body

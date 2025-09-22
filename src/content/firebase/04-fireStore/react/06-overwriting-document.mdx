@@ -1,0 +1,127 @@
+---
+title: Overwriting a Document
+published: true
+---
+
+`setDoc(docRef, data)` writes to a **specific document reference** you provide (so you control the document ID).
+`setDoc` will create the doc if it doesn’t exist and will overwrite it by default (you can `merge` instead).
+
+### `setDoc` — explanation & behaviour
+
+* **Purpose:** write data to a specific `DocumentReference` (you decide the doc id).
+* **Create or overwrite:** it **creates** the document if missing, and **overwrites** the whole document if it exists (fields not included in the new object are removed).
+* **Merge option:** `setDoc(docRef, data, { merge: true })` will only set/replace the supplied fields and keep other fields intact. You can also use `mergeFields` to merge specific nested fields.
+* **Return value:** `Promise<void>`.
+* **Common uses:** user profiles keyed by `uid`, config documents, any case where doc id must be predictable (username -> doc id, predictable mapping for queries, etc).
+* **Works in transactions/batches:** you use `transaction.set(docRef, data)` or `batch.set(docRef, data)`.
+
+Example — create/overwrite (default):
+
+```ts
+import { doc, setDoc } from "firebase/firestore";
+
+await setDoc(doc(db, "profile", user.uid), {
+  username: "hamza",
+  email: "hamza@example.com",
+  createdAt: serverTimestamp()
+});
+```
+
+Example — merge (update without removing other fields):
+
+```ts
+await setDoc(doc(db, "profile", user.uid), {
+  lastSeen: serverTimestamp()
+}, { merge: true });
+```
+
+---
+
+### `addDoc` — explanation & behaviour
+
+* **Purpose:** add a new document to a collection with a **client-generated random ID** (Firestore makes the id).
+* **Always creates a new doc** (no doc id you control).
+* **Return value:** `Promise<DocumentReference>` — you can read `ref.id` to get the generated id.
+* **Common uses:** feed-like collections (posts, comments, messages) where unique IDs are fine and you don’t need to control the ID. Great for append-only collections.
+* **Not used** in transactions/batches directly (you'd create a `doc()` ref manually in a batch/transaction instead).
+
+Example — add a post (auto id):
+
+```ts
+import { collection, addDoc } from "firebase/firestore";
+
+const ref = await addDoc(collection(db, "posts"), {
+  title: "Hello world",
+  body: "My first post",
+  createdAt: serverTimestamp(),
+  authorUid: user.uid
+});
+console.log("new post id:", ref.id);
+```
+
+---
+
+**Key differences (quick checklist)**
+
+* **ID control:** `setDoc` → you provide the ID; `addDoc` → Firestore generates it.
+* **Overwrite vs create-only:** `setDoc` overwrites by default (can merge). `addDoc` always creates a new document.
+* **Return:** `setDoc` → `void`; `addDoc` → `DocumentReference` (with `id`).
+* **Rules/ownership:** If your security rules check `request.auth.uid == documentId`, you **must** use `setDoc(doc(db,"col", uid), ...)`. `addDoc` will fail such rules.
+* **Transactions/batches:** prefer doc refs (`set`) in transactions/batches — `addDoc` is not used there.
+
+
+**When to use which — practical scenarios**
+
+* **Use `setDoc` when:**
+
+  * You want the document id to be the user’s `uid` (profiles): `/profiles/{uid}`.
+  * You need deterministic IDs (username → doc id, settings → `settings/default`, etc).
+  * You want to update-or-create (use `merge: true`) or replace the whole doc.
+  * You need to read/update the same known document later.
+
+* **Use `addDoc` when:**
+
+  * You're appending items to a feed (posts, comments, messages).
+  * You don’t care about the ID and want Firestore to generate a collision-resistant id for you.
+  * You want the convenience of getting the new ID immediately from the returned `DocumentReference`.
+
+---
+
+**Examples side-by-side**
+
+Profile (use `setDoc` with `uid` as id):
+
+```ts
+// create or update a profile by uid (deterministic id)
+await setDoc(doc(db, "profiles", user.uid), {
+  username: "hamza",
+  bio: "dev"
+}, { merge: true });
+```
+
+Post feed (use `addDoc`):
+
+```ts
+const postRef = await addDoc(collection(db, "posts"), {
+  author: user.uid,
+  text: "This is a post",
+  createdAt: serverTimestamp()
+});
+console.log("post id:", postRef.id);
+```
+
+Batch write (must use doc refs):
+
+```ts
+const batch = writeBatch(db);
+const profileRef = doc(db, "profiles", user.uid);
+batch.set(profileRef, { lastLogin: serverTimestamp() }, { merge: true });
+const statsRef = doc(db, "stats", "global");
+batch.update(statsRef, { usersCount: increment(1) });
+await batch.commit();
+```
+
+
+---
+
+

@@ -9,14 +9,14 @@ import type { FileNode } from "@/services/helpers/getContentTree";
 import { setAllDocs, setDoc } from "@/lib/store/features/docsSlice";
 
 export default function DocPage({ params }: any) {
-
+  console.log(posts)
   const { tech } = params
   const dispatch = useAppDispatch()
   const [nodes, setNodes] = useState<FileNode[] | null>(null)
 
   const allPost = useMemo(() => posts?.filter((post) => post?.slug.indexOf(tech) === 0 && post?.published)
     , [posts, tech]);
-
+  
   const { isDocIndexOpen } = useResponsiveContext();
 
   useEffect(() => {
