@@ -1,0 +1,94 @@
+---
+title: Supabase Storage in React
+isPublished : true
+---
+
+You can use Supabase Storage to upload files to your buckets. This is useful for storing images, videos, and other files.
+
+```jsx
+import React, { useState } from "react";
+import { supabase } from "./supabaseClient";
+
+export default function UploadImage() {
+  const [url, setUrl] = useState(null);
+
+  async function handleUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const filePath = `${Date.now()}-${file.name}`;
+
+    const { error , data } = await supabase.storage
+      .from("images") // your bucket name
+      .upload(filePath, file);
+
+      const { id , path , fullPath} = data;
+      // save the path , 
+
+    if (error) {
+      console.error("Upload failed:", error.message);
+      return;
+    }
+    
+  }
+
+  return (
+    <div>
+      <input type="file" accept="image/*" onChange={handleUpload} />
+      {url && <img src={url} alt="uploaded" width="200" />}
+    </div>
+  );
+}
+```
+
+
+
+### Public Read / Write Access 
+
+Go to your project , click on `SQL Editor` and run the following SQL: 
+This will allow anyone to read and write to your bucket. It is unsafe to use this in production.
+
+```sql
+-- Allow anyone (even anon key) to insert (upload) into bucket "post"
+create policy "Allow public uploads to post"
+  on storage.objects
+  for insert
+  with check (bucket_id = 'post');
+
+-- Allow anyone to select (read/list) from bucket "post"
+create policy "Allow public read access to post"
+  on storage.objects
+  for select
+  using (bucket_id = 'post');
+
+```
+
+
+### Get file with path 
+
+```js
+import { supabase } from "./supabase.js"; // your config file 
+
+const { data } = await supabase.storage.from("images").upload('file-path', file);
+const filePath = data.path
+const { data } = supabase.storage.from("bucket-name").getPublicUrl(filePath);
+const imageURL = data.publicUrl
+```
+
+### Delete file with path 
+
+```js
+const { data, error } = await supabase.storage
+  .from("bucket-name") // bucket name
+  .remove(["path-1","path-2"]); // array of paths
+
+if (error) {
+  console.error("Delete failed:", error.message);
+} else {
+  console.log("Deleted:", data);
+}
+```
+
+
+
+---

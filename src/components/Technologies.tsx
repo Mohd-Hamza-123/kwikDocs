@@ -7,7 +7,7 @@ type Props = {
 }
 
 const Technologies = async ({ technology }: Props) => {
-
+  
   return <div className="dark:bg-bgDark bg-gray-100 flex flex-col gap-5">
     {technology?.map((techObj: TechnologyCategory) => {
       return (

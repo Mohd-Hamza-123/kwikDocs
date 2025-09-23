@@ -53,6 +53,6 @@ export default defineConfig({
 
 
 //  export default defineConfig({
-//     root: './src/content/firebase',
+//     root: './src/content/supabase',
 //     collections: {},
 //   })
