@@ -1,0 +1,190 @@
+---
+title: Get Data from Request
+isPublished: true
+---
+
+**Request** is an object that contains information about the HTTP request, including the URL, headers, and body etc. It carries all the data the client sends. You can read data from different parts depending on **how it was sent**.
+
+
+### Reading Request Data in Express (with Frontend Examples)
+
+In Express, incoming data can come from **5 main places**:
+
+* Route parameters (`req.params`)
+* Query parameters (`req.query`)
+* Request body (`req.body`)
+* Headers (`req.headers`)
+* Cookies (`req.cookies`)
+
+Below are explanations, backend examples, frontend requests, and sample responses.
+
+
+### 1. **Route Parameters** (`req.params`)
+
+* Used when data is part of the **URL path**.
+* Example URL: `http://localhost:3000/users/5`
+
+**Backend (Express)**
+
+```js
+app.get("/users/:id", (req, res) => {
+  const userId = req.params.id;  // read route param
+  res.json({ id: userId });
+});
+```
+
+**Frontend (Fetch)**
+
+```js
+fetch("http://localhost:3000/users/123")
+  .then(res => res.json())
+  .then(data => console.log(data));
+```
+
+**Response**
+
+```json
+{ "id": "123" }
+```
+
+
+### 2. **Query Parameters** (`req.query`)
+
+* Used for **filters or optional parameters** in the URL after `?`.
+* Example URL: `http://localhost:3000/search?q=node&page=2`
+
+**Backend (Express)**
+
+```js
+app.get("/search", (req, res) => {
+  const { q, page } = req.query;  // read query params
+  res.json({ query: q, page });
+});
+```
+
+**Frontend (Fetch)**
+
+```js
+fetch("http://localhost:3000/search?q=node&page=2")
+  .then(res => res.json())
+  .then(data => console.log(data));
+```
+
+**Response**
+
+```json
+{ "query": "node", "page": "2" }
+```
+
+
+### 3. **Request Body** (`req.body`)
+
+* Used for **POST, PUT, PATCH** requests.
+* Requires middleware: `app.use(express.json())` for JSON payloads.
+
+**Backend (Express)**
+
+```js
+app.use(express.json()); // enables req.body for JSON
+
+app.post("/users", (req, res) => {
+  const { name, email } = req.body;  // read JSON body
+  res.json({ name, email });
+});
+```
+
+**Frontend (Fetch)**
+
+```js
+fetch("http://localhost:3000/users", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ name: "Hamza", email: "hamza@example.com" })
+})
+.then(res => res.json())
+.then(data => console.log(data));
+```
+
+**Response**
+
+```json
+{ "name": "Hamza", "email": "hamza@example.com" }
+```
+
+
+### 4. **Headers** (`req.headers`)
+
+* Useful for tokens, API keys, or custom metadata.
+
+**Backend (Express)**
+
+```js
+app.get("/profile", (req, res) => {
+  const token = req.headers["authorization"]; // read header
+  res.json({ token });
+});
+```
+
+**Frontend (Fetch)**
+
+```js
+fetch("http://localhost:3000/profile", {
+  headers: { "Authorization": "Bearer abc123" }
+})
+.then(res => res.json())
+.then(data => console.log(data));
+```
+
+**Response**
+
+```json
+{ "token": "Bearer abc123" }
+```
+
+
+### 5. **Cookies** (`req.cookies`)
+
+* Requires `cookie-parser` middleware.
+
+**Backend (Express)**
+
+```bash
+npm install cookie-parser
+```
+
+```js
+import cookieParser from "cookie-parser";
+app.use(cookieParser());
+
+app.get("/check", (req, res) => {
+  res.json(req.cookies);  // read cookies
+});
+
+app.get("/set-cookie", (req, res) => {
+  res.cookie("theme", "dark"); // set cookie
+  res.send("Cookie set");
+});
+```
+
+**Frontend (Fetch)**
+
+```js
+// Set cookie via response
+fetch("http://localhost:3000/set-cookie")
+  .then(() => {
+    // Now send a request with cookies automatically
+    return fetch("http://localhost:3000/check", { credentials: "include" });
+  })
+  .then(res => res.json())
+  .then(data => console.log(data));
+```
+
+**Response**
+
+```json
+{ "theme": "dark" }
+```
+
+---
+
+

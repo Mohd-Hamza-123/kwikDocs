@@ -1,0 +1,188 @@
+---
+title: Send Data to Client
+isPublished: true
+---
+
+Here are all the ways Express can send data to the client** with **frontend fetch examples** so you see what the client receives.
+
+
+### 1. **`res.send()`**
+
+**Backend**
+
+```js
+app.get("/send", (req, res) => {
+  res.send("Hello World"); // plain text
+});
+```
+
+**Frontend**
+
+```js
+fetch("http://localhost:3000/send")
+  .then(res => res.text())
+  .then(data => console.log(data)); 
+// Output: Hello World
+```
+
+---
+
+### 2. **`res.json()`**
+
+**Backend**
+
+```js
+app.get("/json", (req, res) => {
+  res.json({ ok: true, message: "Hello" });
+});
+```
+
+**Frontend**
+
+```js
+fetch("http://localhost:3000/json")
+  .then(res => res.json())
+  .then(data => console.log(data)); 
+// Output: { ok: true, message: "Hello" }
+```
+
+---
+
+### 3. **`res.status()` (with JSON/text)**
+
+**Backend**
+
+```js
+app.get("/status", (req, res) => {
+  res.status(201).json({ created: true });
+});
+```
+
+**Frontend**
+
+```js
+fetch("http://localhost:3000/status")
+  .then(res => res.json())
+  .then(data => console.log(data)); 
+// Output: { created: true }
+```
+
+👉 You can also check `res.status` on **frontend**.
+
+---
+
+### 4. **`res.sendFile()`**
+
+**Backend**
+
+```js
+import path from "path";
+app.get("/file", (req, res) => {
+  res.sendFile(path.resolve("public/sample.txt"));
+});
+```
+
+**Frontend**
+
+```js
+fetch("http://localhost:3000/file")
+  .then(res => res.text())  // since sample.txt is plain text
+  .then(data => console.log(data));
+```
+
+---
+
+### 5. **`res.download()`**
+
+**Backend**
+
+```js
+app.get("/download", (req, res) => {
+  res.download("public/sample.txt");
+});
+```
+
+**Frontend**
+
+```js
+fetch("http://localhost:3000/download")
+  .then(res => res.blob())
+  .then(blob => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "sample.txt";
+    a.click();
+  });
+```
+
+👉 This will trigger a file download in the browser.
+
+---
+
+### 6. **`res.render()`** (View Engine, e.g. EJS)
+
+**Backend**
+
+```js
+app.set("view engine", "ejs");
+
+app.get("/view", (req, res) => {
+  res.render("index", { name: "Hamza" });
+});
+```
+
+**Frontend**
+
+```js
+fetch("http://localhost:3000/view")
+  .then(res => res.text())   // HTML comes as text
+  .then(html => console.log(html));
+```
+
+👉 You’ll get rendered HTML string.
+
+---
+
+### 7. **`res.redirect()`**
+
+**Backend**
+
+```js
+app.get("/redirect", (req, res) => {
+  res.redirect("/json");
+});
+```
+
+**Frontend**
+
+```js
+fetch("http://localhost:3000/redirect")
+  .then(res => res.json())
+  .then(data => console.log(data));
+// Output: { ok: true, message: "Hello" }  (because it redirected to /json)
+```
+
+---
+
+### 8. **`res.end()`**
+
+**Backend**
+
+```js
+app.get("/end", (req, res) => {
+  res.status(204).end(); // No Content
+});
+```
+
+**Frontend**
+
+```js
+fetch("http://localhost:3000/end")
+  .then(res => console.log(res.status)); 
+// Output: 204 (no data in body)
+```
+
+---
+
+
