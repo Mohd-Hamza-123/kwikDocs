@@ -1,0 +1,105 @@
+---
+title: Installation and Setup
+isPublished: true
+---
+
+### 🔹 1. Node.js / Express.js
+
+To connect MongoDB with Node.js/Express, you can use either the **official MongoDB driver** or **Mongoose (ODM)**:
+
+```bash
+npm install mongodb        # Official MongoDB driver
+npm install mongoose       # Recommended for schema-based apps
+```
+
+**Example using Mongoose:**
+
+```js
+import mongoose from "mongoose";
+
+export const connectDb = async () => {
+  try {
+    const MONGO_DB_URI = process.env.MONGO_DB_URI; // Load from .env
+    await mongoose.connect(MONGO_DB_URI);
+    console.log("✅ Connected to MongoDB");
+  } catch (error) {
+    console.error("❌ Error connecting to MongoDB:", error);
+    process.exit(1);
+  }
+};
+```
+
+### 🔹 2. Next.js (App Router or Pages Router)
+
+Next.js does not include a database by default. To use MongoDB, install Mongoose:
+
+```bash
+npm install mongoose
+```
+
+**Database connection helper (`lib/mongodb.js`):**
+
+```js
+import mongoose from "mongoose";
+
+const MONGODB_URI = process.env.MONGODB_URI;
+
+if (!MONGODB_URI) {
+  throw new Error("Please define the MONGODB_URI environment variable");
+}
+
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
+async function dbConnect() {
+  if (cached.conn) return cached.conn;
+
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(MONGODB_URI).then((m) => m);
+  }
+  cached.conn = await cached.promise;
+  return cached.conn;
+}
+
+export default dbConnect;
+```
+
+**Usage inside API routes or Server Actions:**
+
+```js
+import dbConnect from "@/lib/mongodb";
+
+export async function POST(req) {
+  await dbConnect();
+  // Use your Mongoose models here
+}
+```
+
+### 🔹 3. Python / Django
+
+By default, Django uses SQL databases (PostgreSQL, MySQL, SQLite).
+To connect with MongoDB, you can use **Djongo** or **MongoEngine**.
+
+**Install Djongo:**
+
+```bash
+pip install djongo
+```
+
+**Update `settings.py`:**
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'mydb',
+    }
+}
+```
+
+Now you can use Django ORM models as usual, and they will map to MongoDB.
+
+---

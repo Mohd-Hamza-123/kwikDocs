@@ -19,6 +19,7 @@ export const type_Verify_Email = 'VERIFY'
 export const technologyEnums = [
   'DSA',
   'library',
+  'Database',
   'framework',
   'query language',
   'World Wide Web',
