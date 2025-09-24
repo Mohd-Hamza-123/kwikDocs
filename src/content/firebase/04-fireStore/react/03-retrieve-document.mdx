@@ -36,7 +36,7 @@ You can fetch all documents from a collection at once.
 
 ```js
 import { collection, getDocs } from "firebase/firestore";
-
+import { firestoreDb } from "@/firebase/firebase.js"; // your firebase configuration
 const getAllPosts = async () => {
   try {
     // Reference to the "posts" collection
@@ -59,13 +59,13 @@ You can use queries to filter documents by a field value.
 
 ```js
 import { collection, query, where, getDocs } from "firebase/firestore";
+import { firestoreDb } from "@/firebase/firebase.js"; // your firebase configuration
 
 const getPublishedPosts = async () => {
   try {
-    // Query: posts where isPublished = true
     const q = query(
-      collection(firestoreDb, "posts"),
-      where("isPublished", "==", true)
+      collection(firestoreDb, "posts"), 
+      where("isPublished", "==", true),          // Query: posts where isPublished = true
     );
 
     const querySnapshot = await getDocs(q);
@@ -82,18 +82,27 @@ const getPublishedPosts = async () => {
 
 ### 4. Get Documents with Multiple Conditions
 
-You can combine multiple `where` clauses.
+* You can combine multiple `where` clauses.
+* By default, multiple where() filters use AND logic.
 
 ```js
 import { collection, query, where, getDocs } from "firebase/firestore";
-
+import { firestoreDb } from "@/firebase/firebase.js"; // your firebase configuration
 const getFilteredPosts = async () => {
   try {
     // Example: posts where isPublished = true AND like >= 10
     const q = query(
       collection(firestoreDb, "posts"),
       where("isPublished", "==", true),
-      where("like", ">=", 10)
+      where("like", ">=", 10),                   // Query: posts where like >= 10
+      where("isBanned", "!=" , true),            // Query: posts where isBanned != true
+      where("dislike", "<=", 5),                 // Query: posts where dislike < 10
+      where("price", ">" , 100),                 // Query: posts where price > 100
+      where("amount", "<", 1000),                // Query: posts where amount < 1000
+      where("status", "in", ["draft", "review"]) // Matches documents where status is "draft" OR "review
+      where("category", "not-in", ["food", "sport"])  // Matches docs whose category is not food or sport
+      where("tags", "array-contains", "firebase") // Matches documents where the tags array contains exactly "firebase"
+      where("tags", "array-contains-any", ["firebase", "nextjs"]) // Matches documents where the tags array contains any of the specified values
     );
 
     const querySnapshot = await getDocs(q);
@@ -107,12 +116,40 @@ const getFilteredPosts = async () => {
 };
 ```
 
+* OR Queries (multiple conditions)
+
+```jsx
+import { or, query, where, collection, getDocs } from "firebase/firestore";
+import { firestoreDb } from "@/firebase/firebase.js"; // configuration
+
+const getPostsByTitleOrAuthor = async () => {
+  try {
+    // Example: title_lower == "hello world" OR author == "Hamza"
+    const q = query(
+      collection(firestoreDb, "posts"),
+      or(
+        where("title", "==", "hello world"),
+        where("author", "==", "Hamza")
+      )
+    );
+
+    const snapshot = await getDocs(q);
+    const docs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    console.log(docs);
+  } catch (err) {
+    console.error("Error:", err);
+  }
+};
+
+```
+
 ### 5. Get Documents with Ordering and Limits
 
 Firestore allows you to sort results and limit the number of documents returned.
 
 ```js
 import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
+import { firestoreDb } from "@/firebase/firebase.js"; // your firebase configuration
 
 const getRecentPosts = async () => {
   try {
@@ -132,15 +169,6 @@ const getRecentPosts = async () => {
   }
 };
 ```
-
-
-#### Summary of Retrieval Methods
-
-1. **Single document by ID** → `doc()` + `getDoc()`
-2. **All documents in a collection** → `collection()` + `getDocs()`
-3. **Documents with a field condition** → `query()` + `where()`
-4. **Documents with multiple conditions** → multiple `where()` clauses
-5. **Documents with ordering and limits** → `orderBy()` + `limit()`
 
 ---
 
