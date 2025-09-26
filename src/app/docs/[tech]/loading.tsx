@@ -1,8 +1,9 @@
 import React from 'react'
+import LoadingPage from '../../../components/LoadingPage'
 
 const loading = () => {
   return (
-    <div>loading---</div>
+    <LoadingPage/>
   )
 }
 

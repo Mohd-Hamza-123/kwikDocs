@@ -1,0 +1,82 @@
+---
+title : use API
+isPublished : true
+---
+
+The `use` function lets you **read the value of a resource** (such as a Promise or Context) while rendering.
+
+* If the resource is a **Promise**:
+
+  * React will automatically **suspend** rendering until the promise resolves.
+  * While suspended, React will display the nearest `<Suspense fallback={...}>`.
+
+* If the resource is a **Context**:
+
+  * `use` lets you read from the context in a more flexible way compared to `useContext`.
+
+
+### 1. Using `use` with Promises
+
+```jsx
+import { use, Suspense } from 'react';
+
+function Todo({ todoPromise }) {
+  const todo = use(todoPromise); // Suspends until promise resolves
+  return <h1>{todo.title}</h1>;
+}
+
+export default function App() {
+  const promise = fetch('/api/todo/1').then(res => res.json());
+
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Todo todoPromise={promise} />
+    </Suspense>
+  );
+}
+```
+
+### 2. Using `use` with Context
+
+```jsx
+import { createContext, use } from 'react';
+
+const ThemeContext = createContext('light');
+
+function ThemedComponent() {
+  const theme = use(ThemeContext);
+  return <div>Theme: {theme}</div>;
+}
+```
+
+**Best Practices**
+
+* **Don’t create promises inline inside `use`**:
+
+  ```jsx
+  // ❌ Wrong – creates new promise every render
+  const data = use(fetch('/api/data').then(r => r.json()));
+  ```
+
+  Instead, create the promise outside render or use a resource/cache layer.
+
+* **Error Handling**:
+
+  * If a promise rejects, React will surface the error through the nearest Error Boundary.
+
+* **Suspense Requirement**:
+
+  * Always wrap components using `use` with `<Suspense>` to handle loading states.
+
+
+### ✅ When to Use `use`
+
+* Fetching async data during render (with Suspense).
+* Reading context in conditional logic or loops.
+* Simplifying components that previously required `useEffect` + state for async.
+
+
+**References**
+
+* [React 19 Docs – `use`](https://react.dev/reference/react/use)
+
