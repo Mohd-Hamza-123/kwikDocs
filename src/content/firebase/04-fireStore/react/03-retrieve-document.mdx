@@ -170,6 +170,40 @@ const getRecentPosts = async () => {
 };
 ```
 
+
+### Retrieve Document from a Sub-Collection
+
+You can retrieve a document from a sub-collection by specifying the path to the document.
+
+```jsx
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { fireStoreDb } from "@/firebase/firebase";
+
+async function getComments(postId) {
+  try {
+    // Reference to: posts/{postId}/comments
+    const commentsRef = collection(fireStoreDb, "posts", postId, "comments");
+
+    // Optional: order comments by createdAt
+    const q = query(commentsRef, orderBy("createdAt", "asc"));
+
+    // Fetch documents
+    const querySnapshot = await getDocs(q);
+
+    // Map documents to objects
+    const comments = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+
+    console.log(comments);
+    return comments;
+  } catch (error) {
+    console.error("Error fetching comments:", error);
+  }
+}
+```
+
 ---
 
 
