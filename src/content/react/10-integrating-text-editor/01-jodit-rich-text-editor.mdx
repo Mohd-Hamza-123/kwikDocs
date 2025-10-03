@@ -96,22 +96,23 @@ const config = {
   readonly: false,
   placeholder: 'Write your article here...',
   theme: 'default',
-  height: 400,
+  height: 450,
   toolbarButtonSize: 'middle',
   buttons: [
-    'bold', 'italic', 'underline', '|',
-    'ul', 'ol', '|',
-    'link', 'image', 'table', '|',
-    'undo', 'redo', 'source'
+    'bold','italic','underline','strikethrough','|',
+    'brush','eraser','fontsize','font','align','|',
+    'ul','ol','outdent','indent','|',
+    'link','image','video','table','hr','symbols','|',
+    'paragraph','fullsize','preview','find','|',
+    'undo','redo','source'
   ],
   showCharsCounter: true,
   showWordsCounter: true,
-  uploader: {
-    insertImageAsBase64URI: true
-  },
+  uploader: { insertImageAsBase64URI: true },
   enter: 'p',
   spellcheck: true
 };
+
 
 
 const CreatePost = () => {
