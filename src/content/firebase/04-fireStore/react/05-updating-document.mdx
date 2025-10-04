@@ -69,7 +69,7 @@ await setDoc(doc(db, "users", docId), {
 ```
 
 
-## 4) Update nested fields
+### 4) Update nested fields
 
 Use dot notation to update nested fields:
 
@@ -81,7 +81,7 @@ await updateDoc(doc(db, "users", docId), {
 ```
 
 
-## 5) Array operations, increment, delete field
+### 5) Array operations, increment, delete field
 
 Useful atomic operations:
 
@@ -97,7 +97,7 @@ await updateDoc(doc(db, "posts", postId), {
 ```
 
 
-## 6) Transaction (atomic read-modify-write)
+### 6) Transaction (atomic read-modify-write)
 
 If you need to read a value, compute, and update atomically:
 
@@ -118,6 +118,28 @@ async function incrementScore(docId, delta = 1) {
     console.error("Transaction failed: ", e);
   }
 }
+```
+
+### 6. Update document of a subcollection
+
+```js
+import { doc, updateDoc } from "firebase/firestore";
+import { fireStoreDb } from "@/firebase/firebase";
+
+const updateComment = async (postId, commentId) => {
+  try {
+    const newData = {
+      text: "New comment text",
+      isPublished : true
+    }
+
+    const commentRef = doc(fireStoreDb, "posts", postId, "comments", commentId);
+    await updateDoc(commentRef, newData);
+    console.log("Comment updated!");
+  } catch (error) {
+    console.error("Error updating comment:", error);
+  }
+};
 ```
 
 ---

@@ -113,15 +113,26 @@ const db = getFirestore();
 await db.recursiveDelete(db.doc("users/USER_ID"));
 ```
 
+### 7. **Delete a document in a subcollection**
 
-✅ **Summary of All Ways**
+Assuming a collection of `posts` with subcollections `comments`:
 
-1. Delete one document by ID → `deleteDoc(doc(...))`
-2. Delete multiple docs by query → `getDocs(query) + deleteDoc`
-3. Delete all docs in a collection → loop all docs + delete
-4. Batch delete → `writeBatch().delete()`
-5. Server-side delete with Admin SDK → `db.collection(...).doc(...).delete()`
-6. Recursive delete (doc + subcollections) → Admin SDK or Firebase CLI
+```js
+import { doc, deleteDoc } from "firebase/firestore";
+import { fireStoreDb } from "@/firebase/firebase";
+
+const deleteComment = async (postId, commentId) => {
+  try {
+    await deleteDoc(doc(fireStoreDb, "posts", postId, "comments", commentId));
+    console.log("Comment deleted successfully!");
+  } catch (error) {
+    console.error("Error deleting comment:", error);
+  }
+};
+```
+
+* postId is the ID of the parent document
+* commentId is the ID of the subcollection document
 
 ---
 
