@@ -31,11 +31,11 @@ export default function RootLayout({
         <Providers>
           <div className="min-h-dvh bg-background overflow-hidden">
             <Navbar />
+            <Overlay />
             <Sidebar />
             <Toaster />
-            <Overlay />
             <SearchDocs />
-            <main>{children}</main>
+            <main className="mt-[9dvh]">{children}</main>
             <Footer />
           </div>
         </Providers>

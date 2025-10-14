@@ -9,7 +9,6 @@ const Home = async () => {
 
     const isTechnologyNotEmpty = Array.isArray(technology) && technology.length > 0
 
-
     return isTechnologyNotEmpty ? <>
       <Welcome />
       <Technologies technology={technology} />
