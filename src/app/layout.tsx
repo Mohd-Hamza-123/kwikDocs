@@ -35,7 +35,7 @@ export default function RootLayout({
             <Toaster />
             <Overlay />
             <SearchDocs />
-            <main className="mt-[9dvh]">{children}</main>
+            <main>{children}</main>
             <Footer />
           </div>
         </Providers>
