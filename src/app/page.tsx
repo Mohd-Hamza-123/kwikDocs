@@ -12,11 +12,11 @@ const Home = async () => {
 
     return isTechnologyNotEmpty ? <>
       <Welcome />
-      {/* <Technologies technology={technology} /> */}
+      <Technologies technology={technology} />
     </> : <EmptyTechnologies />
 
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     return <EmptyTechnologies />
   }
 };
