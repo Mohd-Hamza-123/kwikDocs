@@ -3,12 +3,12 @@ import getContentTree from "@/services/helpers/getContentTree"
 import path from "path"
 
 export async function GET(
-  request: Request,
-  { params }: { params: { tech?: string } } 
+  request: Request, 
 ) {
   try {
-    const tech = params?.tech
-    console.log('tech', tech)
+     const url = new URL(request.url)
+    const tech = url.searchParams.get('tech')
+    console.log(tech)
     if (!tech) return NextResponse.json({ error: 'tech not provided' }, { status: 400 })
 
     const folderPath = path.join(process.cwd(), 'src', 'content', tech)
