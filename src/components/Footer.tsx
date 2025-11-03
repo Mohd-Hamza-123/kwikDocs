@@ -2,7 +2,8 @@
 import { svgIcons } from './icons';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
-
+import Link from 'next/link';
+import { siteConfig } from '../../config/site';
 const Footer = () => {
 
     const visiblePaths = ['/'];
@@ -27,17 +28,29 @@ const Footer = () => {
                     </span>
                     <div className="flex mt-4 sm:justify-center sm:mt-0 gap-4">
 
-                        <svgIcons.github
-                            className="w-7 h-7 text-gray-500 hover:text-gray-900 dark:fill-white cursor-pointer"
-                        />
-                        <svgIcons.twitter
-                            className="w-7 h-7 text-gray-500 hover:text-gray-900 dark:fill-white cursor-pointer"
-                        />
+                        <Link
+                            href={siteConfig.links.github} target="_blank" >
+                            <svgIcons.github
+                                className="w-7 h-7 text-gray-500 hover:text-gray-900 dark:fill-white cursor-pointer"
+                            />
+                        </Link>
 
-                        <svgIcons.instagram
-                            className="w-7 h-7 text-gray-500 hover:text-gray-900 dark:hover:text-white cursor-pointer"
-                        />
-
+                        <Link
+                            href={siteConfig.links.twitter}
+                            target='_blank'
+                        >
+                            <svgIcons.twitter
+                                className="w-7 h-7 text-gray-500 hover:text-gray-900 dark:fill-white cursor-pointer"
+                            />
+                        </Link>
+                        <Link
+                            href={siteConfig.links.instagram}
+                            target="_blank"
+                        >
+                            <svgIcons.instagram
+                                className="w-7 h-7 text-gray-500 hover:text-gray-900 dark:hover:text-white cursor-pointer"
+                            />
+                        </Link>
                     </div>
                 </div>
             </footer>

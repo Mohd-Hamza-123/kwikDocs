@@ -1,22 +1,25 @@
 'use client'
 import "@/styles/mdx.css";
 import { posts } from '#site/content';
+import { DocPageParams } from "@/types/docs.type";
 import { useAppDispatch } from '@/lib/hooks/hooks';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useResponsiveContext } from "@/context/CSS-Context";
 import { FilteredPostList, LoadingPage, ShowPost } from "@/index";
 import type { FileNode } from "@/services/helpers/getContentTree";
 import { setAllDocs, setDoc } from "@/lib/store/features/docsSlice";
+import { toast } from "@/hooks/use-toast";
 
-export default function DocPage({ params }: any) {
-  console.log(posts)
+export default function DocPage({ params }: DocPageParams) {
+
+  console.log(posts.length)
   const { tech } = params
   const dispatch = useAppDispatch()
   const [nodes, setNodes] = useState<FileNode[] | null>(null)
 
   const allPost = useMemo(() => posts?.filter((post) => post?.slug.indexOf(tech) === 0 && post?.published)
     , [posts, tech]);
-  
+
   const { isDocIndexOpen } = useResponsiveContext();
 
   useEffect(() => {
@@ -25,8 +28,16 @@ export default function DocPage({ params }: any) {
     fetch(`/api/content-tree/${tech}`)
       .then(res => res.json())
       .then((res) => {
+        console.log(res)
         if (res?.tree) setNodes(res?.tree)
         else setNodes(null)
+      })
+      .catch(err => {
+        console.error(err)
+        toast({
+          title: 'Something went wrong',
+          variant : "destructive"
+        })
       })
 
   }, [])

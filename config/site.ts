@@ -5,7 +5,7 @@ export const siteConfig = {
     description: "Learn Simply: Your Beginner-Friendly Guide to Mastering Concepts",
     author: "Mohd Hamza",
     links: {
-        twitter: '',
+        twitter: 'https://x.com/Mohd_Hamza_byte?t=Y6IlBXQ6nooW1eo-__OXEQ&s=08',
         instagram: 'https://www.instagram.com/byte_master_hamza/',
         github: 'https://github.com/Mohd-Hamza-123',
         reddit : 'https://www.reddit.com/user/MathematicianOld479/'

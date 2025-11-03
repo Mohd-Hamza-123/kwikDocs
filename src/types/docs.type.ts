@@ -24,3 +24,9 @@ export type TechnologyCategory = {
     techType: string;
     technologies: Technology[]
 }
+
+export type DocPageParams = {
+    params : {
+        tech : string;
+    }
+}

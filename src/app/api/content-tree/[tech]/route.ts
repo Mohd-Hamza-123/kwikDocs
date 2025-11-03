@@ -1,20 +1,21 @@
-import { NextResponse } from 'next/server'
-import path from 'path'
-import getContentTree from '@/services/helpers/getContentTree'
+import { NextResponse } from "next/server"
+import getContentTree from "@/services/helpers/getContentTree"
+import path from "path"
 
-// Do NOT destructure directly in params – type it properly
 export async function GET(
-    request: Request,
-    context: any // context type
+  request: Request,
+  { params }: { params: { tech?: string } } 
 ) {
-    try {
-        const tech = context?.params?.tech
-        const folderPath = path.join(process.cwd(), 'src', 'content', tech)
-        const tree = await getContentTree(folderPath)
+  try {
+    const tech = params?.tech
+    console.log('tech', tech)
+    if (!tech) return NextResponse.json({ error: 'tech not provided' }, { status: 400 })
 
-        return NextResponse.json({ tree: tree || null }, { status: 200 })
-    } catch (error: any) {
-        console.error(error?.message)
-        return NextResponse.json({ error: error?.message || null }, { status: 500 })
-    }
+    const folderPath = path.join(process.cwd(), 'src', 'content', tech)
+    const tree = await getContentTree(folderPath)
+    return NextResponse.json({ tree: tree || null }, { status: 200 })
+  } catch (error: any) {
+    console.error(error?.message)
+    return NextResponse.json({ error: error?.message || null }, { status: 500 })
+  }
 }

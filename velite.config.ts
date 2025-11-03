@@ -25,6 +25,7 @@ const posts = defineCollection({
 
 export default defineConfig({
   root: `src/content`,
+  // root : 'src/content/python',
   output: {
     data: `.velite`,
     assets: `public/static`,
@@ -52,7 +53,3 @@ export default defineConfig({
 })
 
 
-//  export default defineConfig({
-//     root: './src/content/supabase',
-//     collections: {},
-//   })

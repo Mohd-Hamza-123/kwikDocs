@@ -1,24 +1,31 @@
 'use client'
 import React from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
 import { toast } from '@/hooks/use-toast'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { Input } from "@/components/ui/input"
+import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { useAppDispatch } from '@/lib/hooks/hooks'
 import { useMutation } from '@tanstack/react-query'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { registerUser } from '@/lib/API/Auth/register'
-import { overlayLoadingIsFalseReducer, overlayLoadingIsTrueReducer } from '@/lib/store/features/overlayLoaderSlice'
+import {
+  overlayLoadingIsFalseReducer,
+  overlayLoadingIsTrueReducer
+} from '@/lib/store/features/overlayLoaderSlice'
+import { signupSchema, signupSchemaType } from '@/lib/validation/authSchema'
 
 const Signup = () => {
+
   const router = useRouter()
   const dispatch = useAppDispatch()
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm<signupSchemaType>({
+    resolver: zodResolver(signupSchema)
+  });
 
   const mutationSignup = useMutation({
-    mutationFn: async (payload) => registerUser(payload),
+    mutationFn: (payload: signupSchemaType) => registerUser(payload),
     onMutate: (variables) => {
       dispatch(overlayLoadingIsTrueReducer({
         overlayLoadingMsg: "Please wait you are signIn"
@@ -32,7 +39,6 @@ const Signup = () => {
       })
     },
     onSuccess: (data, variables, context) => {
-    
       toast({
         title: "You are signIn",
       });
@@ -49,59 +55,62 @@ const Signup = () => {
     },
   })
 
-  const Register = async (data: any) => {
-    mutationSignup.mutate(data)
-  }
+  const Register = async (data: signupSchemaType) => mutationSignup.mutate(data)
 
   return (
-    <div className='flex justify-center flex-col items-center min-h-screen'>
-      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <Image
-          height={200}
-          width={200}
-          className="mx-auto h-12 w-auto"
-          src="./logo.png"
-          alt='Image'
-        />
-        <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Sign in to your account</h2>
-      </div>
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" onSubmit={handleSubmit(Register)}>
+    <div className="min-h-full w-full grid place-items-center px-2 py-2">
+      <div className="w-full max-w-2xl bg-card">
 
-          <div className="mt-2">
+        <form className="space-y-5 pb-4 pt-4" onSubmit={handleSubmit(Register)}>
+          <div className="space-y-2">
+            <Label className="text-sm font-medium" htmlFor="username">Username</Label>
             <Input
-              placeholder='username'
-              type='text'
-              {...register("username", {
-                required: true
-              })}
+              id="username"
+              placeholder="username"
+              type="text"
+              className={`h-9 rounded-xl ${errors?.username ? 'ring-2 ring-destructive' : ''}`}
+              {...register("username")}
             />
+            {errors?.username && (
+              <p className="text-sm text-destructive">{errors.username.message}</p>
+            )}
           </div>
 
-          <div className="mt-2">
-            <Input placeholder='email' type='email'  {...register("email", {
-              required: true
-            })} />
+          <div className="space-y-2">
+            <Label className="text-sm font-medium" htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              placeholder="email"
+              type="email"
+              className={`h-9 rounded-xl ${errors?.email ? 'ring-2 ring-destructive' : ''}`}
+              {...register("email")}
+            />
+            {errors?.email && (
+              <p className="text-sm text-destructive">{errors.email.message}</p>
+            )}
           </div>
 
-          <div className="mt-2">
-            <Input placeholder='password' type='password'  {...register("password", {
-              required: true
-            })} />
+          <div className="space-y-2">
+            <Label className="text-sm font-medium" htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              placeholder="password"
+              type="password"
+              className={`h-9 rounded-xl ${errors?.password ? 'ring-2 ring-destructive' : ''}`}
+              {...register("password")}
+            />
+            {errors?.password && (
+              <p className="text-sm text-destructive">{errors.password.message}</p>
+            )}
           </div>
 
-          <div>
-            <Button className='w-full'>SignIn</Button>
-          </div>
-         
+          <Button className="w-full h-9 rounded-xl font-medium shadow-sm">
+            SignIn
+          </Button>
+
         </form>
-        <p className="mt-10 text-center text-sm/6 text-gray-500">
-          Already have account ?
-          <Link href="/login" className="font-semibold text-indigo-600 hover:text-indigo-500"> Login</Link>
-        </p>
       </div>
     </div>
-
   )
 }
 

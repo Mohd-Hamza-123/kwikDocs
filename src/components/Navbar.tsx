@@ -33,7 +33,7 @@ const Navbar = () => {
     if (hidePaths.includes(pathName)) return null;
 
     return (
-        <header className="fixed top-0 border-b border-border bg-background/95 backdrop:blur supports-[backdrop-filter]:bg-background/60 z-10 w-full h-[9vh]">
+        <header className="fixed top-0 border-b border-border bg-background/95 backdrop:blur supports-[backdrop-filter]:bg-background/60 z-10 w-full h-[9vh">
             <nav
                 className="flex justify-between items-center dark:bg-bgDark shadow-xl h-[9dvh] px-3 lg:px-7 w-full"
                 aria-label="Main Navigation">
