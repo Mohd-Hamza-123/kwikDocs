@@ -1,0 +1,37 @@
+---
+title: Import and Export
+published : true
+---
+
+Suppose you have multiple python files in a directory. You can import variables from one file to another file. 
+
+```plaintext
+main.py
+app.py
+```
+
+The content of the `main.py` file is as follows:
+
+```python
+age = 20
+name = "John"
+```
+
+We want to import the `age` and `name` variables from the `app.py` file to the `main.py` file. We can do this : 
+
+```python
+from app import age, name
+print(age)
+print(name)
+```
+
+Another Way to import the variables is as follows:
+
+```python
+import app
+print(app.age)
+print(app.name)
+```
+
+---
+

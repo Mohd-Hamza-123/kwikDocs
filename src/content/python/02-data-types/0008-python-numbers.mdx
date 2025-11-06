@@ -10,8 +10,8 @@ There are three numeric types in Python:
 *   *`complex`*
     
 ```python
-x = 1    # int
-y = 2.8  # float
+x = 1        # int
+y = 2.8      # float
 z = 2 + 1j   # complex
 ```
 
@@ -34,13 +34,21 @@ Python provides a set of built-in functions for performing numeric operations.
 
 **1) round(x,n) Function**
 
-round(x, n): The built-in round function rounds a number x to n decimal places. If n is not provided, it rounds to the nearest integer.
+round(x, n): The built-in round function rounds a number x to n decimal places. If n is not provided, it rounds to the nearest integer. 
+
+* round() function uses Banker's Rounding (also called "round half to even").
 
 ```python
-print(round(2.2))  # Output: 2
-print(round(2.8))  # Output: 3
-print(round(2.5))  # Output: 2
-print(round(2.84919,3)) # Output : 2.849
+a = round(2.2)
+b = round(2.8)
+c = round(2.5)
+f = round(3.5)
+d = round(2.84919,3)
+print(a) # Output: 2
+print(b) # Output: 3
+print(c) # Output: 2
+print(f) # Output: 4
+print(d) # Output: 2.849
 ```
 
 **2) abs(x) Function**
@@ -48,9 +56,12 @@ print(round(2.84919,3)) # Output : 2.849
 abs(x): The built-in abs function returns the absolute value of a number.
 
 ```python
-print(abs(-1))    # Output: 1
-print(abs(-1.1))  # Output: 1.1
-print(abs(5))     # Output: 5
+a = abs(-1)
+b = abs(-1.1)
+c = abs(5)
+print(a)   # Output: 1
+print(b)   # Output: 1.1
+print(c)   # Output: 5
 ```
 
 **3) pow(x,y) Function**
@@ -58,7 +69,8 @@ print(abs(5))     # Output: 5
 pow(x,y): The built-in pow function returns x to the power of y.
 
 ```python
-print(pow(2,3))   # Output: 8
+a  = pow(2,3)
+print(a) # Output: 8
 ```
 
 **4) max(x,y) Function**
@@ -66,8 +78,10 @@ print(pow(2,3))   # Output: 8
 max(x,y): The built-in max function returns the largest of two or more numbers.
 
 ```python
-print(max(1,2))   # Output: 2
-print(max(1,2,3)) # Output: 3
+a = max(1,2,3)
+b = max(1,2,3,4)
+print(a) # Output: 3
+print(b) # Output: 4
 ```
 
 **5) min(x,y) Function**
@@ -75,8 +89,10 @@ print(max(1,2,3)) # Output: 3
 min(x,y): The built-in min function returns the smallest of two or more numbers.
 
 ```python    
-print(min(1,2))   # Output: 1
-print(min(1,2,3)) # Output: 1
+a = min(1,2,3)
+b = min(1,2,3,4)
+print(a) # Output: 1
+print(b) # Output: 1
 ```
 
 **6) int(x) Function**
@@ -84,9 +100,12 @@ print(min(1,2,3)) # Output: 1
 int(x): The built-in int function returns the integer part of a number.
 
 ```python
-print(int(2.8))   # Output: 2
-print(int(2.5))   # Output: 2
-print(int(2.84919)) # Output : 2
+a = int(5.8)
+b = int(2.5)
+c = int(2.84919)
+print(a) # Output: 5
+print(b) # Output: 2    
+print(c) # Output: 2
 ```
 
 ---
@@ -103,66 +122,109 @@ print(math.pi)
 ```
 
 **2) math.floor() Method**  
+
+The `math.floor()` method returns the integer less than or equal to a number.
+
 ```python
 import math
-print(math.floor(0.6))   # 0
-print(math.floor(1.4))   # 1
-print(math.floor(5.3))   # 5
-print(math.floor(-5.3))  # -6
-print(math.floor(22.6))  # 22
-print(math.floor(10.0))  # 10
+a = math.floor(0.6)   
+b = math.floor(1.4)   
+c = math.floor(5.3)   
+d = math.floor(-5.3)  
+e = math.floor(22.6)  
+f = math.floor(10.0)  
+
+print(a) # Output: 0
+print(b) # Output: 1
+print(c) # Output: 5
+print(d) # Output: -6
+print(e) # Output: 22
+print(f) # Output: 10
 ```
 
 **3) math.trunc() Method**
+
+The `math.trunc()` method returns the integer part of a number.
+
 ```python
 import math
-#  It works similarly to rounding towards zero.
-print(math.trunc(5.9))   # Output: 5
-print(math.trunc(-5.9))  # Output: -5
-print(math.trunc(10))    # Output: 10
+
+a = math.trunc(5.9)   
+b = math.trunc(-5.9)  
+c = math.trunc(10)
+
+print(a) # Output: 5
+print(b) # Output: -5
+print(c) # Output: 10
 ```
 
 **4) math.ceil() Method**
 
+The `math.ceil()` method returns the integer greater than or equal to a number.
+
 ```python
 import math
-print(math.ceil(0.6))   # 1
-print(math.ceil(1.4))   # 2
-print(math.ceil(-5.3))  # -5
+
+a = math.ceil(0.6)
+b = math.ceil(1.4)
+c = math.ceil(-5.3)
+
+print(a) # Output: 1
+print(b) # Output: 2
+print(c) # Output: -5
 ```
 
 **5) math.sqrt() Method**
 
+The `math.sqrt()` method returns the square root of a number.
+
 ```python
 import math
-print(math.sqrt(4))   # 2.0
-print(math.sqrt(9))   # 3.0
+
+a = math.sqrt(4)
+b = math.sqrt(9)
+
+print(a) # Output: 2.0
+print(b) # Output: 3.0
+
 ```
 
 **6) math.pow() Method**
+
+The `math.pow()` method returns the value of a number raised to the power of another number.
+
 ```python
 import math
-print(math.pow(2, 3))   # 8.0
+
+a = math.pow(2, 3)
+
+print(a) # Output: 8
 ```
 
 **7) math.factorial() Method**
 
+The `math.factorial()` method returns the factorial of a number.
+
 ```python
 import math
-print(math.factorial(5))   # 120
-```
 
+a = math.factorial(5)
+print(a) # Output: 120
+```
 
 ---
 
 ### **Python Random Module :**
 
 **_1)_ Python random.randint( ) Method** 
+
 ```python
 import random
-# Return a number between 3 and 9 (both included):
-print(random.randint(3, 9))
+
+a = random.randint(3, 9)
+print(a) # returns a random number between 3 and 9 (both included)
 ```
+
 **_2)_ Python random.choice( ) Method**
 ```python
 import random
@@ -170,7 +232,10 @@ import random
 mylist = ["apple", "banana", "cherry"]
 print(random.choice(mylist))
 ```
-**Python Decimal Module :**
+
+---
+
+### **Python Decimal Module :**
 
 Why need this module ? Lets understand with this example
 ```python
@@ -201,7 +266,10 @@ print (Fraction())
 # returns Fraction(0, 1)
 ```  
 
-Boolean as 0 , 1 :
+---
+
+### **Boolean as 0 , 1 :**
+
 
 ```python
 print(0 == False) # True
