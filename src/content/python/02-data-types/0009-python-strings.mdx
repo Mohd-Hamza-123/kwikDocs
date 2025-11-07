@@ -1,60 +1,59 @@
 ---
 title: Strings
-description: Learn the basics of python strings.
 published : true
 ---
 
 
-_Strings in python are surrounded by either single quotation marks, or double quotation marks._
+Strings in python are surrounded by either single quotation marks, or double quotation marks.
 
 ```py
-print("Hello")
-print('Hello')
+print("Hello World")
+
+print('Hello World')
 ```
-## **Slicing Strings :**
+### **Slicing Strings :**
 
-_You can return a range of characters by using the slice syntax._
+You can return a range of characters by using the slice syntax.
 
-_Specify the start index and the end index, separated by a colon, to return a part of the string._
+Specify the start index and the end index, separated by a colon, to return a part of the string.
+
 ```py
-    str = "0123456789"
-    
-    s1 = str[:]
-    print(s1)    # output : 0123456789
-    
-    s2 = str[1:5]
-    print(s2)    # output : 1234
-    
-    s3 = str[4:]
-    print(s3)    # output : 456789
-    
-    s4 = str[:9]
-    print(s4)    # output : 012345678 
-    
-    s5 = str[0:len(str):2]
-    print(s5)   # output : 02468
+str = "0123456789"
+
+s1 = str[:]
+print(s1)    # output : 0123456789
+
+s2 = str[1:5]
+print(s2)    # output : 1234
+
+s3 = str[4:]
+print(s3)    # output : 456789
+
+s4 = str[:9]
+print(s4)    # output : 012345678 
+
+s5 = str[0:len(str):2]
+print(s5)   # output : 02468
 ```
 
-**Slicing Methods :**
-=====================
+### **Slicing Methods :**
 
-_Here are some essential string methods in Python with examples:_
+Here are some essential string methods in Python with examples:
 
 ### 1\. **`strip()`**
 
 Removes leading and trailing whitespace (or specified characters).
 ```py
-    s = "  Hello World  "
-    print(s.strip())  # Output: "Hello World"
+s = "  Hello World  "
+print(s.strip())  # Output: "Hello World"
 ```  
-
 
 ### 2\. **`lower()`**
 
 Converts all characters in the string to lowercase.
 ```py
-    s = "HELLO"
-    print(s.lower())  # Output: "hello"
+s = "HELLO"
+print(s.lower())  # Output: "hello"
 ```
 
 
@@ -62,8 +61,8 @@ Converts all characters in the string to lowercase.
 
 Converts all characters in the string to uppercase.
 ```py
-    s = "hello"
-    print(s.upper())  # Output: "HELLO"
+s = "hello"
+print(s.upper())  # Output: "HELLO"
 ``` 
 
 
@@ -71,8 +70,8 @@ Converts all characters in the string to uppercase.
 
 Replaces occurrences of a substring with another substring.
 ```py
-    s = "Hello, World!"
-    print(s.replace("World", "Python"))  # Output: "Hello, Python!"
+s = "Hello, World!"
+print(s.replace("World", "Python"))  # Output: "Hello, Python!"
 ```
 
 
@@ -80,8 +79,8 @@ Replaces occurrences of a substring with another substring.
 
 Splits the string into a list of substrings based on a delimiter.
 ```py
-    s = "apple,banana,cherry"
-    print(s.split(","))  # Output: ['apple', 'banana', 'cherry']
+s = "apple,banana,cherry"
+print(s.split(","))  # Output: ['apple', 'banana', 'cherry']
 ```
 
 
@@ -89,8 +88,8 @@ Splits the string into a list of substrings based on a delimiter.
 
 Joins elements of an iterable into a single string, separated by the string used for `join`.
 ```py
-    words = ["Hello", "World"]
-    print(" ".join(words))  # Output: "Hello World"
+words = ["Hello", "World"]
+print(" ".join(words))  # Output: "Hello World"
 ```
 
 
@@ -98,8 +97,8 @@ Joins elements of an iterable into a single string, separated by the string used
 
 Checks if the string starts with the specified prefix.
 ```py
-    s = "Python Programming"
-    print(s.startswith("Python"))  # Output: True
+s = "Python Programming"
+print(s.startswith("Python"))  # Output: True
 ``` 
 
 
@@ -107,8 +106,8 @@ Checks if the string starts with the specified prefix.
 
 Checks if the string ends with the specified suffix.
 ```py
-    s = "example.txt"
-    print(s.endswith(".txt"))  # Output: True
+s = "example.txt"
+print(s.endswith(".txt"))  # Output: True
 ```
 
 
@@ -116,8 +115,8 @@ Checks if the string ends with the specified suffix.
 
 Returns the index of the first occurrence of the substring. Returns `-1` if not found.
 ```py
-    s = "Hello, World!"
-    print(s.find("World"))  # Output: 7
+s = "Hello, World!"
+print(s.find("World"))  # Output: 7
 ``` 
 
 
@@ -125,8 +124,8 @@ Returns the index of the first occurrence of the substring. Returns `-1` if not 
 
 Counts the occurrences of a substring in the string.
 ```py
-    s = "banana"
-    print(s.count("a"))  # Output: 3
+s = "banana"
+print(s.count("a"))  # Output: 3
 ``` 
 
 
@@ -134,8 +133,8 @@ Counts the occurrences of a substring in the string.
 
 Capitalizes the first character of the string.
 ```py
-    s = "python"
-    print(s.capitalize())  # Output: "Python"
+s = "python"
+print(s.capitalize())  # Output: "Python"
 ```
 
 
@@ -143,8 +142,8 @@ Capitalizes the first character of the string.
 
 Capitalizes the first character of every word in the string.
 ```py
-    s = "hello world"
-    print(s.title())  # Output: "Hello World"
+s = "hello world"
+print(s.title())  # Output: "Hello World"
 ``` 
 
 
@@ -152,8 +151,8 @@ Capitalizes the first character of every word in the string.
 
 Checks if all characters in the string are alphabetic.
 ```py
-    s = "Python"
-    print(s.isalpha())  # Output: True
+s = "Python"
+print(s.isalpha())  # Output: True
 ``` 
 
 
@@ -161,8 +160,8 @@ Checks if all characters in the string are alphabetic.
 
 Checks if all characters in the string are digits.
 ```py
-    s = "12345"
-    print(s.isdigit())  # Output: True
+s = "12345"
+print(s.isdigit())  # Output: True
 ```
 
 
@@ -170,8 +169,8 @@ Checks if all characters in the string are digits.
 
 Checks if all characters in the string are lowercase.
 ```py
-    s = "hello"
-    print(s.islower())  # Output: True
+s = "hello"
+print(s.islower())  # Output: True
 ```
 
 
@@ -179,8 +178,8 @@ Checks if all characters in the string are lowercase.
 
 Checks if all characters in the string are uppercase.
 ```py
-    s = "HELLO"
-    print(s.isupper())  # Output: True
+s = "HELLO"
+print(s.isupper())  # Output: True
 ```
 
 
@@ -188,8 +187,8 @@ Checks if all characters in the string are uppercase.
 
 Formats the string using placeholders.
 ```py
-    s = "My name is {} and I am {} years old."
-    print(s.format("Alice", 25))  # Output: "My name is Alice and I am 25 years old."
+s = "My name is {} and I am {} years old."
+print(s.format("Alice", 25))  # Output: "My name is Alice and I am 25 years old."
 ```
 
 ## Escape Character ( \\ )

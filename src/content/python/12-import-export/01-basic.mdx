@@ -17,10 +17,10 @@ age = 20
 name = "John"
 ```
 
-We want to import the `age` and `name` variables from the `app.py` file to the `main.py` file. We can do this : 
+We want to import the `age` and `name` variables from the `main.py` file to the `app.py` file. We can do this : 
 
 ```python
-from app import age, name
+from main import age, name
 print(age)
 print(name)
 ```
@@ -28,9 +28,9 @@ print(name)
 Another Way to import the variables is as follows:
 
 ```python
-import app
-print(app.age)
-print(app.name)
+import main
+print(main.age)
+print(main.name)
 ```
 
 ---
