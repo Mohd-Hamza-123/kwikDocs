@@ -3,7 +3,7 @@ title: Strings
 published : true
 ---
 
-Strings in python are surrounded by either single quotation marks, or double quotation marks.
+A string is just a collection of characters — letters, numbers, symbols — inside quotes.
 
 ```py
 print("Hello World")
@@ -13,6 +13,70 @@ multiline
      string
 """)
 ```
+
+### Index — What is it?
+
+Imagine your string is a row of boxes,
+and **each box holds one character**.
+
+Example:
+
+```
+word = "Python"
+```
+
+Now think like this 👇
+
+| Character | P | y | t | h | o | n |
+| --------- | - | - | - | - | - | - |
+| Index     | 0 | 1 | 2 | 3 | 4 | 5 |
+
+So:
+
+* `"P"` is at position **0**
+* `"y"` is at position **1**
+* `"n"` is at position **5**
+
+This **position number** is called an **index**.
+
+---
+
+### 🎯 Accessing Characters (Indexing)
+
+You can pick any character from a string using **square brackets** `[]` with its index number.
+
+```python
+word = "Python"
+
+print(word[0])  # Output: P
+print(word[1])  # Output: y
+print(word[5])  # Output: n
+```
+
+💡 In programming, counting starts from **0**, not 1.
+
+---
+
+### Negative Indexing (From the End)
+
+You can also count from the end using **negative numbers**:
+
+| Character | P  | y  | t  | h  | o  | n  |
+| --------- | -- | -- | -- | -- | -- | -- |
+| Index     | -6 | -5 | -4 | -3 | -2 | -1 |
+
+So:
+
+```python
+word = "Python"
+
+print(word[-1])  # 'n' (last letter)
+print(word[-2])  # 'o'
+print(word[-3])  # 'h'
+```
+
+---
+
 
 ### **String Methods :**
 
