@@ -1,0 +1,145 @@
+---
+title : Schema Design with TypeScript
+isPublished : true
+---
+
+
+### **🔹 Step 1: Import Mongoose Utilities**
+
+```ts
+import {
+  Schema,
+  model,
+  models,
+  InferSchemaType,
+  HydratedDocument,
+  Types,
+} from "mongoose";
+```
+
+📌 These utilities help us:
+
+* **define structure** (`Schema`)
+* **interact with DB** (`model`)
+* **reuse models** (`models`)
+* **generate types** (`InferSchemaType`)
+* **type returned docs** (`HydratedDocument`)
+* **work with MongoDB types** (`Types`)
+
+---
+
+### **🔹 Step 2: Create the Schema (Blueprint)**
+
+```ts
+const userSchema = new Schema(
+  {
+    name: { type: String, required: true, trim: true },
+    email: { type: String, required: true, unique: true, lowercase: true },
+    passwordHash: { type: String, required: true },
+    age: { type: Number },
+    friends: [{ type: Types.ObjectId, ref: "User" }], // relationship
+  },
+  { timestamps: true }
+);
+```
+
+📌 **This defines the structure**. Still no database interaction yet.
+
+---
+
+### **🔹 Step 3: Generate a TypeScript Type from Schema**
+
+```ts
+export type User = InferSchemaType<typeof userSchema>;
+```
+
+Now TypeScript automatically understands:
+
+```ts
+type User = {
+  name: string;
+  email: string;
+  passwordHash: string;
+  age?: number;
+  friends: Types.ObjectId[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+```
+
+📌 **No manual typing needed. No duplicates.**
+
+---
+
+### **🔹 Step 4: Create a Type for Real MongoDB Documents**
+
+```ts
+export type UserDocument = HydratedDocument<User>;
+```
+
+📌 This type includes MongoDB + Mongoose methods like:
+
+* `.save()`
+* `.populate()`
+* `_id`
+
+---
+
+### **🔹 Step 5: Create & Export the Model Safely**
+
+```ts
+const UserModel =
+  (models.User as ReturnType<typeof model<User>> | undefined) ||
+  model<User>("User", userSchema);
+
+export default UserModel;
+```
+
+📌 **Why use `models.User || model()`?**
+
+* avoids duplicate model error in Next.js, hot reload, serverless, etc.
+
+---
+
+### **🎉 Final Working Full Schema Design**
+
+```ts
+import {
+  Schema,
+  model,
+  models,
+  InferSchemaType,
+  HydratedDocument,
+  Types,
+} from "mongoose";
+
+const userSchema = new Schema(
+  {
+    name: { type: String, required: true, trim: true },
+    email: { type: String, required: true, unique: true, lowercase: true },
+    passwordHash: { type: String, required: true },
+    age: { type: Number },
+    friends: [{ type: Types.ObjectId, ref: "User" }],
+  },
+  { timestamps: true }
+);
+
+// 1) Plain data type inferred from schema
+export type User = InferSchemaType<typeof userSchema>;
+
+// 2) Full document type with _id, save(), etc.
+export type UserDocument = HydratedDocument<User>;
+
+// 3) Type for ObjectId
+export type UserId = Types.ObjectId;
+
+// 4) Model creation (Next.js safe)
+const UserModel =
+  (models.User as ReturnType<typeof model<User>> | undefined) ||
+  model<User>("User", userSchema);
+
+export default UserModel;
+```
+
+---
+
