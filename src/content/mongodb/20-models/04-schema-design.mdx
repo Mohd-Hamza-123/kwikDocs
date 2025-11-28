@@ -111,6 +111,7 @@ import {
   InferSchemaType,
   HydratedDocument,
   Types,
+  Model,
 } from "mongoose";
 
 const userSchema = new Schema(
@@ -135,7 +136,7 @@ export type UserId = Types.ObjectId;
 
 // 4) Model creation (Next.js safe)
 const UserModel =
-  (models.User as ReturnType<typeof model<User>> | undefined) ||
+  (models.User as Model<User> | undefined) ||
   model<User>("User", userSchema);
 
 export default UserModel;

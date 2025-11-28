@@ -1,0 +1,106 @@
+---
+title: Docker Basic Commands for Managing Containers
+published: true
+---
+
+## 🐳 Docker Basic Commands
+
+A quick guide to commonly used Docker CLI commands for managing containers.
+
+---
+
+### ⚙️ 1) `docker ps` — Show Running Containers  
+Lists **only containers that are currently running.**
+
+```bash
+docker ps
+````
+
+👀 **You can view details such as:**
+
+* Container ID
+* Image name
+* Ports mapping
+* Running status
+* Container name
+
+**Example Output:**
+
+```plaintext
+CONTAINER ID   IMAGE            STATUS      PORTS       NAMES
+07a30fd1c123   react-docker-app Up 2 mins   8080->80     hopeful_wilson
+```
+
+🔎 **If no containers are running**, you'll see an empty list:
+
+```plaintext
+CONTAINER ID   IMAGE   COMMAND   CREATED   STATUS   PORTS   NAMES
+```
+
+📌 **Meaning:** You have **no running containers**.
+
+---
+
+### 📦 2) `docker ps -a` — Show All Containers
+
+Displays **all containers**, including stopped ones.
+
+```bash
+docker ps -a
+```
+
+🧱 Useful to find old or exited containers you may want to remove.
+
+---
+
+### ⛔ 3) `docker stop <container_id>` — Stop a Running Container
+
+Stops a container **gracefully**.
+
+```bash
+docker stop 07a30fd1c123
+```
+
+💡 Use `docker ps` first to find the container ID.
+
+---
+
+### 🗑️ 4) `docker rm <container_id>` — Remove a Container
+
+Deletes a container, but only if **it is not running**.
+
+```bash
+docker rm 07a30fd1c123
+```
+
+⚠️ If the container is still running, you must stop it first:
+
+```bash
+docker stop <container_id>
+docker rm <container_id>
+```
+
+---
+
+### 🧹 Bonus Tip
+
+To remove **all stopped containers at once**:
+
+```bash
+docker container prune
+```
+
+---
+
+### 🎉 Summary Table
+
+| Command                  | Purpose                       |
+| ------------------------ | ----------------------------- |
+| `docker ps`              | Show running containers       |
+| `docker ps -a`           | Show all containers           |
+| `docker stop <id>`       | Stop a running container      |
+| `docker rm <id>`         | Remove a stopped container    |
+| `docker container prune` | Remove all stopped containers |
+
+---
+

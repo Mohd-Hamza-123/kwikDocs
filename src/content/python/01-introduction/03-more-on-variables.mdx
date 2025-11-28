@@ -1,5 +1,5 @@
 ---
-title: More about Variables and Objects in Python.
+title: More about Variables
 published : true
 ---
 
@@ -10,10 +10,12 @@ Variables don’t store the actual data — they store a reference (a link or po
 **Creating Variables** :
 Python has no command for declaring a variable.
 A variable is created the moment you first assign a value to it.
+
 ```python
-    a = 10
-    print(a)
+a = 10
+print(a)
 ```
+
 **Understanding Variables and Objects** 
 
 In Python, when you write **`a = 10`**, the following happens :_
@@ -62,7 +64,13 @@ print(id(10))  # Outputs the unique ID of the object '10'
 print(dir(10))
 # This will output a list of methods and attributes available to the int class, such as bit_length, to_bytes, and more
 ```
+
 <Callout>
- Everything in Python is an object, and all objects (directly or indirectly) are created by the type metaclass. The type metaclass serves as the ultimate root of Python's object hierarchy, ensuring consistency and flexibility in the language's design. 😊
+Every variable in Python — no matter what type it is —  is ultimately stored in binary (0s and 1s) inside your computer’s memory.
 </Callout>
+
+<Callout>
+ Everything in Python is an object, and all objects (directly or indirectly) are created by the type metaclass. The type metaclass serves as the ultimate root of Python's object hierarchy, ensuring consistency and flexibility in the language's design.
+</Callout>
+
 ---

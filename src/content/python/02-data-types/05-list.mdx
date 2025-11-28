@@ -1,0 +1,531 @@
+---
+title: List
+published : true
+---
+
+
+A `list` in Python is a **mutable**, ordered collection of items. Lists can hold elements of any data type, including integers, strings, floats, or even other lists. Lists are defined using square brackets `[]`.
+
+**Example:**
+
+```python
+colors = ["red", "blue", "green", "pink"]
+phone_no = [1234567890, 9876543210]
+my_list = [1, "Hello", 3.14, [5, 6]]
+```
+
+---
+
+### **Accessing List Data**
+
+You can access elements in a list using their **index**. Python uses zero-based indexing, so the first element is at index `0`.
+
+**Example:**
+
+```python
+my_list = [10, 20, 30, 40, 50]
+
+# Accessing elements
+print(my_list[0])  # Output: 10 (first element)
+print(my_list[-1]) # Output: 50 (last element using negative indexing)
+```
+
+---
+
+### **Updating List Data**
+
+You can update a list element by assigning a new value to a specific index. Lists are **mutable**, so you can also update multiple elements using slicing.
+
+**Example:**
+
+```python
+my_list = [10, 20, 30, 40, 50]
+
+# Update a single element
+my_list[2] = 99
+print(my_list)  # Output: [10, 20, 99, 40, 50]
+
+# Update multiple elements
+my_list[1:3] = [88, 77]
+print(my_list)  # Output: [10, 88, 77, 40, 50]
+```
+
+---
+
+### **Deleting List Data**
+
+You can delete elements from a list using:
+
+- `del` statement
+
+```python
+my_list = [10, 20, 30, 40, 50]
+
+# Delete an element by index
+del my_list[1]
+print(my_list)  # Output: [10, 30, 40, 50]
+```
+
+---
+
+## Python List Methods
+
+### 1. `append()`
+
+**Purpose:** Add a single element to the end of the list.
+
+**Syntax:**
+`list.append(element)`
+
+**Behavior:**
+Does not return a new list; modifies in place.
+
+**Example:**
+
+```python
+nums = [1, 2, 3]
+nums.append(4)
+print(nums)  # [1, 2, 3, 4]
+```
+
+
+### 2. `extend()`
+
+**Purpose:** Add each element of an iterable (list, tuple, set) to the end of the list.
+
+**Syntax:**
+`list.extend(iterable)`
+
+**Example:**
+
+```python
+nums = [1, 2, 3]
+nums.extend([4, 5])
+print(nums)  # [1, 2, 3, 4, 5]
+```
+
+**Difference from `append`:**
+`append` adds one object, `extend` expands the list.
+
+
+### 3. `insert()`
+
+**Purpose:** Insert an element at a specific index.
+
+**Syntax:**
+`list.insert(index, element)`
+
+**Example:**
+
+```python
+nums = [1, 2, 4]
+nums.insert(2, 3)  
+print(nums)  # [1, 2, 3, 4]
+```
+
+
+### 4. `remove()`
+
+**Purpose:** Remove the **first occurrence** of a value.
+
+**Syntax:**
+`list.remove(value)`
+
+**Example:**
+
+```python
+items = ['a', 'b', 'c', 'b']
+items.remove('b')
+print(items)  # ['a', 'c', 'b']
+```
+
+**Raises:** `ValueError` if the value does not exist.
+
+
+### 5. `pop()`
+
+**Purpose:** Remove and return an element.
+
+**Syntax:**
+`list.pop()` → removes last element
+`list.pop(index)` → removes element at index
+
+**Example:**
+
+```python
+items = [10, 20, 30]
+x = items.pop()
+print(x)      # 30
+print(items)  # [10, 20]
+```
+
+**Raises:** `IndexError` if invalid index.
+**Time complexity:**
+
+
+### 6. `clear()`
+
+**Purpose:** Remove all items from the list.
+
+**Syntax:**
+`list.clear()`
+
+**Example:**
+
+```python
+nums = [1, 2, 3]
+nums.clear()
+print(nums)  # []
+```
+
+
+### 7. `index()`
+
+**Purpose:** Return the index of the **first occurrence** of a value.
+
+**Syntax:**
+`list.index(value, start=0, end=len(list))`
+
+**Example:**
+
+```python
+letters = ['a', 'b', 'c', 'b']
+print(letters.index('b'))  # 1
+```
+
+
+### 8. `count()`
+
+**Purpose:** Count how many times a value appears.
+
+**Syntax:**
+`list.count(value)`
+
+**Example:**
+
+```python
+nums = [1, 2, 1, 1, 3]
+print(nums.count(1))  # 3
+```
+
+
+### 9. `sort()`
+
+**Purpose:** Sort the list **in place**.
+
+**Syntax:**
+`list.sort(reverse=False, key=None)`
+
+**Example:**
+
+```python
+nums = [3, 1, 2]
+nums.sort()
+print(nums)  # [1, 2, 3]
+```
+
+**With key function:**
+
+```python
+words = ["cat", "ball", "apple"]
+words.sort(key=len)
+print(words)  # ["cat", "ball", "apple"]
+```
+
+**Note:** Does not return a new list.
+
+
+### 10. `reverse()`
+
+**Purpose:** Reverse the list **in place**.
+
+**Syntax:**
+`list.reverse()`
+
+**Example:**
+
+```python
+nums = [1, 2, 3]
+nums.reverse()
+print(nums)  # [3, 2, 1]
+```
+
+### 11. `copy()`
+
+**Purpose:** Return a **shallow copy** of the list.
+
+**Syntax:**
+`list.copy()`
+
+**Example:**
+
+```python
+nums = [1, 2, 3]
+new_nums = nums.copy()
+```
+
+**Shallow copy:**
+Nested lists are **not** fully copied.
+
+
+### 12. `__len__()` (via `len()`)
+
+Not a method but commonly used.
+
+**Purpose:** Return number of items.
+
+```python
+len([1, 2, 3])  # 3
+```
+
+---
+
+
+## Slicing 
+
+
+Slicing allows you to extract **subsections of a list** without modifying the original list. It is one of Python’s most powerful sequence features.
+
+
+### 1. Basic Slice Syntax
+
+**Syntax Format:**
+
+```
+list[start : stop : step]
+```
+
+**Meaning:**
+
+* **start** → index to begin (inclusive)
+* **stop** → index to end (exclusive)
+* **step** → interval (how many indices to skip)
+
+All three are optional.
+
+---
+
+Assume:
+
+```python
+nums = [10, 20, 30, 40, 50, 60]
+# Index: 0   1   2   3   4   5
+```
+
+### Example 1: Simple slice
+
+```python
+nums[1:4]   # [20, 30, 40]
+```
+
+Takes elements from index 1 to 3.
+
+### Example 2: Omitting start
+
+```python
+nums[:3]    # [10, 20, 30]
+```
+
+Start automatically becomes 0.
+
+### Example 3: Omitting stop
+
+```python
+nums[3:]    # [40, 50, 60]
+```
+
+Stop automatically becomes end of list.
+
+### Example 4: Omitting both
+
+```python
+nums[:]     # [10, 20, 30, 40, 50, 60]
+```
+
+Returns a shallow copy.
+
+
+### Example 5 : Step of  2
+
+```python
+nums[0:6:2]   # [10, 30, 50]
+```
+
+Skips every alternate element.
+
+---
+
+### Negative Index Slicing
+
+Negative indices count from the end:
+
+```
+-1 = last element
+-2 = second last
+```
+
+**Example:**
+
+```python
+nums[-4:-1]   # [30, 40, 50]
+```
+
+Explanation:
+
+* -4 → index 2
+* -1 → index 5 (stop: exclusive)
+
+---
+
+If step is **negative**, slicing goes right→left.
+
+### Example 1: Full reverse list
+
+```python
+nums[::-1]    # [60, 50, 40, 30, 20, 10]
+```
+
+### Example 2: Reverse subset
+
+```python
+nums[5:2:-1]  # [60, 50, 40]
+```
+
+Think: start at index 5 and go down to index 3.
+
+---
+
+## Important Rules to Understand
+
+**Rule 1: Stop index is exclusive**
+
+```python
+nums[1:4]  # includes 1,2,3 (NOT 4)
+```
+
+**Rule 2: Step decides direction**
+
+* Positive step → Left to right
+* Negative step → Right to left
+
+If your direction conflicts with the start/stop, output is empty:
+
+```python
+nums[1:5:-1]  # [] → negative step but start < stop
+```
+
+---
+
+## Slice Assignment (Advanced but Powerful)
+
+You can assign to slices.
+
+**Example 1: Replace a slice**
+
+```python
+nums = [1, 2, 3, 4, 5]
+nums[1:4] = [20, 30]
+print(nums)   # [1, 20, 30, 5]
+```
+
+**Example 2: Delete elements through slicing**
+
+```python
+nums = [10, 20, 30, 40]
+nums[1:3] = []
+print(nums)  # [10, 40]
+```
+
+**Example 3: Insert by slicing of length 0**
+
+```python
+nums = [1, 4, 5]
+nums[1:1] = [2, 3]
+print(nums)  # [1, 2, 3, 4, 5]
+```
+
+---
+
+## Slice Creates a New List
+
+Slicing always returns a **new list**, not a reference.
+
+```python
+a = [1, 2, 3]
+b = a[:]
+b.append(4)
+print(a)  # [1, 2, 3]
+```
+
+---
+
+## Out-of-Range Handling
+
+Python does NOT throw IndexError when slicing out of range.
+
+```python
+nums = [10, 20, 30]
+print(nums[0:100])   # [10, 20, 30]
+print(nums[-100:2])  # [10, 20]
+```
+
+Graceful adjustment makes slicing safe.
+
+---
+
+## Common Slice Patterns
+
+### Reverse entire list:
+
+```python
+nums[::-1]
+```
+
+### Last three items:
+
+```python
+nums[-3:]
+```
+
+### All except first and last:
+
+```python
+nums[1:-1]
+```
+
+### Copy list:
+
+```python
+nums[:]
+```
+
+### Every even-index element:
+
+```python
+nums[0::2]
+```
+
+### Every odd-index element:
+
+```python
+nums[1::2]
+```
+
+---
+
+### Quick Summary Table
+
+| Slice           | Meaning                        |
+| --------------- | ------------------------------ |
+| `a[start:stop]` | Elements index start to stop-1 |
+| `a[:stop]`      | From start to stop-1           |
+| `a[start:]`     | From start to end              |
+| `a[:]`          | Copy list                      |
+| `a[::step]`     | Step through                   |
+| `a[::-1]`       | Reverse list                   |
+| `a[-n:]`        | Last n items                   |
+| `a[:-n]`        | All except last n              |
+
+
+---
+

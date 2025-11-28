@@ -1,9 +1,9 @@
 ---
-title: Python Variables.
+title: variables
 published : true
 ---
 
-In **Python**, a **variable** is like a **container** (or a box) that **stores data** — such as numbers, text, or other values.
+Variables in Python are simply names that refer to values.
 
 **Example**
 
@@ -12,29 +12,69 @@ name = "Hamza"
 product_name = "PlayStation 5"
 age = 77
 height = 89.4323
-isGraduated = True
-is12thFailed = False
+is_graduated = True
+is_Failed = False
+colors = ["Red" , "Blue" , "Green" , "Pink"]
 ```
-
-* `name` is a **variable** that stores the text `"Hamza"`
-* `product_name` is a **variable** that stores the text `"PlayStation 5"`
-* `age` is a **variable** that stores the number `24`
-* `height` is a **variable** that stores the number `89.4323`
-* `isGraduated` is a **variable** that stores the boolean value `True`
-* `is12thFailed` is a **variable** that stores the boolean value `False`
-
 
 ### **Rules for naming python variables**
 
-* Must **start with a letter or underscore** ( _ )
-* Can contain **letters, numbers, or underscores**
-* Cannot start with a number
-* No spaces allowed
-* Shouldn’t use Python keywords (like `if`, `for`, `print`, etc.)
+Here is a clear and concise summary **with examples**:
 
-<Callout>
-Every variable in Python — no matter what type it is —  is ultimately stored in binary (0s and 1s) inside your computer’s memory.
-</Callout>
+1. Must start with a letter or underscore
+
+Valid:
+
+```python
+name = "Hamza"
+_age = 24
+```
+
+Invalid:
+
+```python
+1user = "error"
+```
+
+2. Can contain letters, digits, and underscores
+
+Valid:
+
+```python
+user1 = "Ayan"
+total_amount = 500
+```
+
+Invalid:
+
+```python
+user-name = "error"   # hyphen not allowed
+full name = "error"   # space not allowed
+```
+
+3. Case-sensitive
+
+```python
+value = 10
+Value = 20   # different variable
+```
+
+4. Cannot use Python keywords
+
+Invalid:
+
+```python
+for = 5      # invalid
+class = "x"  # invalid
+```
+
+5. Use snake_case (recommended)
+
+```python
+student_name = "Ali"
+max_score = 100
+```
+
 
 
 ---
