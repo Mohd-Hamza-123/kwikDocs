@@ -91,7 +91,7 @@
     "baseline-browser-mapping": "^2.9.5",
     "cross-env": "^10.0.0",
     "daisyui": "^4.12.14",
-    "eslint": "^8",
+    "eslint": "^9.39.2",
     "eslint-config-next": "^16.0.7",
     "postcss": "^8",
     "rehype-autolink-headings": "^7.1.0",
