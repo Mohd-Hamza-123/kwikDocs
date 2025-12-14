@@ -1,0 +1,70 @@
+---
+title: Basic Middleware
+published: true
+---
+
+Middleware is simply a function that sits between the incoming request and the final route handler, allowing you to process or modify the request/response along the way.
+
+Example : 
+
+```
+Request ---> Middleware ---> Middleware ---> Handler ---> Response
+```
+
+### Types of Middleware
+
+There are two types of middleware :
+
+1. Global Middleware 
+2. Route Middleware
+
+
+### Global Middleware
+
+Global middleware refers to middleware functions that are applied to every incoming request in the application, regardless of the route or HTTP method.
+
+
+A global middleware is registered using:
+```js
+app.use(middlewareFunction)
+```
+
+Example:
+
+A Global Middleware to log the time of every request:
+
+```js
+app.use(function (req, res, next) {
+  console.log('Time:', Date.now())
+  next() // pass control to the next middleware
+})
+```
+
+A Global Middleware to parse JSON requests:
+
+```js
+app.use(express.json());
+```
+
+A Global Middleware to catch errors : 
+
+```typescript
+app.use((err : Error, req : Request, res : Response, next : NextFunction)=>{
+  console.log(err.name)
+  res.status(500).json({
+    message : "Internal Server Error",
+    success : false,
+    error : err.message
+  })
+})
+```
+
+### Route Middleware
+
+In Express.js, route middleware refers to middleware functions that are executed only for specific routes or route groups, not for every request.
+
+Example : 
+
+```js
+app.get("/route", middleware, handler);
+```

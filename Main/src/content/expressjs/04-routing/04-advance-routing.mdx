@@ -1,0 +1,68 @@
+---
+title : Advance Routing
+published : true
+---
+
+### Make Router Folder 
+
+```
+src/
+ ├── index.ts          # Entry point (server start)
+ ├── routes/           # All route definitions
+ │    ├── user.router.ts
+ │    ├── todos.router.ts
+ │    └── product.router.ts
+ ├── controllers/      # Route logic
+ ├── middlewares/
+ └── config/
+```
+
+### 
+
+```ts
+// routes/user.router.ts
+import { Router, type Request, type Response } from "express";
+
+const router = Router();
+
+/**
+ * GET /users
+ */
+router.get("/", (req: Request, res: Response) => {
+  res.json({ message: "Get all users" });
+});
+
+/**
+ * POST /users
+ */
+router.post("/", (req: Request, res: Response) => {
+  res.json({ message: "Create user" });
+});
+
+export default router;
+```
+
+### 
+
+```ts 
+import express from "express";
+import routes from "./routes";
+
+const app = express();
+
+/* Global middleware */
+app.use(express.json());
+
+/* Routes */
+app.use("/api", routes);
+
+export default app;
+``` 
+
+### 
+
+Hit the route 
+
+```
+GET /api/users
+```

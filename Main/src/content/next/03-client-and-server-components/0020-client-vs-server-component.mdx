@@ -1,0 +1,70 @@
+---
+title: Client vs Server Component
+description: Introduction to Client and Server Components
+published: true
+---
+
+## Server Component 
+
+Server components execute only on the server. By default every component is a server component. Unless you explicitly mark a component as a client component.
+
+```tsx
+export default function ServerComponent() {
+    return <h1>This is a server component</h1>
+}
+```
+
+### **When to Use Server Components**
+Server Components run on the server. Use them when your component:
+
+1. **Fetches Data on the Server:**
+   - Needs to access a database, call an API, or fetch static content before rendering.
+
+2. **Doesn’t Require Interactivity:**
+   - Displays static or dynamic content without user interactions (e.g., blog posts, product descriptions).
+
+3. **Needs Better Performance:**
+   - Offloads heavy computations or large data processing to the server.
+
+4. **Requires Secure Data Handling:**
+   - Handles sensitive operations like fetching private user data or secure API calls.
+
+5. **Focuses on SEO:**
+   - Outputs fully-rendered HTML for search engines to crawl.
+
+
+## Client Component
+
+Client components execute on the server as well as on the client. Client component first executes on the server and then on the client.
+
+```tsx
+'use client'
+export default function ClientComponent() {
+    return <h1>This is a client component</h1>
+}
+```
+
+### **When to Use Client Components**
+Client Components run in the browser. Use them when your component:
+
+1. **Needs Interactivity:**
+   - Includes user interactions like forms, buttons, or dropdowns.
+   - Uses browser-specific APIs like `localStorage`, `window`, or `document`.
+
+2. **Relies on State or Effects:**
+   - Manages local state with hooks like `useState` or `useReducer`.
+   - Uses `useEffect` for side effects like fetching data from an API on the client side.
+
+3. **Requires Animation:**
+   - Implements animations using libraries like Framer Motion or CSS transitions.
+
+4. **Handles Client-Side Data Fetching:**
+   - Fetches data after the page loads, such as infinite scrolling or client-side search.
+
+5. **Depends on Real-Time Updates:**
+   - Uses WebSockets, subscriptions, or polling for live data (e.g., chat apps, dashboards).
+---
+
+<Callout>
+If you mark a parent component with "use client", all of its child components automatically inherit the client-side behavior, regardless of whether "use client" is explicitly specified in the child components or not.
+</Callout>

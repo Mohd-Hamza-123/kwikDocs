@@ -1,0 +1,147 @@
+---
+title: Remove Elements
+published: true
+---
+
+JavaScript provides multiple ways to **remove elements** from the DOM — whether it's a single node, multiple children, or replacing content. Below are all common methods with examples and output.
+
+---
+
+### ✅ 1. `element.remove()`
+
+Removes the element itself from the DOM.  
+
+**Example:**
+```html
+<div id="toRemove">Remove me</div>
+````
+
+```js
+document.getElementById("toRemove").remove();
+```
+
+**Output in DOM:**
+
+```html
+<!-- Nothing — element is completely removed -->
+```
+
+---
+
+
+### ✅ 2. `element.innerHTML = ""`
+
+Removes **all child elements and text** inside a container.
+
+**Example:**
+
+```html
+<div id="wrapper">
+  <p>Item 1</p>
+  <p>Item 2</p>
+</div>
+```
+
+```js
+document.getElementById("wrapper").innerHTML = "";
+```
+
+**Output in DOM:**
+
+```html
+<div id="wrapper"></div>
+```
+
+---
+
+### ✅ 3. `element.textContent = ""`
+
+Also removes all child nodes, but is used when you're sure it’s only text (and may be slightly faster).
+
+**Example:**
+
+```html
+<div id="info">
+  Some text <span>and more</span>
+</div>
+```
+
+```js
+document.getElementById("info").textContent = "";
+```
+
+**Output in DOM:**
+
+```html
+<div id="info"></div>
+```
+
+> ⚠️ Removes **everything inside**, including nested tags.
+
+---
+
+### ✅ 4. `parent.replaceChild(newNode, oldNode)`
+
+Replaces an element — effectively **removes** the old one.
+
+**Example:**
+
+```html
+<div id="container">
+  <p id="old">Old Paragraph</p>
+</div>
+```
+
+```js
+const container = document.getElementById("container");
+const old = document.getElementById("old");
+
+const newP = document.createElement("p");
+newP.textContent = "New Paragraph";
+
+container.replaceChild(newP, old);
+```
+
+**Output in DOM:**
+
+```html
+<div id="container">
+  <p>New Paragraph</p>
+</div>
+```
+
+---
+
+### ✅ 5. Using `while (element.firstChild)`
+
+Removes **all children** one by one.
+
+**Example:**
+
+```html
+<ul id="menu">
+  <li>Home</li>
+  <li>About</li>
+  <li>Contact</li>
+</ul>
+```
+
+```js
+const menu = document.getElementById("menu");
+
+while (menu.firstChild) {
+  menu.removeChild(menu.firstChild);
+}
+```
+
+**Output in DOM:**
+
+```html
+<ul id="menu"></ul>
+```
+
+---
+
+### Methods to Study 
+
+* parent.removeChild(child)

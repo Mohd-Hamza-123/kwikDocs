@@ -1,0 +1,88 @@
+---
+title: Tables
+published: true
+---
+
+A table in HTML consists of table cells inside rows and columns.
+
+### Basic Table Example:
+
+<HtmlEditor id={1} defaultCode={`
+<table border="2">
+  <tr>
+    <th>Person 1</th>
+    <th>Person 2</th>
+    <th>Person 3</th>
+  </tr>
+  <tr>
+    <td>Emil</td>
+    <td>Tobias</td>
+    <td>Linus</td>
+  </tr>
+  <tr>
+    <td>16</td>
+    <td>14</td>
+    <td>10</td>
+  </tr>
+</table>
+`}/>
+
+### Table Tags Description:
+
+| Tag         | Description                                        |
+|-------------|----------------------------------------------------|
+| `<table>`   | Defines a table                                    |
+| `<th>`      | Defines a header cell in a table                   |
+| `<tr>`      | Defines a row in a table                           |
+| `<td>`      | Defines a cell in a table                          |
+| `<caption>` | Defines a table caption                            |
+| `<thead>`   | Groups the header content in a table               |
+| `<tbody>`   | Groups the body content in a table                 |
+| `<tfoot>`   | Groups the footer content in a table               |
+
+### Example Table with Header, Body, and Footer:
+
+<HtmlEditor id={2} defaultCode={`
+<table border="2">
+  <caption>Student Grades Table</caption>
+
+  <thead>
+    <tr>
+      <th>Student ID</th>
+      <th>Name</th>
+      <th>Subject</th>
+      <th>Grade</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>101</td>
+      <td>John Doe</td>
+      <td>Mathematics</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>Jane Smith</td>
+      <td>Physics</td>
+      <td>B</td>
+    </tr>
+    <tr>
+      <td>103</td>
+      <td>Emily Johnson</td>
+      <td>Chemistry</td>
+      <td>A</td>
+    </tr>
+  </tbody>
+
+  <tfoot>
+    <tr>
+      <td colspan="3">Total Students</td>
+      <td>3</td>
+    </tr>
+  </tfoot>
+</table>
+`}/>
+
+--- 

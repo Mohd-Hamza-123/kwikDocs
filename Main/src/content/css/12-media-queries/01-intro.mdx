@@ -1,0 +1,68 @@
+---
+title: Media Queries
+isPublished: true
+---
+
+Media queries in **CSS** are a feature that lets you apply **different styles depending on the device’s characteristics**, like screen size, resolution, or orientation.
+
+👉 In simpler words:
+They help make your website **responsive**—it looks good on **mobile, tablet, and desktop** by changing the layout/styles based on the device’s screen.
+
+
+### 📝 Syntax:
+
+```css
+@media (condition) {
+  /* CSS rules go here */
+}
+```
+
+
+### 📱 Example: Screen size–based styling
+
+```css
+/* For small screens (like phones) */
+@media (max-width: 480px) {
+  body {
+    background-color: lightblue;
+    font-size: 14px;
+  }
+}
+
+/* For tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+  body {
+    background-color: lightgreen;
+    font-size: 16px;
+  }
+}
+
+/* For desktops */
+@media (min-width: 769px) {
+  body {
+    background-color: lightyellow;
+    font-size: 18px;
+  }
+}
+```
+
+
+### 🟢 Key Points:
+
+* `max-width`: Styles apply **up to** that width.
+* `min-width`: Styles apply **from** that width and above.
+* You can combine conditions with `and`:
+
+  ```css
+  @media (min-width: 600px) and (orientation: landscape) { ... }
+  ```
+* Usually used for **responsive design**.
+
+
+### ⚡ Common Breakpoints (not fixed, but widely used):
+
+* **0 – 480px:** Mobile
+* **481 – 768px:** Tablet
+* **769 – 1024px:** Small desktops/laptops
+* **1025px and above:** Large screens
+

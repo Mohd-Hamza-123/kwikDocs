@@ -1,0 +1,35 @@
+---
+title: Delete File (callback)
+description: ''
+published: true
+---
+
+### Syntax of `fs.unlink()`
+
+```javascript
+fs.unlink(path, callback);
+```
+
+Example : 
+
+```js
+import http from 'http';
+import path from 'path';
+import fs from 'fs';
+
+const server = http.createServer((req, res) => {
+    const filePath = path.join('public', 'sample.txt');
+    
+    fs.unlink(filePath, (err) => {
+        if (err) {
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end("Error: Can't delete the file");
+            return;
+        }
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end("File deleted successfully!");
+    });
+});
+
+server.listen(8000)
+```

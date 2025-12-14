@@ -1,0 +1,87 @@
+---
+title: Port Mapping
+published: true
+---
+
+### 🔑 **Port Mapping** lets you connect:
+
+> 🔸 The container’s internal port
+> 🔸 to your machine’s (host’s) external port
+
+This way, services running **inside the container** can be accessed **from your browser or other tools** on your host machine.
+
+---
+
+### ✅ Example: Basic Port Mapping
+
+Let’s say a Node.js or Python server inside the container runs on **port 3000**.
+
+To make it accessible on your local machine at **[http://localhost:5000](http://localhost:5000)**, you'd run:
+
+```bash
+docker run -p 5000:3000 my-app
+```
+
+### 🧠 What it means:
+
+```
+-p <host-port>:<container-port>
+```
+
+* `5000` → port on **your machine** (host)
+* `3000` → port **inside the container** (where the app listens)
+
+Now when you go to `http://localhost:5000`, you're reaching the app inside the container on port 3000.
+
+---
+
+## 🔁 Real-Life Analogy
+
+Imagine:
+
+* The container is a **hotel room**.
+* The service (like a web server) runs **inside the room** on a specific **phone number** (port).
+* Port mapping is like **connecting the hotel room phone to the reception desk**, so **visitors can call in** from outside.
+
+---
+
+## 🔍 View Port Mapping of a Running Container
+
+```bash
+docker ps
+```
+
+You’ll see a column like this:
+
+```
+PORTS
+0.0.0.0:5000->3000/tcp
+```
+
+Which means:
+**Host port 5000 is forwarded to container port 3000**
+
+---
+
+## 📌 Common Use Cases
+
+| App              | Internal Port | Typical Host Port |
+| ---------------- | ------------- | ----------------- |
+| Node.js App      | 3000          | 3000 or 8080      |
+| React Dev Server | 3000          | 3000              |
+| Python Flask     | 5000          | 5000              |
+| MongoDB          | 27017         | 27017             |
+| MySQL            | 3306          | 3306              |
+
+---
+
+### 🔐 Optional: Use `-p` multiple times
+
+Map multiple ports:
+
+```bash
+docker run -p 3000:3000 -p 5000:5000 my-app
+```
+
+---
+

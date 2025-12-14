@@ -1,0 +1,173 @@
+---
+title: Commits
+description: ''
+published: true
+---
+
+Commits in Git are snapshots of changes made to your codebase at a specific point in time. Each commit represents a saved state of your project, including a message describing the changes.
+
+### Creating a Commit
+
+To create a commit, follow these steps:
+
+1. **Stage the changes**: Use the `git add` command to stage the files you want to include in the commit.
+   ```bash
+   git add <FILE_NAME>   # Stage a specific file
+   git add .             # Stage all changes in the working directory
+   ```
+
+2. **Commit the changes**: Use the `git commit` command with a descriptive message.
+   ```bash
+   git commit -m "<MESSAGE>"
+   ```
+
+### Example:
+```plaintext
+PS E:\Rough\git-tutorial> git add .
+PS E:\Rough\git-tutorial> git commit -m "Initial commit"
+```
+
+---
+## Viewing Commit History
+
+You can view the history of commits in your repository using the following commands:
+
+### Detailed Commit History
+```bash
+git log
+```
+
+### Compact Commit History
+```bash
+git log --oneline
+```
+
+### Example:
+```plaintext
+PS E:\Rough\git-tutorial> git log
+commit 698fa2ec2e73eafc3e39ba515c5bd61e67fe5b6f (HEAD -> master)
+Author: Mohd Hamza <example@gmail.com>
+Date:   Tue Mar 18 21:58:56 2025 +0530
+
+    Second commit
+
+commit dd87246b55d527472c1758d0c3131762ead8d301
+Author: Mohd Hamza <example@gmail.com>
+Date:   Tue Mar 18 21:56:53 2025 +0530
+
+    Initial commit
+```
+
+---
+## Viewing Commit Details
+
+To view the details of a specific commit, use the `git show` command:
+
+```bash
+git show <COMMIT_ID>
+```
+
+You can also display the output without paging using:
+```bash
+git --no-pager show <COMMIT_ID>
+```
+
+### Note:
+You can use the first 7 characters of the commit ID instead of the full ID.
+
+---
+
+## Using `git blame`
+
+The `git blame` command shows the history of a file line by line, indicating the commit that last modified each line.
+
+### Syntax:
+```bash
+git blame <FILE_PATH>
+```
+
+### Example:
+```plaintext
+PS E:\Rough\git-tutorial> git blame main.py
+698fa2ec (Mohd Hamza 2025-03-18 21:58:56 +0530 1) # tracking is enabled for all files in the current working directory
+^dd87246 (Mohd Hamza 2025-03-18 21:56:53 +0530 2) def newFunction():
+^dd87246 (Mohd Hamza 2025-03-18 21:56:53 +0530 3)     print("Tracking is enabled")
+^dd87246 (Mohd Hamza 2025-03-18 21:56:53 +0530 4)     hello = "Hello World"
+^dd87246 (Mohd Hamza 2025-03-18 21:56:53 +0530 5)     print(hello)
+^dd87246 (Mohd Hamza 2025-03-18 21:56:53 +0530 6)
+^dd87246 (Mohd Hamza 2025-03-18 21:56:53 +0530 7) newFunction()
+```
+
+---
+
+## Using `git status`
+
+The `git status` command shows the current status of your repository. It displays the number of files that have been modified, added, or deleted.
+
+```bash
+git status
+```
+
+Example output:
+```plaintext
+PS E:\Rough\git-tutorial> git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   core/config.py
+        modified:   main.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+### Deleting Commits
+
+```bash
+Remove-Item -Recurse -Force .git
+```
+---
+
+### Reflog 
+
+The reflog is a log of all the commits that have been made to the repository. It is stored in the `.git/logs` directory and is updated every time a commit is made.
+
+To view the reflog, use the following command:
+
+```bash
+git reflog
+```
+
+### Find specific commit
+
+To find a specific commit, use the following command:
+
+```bash
+git reflog <commit-hash>
+```
+
+### Recover lost commits or changes
+
+If you accidentally deleted a branch or made changes that are no longer visible in the commit history, you can often recover them using the reflog. First, find the reference to the commit where the branch or changes existed, and then reset your branch to that reference.
+
+```bash
+git reflog <commit-hash>
+git reset --hard <commit-hash>
+```
+
+or you can use `HEAD@{n}` to reset to the nth commit before the one you want to reset to. 
+
+```bash
+git reflog <commit-hash>
+git reset --hard HEAD@{1}
+```
+---
+
+## Key Points About Commits:
+
+- **Unique ID**: Each commit has a unique ID (SHA).
+- **Descriptive Message**: Each commit includes a message describing the changes.
+- **Author Information**: Commits are associated with a specific author.
+- **Timestamp**: Commits are timestamped with the date and time they were made.
+
+---

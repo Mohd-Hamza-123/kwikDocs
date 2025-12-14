@@ -1,0 +1,58 @@
+---
+title: Django Forms Advance
+description: ""
+published: true
+---
+
+## Django Forms with Request Method
+
+### 1. POST Method
+
+The most common method for submitting forms is the POST method, which sends data to the server for processing.
+
+```python
+# appName/forms.py
+from django import forms
+class ContactForm(forms.Form):
+    name = forms.CharField()
+    email = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput())
+```
+
+```html
+<!-- appName/templates/appName/index.html -->
+<form method="POST">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">Submit</button>
+</form>
+```
+
+In Django, the `csrf_token` is a security measure to prevent Cross-Site Request Forgery attacks. It ensures that the form submission is coming from the same site.
+
+
+```python
+# appName/views.py
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from appName.forms import CreateBlogForm  # Import your form class
+
+def create_blog_view(request):
+    print(request.method)  # To check the request method
+    print(request.POST)  # To check the data sent in the POST request
+    if request.method == "POST":
+        fm = CreateBlogForm(request.POST)  # Bind form data
+        if fm.is_valid():  # server side validation
+            print(fm.errors)  # To check if there are any validation errors
+            print(fm.cleaned_data)  # To check the cleaned data after validation
+            name = fm.cleaned_data.get("name")
+            email = fm.cleaned_data.get("email")
+            password = fm.cleaned_data.get("password")
+            # Perform the action you want to do with the data
+            return HttpResponseRedirect('/success-page/')  # Redirect to a success page
+    else:
+        fm = CreateBlogForm()  # Instantiate an empty form
+    context = {'form': fm}  # Use a meaningful variable name for the context dictionary
+    return render(request, 'appName/index.html', context=context)  # Render the template with the form
+```
+

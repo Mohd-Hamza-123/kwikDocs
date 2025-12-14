@@ -1,0 +1,88 @@
+---
+title: Assignment Operators
+published: true
+---
+
+
+Assignment operators are used to assign values to variables in JavaScript. The most common is the simple `=` operator, but JavaScript also provides **compound assignment operators** that combine arithmetic with assignment.
+
+### Basic Assignment Operator
+
+| Operator | Description                 | Example         | Result          |
+|----------|-----------------------------|------------------|------------------|
+| `=`      | Assigns a value             | `x = 10`         | `x` is `10`      |
+
+
+```js
+let x;
+x = 5;
+console.log(x); // Output: 5
+```
+
+---
+
+### Compound Assignment Operators
+
+These operators perform an operation and assignment in a single step.
+
+| Operator | Equivalent To | Description               |
+| -------- | ------------- | ------------------------- |
+| `+=`     | `x = x + y`   | Addition assignment       |
+| `-=`     | `x = x - y`   | Subtraction assignment    |
+| `*=`     | `x = x * y`   | Multiplication assignment |
+| `/=`     | `x = x / y`   | Division assignment       |
+| `%=`     | `x = x % y`   | Modulus assignment        |
+| `**=`    | `x = x ** y`  | Exponentiation assignment |
+
+
+#### 1. `+=` (Addition Assignment)
+
+```js
+let a = 10;
+a += 5; // Same as: a = a + 5
+console.log(a); // Output: 15
+```
+
+#### 2. `-=` (Subtraction Assignment)
+
+```js
+let b = 20;
+b -= 7; // b = b - 7
+console.log(b); // Output: 13
+```
+
+#### 3. `*=` (Multiplication Assignment)
+
+```js
+let c = 4;
+c *= 3; // c = c * 3
+console.log(c); // Output: 12
+```
+
+#### 4. `/=` (Division Assignment)
+
+```js
+let d = 12;
+d /= 3; // d = d / 3
+console.log(d); // Output: 4
+```
+
+#### 5. `%=` (Modulus Assignment)
+
+```js
+let e = 10;
+e %= 3; // e = e % 3
+console.log(e); // Output: 1
+```
+
+#### 6. `**=` (Exponentiation Assignment)
+
+```js
+let f = 2;
+f **= 3; // f = f ** 3
+console.log(f); // Output: 8
+```
+
+---
+
+

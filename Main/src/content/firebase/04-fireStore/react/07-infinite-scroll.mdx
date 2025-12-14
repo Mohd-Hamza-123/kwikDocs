@@ -1,0 +1,86 @@
+---
+title: Infinite Scroll
+isPublished: true
+---
+
+We use `startAfter` to fetch the next set of posts. We use `IntersectionObserver` to check if the user has scrolled to the bottom of the page. If the user has scrolled to the bottom, we fetch the next set of posts. If there are no more posts, we set `hasMorePost` to `false`.
+
+```jsx
+import React, { useEffect, useState, useRef } from 'react'
+import { fireStoreDb } from '../firebase/firebase' // firebase configuration
+import { collection, getDocs, limit, orderBy, query, startAfter } from 'firebase/firestore'
+import { FiLoader } from "react-icons/fi";
+
+export default function Home() {
+
+  const [posts, setPosts] = useState([]);
+  const [hasMorePost, setHasMorePost] = useState(true)
+  const spinnerRef = useRef(null)
+
+  const getPosts = async () => {
+    try {
+      const q = query(
+        collection(fireStoreDb, 'posts'),
+        orderBy('createdAt', "desc"),
+        limit(5),
+      )
+      const querySnapshot = await getDocs(q)
+      const documents = querySnapshot.docs.map((doc) => {
+        return { ...doc.data(), id: doc.id }
+      })
+      setPosts(documents)
+
+    } catch (error) {
+      setPosts([])
+    }
+  }
+
+  useEffect(() => {
+
+    if (!spinnerRef.current) return
+    const observer = new IntersectionObserver(async (entries) => {
+      const isIntersecting = entries[0].isIntersecting
+
+      if (isIntersecting) {
+        const lastPostTimeStamp = posts[posts.length - 1]?.createdAt
+        const q = query(
+          collection(fireStoreDb, 'posts'),
+          orderBy('createdAt', "desc"),
+          startAfter(lastPostTimeStamp),
+          limit(5),
+        )
+        const querySnapshot = await getDocs(q)
+        const documents = querySnapshot.docs.map((doc) => {
+          return { ...doc.data(), id: doc.id }
+        })
+
+        if (documents.length === 0) {
+          setHasMorePost(false)
+          return () => observer.disconnect()
+        }
+        setPosts((prev) => [...prev, ...documents])
+      }
+    })
+
+    observer.observe(spinnerRef.current)
+
+    return () => observer.disconnect()
+  }, [posts])
+
+  useEffect(() => {
+    getPosts()
+  }, []);
+
+
+  return (
+    <>
+        <div className='flex gap-3 px-3 py-2 flex-wrap'>
+          {posts.map((post) => (
+            <div key={post.id} className='w-full'>{post.title}</div>
+          ))}
+        {hasMorePost && <Loader ref={spinnerRef} />} 
+        <!-- Spinner for infinite scroll -->
+    </>
+  )
+}
+```

@@ -1,0 +1,126 @@
+---
+title: Functions
+description: A comprehensive guide to functions in JavaScript
+published: true
+---
+
+Functions in JavaScript are reusable blocks of code that perform a specific task. They allow you to organize code into manageable sections and can accept inputs (parameters) and return outputs.
+
+### **1. Function Declaration**
+
+A **function declaration** defines a named function.
+
+```javascript
+function functionName(parameters) {
+    // code to execute
+    return value; // optional
+}
+```
+
+**Example:**
+
+```javascript
+function greet() {
+    console.log("Hello!");
+}
+greet(); // Function is called by its name
+```
+
+---
+
+### **2. Function Expression**
+
+A **function expression** is a function that is assigned to a variable. When you store a function in a variable, it becomes a function expression.
+
+```javascript
+const variableName = function(parameters) {
+  // Function body
+};
+```
+
+**Example:**
+
+```javascript
+// Anonymous Function Expression
+const greet = function(name) {
+  return `Hello, ${name}!`;
+};
+
+// Named Function Expression
+const greet = function greeting(name) {
+  return `Hello, ${name}!`;
+};
+```
+
+---
+
+### **3. Arrow Functions**
+
+Arrow functions provide a more concise syntax for writing functions. They are always anonymous.
+
+```javascript
+const functionName = (parameters) => {
+  // code to execute
+  return value; // optional
+};
+```
+
+**Example:**
+
+```javascript
+const add = (a, b) => a + b;
+console.log(add(2, 3)); // Output: 5
+```
+
+Arrow functions are particularly useful for callbacks and do not bind their own `this` value.
+
+---
+
+### **4. Immediately Invoked Function Expression (IIFE)**
+
+An IIFE is a function that runs immediately after it is defined.
+
+```javascript
+(function() {
+    console.log("This is an IIFE!");
+})();
+```
+
+**Example:**
+
+```javascript
+(function greet() {
+    console.log("Hello from an IIFE!");
+})();
+```
+
+---
+
+### **5. Default Parameters**
+
+Default parameters allow you to set default values for function arguments.
+
+```javascript
+function greet(name = "Guest") {
+    console.log(`Hello, ${name}!`);
+}
+greet(); // Output: Hello, Guest!
+greet("John"); // Output: Hello, John!
+```
+
+---
+
+### **6. Rest Parameters**
+
+Rest parameters allow a function to accept an indefinite number of arguments as an array.
+
+```javascript
+function sum(...numbers) {
+    return numbers.reduce((acc, curr) => acc + curr, 0);
+}
+console.log(sum(1, 2, 3, 4)); // Output: 10
+```
+
+---
+
+

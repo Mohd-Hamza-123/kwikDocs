@@ -1,0 +1,83 @@
+---
+title: HTML Attributes
+published: true
+---
+
+
+In **HTML**, **attributes** are extra pieces of information added inside the opening tag of an element.
+They **define properties or behavior** of that element.
+
+### 🔎 Syntax of an Attribute
+
+```html
+<tagname attribute="value">Content</tagname>
+```
+
+**Example:**
+
+In the following code, the `src` attribute is used to specify the source of an image, and the `alt` attribute provides alternative text for the image , and the `width` and `height` attributes set the size of the image.
+
+<HtmlEditor id={1} defaultCode={`<img src="https://images.unsplash.com/photo-1755870190504-fd73e944bcc5?q=80&w=876&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A house" width="300" height="200">`}/>
+
+
+### 🎯 Common HTML Attributes:
+
+1. **id** – Unique identifier
+
+```html
+<p id="intro">Hello</p>
+```
+
+2. **class** – Groups elements for styling
+
+```html
+<div class="box"></div>
+```
+
+3. **href** – URL for links
+
+```html
+<a href="https://google.com">Google</a>
+```
+
+4. **src** – File source (images, videos, scripts)
+
+```html
+<img src="pic.jpg" alt="Image">
+```
+
+5. **alt** – Alternative text for images
+
+```html
+<img src="dog.png" alt="A cute dog">
+```
+
+6. **style** – Inline CSS
+
+```html
+<p style="color: red;">Red Text</p>
+```
+
+7. **title** – Tooltip text
+
+```html
+<abbr title="World Health Organization">WHO</abbr>
+```
+
+8. **hidden** – Hides an element from view
+
+```html
+<input type="text" hidden>
+```
+
+
+### 🔑 Key Points:
+
+* Attributes are always in the **opening tag**.
+* They are usually in the form of **name="value"**.
+* Some attributes are **global** (work on any tag, like `id`, `class`, `style`).
+* Others are **specific** (like `src` only for `<img>` or `<script>`).
+
+---
+
+

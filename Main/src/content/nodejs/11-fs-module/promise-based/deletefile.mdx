@@ -1,0 +1,56 @@
+---
+title: Delete File (Promise)
+description: Create a file asynchronously in Node.js
+published: true
+---
+
+
+### Syntax of `fs.promises.unlink()`
+
+```javascript
+fs.promises.unlink(path);
+```
+
+* **`path`**: Path to the file to be deleted.
+
+**Returns:** A Promise that resolves when the file is deleted or rejects with an error.
+
+---
+
+### Example: Delete a File
+
+This example deletes a file named `sample.txt` from the `public` directory:
+
+```javascript
+import fs from 'fs/promises';
+import path from 'path';
+
+const deleteFile = async () => {
+    try {
+        const filePath = path.join('public', 'sample.txt');
+        await fs.unlink(filePath);
+        console.log('File deleted successfully!');
+    } catch (error) {
+        console.error('Error deleting file:', error);
+    }
+};
+
+deleteFile();
+```
+
+---
+
+### Notes
+
+* **Error Handling:**
+  Use `try-catch` to manage errors like:
+
+  * File not found (`ENOENT`).
+  * Insufficient permissions.
+
+* **File Path:**
+  Ensure the file path is correct and resolved using `path.join()` for platform independence.
+
+---
+
+

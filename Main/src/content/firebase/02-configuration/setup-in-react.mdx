@@ -1,0 +1,57 @@
+---
+title: Setup in React
+published: true
+---
+
+### 1) Install Firebase
+
+Run the following command in your project directory:
+
+```bash
+npm install firebase
+```
+
+### 2) Initialize Firebase
+
+Create a new file (for example: `firebase.js`) and add the Firebase configuration:
+
+```js
+// firebase.js
+// Import the functions you need from the SDKs
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth";
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyD-1-2-3",
+  authDomain: "project-id.firebaseapp.com",
+  projectId: "project-id",
+  storageBucket: "project-id.appspot.com",
+  messagingSenderId: "sender-id",
+  appId: "app-id",
+  measurementId: "G-measurement-id",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Initialize Analytics (optional)
+const analytics = getAnalytics(app);
+
+// Initialize Auth (optional)
+const firebaseAuth = getAuth(app);
+
+export { app, analytics , firebaseAuth };
+```
+
+### 3) Use in Your React App
+
+Now you can import the Firebase instance wherever you need it in your React project:
+
+```js
+import { app } from "./firebase";
+```
+
+---
+

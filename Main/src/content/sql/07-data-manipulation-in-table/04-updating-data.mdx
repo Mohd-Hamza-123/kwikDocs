@@ -1,0 +1,68 @@
+---
+title: Update Data in a Table
+description: Learn how to update data in a table using the `UPDATE` statement in SQL.
+published : true
+---
+
+### **Syntax for Updating Data**
+
+The `UPDATE` statement modifies existing data in a table. The syntax is similar for both **MySQL** and **PostgreSQL**:
+
+```sql
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;
+```
+
+---
+
+### **Example: Updating Data in MySQL and PostgreSQL**
+
+1. **Increase salary by 10% for employees in the Sales department:**
+
+   ```sql
+   UPDATE employees
+   SET salary = salary * 1.1
+   WHERE department = 'Sales';
+   ```
+
+2. **Update multiple columns for a specific employee:**
+
+   ```sql
+   UPDATE employees
+   SET name = 'John Doe', salary = 85000
+   WHERE employee_id = 101;
+   ```
+
+---
+
+### **Important Notes**
+
+1. **Condition Clause (`WHERE`):**
+
+   * Always include a `WHERE` clause to specify which rows to update.
+   * Omitting the `WHERE` clause will update **all rows** in the table, which can lead to unintended results.
+
+2. **Updating Multiple Columns:**
+
+   * Use a comma-separated list in the `SET` clause to update multiple columns simultaneously.
+
+3. **Impact on Performance:**
+
+   * For large tables, ensure that the `WHERE` clause uses indexed columns to optimize the update process.
+
+---
+
+### **Key Considerations**
+
+1. **Behavior in MySQL and PostgreSQL:**
+
+   * The syntax and behavior of the `UPDATE` statement are almost identical in both databases.
+   * Both require the `SET` clause to specify the columns being updated.
+
+2. **Data Validation:**
+
+   * Ensure the values being updated comply with column constraints (e.g., data type, unique constraints).
+
+---
+

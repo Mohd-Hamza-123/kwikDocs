@@ -1,0 +1,38 @@
+---
+title: Project Structure
+description: ""
+published : true
+---
+
+Django folder structure
+
+```plaintext
+myproject/  # Outer project folder / Root directory
+│
+├── manage.py
+├── myproject/  # Inner project folder
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── asgi.py
+│   └── wsgi.py
+```
+
+#### 1. manage.py
+
+This is a command-line utility that lets you interact with your Django project. You can use it to run the development server, create database migrations, and perform other administrative tasks.
+
+#### 2. __init__.py:
+Makes this a Python package.
+
+#### 3. settings.py:
+All the configurations of your Django project (databases, installed apps, middleware, etc).
+
+#### 4. urls.py:
+The URL declarations for your project. Think of it as the router.
+
+#### 5. wsgi.py:
+Used for deploying your project with WSGI-compatible web servers (like Gunicorn).
+
+#### 6. asgi.py:
+Used for asynchronous support — if you're using WebSockets or running on an ASGI server.

@@ -1,0 +1,34 @@
+---
+title: Anchor Tag
+published: true
+---
+
+The `<a>` tag defines a hyperlink, which is used to link from one HTML page to another.
+```html
+<!-- Syntax -->
+<a href="link" >click here</a>
+```
+
+### **Absolute Link :**
+
+<HtmlEditor defaultCode={`
+<a href="https://en.wikipedia.org/wiki/India" target="_self" >Visit<u>Wikipedia</u></a>
+<br>
+<a href="https://www.w3schools.com" target="_blank">W3schools</a>`}/>
+
+### **Relative Link :**
+
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1751261438/Screenshot_2025-06-30_110020_wrlckw.png" alt="Relative Link"/>
+
+```html
+<a href="./page1.html">Visit page</a>
+<a href="../page2.html">Visit page</a>  
+<a href="../../page3.html">Visit page</a>
+```
+
+The `target` attribute specifies where to open the linked document.
+
+* `_self` - Default. Opens the document in the same window/tab as it was clicked
+* `_blank` - Opens the document in a new window or tab
+
+---

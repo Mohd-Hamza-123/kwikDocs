@@ -1,0 +1,67 @@
+---
+title: Configuring Environment Variable
+published: true
+---
+
+Environment variables are a way to store configuration values in a production environment. They are set in the operating system environment and can be accessed by the application.
+
+### 1) Install the `dotenv` package
+
+```bash
+npm install dotenv
+```
+
+### 2) Create a `.env` file
+
+Create a `.env` file in the root directory of your project and add the following lines:
+
+```bash
+PORT=3000
+DB_URL=mongodb://localhost:27017/myapp
+JWT_SECRET=supersecretkey
+```
+
+This file should be in the `.gitignore` file so that it is not committed to the repository.
+
+### 3) Load the environment variables
+
+In your application, load the environment variables using the `dotenv` package:
+
+```ts
+import express from "express";
+import dotenv from "dotenv";
+
+// Load environment variables from .env
+dotenv.config();
+
+const app = express();
+
+// Access environment variables
+const PORT = process.env.PORT || 3000;
+const DB_URL = process.env.DB_URL;
+const JWT_SECRET = process.env.JWT_SECRET;
+
+app.get("/", (_req, res) => {
+  res.json({
+    message: "Hello World",
+    db: DB_URL,
+    secret: JWT_SECRET ? "loaded" : "not loaded"
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
+```
+
+### 4) Optional 
+
+```ts
+import express from "express";
+import dotenv from "dotenv";
+
+// Load environment variables from .env
+dotenv.config({
+  path : "./src/private/.env", // Specify a custom path for the .env file (default is ".env")
+});
+```

@@ -1,0 +1,79 @@
+---
+title: Django ORM
+description: Learn how to use Django ORM for database operations
+published: true
+---
+
+Django ORM (Object-Relational Mapping) is a feature of the Django web framework that allows developers to interact with a relational database(sql lite,mySQL,Postgresql, etc) using Python code instead of writing raw SQL queries.
+
+
+<ImageCenter src="https://res.cloudinary.com/dkkifg17t/image/upload/v1744537134/Documentarium/Django/nywm62hoivevkzg0aqfd.png" alt="Django ORM"/> 
+
+
+### Key Features of Django ORM:
+
+- Tables in the database are represented as Python classes.
+- Each table column corresponds to a class attribute.
+- Each row in the table corresponds to an instance of the class.
+
+### Example :
+
+```python
+# models.py
+from django.db import models
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.CharField(max_length=50)
+    published_date = models.DateField()
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+```
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Published Date</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Django ORM Basics</td>
+      <td>John Doe</td>
+      <td>2025-01-01</td>
+      <td>29.99</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Learning Django</td>
+      <td>Jane Smith</td>
+      <td>2024-12-15</td>
+      <td>19.99</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Advanced Django Patterns</td>
+      <td>Emily Johnson</td>
+      <td>2025-03-10</td>
+      <td>39.50</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Django for Beginners</td>
+      <td>Alex Brown</td>
+      <td>2023-08-20</td>
+      <td>15.75</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Django Cookbook</td>
+      <td>Chris Wilson</td>
+      <td>2024-07-11</td>
+      <td>24.99</td>
+    </tr>
+  </tbody>
+</table>
+

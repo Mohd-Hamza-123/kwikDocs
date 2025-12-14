@@ -1,0 +1,78 @@
+---
+title : Margin & Padding
+published : true
+---
+
+
+### 🎨 **1. Margin (m-)**
+
+* `m-{size}` → applies margin on **all sides**
+* `mt-{size}` → margin-top
+* `mr-{size}` → margin-right
+* `mb-{size}` → margin-bottom
+* `ml-{size}` → margin-left
+* `mx-{size}` → margin-left & margin-right (X-axis)
+* `my-{size}` → margin-top & margin-bottom (Y-axis)
+
+```html
+<div class="m-4 bg-blue-200">All sides 1rem (16px)</div>
+<div class="mt-8 bg-green-200">Top margin 2rem (32px)</div>
+<div class="mx-10 bg-red-200">Left & Right margin 2.5rem (40px)</div>
+<div class="my-6 bg-yellow-200">Top & Bottom margin 1.5rem (24px)</div>
+```
+
+---
+
+### 🎨 **2. Padding (p-)**
+
+Same idea as margin, but with `p-`:
+
+* `p-{size}` → padding all sides
+* `pt-{size}` → padding-top
+* `pr-{size}` → padding-right
+* `pb-{size}` → padding-bottom
+* `pl-{size}` → padding-left
+* `px-{size}` → padding left & right
+* `py-{size}` → padding top & bottom
+
+```html
+<div class="p-4 bg-blue-400">All sides 1rem (16px)</div>
+<div class="pt-6 bg-green-400">Top padding 1.5rem (24px)</div>
+<div class="px-8 bg-red-400">Left & Right padding 2rem (32px)</div>
+<div class="py-10 bg-yellow-400">Top & Bottom padding 2.5rem (40px)</div>
+```
+
+---
+
+## 🎨 **3. Sizes (Scale & Units)**
+
+Tailwind spacing scale is based on **multiples of 0.25rem (4px)**.
+
+Examples:
+
+* `m-1` → 0.25rem (4px)
+* `m-2` → 0.5rem (8px)
+* `m-4` → 1rem (16px)
+* `m-10` → 2.5rem (40px)
+* `m-20` → 5rem (80px)
+
+---
+
+## 🎨 **4. Arbitrary values (custom px, %, rem, etc.)**
+
+If the scale doesn’t fit, use square brackets:
+
+```html
+<div class="m-[30px] p-[5%] bg-indigo-300">Custom margin & padding</div>
+```
+
+---
+
+✅ **Summary**
+
+* **Margin:** `m-`, `mt-`, `mr-`, `mb-`, `ml-`, `mx-`, `my-`
+* **Padding:** `p-`, `pt-`, `pr-`, `pb-`, `pl-`, `px-`, `py-`
+* **Spacing scale:** multiples of 4px (e.g. `m-4` = 16px)
+* **Custom values:** `m-[30px]`, `p-[5%]`, etc.
+
+---

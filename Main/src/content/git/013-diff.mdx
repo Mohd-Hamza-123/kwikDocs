@@ -1,0 +1,55 @@
+---
+title: Diff
+description: Learn about diff in Git
+published: true
+---
+
+## 🛠️ **Viewing Changes with `git diff`**
+
+The `git diff` command shows the differences between various repository states.
+
+1. Comparing Working Directory and Staging Area :
+```bash
+    git diff
+```
+
+2. Comparing Staging Area with Repository :
+```bash
+git diff --staged
+```
+
+3. Comparing Two Branches :
+```bash
+git diff <branch1>..<branch2>
+```
+
+4. Comparing Two Commits :
+
+```bash
+git diff <commit-hash-one> <commit-hash-two>
+```
+
+### How to Read the Diff Output
+
+- `a/` – the original file (before changes)
+- `b/` – the updated file (after changes)
+- `---` – marks the beginning of the original file
+- `+++` – marks the beginning of the updated file
+- `@@` – shows the line numbers and position of changes
+
+### 📋 Example Output:
+```plaintext
+warning: in the working copy of 'main.py', CRLF will be replaced by LF the next time Git touches it
+diff --git a/main.py b/main.py
+index d93a136..5fa4abc 100644
+--- a/main.py
++++ b/main.py
+@@ -1,5 +1,7 @@
+ print("Hello World")
+-
+ def newFunction():
+-    print("New Function")
++    print("Updated Function")
+```
+
+---

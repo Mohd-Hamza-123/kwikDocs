@@ -1,0 +1,179 @@
+---
+title: Type Alias
+published: true
+---
+
+A **type alias** in TypeScript is a way to create a custom name for a type, making your code more readable and reusable. Type aliases can represent primitive types, complex types, or even function signatures.
+
+**Syntax**
+
+```typescript
+type AliasName = TypeDefinition;
+```
+
+---
+
+**Examples:**
+
+#### 1. **Primitive Type Alias**
+
+You can create aliases for primitive types like `string` or `number`.
+
+```typescript
+type Age = number;
+type Name = string;
+
+let myAge: Age = 25;
+let myName: Name = "Hamza";
+```
+
+#### 2. **Union Type Alias**
+
+Type aliases are useful for defining union types.
+
+```typescript
+type Status = "success" | "error" | "loading";
+
+let currentStatus: Status = "loading"; // Valid
+// currentStatus = "done"; // Error: Type '"done"' is not assignable to type 'Status'.
+```
+
+#### 3. **Object Type Alias**
+
+You can define the structure of an object.
+
+```typescript
+type User = {
+    id: number;
+    name: string;
+    isActive: boolean;
+};
+
+const user: User = {
+    id: 1,
+    name: "Alice",
+    isActive: true,
+};
+```
+
+#### 4. **Array Type Alias**
+
+You can use type aliases for arrays with specific types.
+
+```typescript
+type UserIDs = number[];
+
+let ids: UserIDs = [1, 2, 3];
+```
+
+#### 5. **Function Type Alias**
+
+Type aliases can describe a function's signature.
+
+```typescript
+type Greet = (name: string) => string;
+
+const sayHello: Greet = (name) => `Hello, ${name}!`;
+console.log(sayHello("Hamza")); // Output: Hello, Hamza!
+```
+
+#### 6. **Intersection Type Alias**
+
+Combining multiple types using intersection.
+
+```typescript
+type Admin = { role: string };
+type User = { id: number; name: string };
+
+type AdminUser = Admin & User;
+
+const admin: AdminUser = {
+    role: "superadmin",
+    id: 1,
+    name: "Hamza",
+};
+```
+
+---
+
+### Use of `type` While Importing in TypeScript
+
+In TypeScript, adding the keyword **`type`** in an import statement means:
+
+**You are importing only the TypeScript type, not actual JavaScript code.**
+
+This import is removed during compilation and **does not appear in the final JavaScript output**.
+
+---
+
+## Why Use `import type`?
+
+Using `import type` tells TypeScript:
+
+* “I only need this for type-checking.”
+* “Do **not** include this in the compiled JavaScript.”
+* “Do **not** treat this as a runtime dependency.”
+
+This keeps your build cleaner, faster, and avoids unnecessary or incorrect runtime imports.
+
+---
+
+## Example
+
+### File: `types.ts`
+
+```typescript
+export type User = {
+  id: number;
+  name: string;
+};
+```
+
+---
+
+## With `import type`
+
+```typescript
+// index.ts
+// Importing the type only (not a runtime value)
+import type { User } from "./types";
+
+function printUser(user: User) {
+  console.log("User ID:", user.id);
+  console.log("User Name:", user.name);
+}
+
+printUser({ id: 1, name: "Hamza" });
+```
+
+### What happens:
+
+* `User` is used purely for **type-checking**.
+* The import is **removed** in compiled JavaScript.
+* No runtime dependency on `./types` is created.
+
+---
+
+## Without `import type`
+
+```typescript
+// index.ts
+import { User } from "./types";
+
+function printUser(user: User) {
+  console.log("User ID:", user.id);
+  console.log("User Name:", user.name);
+}
+
+printUser({ id: 1, name: "Hamza" });
+```
+
+### What happens:
+
+* TypeScript treats this as a normal import.
+* Even though `User` is only a type, TypeScript may still emit a runtime import.
+* This can cause unnecessary JavaScript code or even runtime errors if no real value named `User` exists.
+
+
+
+---

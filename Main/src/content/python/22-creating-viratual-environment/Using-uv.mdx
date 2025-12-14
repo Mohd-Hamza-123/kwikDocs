@@ -1,0 +1,65 @@
+---
+title: Creating a virtual environment using UV package
+description: ""
+published : true
+---
+
+### Install the `uv` package
+
+```bash
+pip install uv
+```
+
+### Creating a new project
+
+You can create a new Python project using the uv init command:
+
+```bash
+uv init my-project
+cd my-project
+```
+
+It will create a new folder with some files : 
+
+```plainText
+├── .gitignore
+├── .python-version
+├── README.md
+├── main.py
+└── pyproject.toml
+```
+
+### Run the script
+
+You can run the script using the uv run command:
+
+```bash
+uv run main.py
+```
+
+It will create a virtual environment and install the dependencies specified in the pyproject.toml file.
+
+
+After running above command : 
+
+```plainText
+.
+├── .venv
+│   ├── bin
+│   ├── lib
+│   └── pyvenv.cfg
+├── .python-version
+├── README.md
+├── main.py
+├── pyproject.toml
+└── uv.lock
+```
+
+### To Install libraries
+
+```bash
+uv add [package-name]
+uv add django
+```
+
+---

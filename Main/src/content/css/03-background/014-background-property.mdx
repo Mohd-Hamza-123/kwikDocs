@@ -1,0 +1,111 @@
+---
+title: Background Property
+published: true
+---
+
+The `background` property in CSS is used to set the background of an element, including color, image, position, size, and more.
+
+It’s a **shorthand property** that allows you to set multiple background-related values at once.
+
+
+### 🧱 Syntax
+
+```css
+background: [background-color] [background-image] [background-position] / [background-size] [background-repeat] [background-attachment] [background-origin] [background-clip];
+```
+
+> You can use as many or as few as needed. Order matters when using shorthand.
+
+---
+
+### 🔑 Background Sub-Properties
+
+### 1. `background-color`
+
+Sets the background color of an element.
+
+```css
+background-color: lightblue;
+```
+
+### 2. `background-image`
+
+Sets an image as the background.
+
+```css
+background-image: url('image.jpg');
+```
+
+### 3. `background-repeat`
+
+Defines whether and how the background image repeats.
+
+```css
+background-repeat: repeat;       /* Default */
+background-repeat: no-repeat;
+background-repeat: repeat-x;
+background-repeat: repeat-y;
+```
+
+### 4. `background-position`
+
+Specifies the position of the background image.
+
+```css
+background-position: center;
+background-position: top left;
+background-position: 50% 20%;
+```
+
+### 5. `background-size`
+
+Controls the size of the background image.
+
+```css
+background-size: cover;     /* Fill entire area */
+background-size: contain;   /* Fit within area */
+background-size: 100px 200px;
+```
+
+### 6. `background-attachment`
+
+Specifies whether the background scrolls with the page.
+
+```css
+background-attachment: scroll;     /* Default */
+background-attachment: fixed;      /* Stays in place */
+background-attachment: local;
+```
+
+### 7. `background-origin`
+
+Defines where the background image starts (relative to content, padding, or border).
+
+```css
+background-origin: padding-box;    /* Default */
+background-origin: border-box;
+background-origin: content-box;
+```
+
+### 8. `background-clip`
+
+Determines how far the background extends (clip area).
+
+```css
+background-clip: border-box;       /* Default */
+background-clip: padding-box;
+background-clip: content-box;
+```
+
+**🧪 Example: Full Shorthand**
+
+```css
+.example {
+  background: lightblue url('bg.jpg') no-repeat center/cover fixed padding-box content-box;
+}
+```
+
+
+---
+
+

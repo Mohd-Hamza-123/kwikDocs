@@ -1,0 +1,116 @@
+---
+title: Data Types
+published: true
+---
+
+#### JavaScript Data Types
+
+JavaScript is a dynamically typed language, meaning variables are not directly associated with any specific data type. Instead, the data type is determined by the value assigned to the variable at runtime.
+
+#### Primitive Data Types
+
+These are immutable and represent a single value:
+
+#### 1. String
+Represents a sequence of characters.
+
+```js
+let name = "John";
+console.log(typeof name);
+// "string"
+```
+
+#### 2. Number
+Represents both integer and floating-point numbers.
+
+```js
+let age = 25;
+let pi = 3.14;
+console.log(typeof age); // "number"
+console.log(typeof pi); // "number"
+```
+
+#### 3. BigInt
+Allows representation of integers larger than the Number type's safe range.
+
+```js
+let largeNumber = 1234567890123456789012345678901234567890n;
+console.log(typeof largeNumber); // "bigint"
+```
+
+#### 4. Boolean
+Represents logical values: true or false.
+
+```js
+let isActive = true;
+console.log(typeof isActive); // "boolean"
+```
+
+#### 5. Undefined
+Indicates a variable that has been declared but not assigned a value.
+
+```js
+let noValue;
+console.log(typeof noValue); // "undefined"
+```
+
+#### 6. Null
+Represents an intentional absence of any object value.
+
+```js
+let emptyValue = null;
+console.log(typeof emptyValue); // "object" (this is a known JavaScript quirk)
+```
+
+#### 7. Symbol
+Represents a unique identifier, often used to create private or hidden properties in objects.
+
+```js
+let uniqueId = Symbol("id");
+console.log(typeof uniqueId); // "symbol"
+```
+
+#### Non-Primitive (Reference) Data Types
+
+These are mutable and can hold multiple values:
+
+#### 1. Object
+Used to store collections of data and more complex entities.
+
+```js
+let person = {
+  name: "John",
+  age: 30
+};
+console.log(typeof person); // "object"
+```
+
+#### 2. Array
+A special type of object used to store ordered collections of data.
+
+```js
+let colors = ["red", "green", "blue"];
+console.log(typeof colors); // "object"
+```
+
+#### 3. Function
+A callable object that executes a block of code.
+
+```js
+function greet() {
+  console.log("Hello, world!");
+}
+console.log(typeof greet); // "function"
+```
+
+#### Type Coercion and Dynamic Typing
+JavaScript allows type coercion, automatically converting one data type to another when required.
+
+```js
+let num = "5";
+let result = num * 2; // The string "5" is coerced to a number
+console.log(result); // 10
+```
+
+---
+

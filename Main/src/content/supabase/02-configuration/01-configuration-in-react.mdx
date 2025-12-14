@@ -1,0 +1,89 @@
+---
+title: Configuration in React
+isPublished : true
+---
+
+
+To **configure Supabase** in a React app, you just need to:
+
+### 1. Create a Supabase project
+
+1. Go to [https://supabase.com/](https://supabase.com/) → sign in.
+2. Create a **new project**.
+3. Copy down:
+
+   * **Project URL** (looks like `https://xyzcompany.supabase.co`) - go to project settings then `Data API` → `Project URL` and copy the URL.
+   * **anon public key** (found in `Project Settings → API Keys → anon key`)
+
+⚠️ Never expose the **service\_role** key in React/browser — only use the **anon** key client-side.
+
+
+## 2. Install the client SDK
+
+```bash
+npm install @supabase/supabase-js
+```
+
+### 3. Create a Supabase client file
+
+In your React project, add a file (say `supabaseClient.js`):
+
+```js
+// supabaseClient.js
+import { createClient } from '@supabase/supabase-js';
+
+const SUPABASE_URL = process.env.REACT_APP_SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.REACT_APP_SUPABASE_ANON_KEY;
+
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+```
+
+### 4. Add your keys to `.env`
+
+Create `.env` in the project root:
+
+```env
+REACT_APP_SUPABASE_URL=https://your-project-ref.supabase.co
+REACT_APP_SUPABASE_ANON_KEY=your-anon-public-key
+```
+
+### 5. Use it in components
+
+Example: fetch user data from your Supabase database:
+
+```jsx
+import React, { useEffect, useState } from "react";
+import { supabase } from "./supabaseClient";
+
+function UsersList() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    async function loadUsers() {
+      let { data, error } = await supabase.from("users").select("*");
+      if (error) console.error(error);
+      else setUsers(data);
+    }
+    loadUsers();
+  }, []);
+
+  return (
+    <div>
+      <h2>Users</h2>
+      <ul>
+        {users.map((u) => (
+          <li key={u.id}>{u.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default UsersList;
+```
+
+
+---
+
+
+

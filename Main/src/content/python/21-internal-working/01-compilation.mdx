@@ -1,0 +1,28 @@
+---
+title: Compilation of Python.
+published : true
+---
+
+
+![](https://media.geeksforgeeks.org/wp-content/uploads/20230809115142/Internal-working-of-Python-(1).gif)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715260627801/291e3358-04f4-4e05-b30f-591d36611b99.png?auto=compress,format&format=webp)
+
+**Compiled to Byte Code :**
+
+Python source files (`.py`) are compiled into **bytecode** (`.pyc`) **/** **compiled bytecode** (.pyc)  before execution. This Byte Code is mostly hidden but sometimes it is visible especially when we import files. It is low level and platform independent. Byte Code runs faster .
+
+The `**__pycache__**` folder is a directory where Python stores **compiled bytecode files** to optimize the execution of Python programs. It is created automatically by the Python interpreter when a module is imported or executed.
+
+_Breaking down the byte Code File Name_
+
+Byte Code File : index.cpython-312.pyc
+
+1.  **index :** This is the name of the Python module or script (e.g., `index.py`).
+2.  **cpython :** Indicates the Python implementation used to generate this bytecode. Here, it's **CPython**, the default and most widely used implementation of Python.
+3.  **312** : Refers to the version of Python used to generate the bytecode. In this case, it's **Python 3.12**.
+4.  **`.pyc`:** The extension `.pyc` stands for **Python Compiled**. This is a file containing the compiled bytecode of the module.
+
+It works only for imported Files. It not work for top level files.
+
+---

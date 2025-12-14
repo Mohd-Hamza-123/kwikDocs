@@ -1,0 +1,301 @@
+---
+title: Retrieving Data from DB
+description: Learn how to retrieve data from the database
+published: true
+---
+
+Retrieving data from a database in Django is primarily done using the model's **QuerySet API**. Here are various ways to retrieve data from the database:
+
+The QuerySet API in Django is a high-level interface for interacting with your database.
+
+---
+
+### 1. **Retrieve All Records**
+Use the `.all()` method to fetch all records of a model.
+
+```python
+from myapp.models import Product
+from django.shortcuts import render
+def get_all_products():
+    # Fetch all products
+    products = Product.objects.all()
+    # print(products.values())
+    dict = {
+      'data' : products
+    }
+    return render(request, 'myapp/products.html',context = dict)
+```
+
+---
+
+### 2. **Retrieve a Single Record by ID**
+Use the `.get()` method with the primary key or another unique field. This will raise a `DoesNotExist` exception if the object is not found.
+
+```python
+from myapp.models import Product
+def get_product(request, id):
+   product = Product.objects.get(id=1)
+   print(product)
+```
+
+---
+
+### 3. **Retrieve Records Using Filtering**
+Use the `.filter()` method to retrieve records that match specific conditions. It returns a QuerySet.
+
+
+1. **Basic Field Filters**
+
+* Filters on fields directly.
+
+  ```python
+  Product.objects.filter(name="Laptop")
+  ```
+
+2. **Field Lookups**
+
+* Lookups provide more advanced filtering capabilities.
+
+- Comparison Lookups
+
+* `__lt`: Less than
+* `__lte`: Less than or equal to
+* `__gt`: Greater than
+* `__gte`: Greater than or equal to
+
+```python
+Product.objects.filter(price__gt=50)  # Price greater than 50
+```
+
+- Range Lookups : Filters within a range.
+
+```python
+Product.objects.filter(price__range=(50, 100))
+```
+
+- Exact Lookups
+
+* Checks for exact matches (case-sensitive).
+
+```python
+Product.objects.filter(name__exact="Laptop")
+```
+
+- Case-Insensitive Exact Lookups
+
+```python
+Product.objects.filter(name__iexact="laptop")
+```
+
+- Contains and Case-Insensitive Contains
+
+```python
+Product.objects.filter(description__contains="battery")
+Product.objects.filter(description__icontains="battery")
+```
+
+- StartsWith and EndsWith
+
+```python
+Product.objects.filter(name__startswith="Lap")
+Product.objects.filter(name__istartswith="lap")  # Case-insensitive
+Product.objects.filter(name__endswith="top")
+```
+
+- In Lookups
+
+* Matches any value in a list.
+
+```python
+Product.objects.filter(category__in=["electronics", "appliances"])
+```
+
+- Is Null
+
+* Filters for `NULL` values.
+
+```python
+Product.objects.filter(discount__isnull=True)
+```
+
+- Regex
+
+* Matches regular expressions.
+
+```python
+Product.objects.filter(name__regex=r"^Lap.*")
+Product.objects.filter(name__iregex=r"^lap.*")  # Case-insensitive
+```
+
+---
+
+3. **Chaining Filters**
+
+* Combine multiple filters.
+
+```python
+Product.objects.filter(price__gt=50, stock__lte=20) #  AND condition
+```
+
+---
+
+4. **Exclude Filters**
+
+* Exclude objects matching certain criteria.
+
+```python
+Product.objects.exclude(price__lt=50)
+```
+
+---
+
+5. **OR Conditions**
+
+* Use `Q` objects for complex queries.
+
+```python
+from django.db.models import Q
+Product.objects.filter(Q(price__gt=50) | Q(stock__lt=10))
+```
+
+---
+
+6. **Aggregation and Annotation**
+
+* Use these for filtering based on aggregated values.
+
+```python
+from django.db.models import Avg
+Product.objects.annotate(avg_price=Avg('price')).filter(avg_price__gt=50)
+```
+
+---
+
+7. **Custom Filters**
+
+* Write custom methods on the `Manager` or use raw SQL if necessary.
+
+---
+
+### 4. **Retrieve the First or Last Record**
+Use `.first()` or `.last()` to get the first or last record in a QuerySet.
+
+```python
+first_product = Product.objects.all().first()
+last_product = Product.objects.all().last()
+```
+
+---
+
+### 5. **Retrieve a Subset of Records (Slicing)**
+Use slicing to retrieve a limited number of records.
+
+```python
+# Fetch the first 5 products
+products = Product.objects.all()[:5]
+```
+
+---
+
+### 6. **Retrieve Records Using Exclusion**
+Use the `.exclude()` method to exclude records matching a condition.
+
+```python
+# Exclude products with price less than 20
+products = Product.objects.exclude(price__lt=20)
+```
+
+---
+
+### 7. **Order Records**
+Use `.order_by()` to sort records.
+
+```python
+# Order products by price in ascending order
+products = Product.objects.all().order_by('price')
+
+# Order by price in descending order
+products = Product.objects.all().order_by('-price')
+```
+
+---
+
+### 8. **Retrieve Specific Fields**
+Use `.values()` or `.values_list()` to fetch specific fields instead of entire model objects.
+
+- **Using `.values()`** (returns a list of dictionaries):
+  ```python
+  products = Product.objects.values('id', 'name', 'price')
+  ```
+
+- **Using `.values_list()`** (returns a list of tuples):
+  ```python
+  products = Product.objects.values_list('id', 'name', 'price')
+  ```
+
+---
+
+### 9. **Retrieve Distinct Records**
+Use `.distinct()` to eliminate duplicate records.
+
+```python
+products = Product.objects.values('category').distinct()
+```
+
+---
+
+### 10. **Execute Raw SQL Queries**
+Use `raw()` for custom SQL queries.
+
+```python
+from django.db import connection
+
+# Raw SQL query
+products = Product.objects.raw('SELECT * FROM myapp_product WHERE price > %s', [50])
+
+# Raw query using connection
+with connection.cursor() as cursor:
+    cursor.execute("SELECT * FROM myapp_product WHERE price > %s", [50])
+    rows = cursor.fetchall()
+```
+
+---
+
+### 11. **Handle Query Exceptions**
+Handle cases where a record is not found or multiple records are returned.
+
+- **Handle `DoesNotExist` Exception**:
+  ```python
+  from myapp.models import Product
+  from django.core.exceptions import ObjectDoesNotExist
+
+  try:
+      product = Product.objects.get(id=999)
+  except ObjectDoesNotExist:
+      product = None
+  ```
+
+- **Handle `MultipleObjectsReturned` Exception**:
+  ```python
+  try:
+      product = Product.objects.get(price=50)
+  except Product.MultipleObjectsReturned:
+      product = Product.objects.filter(price=50).first()
+  ```
+
+---
+
+### 12. **Advanced Filtering**
+Use complex queries with Django's **ORM Lookups** (e.g., `__icontains`, `__gte`, `__in`, `__range`, etc.).
+
+```python
+# Filter products with name containing "phone" (case-insensitive)
+products = Product.objects.filter(name__icontains="phone")
+
+# Filter products with price between 10 and 50
+products = Product.objects.filter(price__range=(10, 50))
+
+# Filter products with category in a list of categories
+products = Product.objects.filter(category__in=['electronics', 'furniture'])
+```
+

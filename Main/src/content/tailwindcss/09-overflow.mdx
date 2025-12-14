@@ -1,0 +1,47 @@
+---
+title : Overflow
+published : true
+---
+
+
+### 🎨 **1. Overflow on both axes**
+
+```html
+<div class="overflow-auto">Auto overflow (scroll when needed)</div>
+<div class="overflow-hidden">Hide overflowing content</div>
+<div class="overflow-visible">Content can overflow (default)</div>
+<div class="overflow-scroll">Always show scrollbars</div>
+```
+
+---
+
+### 🎨 **2. Axis-specific overflow**
+
+You can control **X (horizontal)** and **Y (vertical)** separately:
+
+```html
+<div class="overflow-x-auto">Horizontal scroll if needed</div>
+<div class="overflow-y-scroll">Always vertical scroll</div>
+<div class="overflow-x-hidden">Hide horizontal overflow</div>
+<div class="overflow-y-visible">Show vertical overflow</div>
+```
+
+---
+
+**3. Example**
+
+```html
+<div class="w-40 h-20 border overflow-auto">
+  <p>This is some long text that will scroll inside the box...</p>
+</div>
+```
+
+---
+
+✅ **Summary**
+
+* **All sides** → `overflow-auto` | `overflow-hidden` | `overflow-visible` | `overflow-scroll`
+* **X axis** → `overflow-x-auto` | `overflow-x-hidden` | `overflow-x-visible` | `overflow-x-scroll`
+* **Y axis** → `overflow-y-auto` | `overflow-y-hidden` | `overflow-y-visible` | `overflow-y-scroll`
+
+---

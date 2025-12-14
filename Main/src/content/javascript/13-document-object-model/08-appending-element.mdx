@@ -1,0 +1,232 @@
+---
+title: Appending Element
+published: true
+---
+
+We have learned how to create elements and append them to the DOM. Now, let's learn how to append elements using various methods.
+
+### ✅ 1. `appendChild()`
+
+* **Accepts:** Only **one node** (element or text node).
+* **Supports Strings:** ❌ No
+* **Returns:** The appended node
+* **Use case:** Simple, single-node appending (older but widely supported).
+
+**Before:**
+
+```html
+<body>
+</body>
+```
+
+**JavaScript:**
+
+```js
+const div = document.createElement("div");
+div.textContent = "Appended with appendChild";
+document.body.appendChild(div);
+```
+
+**After:**
+
+```html
+<body>
+  <div>Appended with appendChild</div>
+</body>
+```
+
+---
+
+### ✅ 2. `append()`
+
+* **Accepts:** **Multiple nodes and/or strings**
+* **Supports Strings:** ✅ Yes
+* **Returns:** ❌ Nothing
+* **Use case:** When you want to append multiple elements or mixed text + elements.
+
+**Before:**
+
+```html
+<body>
+</body>
+```
+
+**JavaScript:**
+
+```js
+const div = document.createElement("div");
+const span = document.createElement("span");
+span.textContent = "Span inside";
+div.append("Text before ", span);
+document.body.append(div);
+```
+
+**After:**
+
+```html
+<body>
+  <div>Text before <span>Span inside</span></div>
+</body>
+```
+
+---
+
+## ✅ 3. `prepend()`
+
+* **Accepts:** Multiple nodes and/or strings
+* **Supports Strings:** ✅ Yes
+* **Returns:** ❌ Nothing
+* **Use case:** To add content at the beginning of a container.
+
+**Before:**
+
+```html
+<body>
+  <p>Existing content</p>
+</body>
+```
+
+**JavaScript:**
+
+```js
+const h1 = document.createElement("h1");
+h1.textContent = "Prepended Heading";
+document.body.prepend(h1);
+```
+
+**After:**
+
+```html
+<body>
+  <h1>Prepended Heading</h1>
+  <p>Existing content</p>
+</body>
+```
+
+---
+
+### ✅ 4. `insertAdjacentElement()`
+
+* **Accepts:** One element
+* **Supports Strings:** ❌ No
+* **Returns:** The inserted element
+* **Use case:** Precise positioning (`beforebegin`, `afterbegin`, `beforeend`, `afterend`)
+
+**Before:**
+
+```html
+<div id="target">
+  <p>Some text</p>
+</div>
+```
+
+**JavaScript:**
+
+```js
+const el = document.createElement("div");
+el.textContent = "Inserted with insertAdjacentElement";
+const target = document.getElementById("target");
+target.insertAdjacentElement("beforeend", el);
+```
+
+**After:**
+
+```html
+<div id="target">
+  <p>Some text</p>
+  <div>Inserted with insertAdjacentElement</div>
+</div>
+```
+---
+
+
+### ✅ 5. `insertAdjacentHTML()`
+
+This method lets you insert **HTML text** into the DOM **at a specific position** relative to an existing element.
+
+**Syntax**
+
+```js
+element.insertAdjacentHTML(position, text);
+```
+
+* **`position`** → where to insert, relative to the element:
+
+  * `"beforebegin"` → before the element itself
+  * `"afterbegin"` → inside element, at the start
+  * `"beforeend"` → inside element, at the end
+  * `"afterend"` → after the element itself
+
+* **`text`** → string of HTML to insert (it gets parsed into DOM nodes)
+
+
+**Example**
+
+```html
+<div id="container">Hello</div>
+
+<script>
+const container = document.getElementById("container");
+
+container.insertAdjacentHTML("beforebegin", "<p>Before container</p>");
+container.insertAdjacentHTML("afterbegin", "<p>At the start</p>");
+container.insertAdjacentHTML("beforeend", "<p>At the end</p>");
+container.insertAdjacentHTML("afterend", "<p>After container</p>");
+</script>
+```
+
+**Resulting DOM:**
+
+```html
+<p>Before container</p>
+<div id="container">
+  <p>At the start</p>
+  Hello
+  <p>At the end</p>
+</div>
+<p>After container</p>
+```
+
+### **Why use it?**
+
+1. **Performance** → Faster than `innerHTML +=` because it doesn’t re-parse the entire element’s HTML, only the new part.
+2. **Flexibility** → You can insert at **precise positions** (start, end, before, after).
+3. **Convenience** → Directly insert HTML strings instead of creating elements manually with `createElement()`.
+
+✅ **In short:**
+
+`insertAdjacentHTML()` = a **fast, flexible way** to inject HTML strings into the DOM without destroying existing content.
+
+---
+
+### ✅ 6. `outerHTML`
+
+* **Accepts:** String of HTML
+* **Supports Strings:** ✅ Yes
+* **Returns:** ❌ Nothing
+* **Use case:** Replaces the selected element entirely.
+
+**Before:**
+
+```html
+<div id="oldEl">Old Content</div>
+```
+
+**JavaScript:**
+
+```js
+const old = document.getElementById("oldEl");
+old.outerHTML = "<div>Replaced using outerHTML</div>";
+```
+
+**After:**
+
+```html
+<div>Replaced using outerHTML</div>
+```
+
+---
+
+### Methods to Study
+
+* `insertBefore()`

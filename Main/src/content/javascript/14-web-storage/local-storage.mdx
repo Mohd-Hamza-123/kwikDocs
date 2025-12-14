@@ -1,0 +1,93 @@
+---
+title: Local Storage
+published: true
+---
+
+`localStorage` is part of the **Web Storage API** that allows you to store key-value pairs **in the browser**, with **no expiration date**. The data persists even after the browser is closed and reopened.
+
+---
+
+### ✅ Features of localStorage:
+
+* Stores data as **string key-value pairs**
+* Data is saved **per domain** (shared across tabs on the same origin)
+* **Persistent** (does not expire unless manually cleared)
+* Has a limit of about **5–10MB**
+
+---
+
+### 📚 Syntax and Methods
+
+| Method                             | Description                              |
+| ---------------------------------- | ---------------------------------------- |
+| `localStorage.setItem(key, value)` | Stores a value for a given key           |
+| `localStorage.getItem(key)`        | Retrieves the value for a given key      |
+| `localStorage.removeItem(key)`     | Removes the key-value pair               |
+| `localStorage.clear()`             | Removes **all** data in localStorage     |
+| `localStorage.key(index)`          | Returns the key name at a specific index |
+| `localStorage.length`              | Returns the total number of stored items |
+
+---
+
+### ✏️ Example 1: Basic Set and Get
+
+```js
+// Store data
+localStorage.setItem("username", "Hamza");
+
+// Retrieve data
+const user = localStorage.getItem("username");
+console.log(user); // Output: "Hamza"
+```
+
+---
+
+### ✏️ Example 2: Remove and Clear
+
+```js
+localStorage.removeItem("username"); // Removes one item
+
+localStorage.clear(); // Clears everything stored in localStorage
+```
+
+---
+
+### ✏️ Example 3: Store Objects (via JSON)
+
+Since `localStorage` only stores strings, you must convert objects to strings using `JSON.stringify()` and retrieve them using `JSON.parse()`.
+
+```js
+const user = { name: "Hamza", age: 23 };
+
+// Store object
+localStorage.setItem("user", JSON.stringify(user));
+
+// Retrieve object
+const data = JSON.parse(localStorage.getItem("user"));
+console.log(data.name); // Output: "Hamza"
+```
+
+---
+
+### ⚠️ Notes and Best Practices
+
+* Always **convert objects/arrays to strings** before storing.
+* Handle missing keys safely:
+
+  ```js
+  const value = localStorage.getItem("unknownKey") || "default";
+  ```
+* Avoid storing **sensitive data** (like passwords or tokens) in `localStorage`.
+* Use `localStorage` only for **small amounts of data** (non-critical).
+
+---
+
+### 🧪 Tip: Inspect localStorage in Browser DevTools
+
+1. Open browser dev tools (F12 or right-click → Inspect)
+2. Go to **Application → Storage → localStorage**
+3. View and modify key-value pairs directly
+
+---
+
+

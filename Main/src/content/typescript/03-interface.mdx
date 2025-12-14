@@ -1,0 +1,104 @@
+---
+title: Interface
+published: true
+---
+
+
+In TypeScript, an **interface** is a way to define the shape or structure of an object. It specifies the properties, their types, and optionally, their behaviors (methods). Interfaces are primarily used to ensure that objects or classes adhere to a particular structure, making your code more predictable and easier to debug.
+
+
+### **Key Features of Interfaces**
+
+1. **Defines the Structure**: Interfaces describe the required properties and their types.
+
+```typescript
+interface User {
+  id: number;
+  name: string;
+  isActive: boolean;
+}
+
+const user: User = {
+    id: 1,
+    name: "Hamza",
+    isActive: true,
+};
+```
+
+2. **Optional Properties**: Use `?` to mark properties as optional.
+
+```typescript
+interface Product {
+  id: number;
+  name: string;
+  description?: string; // Optional
+}
+
+const item: Product = { id: 101, name: "Book" }; // No error
+```
+
+3. **Readonly Properties**: Use `readonly` to make properties immutable.
+
+```typescript
+interface Car {
+    readonly id: number;
+    model: string;
+}
+const myCar: Car = { id: 1, model: "Tesla" };
+// myCar.id = 2; // Error: Cannot assign to 'id' because it is a read-only property
+```
+
+4. **Function Signatures**: Interfaces can describe function types.
+
+```typescript
+interface Greet {
+    (name: string): string;
+}
+const sayHello: Greet = (name) => `Hello, ${name}!`;
+```
+
+5. **Extending Interfaces**: Interfaces can inherit properties from other interfaces.
+
+```typescript
+interface Animal {
+    name: string;
+}
+interface Dog extends Animal {
+    breed: string;
+}
+const myDog: Dog = { name: "Buddy", breed: "Golden Retriever" };
+```
+
+6. **Classes Implementing Interfaces**: Classes can implement an interface to enforce its structure.
+
+```typescript
+interface Shape {
+    area(): number;
+}
+class Circle implements Shape {
+    radius: number;
+    constructor(radius: number) {
+        this.radius = radius;
+    }
+    area(): number {
+        return Math.PI * this.radius ** 2;
+    }
+}
+const circle = new Circle(5);
+console.log(circle.area()); // 78.53981633974483
+```
+
+7. **Index Signatures**: Allows defining the types of keys and values for dynamic properties.
+
+```typescript
+interface StringMap {
+    [key: string]: string;
+}
+const translations: StringMap = {
+    hello: "Hola",
+    goodbye: "Adiós",
+};
+```
+
+
+---

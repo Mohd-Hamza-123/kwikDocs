@@ -1,0 +1,127 @@
+---
+title: Data Modeling & Schema Design
+isPublished: true
+---
+
+###  What is Data Modeling?
+
+**Data Modeling** is the process of deciding how data should be structured, stored, and related inside a database.  
+It focuses on planning **what data we need** before writing any code.
+
+> 🧠 **Data Modeling = Thinking / Planning**
+
+#### 🎯 Key Points
+- Decide what data a system needs (e.g., users, products, posts)
+- Identify the fields and what type they are
+- Decide relationships between data (e.g., user has many posts)
+
+---
+
+### 👤 Example: User Data Model
+
+Before writing code, we plan what fields a `User` should have:
+
+| **Field**      | **Type** | **Constraint / Info**                              |
+| -------------- | -------- | -------------------------------------------------- |
+| `name`         | String   | required                                           |
+| `email`        | String   | required, unique, lowercase                        |
+| `passwordHash` | String   | required                                           |
+| `avatarUrl`    | String   | optional (profile picture)                         |
+| `phone`        | String   | optional, unique                                   |
+| `role`         | String   | enum: `"user"`, `"admin"` (default `"user"`)       |
+| `isVerified`   | Boolean  | default: false (email/phone verification)          |
+| `status`       | String   | enum: `"active"`, `"blocked"` (default `"active"`) |
+| `createdAt`    | Date     | auto generated (timestamp)                         |
+| `updatedAt`    | Date     | auto generated (timestamp)                         |
+
+> 📌 **This table is data modeling** — it’s planning before writing code and works for any database (SQL, MongoDB, Firebase, etc.)
+
+---
+
+### What is Schema Design?
+
+**Schema Design** is the process of implementing the planned data model in a specific database.  
+It defines the exact structure, rules, and types in **database code**.
+
+> 🔧 **Schema Design = Writing / Implementing**
+
+- Converts the model into actual database schema
+- Includes types, validation rules, constraints, defaults, etc.
+- Implementation is different for each database (SQL, MongoDB, Firebase)
+
+---
+
+### 🛢️ User Schema in MongoDB (Mongoose)
+
+```js
+import mongoose, { Schema } from "mongoose";
+
+const userSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+
+    passwordHash: {
+      type: String,
+      required: true,
+    },
+
+    avatarUrl: {
+      type: String,
+      default: null, // optional
+    },
+
+    phone: {
+      type: String,
+      unique: true,
+      sparse: true, // allows unique + optional
+    },
+
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
+    },
+
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
+
+    status: {
+      type: String,
+      enum: ["active", "blocked"],
+      default: "active",
+    },
+  },
+  { timestamps: true }
+);
+
+// Creating and exporting the model
+export default mongoose.model("User", userSchema);
+```
+
+---
+
+### 🔁 Relationship Between Both
+
+```
+Data Modeling (Plan)
+        ↓
+Schema Design (Code Blueprint)
+        ↓
+Database (Stores + Validates Data)
+```
+
+---

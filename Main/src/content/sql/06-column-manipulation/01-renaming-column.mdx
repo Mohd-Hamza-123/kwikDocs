@@ -1,0 +1,48 @@
+---
+title: Renaming Column
+description: ""
+published: true
+---
+
+### **Syntax for Changing Column Name**
+
+#### **PostgreSQL**
+
+```sql
+ALTER TABLE table_name
+RENAME COLUMN old_column_name TO new_column_name;
+```
+
+#### **MySQL**
+
+```sql
+ALTER TABLE table_name
+CHANGE old_column_name new_column_name new_data_type;
+```
+
+---
+
+### **Changing Column Name Example**
+
+#### **PostgreSQL**
+
+```sql
+ALTER TABLE employee
+RENAME COLUMN hire_data TO hire_date;
+```
+
+#### **MySQL**
+
+```sql
+ALTER TABLE employee
+CHANGE hire_data hire_date DATE;
+```
+
+---
+
+### **Key Difference**
+
+* **PostgreSQL**: Uses `RENAME COLUMN` and does not require specifying the data type.
+* **MySQL**: Requires the `CHANGE` keyword, the new column name, and the data type. In MySQL, the CHANGE command is not just for renaming a column; it is also used to modify the column's definition. Hence, the data type and any constraints must be explicitly specified.
+
+---

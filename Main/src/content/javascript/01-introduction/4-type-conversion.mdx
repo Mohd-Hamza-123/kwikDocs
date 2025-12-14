@@ -1,0 +1,106 @@
+---
+title: Type Conversion
+published: true
+---
+
+**Type conversion** means converting a value from one data type to another.
+There are two types:
+
+1. **Implicit Conversion (Type Coercion)** – done automatically by JavaScript
+2. **Explicit Conversion** – done manually by you (the developer)
+
+---
+
+### 🔸 1. **Implicit Type Conversion (Coercion)**
+
+JavaScript **automatically** converts types when needed (like combining a string with a number).
+
+#### ✅ Example 1: Number + String → String
+
+```js
+let result = 5 + "5";
+console.log(result);        // "55"
+console.log(typeof result); // string
+```
+
+📝 The number `5` was converted to a string before concatenation.
+
+---
+
+#### ✅ Example 2: String \* Number → Number
+
+```js
+let result = "10" * 2;
+console.log(result);        // 20
+console.log(typeof result); // number
+```
+
+📝 `"10"` was automatically converted to a number.
+
+---
+
+#### ✅ Example 3: Boolean to Number
+
+```js
+let result = true + 1;
+console.log(result);        // 2
+console.log(typeof result); // number
+```
+
+📝 `true` was converted to `1`.
+
+---
+
+### 🔸 2. **Explicit Type Conversion (Manual)**
+
+You can **manually convert** types using built-in functions like `Number()`, `String()`, `Boolean()`.
+
+---
+
+### 🔹 Convert to Number
+
+```js
+let str = "42";
+let num = Number(str);
+
+console.log(num);        // 42
+console.log(typeof num); // number
+```
+
+✅ Works with numeric strings, but returns `NaN` for non-numeric:
+
+```js
+Number("hello"); // NaN
+```
+
+---
+
+### 🔹 Convert to String
+
+```js
+let age = 25;
+let strAge = String(age);
+
+console.log(strAge);        // "25"
+console.log(typeof strAge); // string
+```
+
+---
+
+### 🔹 Convert to Boolean
+
+```js
+let emptyStr = "";
+let zero = 0;
+let name = "Hamza";
+
+console.log(Boolean(emptyStr)); // false
+console.log(Boolean(zero));     // false
+console.log(Boolean(name));     // true
+```
+
+✅ Falsy values: `""`, `0`, `null`, `undefined`, `NaN`, `false`
+✅ Truthy values: everything else
+
+---
+

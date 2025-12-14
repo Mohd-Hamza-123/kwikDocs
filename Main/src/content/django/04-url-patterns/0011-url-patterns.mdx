@@ -1,0 +1,137 @@
+---
+title: URL Patterns
+description: "Understanding Django URLconfs and how to map URLs to views."
+published: true
+---
+
+URL patterns, also known as **URLconfs**, are used to map incoming HTTP requests to the appropriate view functions or classes.
+
+## 🔧 Syntax of `path()`
+
+```python
+path(route, view, kwargs=None, name=None)
+```
+
+| Parameter | Description |
+|----------|-------------|
+| `route`   | The URL pattern to match (e.g., `"about/"`, `"products/<int:id>/"`). |
+| `view`    | The view function or class that should handle the request. |
+| `kwargs`  | Optional dictionary of keyword arguments to pass to the view. |
+| `name`    | Optional name to identify the URL pattern, useful for reverse URL resolution. |
+
+---
+
+## 📌 Basic URL Patterns
+
+```python
+# urls.py
+from django.urls import path
+from appName.views import home_view, about_view, contact_view
+
+urlpatterns = [
+    path("", home_view),
+    path("about/", about_view),
+    path("contact/", contact_view),
+]
+```
+
+---
+
+## 🏷️ URL Patterns with `name`
+
+Adding a `name` to your URL pattern allows you to use it in `reverse()` and `{% url %}` template tags.
+
+```python
+# urls.py
+from django.urls import path
+from appName.views import home_view, about_view, contact_view
+
+urlpatterns = [
+    path("", home_view, name="home"),
+    path("about/", about_view, name="about"),
+    path("contact/", contact_view, name="contact"),
+]
+```
+
+Usage in template:
+```django
+<a href="{% url 'about' %}">About Us</a>
+```
+
+---
+
+## 🧩 URL Patterns with `kwargs`
+
+You can pass additional data to views using `kwargs`.
+
+```python
+# urls.py
+from django.urls import path
+from appName.views import about_view
+
+urlpatterns = [
+    path("about/", about_view, kwargs={"name": "Hamza", "isMale": True}),
+]
+```
+
+### Accessing `kwargs` in the View
+
+```python
+# views.py
+from django.http import HttpResponse
+
+def about_view(request, **kwargs):
+    name = kwargs.get("name")
+    isMale = kwargs.get("isMale")
+    return HttpResponse(f"Hello {name}, isMale: {isMale}")
+```
+
+---
+
+## 🧠 Dynamic URL Patterns
+
+Django also allows capturing values from the URL using converters like `<int:>`, `<str:>`, `<slug:>`, etc.
+
+```python
+# urls.py
+from django.urls import path
+from appName.views import product_detail_view
+
+urlpatterns = [
+    path("product/<int:id>/", product_detail_view, name="product-detail"),
+]
+```
+
+```python
+# views.py
+def product_detail_view(request, id):
+    return HttpResponse(f"Product ID: {id}")
+```
+
+### 🔄 Including Other URLConfs with `include()`
+
+In larger Django projects with multiple apps (like products, blog, users, etc.), it's best practice to keep each app’s URLs in its own urls.py and include them in the main project's URLconf.
+
+```python
+# project-level urls.py
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("products/", include("products.urls")),
+]
+```
+
+```python
+# products/urls.py (inside the products app)
+from django.urls import path
+from .views import product_list_view, product_detail_view
+
+urlpatterns = [
+    path("", product_list_view, name="product-list"),
+    path("<int:id>/", product_detail_view, name="product-detail"),
+]
+```
+
+---

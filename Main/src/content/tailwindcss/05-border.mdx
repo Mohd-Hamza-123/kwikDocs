@@ -1,0 +1,102 @@
+---
+title : Border
+published : true
+---
+
+
+### 🎨 **1. Border Width**
+
+* `border` → default `1px` border on all sides
+* `border-2`, `border-4`, `border-8` → thicker borders
+* Side-specific:
+
+  * `border-t` → top
+  * `border-r` → right
+  * `border-b` → bottom
+  * `border-l` → left
+
+```html
+<div class="border p-4">Default border</div>
+<div class="border-4 p-4">Thick border</div>
+<div class="border-t-2 p-4">Top border only</div>
+```
+
+---
+
+### 🎨 **2. Border Color**
+
+Use `border-{color}` just like background & text:
+
+```html
+<div class="border-2 border-red-500 p-4">Red border</div>
+<div class="border-4 border-blue-700 p-4">Blue border</div>
+<div class="border border-green-400 p-4">Green border</div>
+```
+
+👉 You can also use **arbitrary values**:
+
+```html
+<div class="border-2 border-[#ff5733] p-4">Custom hex border</div>
+```
+
+---
+
+### 🎨 **3. Border Style**
+
+```html
+<div class="border-2 border-dashed p-4">Dashed border</div>
+<div class="border-2 border-dotted p-4">Dotted border</div>
+<div class="border-2 border-double p-4">Double border</div>
+<div class="border-2 border-solid p-4">Solid border</div>
+<div class="border-2 border-none p-4">No border</div>
+```
+
+---
+
+### 🎨 **4. Border Radius (rounded corners)**
+
+```html
+<div class="border rounded p-4">Small rounded</div>
+<div class="border rounded-lg p-4">Large rounded</div>
+<div class="border rounded-full p-4">Fully rounded (circle if square)</div>
+```
+
+📌 Common options:
+
+* `rounded-sm` → small radius
+* `rounded` → default
+* `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-2xl`, `rounded-3xl` → larger
+* `rounded-full` → pill/circle
+
+👉 Side-specific:
+
+* `rounded-t-lg` → top corners
+* `rounded-b-lg` → bottom corners
+* `rounded-l-lg` → left corners
+* `rounded-r-lg` → right corners
+
+---
+
+### 🎨 **5. Ring (extra outline)**
+
+Tailwind also has **rings** (outer borders, often used for focus states):
+
+```html
+<button class="border rounded ring-2 ring-blue-500 p-2">
+  Button with ring
+</button>
+```
+
+---
+
+✅ **Summary**
+
+* **Width** → `border`, `border-2`, `border-t-4`
+* **Color** → `border-red-500`, `border-[#hex]`
+* **Style** → `border-dashed`, `border-dotted`, `border-double`, `border-solid`
+* **Radius** → `rounded`, `rounded-lg`, `rounded-full`, `rounded-t-md`
+* **Ring** → `ring-2 ring-blue-500`
+
+---
+
+

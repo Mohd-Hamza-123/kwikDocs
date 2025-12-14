@@ -1,0 +1,64 @@
+---
+title: CSS Border Properties
+published: true
+---
+
+The CSS border properties allow you to specify the style, width, and color of an element's border.
+
+```css
+.someElement {
+  border: 5px solid red; /* Sets a solid red border with a width of 5px */
+}
+```
+
+### 🌟 Border Styles:
+
+- **`dotted`** - Defines a dotted border.
+- **`dashed`** - Defines a dashed border.
+- **`solid`** - Defines a solid border.
+- **`double`** - Defines a double border.
+- **`groove`** - Defines a 3D grooved border (effect depends on the `border-color` value).
+- **`ridge`** - Defines a 3D ridged border (effect depends on the `border-color` value).
+- **`none`** - Defines no border.
+- **`hidden`** - Defines a hidden border.
+
+
+**Example:**
+
+<HtmlEditor id={1} defaultCode={`<html>
+  <head>
+    <style>
+      .border {
+        border: 5px solid red;
+      }
+      .dotted {
+        border: 5px dotted blue;
+      }
+      .dashed {
+        border: 5px dashed green;
+      }
+      .none {
+        border: 5px none;
+      }
+      .hidden {
+        border: 5px hidden;
+      }
+      .groove {
+        border: 5px groove blue;
+      }
+      .ridge {
+        border: 5px ridge green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="border">Border</div>
+    <div class="dotted">Dotted</div>
+    <div class="dashed">Dashed</div>
+    <div class="none">None</div>
+    <div class="hidden">Hidden</div>
+    <div class="groove">Groove</div>
+    <div class="ridge">Ridge</div>
+  </body>
+</html>
+`}/>

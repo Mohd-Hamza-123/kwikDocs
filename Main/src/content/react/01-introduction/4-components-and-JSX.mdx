@@ -1,0 +1,165 @@
+---
+title: Components & JSX
+published: true
+---
+
+
+Components are the building blocks of React applications. Think of them like LEGO pieces that you can combine to build a complete user interface. Each component is a reusable piece of code that represents a part of your user interface.
+
+### Types of Components
+
+#### 1. Function Components
+
+The modern and recommended way to write components. They are simple JavaScript functions that return JSX.
+
+```jsx
+function Greeting() {
+  return <h1>Hello, World!</h1>;
+}
+```
+
+#### 2. Class Components
+
+The traditional way to define components using JavaScript classes.
+
+```jsx
+class Greeting extends React.Component {
+  render() {
+    return <h1>Hello, World!</h1>;
+  }
+}
+```
+
+#### Use of Components 
+
+To use a component, first you need to import it into your file. Then, you can use it in your JSX code by calling it as a function or by using it as a class.
+
+```jsx
+import React from 'react';
+import Greeting from './Greeting';
+
+function App() {
+  return (
+    <div>
+      <Greeting />
+    </div>
+  );
+}
+
+export default App;
+```
+
+```jsx
+import React from 'react';
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <Greeting />
+      </div>
+    );
+  }
+}
+```
+
+#### Components vs Function 
+
+
+1. **Function (in JavaScript)**
+
+* A function is just plain JavaScript — it takes input (parameters) and returns an output.
+* Example:
+
+```js
+function add(a, b) {
+  return a + b;
+}
+```
+
+* It has nothing to do with React unless you explicitly make it return **React elements**.
+
+
+2. **React Component**
+
+* A React component **is a special kind of function (or class)** that **returns JSX (React elements)**.
+* React uses these components to build the UI.
+* Example:
+
+```jsx
+function Greeting() {
+  return <h1>Hello, World!</h1>;  // returns JSX
+}
+```
+
+* React components must:
+
+  * Start with a **capital letter** (e.g., `Greeting`, not `greeting`).
+  * Return JSX (or `null`) that React can render.
+
+👉 In short:
+**Every React component is a function, but not every function is a React component.**
+
+
+---
+
+### What is JSX?
+
+JSX (JavaScript XML) is a syntax extension for JavaScript that looks similar to HTML. It makes writing React components more intuitive.
+
+### JSX Basics
+
+- JSX is a `syntax extension` for JavaScript that lets you write HTML-like code in your JavaScript
+- It gets transformed into regular JavaScript during the build process
+- It makes your React code more readable and easier to write
+
+```jsx
+// This is JSX
+const element = <h1>Hello, JSX!</h1>;
+
+// It gets transformed into something like this
+const element = React.createElement('h1', null, 'Hello, JSX!');
+```
+
+### JSX Rules
+
+1. **Every JSX element must be closed**
+```jsx
+   <img src="image.jpg" /> {/* Self-closing tag */}
+   <div>Content</div> {/* Regular closing tag */}
+```
+
+2. **Return a single root element**
+```jsx
+   // Correct - Single root element
+   return (
+     <div>
+       <h1>Title</h1>
+       <p>Paragraph</p>
+     </div>
+   );
+
+   // Also correct - Using Fragment
+   return (
+     <>
+       <h1>Title</h1>
+       <p>Paragraph</p>
+     </>
+   );
+```
+
+3. **Use camelCase for attributes**
+
+```jsx
+   <div className="container" onClick={handleClick}></div>
+```
+
+4. **Embed JavaScript expressions with curly braces**
+
+```jsx
+   const name = "React";
+   return <h1>Hello, {name}!</h1>;
+```
+
+---
+

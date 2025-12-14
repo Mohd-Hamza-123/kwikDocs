@@ -1,0 +1,50 @@
+.loader {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    position: relative;
+  }
+  
+  .loader::after,
+  .loader::before {
+    content: '';  
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 3px solid;
+    border-color: transparent transparent #ffa200 #ffa200;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    animation: rotationBack 0.25s linear infinite;
+    transform-origin: center center;
+  }
+  
+  .loader::before {
+    width: 32px;
+    height: 32px;
+    border-color: #FFF #FFF transparent transparent;
+    animation: rotation 0.75s linear infinite;
+  }
+  
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes rotationBack {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(-360deg);
+    }
+  }

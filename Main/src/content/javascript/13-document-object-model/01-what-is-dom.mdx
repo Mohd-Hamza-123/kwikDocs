@@ -1,0 +1,38 @@
+---
+title: What is DOM?
+published: true
+---
+
+### Document Object Model (DOM)
+
+The Document Object Model (DOM) is a programming interface that represents structured documents like HTML as a tree of objects. It defines how to access, manipulate, and modify document elements using scripting languages like JavaScript. Essentially, the DOM is an API that allows interaction with HTML or XML documents.
+
+```html
+<html>
+  <body>
+    <h1>Hello</h1>
+    <p>Welcome to my site</p>
+  </body>
+</html>
+```
+
+```plaintext
+<-- Tree Of Objects -->
+
+Document
+└── html
+    └── body
+        ├── h1
+        │   └── Text: "Hello"
+        └── p
+            └── Text: "Welcome to my site"
+```
+
+
+* The whole page is a Document object.
+* Inside it, there's an html object.
+* Inside `<html>`, there's a body object.
+* Inside `<body>`, there are h1 and p elements, which are also objects.
+* Text like "Hello" and "Welcome..." is inside Text nodes, which are also objects.
+
+---

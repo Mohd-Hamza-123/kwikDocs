@@ -1,0 +1,127 @@
+---
+title: Installation and Setup
+published: true
+---
+
+To use **Redux** in your React project, you need to install two main packages:
+
+* `@reduxjs/toolkit` → modern way of writing Redux logic
+* `react-redux` → bindings to connect Redux with React components
+
+Here’s how you do it step by step:
+
+### 1. Install dependencies
+
+Run this in your project root:
+
+```bash
+npm install @reduxjs/toolkit react-redux
+```
+
+
+### 2. Create a Redux store
+
+Inside your project (e.g., in a `store.js` or `redux/store.js` file):
+
+```js
+// store.js
+import { configureStore } from '@reduxjs/toolkit';
+
+const store = configureStore({
+  reducer: {
+  },
+});
+
+export default store;
+```
+
+### 3. Provide the store to React
+
+Wrap your app with `<Provider>` in `index.js` (or `main.jsx` if using Vite):
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import store from './redux/store.js';
+import App from './App';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
+```
+
+
+### 4. Create a slice (example)
+
+A slice holds your state + reducers:
+
+```js
+// redux/features/counterSlice.js
+import { createSlice } from '@reduxjs/toolkit';
+
+const counterSlice = createSlice({
+  name: 'counterSlice',
+  initialState: { value: 0 },
+  reducers: {
+    increment: (state) => {
+      state.value += 1;
+    },
+    decrement: (state) => {
+      state.value -= 1;
+    },
+    incrementByAmount: (state, action) => {
+      state.value += action.payload;
+    },
+  },
+});
+
+export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export default counterSlice.reducer;
+```
+
+### 5. Update the store
+
+```js
+// store.js
+import { configureStore } from '@reduxjs/toolkit';
+import counterSlice from './counterSlice';
+
+const store = configureStore({
+  reducer: {
+    counter: counterSlice,
+  },
+});
+
+export default store;
+```
+
+
+### 5. Use Redux state and actions in components
+
+Example:
+
+```js
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { increment, decrement , incrementByAmount } from './counterSlice';
+
+function Counter() {
+  const count = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
+
+  return (
+    <div>
+      <h2>{count}</h2>
+      <button onClick={() => dispatch(increment())}>+</button>
+      <button onClick={() => dispatch(decrement())}>-</button>
+      <button onClick={() => dispatch(incrementByAmount(5))}>+5</button>
+    </div>
+  );
+}
+
+export default Counter;
+```

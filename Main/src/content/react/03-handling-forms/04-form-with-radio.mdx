@@ -1,0 +1,92 @@
+---
+title: Radio Buttons Form
+published: true
+---
+
+
+👉 A **radio group** allows only **one selected value at a time**.
+
+
+🔹 Example: Radio Buttons with State
+
+```tsx
+import { useState } from "react";
+
+function RadioExample() {
+  // one selected value only
+  const [gender, setGender] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setGender(e.target.value); // update state with selected value
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Selected gender:", gender);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <h3>Select Gender</h3>
+
+      <input
+        type="radio"
+        id="male"
+        name="gender"
+        value="Male"
+        checked={gender === "Male"}
+        onChange={handleChange}
+      />
+      <label htmlFor="male">Male</label>
+      <br />
+      <br />
+
+      <input
+        type="radio"
+        id="female"
+        name="gender"
+        value="Female"
+        checked={gender === "Female"}
+        onChange={handleChange}
+      />
+      <label htmlFor="female">Female</label>
+      <br />
+      <br />
+
+      <input
+        type="radio"
+        id="other"
+        name="gender"
+        value="Other"
+        checked={gender === "Other"}
+        onChange={handleChange}
+      />
+      <label htmlFor="other">Other</label>
+      <br />
+      <br />
+
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+export default RadioExample;
+```
+
+---
+
+🔎 Key Points
+
+1. `useState("")` → holds the **currently selected value**.
+2. `checked={gender === "Male"}` → makes each radio **controlled** by state.
+3. `onChange={(e) => setGender(e.target.value)}` → updates state when a new option is picked.
+
+---
+
+✅ If you select **Female**, state becomes:
+
+```js
+"Female"
+```
+
+---

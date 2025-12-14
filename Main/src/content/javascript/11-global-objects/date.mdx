@@ -1,0 +1,262 @@
+---
+title: Date In JavaScript
+published: true
+---
+
+The `Date` object in JavaScript is used to work with dates and times — you can create, get, set, and format date or time values.
+
+
+### 📅 Creating a Date Object
+
+You can create a Date object using the `new Date()` constructor.
+
+```js
+const date = new Date(); // 2025-08-03T09:03:10.301Z
+```
+
+This will create a Date object with the current date and time.
+
+---
+
+## 🕒 Formatting Dates
+
+```js
+const d = new Date();
+console.log(d.toString());          // Sun Aug 03 2025 14:37:16 GMT+0530 (India Standard Time)
+console.log(d.toDateString());      // Sun Aug 03 2025
+console.log(d.toTimeString());      // 14:37:16 GMT+0530 (India Standard Time)
+console.log(d.toISOString());       // 2025-08-03T09:07:16.557Z
+console.log(d.toLocaleDateString()); // 3/8/2025
+console.log(d.toLocaleTimeString()); // 2:37:16 pm
+```
+
+---
+
+## 🧾 Passing Arguments to the Date Constructor
+
+```js
+const d1 = new Date("2025-08-03"); // yyyy-mm-dd format
+const d2 = new Date(2025, 7, 3);   // year, month (0-based), day
+```
+
+> 🔹 Note: Months start from 0 (January) to 11 (December)
+
+---
+
+## 🔝 Most Used `Date` Get Methods (with Examples)
+
+### 1. `getFullYear()`
+
+📌 Returns the **4-digit year**
+
+```js
+const d = new Date();
+console.log(d.getFullYear()); // 2025
+```
+
+---
+
+### 2. `getMonth()`
+
+📌 Returns the **month (0–11)**
+
+> January = 0, December = 11
+
+```js
+console.log(d.getMonth()); // 7 → August
+```
+
+---
+
+### 3. `getDate()`
+
+📌 Returns the **day of the month (1–31)**
+
+```js
+console.log(d.getDate()); // 3
+```
+
+---
+
+### 4. `getDay()`
+
+📌 Returns the **day of the week (0–6)**
+
+> Sunday = 0, Saturday = 6
+
+```js
+console.log(d.getDay()); // 0 → Sunday
+```
+
+---
+
+### 5. `getHours()`
+
+📌 Returns the **hour (0–23)**
+
+```js
+console.log(d.getHours()); // e.g., 14 → 2 PM
+```
+
+---
+
+### 6. `getMinutes()`
+
+📌 Returns the **minutes (0–59)**
+
+```js
+console.log(d.getMinutes()); // e.g., 45
+```
+
+---
+
+### 7. `getSeconds()`
+
+📌 Returns the **seconds (0–59)**
+
+```js
+console.log(d.getSeconds()); // e.g., 12
+```
+
+---
+
+### 8. `getTime()`
+
+📌 Returns the **timestamp** (milliseconds since Jan 1, 1970)
+
+```js
+const d = new Date();
+console.log(d.getTime());    // 1754185039496
+console.log(+d);             // same as above (`+d` is shorthand for d.getTime())
+console.log(Date.now());     // same as above, gets current timestamp directly
+```
+
+---
+
+### ✅ Quick Recap Table
+
+| Method          | Returns                   |
+| --------------- | ------------------------- |
+| `getFullYear()` | 4-digit year (e.g., 2025) |
+| `getMonth()`    | Month (0–11)              |
+| `getDate()`     | Day of month (1–31)       |
+| `getDay()`      | Weekday (0–6)             |
+| `getHours()`    | Hour (0–23)               |
+| `getMinutes()`  | Minutes (0–59)            |
+| `getSeconds()`  | Seconds (0–59)            |
+| `getTime()`     | Timestamp in milliseconds |
+
+---
+
+## 🔧 Most Used `Date` Set Methods (with Examples)
+
+These methods allow you to **modify specific parts** of a `Date` object.
+
+---
+
+### 1. `setFullYear(year)`
+
+📌 Sets the **year**
+
+```js
+const d = new Date();
+d.setFullYear(2030);
+console.log(d); // year changed to 2030
+```
+
+---
+
+### 2. `setMonth(month)`
+
+📌 Sets the **month (0–11)**
+
+> 0 = January, 11 = December
+
+```js
+d.setMonth(0); // sets month to January
+```
+
+---
+
+### 3. `setDate(day)`
+
+📌 Sets the **day of the month (1–31)**
+
+```js
+d.setDate(15); // sets day to 15th
+```
+
+---
+
+### 4. `setHours(hour)`
+
+📌 Sets the **hour (0–23)**
+
+```js
+d.setHours(9); // sets time to 9 AM
+```
+
+---
+
+### 5. `setMinutes(minutes)`
+
+📌 Sets the **minutes (0–59)**
+
+```js
+d.setMinutes(30); // sets minute to :30
+```
+
+---
+
+### 6. `setSeconds(seconds)`
+
+📌 Sets the **seconds (0–59)**
+
+```js
+d.setSeconds(45); // sets seconds to :45
+```
+
+---
+
+### 7. `setTime(milliseconds)`
+
+📌 Sets the **whole date/time** using a timestamp
+
+```js
+d.setTime(1754185039496); // sets exact time from milliseconds
+```
+
+---
+
+### ✅ Quick Recap Table
+
+| Method           | Sets...                 |
+| ---------------- | ----------------------- |
+| `setFullYear(y)` | Year                    |
+| `setMonth(m)`    | Month (0–11)            |
+| `setDate(d)`     | Day of the month (1–31) |
+| `setHours(h)`    | Hour (0–23)             |
+| `setMinutes(m)`  | Minutes (0–59)          |
+| `setSeconds(s)`  | Seconds (0–59)          |
+| `setTime(ms)`    | Entire timestamp        |
+
+---
+
+## 🔍 Compare Dates
+
+You can compare dates by converting them to **timestamps**.
+
+```js
+const date1 = new Date('2025-08-01');
+const date2 = new Date('2025-08-03');
+
+console.log(date1.getTime() === date2.getTime()); // false
+console.log(date1.getTime() < date2.getTime());   // true
+console.log(+date1 === +date2);                   // also valid
+```
+
+---
+
+>  Use `getTime()` or `+date` to get numeric values for accurate comparisons.
+
+---

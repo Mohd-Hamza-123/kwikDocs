@@ -1,0 +1,71 @@
+---
+title: Request Object
+description: Learn about Request Object
+published: true
+---
+
+The **request** object is an object that contains information about the request made by the client. It is passed as the first argument to the callback function in the `createServer` method.
+
+The request object has the following properties:
+
+| Property | Description |
+|----------|-------------|
+| url      | The URL of the request. |
+| method   | The HTTP method used in the request. |
+| headers  | An object containing the request headers. |
+| body     | The request body. |
+
+### Example: Accessing Request Object in Node.js
+
+```javascript
+import http from 'http';
+
+const server = http.createServer((request, response) => {
+    console.log(request.url);
+    console.log(request.method);
+    console.log(request.headers);
+    console.log(request.body);
+});
+
+server.listen(3000, () => {
+    console.log('Server running at http://localhost:3000/');
+});
+```
+
+## Handling Different Requests Data
+
+
+### 1. Handling JSON Data
+
+
+```javascript
+const server = http.createServer((request, response) => {
+    console.log(request.url);
+
+    if (request.method === 'POST') {
+        let body = '';
+
+        // Listen for chunks of data
+        request.on('data', (chunk) => {
+            body += chunk.toString(); // Convert Buffer to string
+        });
+
+        // End event triggers when all data is received
+        request.on('end', () => {
+            try {
+                const parsedBody = JSON.parse(body); // Parse JSON data
+
+                response.writeHead(200, { "Content-Type": "application/json" });
+                response.end(JSON.stringify({ message: 'Data received', data: parsedBody }));
+            } catch (error) {
+                response.writeHead(400, { "Content-Type": "application/json" });
+                response.end(JSON.stringify({ error: 'Invalid JSON' }));
+            }
+        });
+    } else {
+        response.writeHead(405, { "Content-Type": "text/plain" });
+        response.end("Only POST requests are supported");
+    }
+});
+```
+

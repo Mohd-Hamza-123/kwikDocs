@@ -1,0 +1,120 @@
+---
+title: Forms
+published: true
+---
+
+An HTML form is used to collect user input. The user input is most often sent to a server for processing. 
+
+The HTML `<form>` element is used to create an HTML form for user input.
+
+```html
+<form>
+.
+form elements
+.
+</form>
+```
+
+The `<form>` element is a container for different types of input elements, such as: text fields, checkboxes, radio buttons, submit buttons, etc.
+
+
+Basic Forms :
+
+<HtmlEditor id={1} defaultCode={`
+<form>
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" ><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" >
+  <input type="submit" >
+</form>
+`}/>
+
+---
+
+### Form Validation
+
+HTML forms can be validated using various attribute eg maxlength, minlength, required, pattern, etc.
+
+<HtmlEditor id={2} defaultCode={`
+<form>
+  <input type="text" placeholder="username" required>
+  <input type="email" placeholder="email" required>
+  <input type="password" placeholder="password" required maxlength="8" minlength="6">
+  <button type="submit">Submit</button>
+</form>
+`}/>
+
+---
+
+#### Form with checkboxes:
+
+ <HtmlEditor id={3} defaultCode={`
+<form>
+  <input type="checkbox" id="vehicle1" >
+  <label for="vehicle1"> I have a bike</label><br>
+  <input type="checkbox" id="vehicle2" >
+  <label for="vehicle2"> I have a car</label><br>
+  <input type="checkbox" id="vehicle3" >
+  <label for="vehicle3"> I have a boat</label>
+</form>
+`}/>
+
+---
+
+#### Forms using Div :
+
+<HtmlEditor id={4} defaultCode={`
+<form>
+
+ <div> 
+  <input type="checkbox" id="vehicle1" >
+  <label for="vehicle1"> I have a bike</label>
+ </div>
+
+ <div> 
+   <input type="checkbox" id="vehicle2" >
+   <label for="vehicle2"> I have a car</label>
+ </div>
+
+  <div>
+  <input type="checkbox" id="vehicle3" >
+  <label for="vehicle3"> I have a boat</label>
+  </div>
+
+</form>
+`}/>
+
+---
+
+#### Form using Textarea
+
+<HtmlEditor id={5} defaultCode={`
+<form>
+      <label for="w3">Type Message</label>
+      <textarea id="w3" placeholder="Message" rows="4" cols="50"></textarea>
+      <br />
+      <button value="submit">Submit</button>
+ </form>
+`}/>
+
+---
+
+#### Form using select Tag
+
+<HtmlEditor id={6} defaultCode={`
+<form>
+      <label for="cars">Choose a car:</label>
+      <select id="cars">
+        <option hidden>Choose</option>
+        <option>Volvo</option>
+        <option>Saab</option>
+        <option>Mercedes</option>
+        <option>Audi</option>
+      </select>
+      <button type="submit">submit</button>
+</form>
+`}/>
+
+
+---

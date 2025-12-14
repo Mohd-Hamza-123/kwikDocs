@@ -1,0 +1,62 @@
+---
+title : useFormStatus Hook
+published : true
+---
+
+`useFormStatus` is a React 19 hook that **tells you if a form is currently submitting or not**.
+It only works if you call it **inside a component that is a child of a `<form>`**.
+
+
+🔹 Simple Example
+
+```tsx
+// Parent component
+import React from "react";
+export default function MyForm() {
+  // This function runs when the form is submitted
+  async function handleSubmit(formData: FormData) {
+    await new Promise((resolve) => setTimeout(resolve, 2000)); // fake delay
+    console.log("Submitted:", formData.get("name"));
+  }
+
+  return (
+    <form action={handleSubmit}>
+      <input type="text" name="name" placeholder="Your name" />
+      <SubmitButton /> {/* child of <form>, so it works */}
+    </form>
+  );
+}
+```
+
+```jsx
+// Child component
+import { useFormStatus } from "react-dom";
+
+// A button that knows when the form is submitting
+function SubmitButton() {
+  const { pending } = useFormStatus(); // gets status of nearest <form>
+  return (
+    <button type="submit" disabled={pending}>
+      {pending ? "Submitting..." : "Submit"}
+    </button>
+  );
+}
+```
+
+---
+
+🔹 What happens
+
+1. You type a name and click **Submit**.
+2. The `handleSubmit` function runs (takes \~2 seconds here).
+3. While it’s running:
+
+   * `useFormStatus().pending` becomes **true**.
+   * The button text changes to **"Submitting..."**.
+   * Button is disabled.
+4. When done, it goes back to **"Submit"**.
+
+---
+
+
+

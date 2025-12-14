@@ -1,0 +1,107 @@
+---
+title: Form Elements
+published: true
+---
+
+### Input Tag🖋️
+
+The `<input>` tag specifies an input field where the user can enter data.
+
+<HtmlEditor id={1} defaultCode={`
+<input type="text" placeholder="Enter your name"> <!-- Default value -->
+<input type="button" value="Click">
+<input type="checkbox">
+<input type="color">
+<input type="date">
+<input type="datetime-local">
+<input type="email" placeholder="Enter your email">
+<input type="file">
+<input type="number">
+<input type="password" placeholder="Enter your password">
+<input type="radio">
+<input type="range">
+<input type="reset">
+<input type="search" placeholder="Search anything">
+<input type="submit" value="Login">
+<input type="time">
+<input type="url">
+<input type="week">
+`}/>
+
+---
+
+## Textarea Tag 📝
+
+The `<textarea>` tag is used to define a multi-line input field where users can enter text. It is ideal for long text inputs such as comments or feedback.
+
+<HtmlEditor id={2} defaultCode={`
+  <textarea rows="4" cols="50"></textarea>
+`}/>
+
+
+### Attributes
+- **rows**: Specifies the number of visible text lines.
+- **cols**: Specifies the width of the text area.
+- **placeholder**: Displays a hint for the user.
+
+---
+
+## Select Tag 📜
+
+The `<select>` tag is used to create a dropdown list, allowing users to select one or more options from a list.
+
+<HtmlEditor id={3} defaultCode={`
+  <select>
+    <option value="option1">Option 1</option>
+    <option value="option2">Option 2</option>
+    <option value="option3">Option 3</option>
+  </select>
+`}/>
+
+### Attributes
+- **multiple**: Allows users to select multiple options.
+- **size**: Specifies the number of visible options.
+
+Example : 
+
+<HtmlEditor id={4} defaultCode={`
+  <form>
+    <label for="choices">Choose an option:</label>
+    <select id="choices" name="choices" multiple>
+      <option value="option1">Option 1</option>
+      <option value="option2">Option 2</option>
+      <option value="option3">Option 3</option>
+    </select>
+  </form>
+`}/>
+
+---
+
+### Button Tag 🔘
+
+The `<button>` tag defines a clickable button that can trigger various actions such as submitting forms or executing JavaScript functions.
+
+<HtmlEditor id={5} defaultCode={`
+<button type="button">Click Me</button>
+<button type="submit">Submit</button>
+<button type="reset">Reset</button>
+`}/>
+
+### Attributes
+- **type**: Specifies the button type (`button`, `submit`, `reset`).
+- **disabled**: Disables the button, preventing user interaction.
+
+### Example
+
+<HtmlEditor id={6} defaultCode={`
+<form>
+  <input type="text" placeholder="Enter your name">
+  <input type="email" placeholder="Enter your email">
+  <input type="password" placeholder="Enter your password">
+  <br>
+  <button type="submit">Submit</button>
+  <button type="reset">Reset</button>
+</form>
+`}/>
+
+---

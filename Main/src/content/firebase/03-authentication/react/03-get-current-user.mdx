@@ -1,0 +1,29 @@
+---
+title: Get Current User in Firebase
+published: true
+---
+
+```js
+import { onAuthStateChanged } from "firebase/auth";
+import { firebaseAuth } from "./firebase"; // Your firebase configuration
+
+onAuthStateChanged(firebaseAuth, (user) => {
+  if (user) {
+    console.log("User is signed in:", user);
+    console.log("UID:", user.uid);
+    console.log("Email:", user.email);
+  } else {
+    console.log("User is signed out");
+  }
+});
+```
+
+* This runs whenever the user logs in, logs out, or when Firebase restores the session after a refresh.
+* Most apps use onAuthStateChanged once (in a global state, Redux/Zustand/Context) to track the current user and provide it to the whole app.
+
+
+<Callout>
+For more information : <a href="https://firebase.google.com/docs/auth/web/start?_gl=1*1bzdcrv*_up*MQ..&gclid=CjwKCAjw_fnFBhB0EiwAH_MfZq7YQTs2rbxxW1Y3jqKvsAtpO7SSDgHD3-Cad25Gf3VsP4W9lHlpjBoCiN8QAvD_BwE&gclsrc=aw.ds&gbraid=0AAAAADpUDOjrdN2_6qd8sji0z4VIduM0o#set_an_authentication_state_observer_and_get_user_data" target="_blank">Identify users</a>
+</Callout>
+
+---

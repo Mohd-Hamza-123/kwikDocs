@@ -1,0 +1,93 @@
+---
+title: Synchronous vs Asynchronous JavaScript
+published: true
+---
+
+### 🔹 What is **Synchronous JavaScript**?
+
+In **synchronous** code:
+
+* Tasks are executed **one after another**.
+* Each line **waits** for the previous one to finish before running.
+* This is the default behavior in JavaScript.
+
+**Example:**
+
+```js
+console.log("Start");
+console.log("Middle");
+console.log("End");
+```
+
+🧾 **Output:**
+
+```
+Start
+Middle
+End
+```
+
+Every line runs **in order**, one after the other.
+
+---
+
+### 🔸 What is **Asynchronous JavaScript**?
+
+In **asynchronous** code:
+
+* Some tasks (like timers, HTTP requests, or reading files) **do not block** the main thread.
+* JavaScript can **keep running other code** while waiting for tasks like timers or server responses to finish.
+
+**Example using `setTimeout`:**
+
+```js
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Inside Timeout");
+}, 1000);
+
+console.log("End");
+```
+
+🧾 **Output:**
+
+```
+Start
+End
+Inside Timeout
+```
+
+*(after \~1 second delay)*
+
+---
+
+### 🎨 Visual Analogy
+
+* **Synchronous**: You stand in line at a ticket counter. You can't move forward until the person ahead is done.
+* **Asynchronous**: You take a token and sit down. When your turn comes, you're called back without blocking others.
+
+---
+
+### 🧪 Common Asynchronous Tools in JS
+
+| Feature         | Description                              |
+| --------------- | ---------------------------------------- |
+| `setTimeout()`  | Runs code after a delay                  |
+| `setInterval()` | Runs code repeatedly with delay          |
+| `fetch()`       | Makes HTTP requests (returns Promise)    |
+| `Promise`       | Handles async operations and chaining    |
+| `async/await`   | Cleaner syntax for working with Promises |
+
+---
+
+### 🧾 Quick Comparison Table
+
+| Feature            | Synchronous                       | Asynchronous                                    |
+| ------------------ | --------------------------------- | ----------------------------------------------- |
+| Execution Order    | Line-by-line, blocking            | Non-blocking, skips to next task                |
+| Blocks other code? | ✅ Yes                             | ❌ No                                            |
+| Real-world example | Reading a large file line-by-line | Downloading a file in background                |
+| Common tools       | Regular JS code                   | `setTimeout`, `fetch`, `Promise`, `async/await` |
+
+---

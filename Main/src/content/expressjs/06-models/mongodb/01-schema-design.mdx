@@ -1,0 +1,60 @@
+---
+title: Schema Design
+published: true
+---
+
+
+Below is a clean and production-ready **User schema** designed for an Express application using Mongoose.
+
+### User Model
+
+```js
+import mongoose from "mongoose";
+
+const userSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: [true, "username is required"],
+      unique: true,
+      trim: true,
+    },
+
+    email: {
+      type: String,
+      required: [true, "email is required"],
+      unique: true,
+      lowercase: true,
+    },
+
+    password: {
+      type: String,
+      required: [true, "password is required"],
+      select: false, // exclude password from queries by default
+    },
+
+    role: {
+      type: String,
+      enum: ["admin", "user"],
+      default: "user",
+    },
+  },
+  {
+    timestamps: true, // adds createdAt and updatedAt
+  }
+);
+
+const User = mongoose.model("User", userSchema);
+
+export default User;
+```
+
+
+**Notes**
+
+* `unique` creates a database index; duplicate key errors should still be handled in error middleware.
+* `select: false` improves security by hiding passwords in query results.
+* `timestamps` automatically manages audit fields.
+
+---
+

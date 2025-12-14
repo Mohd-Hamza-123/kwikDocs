@@ -1,0 +1,71 @@
+---
+title: Setup React Router
+published: true
+---
+
+### 1) Import `BrowserRouter` in you `main.jsx/tsx` file
+
+> BrowserRouter is a wrapper component that enables `client side routing` in your application. It use browser history API to keep track of the URL.
+
+```jsx
+// main.jsx
+import App from './App.jsx'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router'
+
+createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+    <StrictMode>
+      <App />
+    </StrictMode>
+  </BrowserRouter>,
+)
+```
+
+### 2) Import `Routes` and `Route` in you `App.jsx/tsx` file
+
+```jsx
+// App.jsx
+import Home from "./pages/Home";
+import { useState } from "react";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import { Route, Routes } from "react-router";
+
+const App = () => {
+
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" Component={Login} />
+      {/* use Component when you don't want to pass props */} 
+      <Route path="/signup" element={<Signup />} />
+      {/* use element when you want to pass props */}
+    </Routes>
+  )
+}
+
+export default App
+```
+
+### 3) Import `Link` in to navigate between pages
+
+```jsx
+// App.jsx
+import { Link } from "react-router-dom";
+
+const Navbar = () => {
+  return (
+    <div>
+      <Link to="/">Home</Link>
+      <Link to="/login">Login</Link>
+      <Link to="/signup">Signup</Link>
+    </div>
+  )
+}
+
+export default Navbar
+```
+
+---

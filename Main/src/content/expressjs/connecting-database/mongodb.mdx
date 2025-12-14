@@ -1,0 +1,117 @@
+---
+title: Connecting to MongoDB
+published: true
+---
+
+Connecting MongoDB to your Express application requires installing **Mongoose** and creating a reusable database connection module.
+
+### **1. Install Mongoose**
+
+Run the following command in your project:
+
+```bash
+npm install mongoose
+```
+
+---
+
+### **2. Create the Database Configuration File**
+
+Create a new file:
+`config/db.js` (or `config/db.ts` if you're using TypeScript)
+
+This file will handle:
+
+* Attaching MongoDB connection lifecycle event listeners
+* Connecting to MongoDB using environment variables
+* Logging connection status
+* Handling connection errors safely
+
+### **config/db.js**
+
+```ts
+// config/db.js (or db.ts for TypeScript)
+import mongoose from "mongoose";
+
+const connectDB = async () => {
+  // Connection event listeners
+  mongoose.connection.on("connected", () => {
+    console.log("Mongoose connected to DB");
+  });
+
+  mongoose.connection.on("error", (err) => {
+    console.error("Mongoose connection error:", err);
+  });
+
+  mongoose.connection.on("disconnected", () => {
+    console.log("Mongoose disconnected from DB");
+  });
+
+  mongoose.connection.on("reconnected", () => {
+    console.log("Mongoose reconnected to DB");
+  });
+
+  try {
+
+   await mongoose.connect(process.env.MONGODB_URI!, {
+   dbName: "auth-mern",              // Which database inside MongoDB to use
+   maxPoolSize: 20,                  // How many active database connections the app can use at the same time
+   serverSelectionTimeoutMS: 10000,  // How long Mongoose waits (10s) to find a MongoDB server before giving up
+   socketTimeoutMS: 45000,           // Maximum time (45s) a DB operation can take before it is forcibly stopped
+   autoIndex: false,                 // Do NOT build schema indexes automatically (better performance in  production)
+   });
+
+  } catch (error: unknown) {
+    console.log(
+      "Error connecting to database:",
+      error instanceof Error ? error.message : error
+    );
+
+    // Remove event listeners to avoid memory leaks
+    mongoose.connection.removeAllListeners();
+
+    process.exit(1);  
+  }
+};
+
+export default connectDB;
+```
+
+---
+
+### **3. Connect to MongoDB in Your Server Entry File**
+
+Before starting your server, you must connect to MongoDB.
+
+**server.js**
+
+```js
+import express from "express";
+import connectDB from "./config/db.js";
+
+const app = express();
+const port = process.env.PORT || 5000;
+
+// Connect to MongoDB
+await connectDB();
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+```
+
+This ensures your server only starts after a successful connection.
+
+---
+
+### **4. Add MongoDB Credentials to `.env`**
+
+```
+MONGODB_URI="mongodb+srv://<username>:<password>@<cluster-url>/<database-name>?retryWrites=true&w=majority"
+```
+
+Replace `<username>`, `<password>`, and `<cluster-url>` with your actual MongoDB Atlas credentials.
+
+
+---
+
