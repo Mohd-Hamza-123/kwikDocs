@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import LoadingPage from '@/components/LoadingPage';
+import LoadingPage from '@/components/Spinner/LoadingPage';
 import { Suspense } from 'react';
 
 const VerifyEmailContent = dynamic(() => import('@/components/VerifyEmailContent'), {

@@ -1,33 +1,76 @@
-import React from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 
-const Login = ({ children }: any) => {
-
+export default function LoginLayout({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
     return (
-        <div className="flex h-screen flex-col justify-center items-center w-screen fixed top-0 gap-4 z-50" id='login'>
+        <div className="min-h-screen w-full grid grid-cols-1 lg:grid-cols-2 bg-neutral-950 text-neutral-100">
+            {/* LEFT HERO – same as signup */}
+            <div className="hidden lg:block relative overflow-hidden">
+                {/* Background image */}
+                <Image
+                    src="/images/hero.jpg"       // same image you use on signup
+                    alt="Hero"
+                    width={1600}
+                    height={1600}
+                    className="absolute inset-0 h-full w-full object-cover"
+                />
 
-            <Image
-                height={200}
-                width={200}
-                className="mx-auto h-12 w-auto"
-                src="./logo.png"
-                alt='Image'
-                quality={100}
-            />
+                {/* Dark gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-black/50 to-black/10" />
 
-            <h2 className="text-center text-2xl/9 font-bold tracking-tight">Log in to your account</h2>
+                {/* Content on top */}
+                <div className="relative z-10 flex h-full flex-col justify-between px-12 py-10">
+                    {/* Brand row */}
+                    <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-full bg-black/60 border border-pink-400/40 flex items-center justify-center shadow-[0_0_18px_rgba(244,114,182,0.5)]">
+                            <Image
+                                src="/logo.png"
+                                alt="Kwik Docs"
+                                width={24}
+                                height={24}
+                                className="h-6 w-6"
+                            />
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-sm font-semibold tracking-wide text-pink-300">
+                                Kwik Docs
+                            </span>
+                            <span className="text-xs text-pink-100/80">
+                                Read docs like stories.
+                            </span>
+                        </div>
+                    </div>
 
-            {children}
+                    {/* Main hero text */}
+                    <div className="pb-10 max-w-xl">
+                        <h1 className="text-4xl font-semibold leading-tight text-white">
+                            Read the docs like <br /> stories.
+                        </h1>
+                        <p className="mt-3 text-sm text-pink-100/80 max-w-md">
+                            Turn dry documentation into clean narrative pages your team
+                            actually enjoys reading.
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-            <p className="text-center text-sm/6 text-gray-500">
-                Not a User ?
-                <Link href="/signup" className="font-semibold text-indigo-600 hover:text-indigo-500"> Signup </Link>
-            </p>
-
+            {/* RIGHT SIDE – same structure as signup */}
+            <div className="flex items-center justify-center px-6 sm:px-12 lg:px-20 py-12">
+                <div className="w-full max-w-md">
+                    {children}
+                    <div className="mt-6 flex justify-between text-sm text-neutral-400">
+                        <p>Don't have an account?</p>
+                        <Link href="/signup" className="hover:text-neutral-200">
+                            Sign up
+                        </Link>
+                    </div>
+                </div>
+            </div>
         </div>
-
-    )
+    );
 }
-
-export default Login

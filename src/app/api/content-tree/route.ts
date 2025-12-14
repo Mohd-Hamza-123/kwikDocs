@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server"
-import getContentTree from "@/services/helpers/getContentTree"
 import path from "path"
+import { NextResponse } from "next/server"
+import getContentTree from "@/utils/getContentTree"
 
 export async function GET(
   request: Request, 

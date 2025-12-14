@@ -4,8 +4,9 @@ import "@/styles/mdx.css"
 import React from 'react'
 import { posts } from "#site/content";
 import { MDXContent } from '@/components/mdx-component';
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { toast } from "@/hooks/use-toast";
+import { DocumentType as PostType } from "../../../types/docs.type";
 
 // export async function generateStaticParams(): Promise<
 //     PostPageProps["params"][]
@@ -13,17 +14,20 @@ import { toast } from "@/hooks/use-toast";
 //     return posts.map((post) => ({ slug: post.slugAsParams.split("/") }));
 // }
 
-function getPostFromParams(params: any) {
-    const slug = params.slug.join("/")
-    console.log("slug : ", slug)
+function getPostFromParams(slugArray: string[]) {
+    const slug = slugArray.join("/")
+    // console.log("slug : ", slug)
     const post = posts.find((post) => post?.slug === slug)
     console.log(post?.slug)
     return post
 }
 
-export default function PostPage({ params }: any) {
+export default function PostPage() {
+
     const router = useRouter()
-    const post = getPostFromParams(params);
+    const { slug  } = useParams()
+    // console.log("slug : ",slug)
+    const post: PostType | undefined = getPostFromParams(slug as string[]);
     if (!post || !post.published) {
         toast({
             title: "Document not found",

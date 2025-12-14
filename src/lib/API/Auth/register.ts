@@ -1,12 +1,16 @@
-import conf from "@/conf/conf";
-import axios from "axios";
 
-export const registerUser = async (userData: any) => {
+import { SignupSchemaType } from "@/lib/validation/authSchema";
 
-    const res = await axios.post(`${conf.api_end_point}api/auth/signup`, userData);
-    if (res.data?.success) {
-        return res.data?.payload
-    }
-    return null
+export const registerUser = async (userData: SignupSchemaType) => {
+    const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userData)
+    });
+
+    const data = await response.json();
+    return data
 };
 

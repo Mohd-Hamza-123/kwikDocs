@@ -35,5 +35,5 @@ export const loginSchema = z.object({
     password: passwordSchema
 })
 
-export type loginSchemaType = z.infer<typeof loginSchema>
-export type signupSchemaType = z.infer<typeof signupSchema>
+export type LoginSchemaType = z.infer<typeof loginSchema>
+export type SignupSchemaType = z.infer<typeof signupSchema>

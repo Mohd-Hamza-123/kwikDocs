@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import conf from '@/conf/conf';
 import nodemailer from 'nodemailer'
-import UserModel from '@/models/user.model';
+import User from '@/models/user.model';
 import { randomBytes } from 'crypto';
 
 import {
@@ -10,27 +10,27 @@ import {
     type_Verify_Email
 } from '@/constant';
 
-interface I_Email {
+interface Email {
     email: string;
     emailType: string;
     userId: string;
 }
 
-const sendEmail = async ({ email, emailType, userId }: I_Email) => {
+const sendEmail = async ({ email, emailType, userId }: Email) => {
     try {
 
         const salt = await bcrypt.genSalt(saltRounds);
         const token = await bcrypt.hash(userId, salt);
 
         if (emailType === type_Verify_Email) {
-            await UserModel.findByIdAndUpdate(userId, {
+            await User.findByIdAndUpdate(userId, {
                 verifyToken: token,
                 verifyTokenExpiry: Date.now() + (1000 * 60 * 60)
             })
         } else if (emailType === type_Reset_Email) {
-            await UserModel.findByIdAndUpdate(userId, {
+            await User.findByIdAndUpdate(userId, {
                 forgotPasswordToken: token,
-                forgetPasswordTokenExpiry: Date.now() + (1000 * 60 * 60 * 6)
+                forgetPasswordTokenExpiry: Date.now() + (1000 * 60 * 5)
             })
         }
 
@@ -44,7 +44,7 @@ const sendEmail = async ({ email, emailType, userId }: I_Email) => {
         });
 
         const link = emailType === type_Verify_Email ? `${conf.api_end_point}verify-email?token=${token}` : `${conf.api_end_point}reset-password?token=${token}`
-        console.log("link", link);
+        // console.log("link", link);
 
         const mailOptions = {
             from: conf.mail_user,
@@ -76,11 +76,11 @@ const sendEmail = async ({ email, emailType, userId }: I_Email) => {
         }
 
         const mailResponse = await transporter.sendMail(mailOptions);
-
         // console.log(mailResponse)
         return mailResponse
-    } catch (error: any) {
-        console.log(error?.message);
+    } catch (error: unknown) {
+        console.error(error instanceof Error ? error.message : "mail not sent");
+        return null
     }
 }
 

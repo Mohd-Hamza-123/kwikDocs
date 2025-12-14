@@ -21,9 +21,10 @@ const config = {
     extend: {
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
-        roboto : ["Roboto", 'sans-serif'],
-        libre : ["Libre Baskerville", 'serif'],
-        calSans : ["Cal Sans", 'sans-serif']
+        roboto: ["Roboto", 'sans-serif'],
+        libre: ["Libre Baskerville", 'serif'],
+        calSans: ["Cal Sans", 'sans-serif'],
+        poppins: ["var(--font-poppins)"],
       },
       colors: {
         bgDark: '#121212',
@@ -81,8 +82,8 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
-      textShadow:{
-        
+      textShadow: {
+
       }
     },
   },

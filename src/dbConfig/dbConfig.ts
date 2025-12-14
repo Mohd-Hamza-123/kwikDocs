@@ -1,25 +1,44 @@
-import conf from "@/conf/conf";
+// lib/mongoose.ts
 import mongoose from "mongoose";
+import conf from "@/conf/conf";
 
-async function connectDB() {
-    try {
-        // console.log(conf.mongodb_uri)
-        if (mongoose.connection.readyState >= 1) return
-
-        await mongoose.connect(conf.mongodb_uri);
-        const connection = mongoose.connection
-
-        connection.on('connected', () => {
-            console.log("mongoDB Connected")
-        })
-        connection.on('error', (err) => {
-            console.log('mongoDB connection error. Make sure mongodb is up & running. Error : ' + err);
-            process.exit()
-        });
-    } catch (error) {
-        console.log("Something went wrong in connecting Database");
-        console.log(error)
-    }
+declare global {
+  // eslint-disable-next-line no-var
+  var __mongoose__: {
+    conn?: typeof mongoose | null;
+    promise?: Promise<typeof mongoose> | null;
+  } | undefined;
 }
 
-export default connectDB
+const MONGO_URI = conf.mongodb_uri;
+
+if (!global.__mongoose__) {
+  global.__mongoose__ = { conn: null, promise: null };
+}
+
+async function connectDB() {
+  if (global.__mongoose__!.conn) {
+    return global.__mongoose__!.conn;
+  }
+
+  if (!MONGO_URI) {
+    throw new Error("Please define the MONGO_URI environment variable");
+  }
+
+  if (!global.__mongoose__!.promise) {
+    global.__mongoose__!.promise = mongoose
+      .connect(MONGO_URI)
+      .then((mongooseInstance) => {
+        global.__mongoose__!.conn = mongooseInstance;
+        return mongooseInstance;
+      })
+      .catch((err) => {
+        global.__mongoose__!.promise = null;
+        throw err;
+      });
+  }
+
+  return global.__mongoose__!.promise!;
+}
+
+export default connectDB;

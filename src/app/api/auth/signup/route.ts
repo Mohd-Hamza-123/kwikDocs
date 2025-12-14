@@ -1,63 +1,75 @@
 import sendEmail from "@/lib/mailer";
 import connectDB from "@/dbConfig/dbConfig";
-import UserModel from "@/models/user.model";
-import hashPassword from "@/lib/HashPassword";
+import User from "@/models/user.model";
+import crypto from 'crypto'
 import { type_Verify_Email } from "@/constant";
 import { NextRequest, NextResponse } from "next/server";
-connectDB();
+import Session from "@/models/session.model";
 
 export async function POST(request: NextRequest) {
 
     try {
+        connectDB();
         const body = await request.json();
         const { username, email, password } = body;
-        const user = await UserModel.findOne({
+
+        const isUserExists = await User.findOne({
             $or: [{ username }, { email }]
         });
 
-        if (user) {
+        if (isUserExists) {
             return NextResponse.json({
                 success: false,
-                message: "User already exists",
-            }, { status: 400 })
+                message: "User already exists"
+            }, { status: 409 }); // 409 Conflict
         }
 
-        const hashedPassword = await hashPassword(password);
-
-        if (!hashedPassword) {
-            return NextResponse.json({
-                success: false,
-                message: "something went wrong while signIn."
-            }, { status: 400 })
-        }
-
-        const createUser = new UserModel({
+        const createUser = new User({
             username,
             email,
-            password: hashedPassword
+            password
         })
 
-        const response = await createUser.save();
+        const user = await createUser.save();
 
-        delete response?.password
+        const sessionToken = crypto.randomBytes(32).toString('hex')
+        const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24);
 
-        await sendEmail({
-            email,
-            emailType: type_Verify_Email,
-            userId: response?._id.toString()
-        });
+        await Session.deleteMany({ userId: user._id });
+        await Session.create({
+            userId: user._id,
+            sessionToken,
+            expiresAt
+        })
 
-        return NextResponse.json({
+        // const mailResponse = await sendEmail({
+        //     email,
+        //     emailType: type_Verify_Email,
+        //     userId: response._id.toString()
+        // });
+
+        const response = NextResponse.json({
+            // mailSuccess: mailResponse?.accepted,
             success: true,
             message: 'successfully registered',
-            payload: response
         }, { status: 200 })
 
-    } catch (error: any) {
+        response.cookies.set('session', sessionToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            expires: expiresAt,
+            path: '/',
+            sameSite: 'lax'
+        })
+
+        return response
+
+    } catch (error: unknown) {
+        const environment = process.env.NODE_ENV
         return NextResponse.json({
-            success: true,
-            message: 'successfully registered',
-            error: error?.message || error
+            success: false,
+            message: 'something went wrong',
+            error: environment === "development" ? (error instanceof Error ? error.message : "internal server error") : "something went wrong , please try again later"
         }, { status: 500 })
     }
 }

@@ -1,25 +1,26 @@
 import Branding from "@/components/Branding";
+import Link from "next/link";
+import { siteConfig } from "../../../config/site";
 
 export default function GetStarted() {
   return (
-    <div className="relative min-h-screen bg-[#0b0b10] text-gray-100 antialiased selection:bg-indigo-500/30 selection:text-white">
+    <div className="relative bg-[#0b0b10] text-gray-100 antialiased selection:bg-indigo-500/30 selection:text-white">
+
       {/* Background */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-48 left-1/2 h-[32rem] w-[72rem] -translate-x-1/2 rounded-full bg-gradient-to-r from-indigo-600/40 via-purple-500/30 to-cyan-400/30 blur-3xl" />
-        <div className="absolute -bottom-64 left-1/2 h-[28rem] w-[72rem] -translate-x-1/2 rounded-full bg-gradient-to-t from-purple-700/20 via-indigo-700/10 to-transparent blur-3xl" />
       </div>
 
-      {/* Nav */}
+
       <header className="sticky top-0 z-30 border-b border-white/10 bg-black/40 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-0">
           <div className="flex items-center gap-2">
-            <Branding/>
+            <Branding />
           </div>
           <nav className="hidden gap-6 md:flex text-sm text-gray-300">
-            <a href="#" className="hover:text-white">Docs</a>
-            <a href="#" className="hover:text-white">Playground</a>
-            <a href="#" className="hover:text-white">Examples</a>
-            <a href="#" className="hover:text-white">GitHub</a>
+            <Link href="/app" className="hover:text-white">Home</Link>
+            <Link href="/app/playground" className="hover:text-white">Playground</Link>
+            <Link href={siteConfig.links.github} className="hover:text-white">GitHub</Link>
           </nav>
         </div>
       </header>
@@ -42,18 +43,16 @@ export default function GetStarted() {
 
         {/* Buttons */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-          <a
-            href="#get-started"
-            className="rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 px-6 py-3 text-sm font-medium text-white shadow-lg transition hover:opacity-90"
-          >
+          <Link
+            href="/app"
+            className="rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 px-6 py-3 text-sm font-medium text-white shadow-lg transition hover:opacity-90">
             Get Started
-          </a>
-          <a
-            href="https://github.com"
-            className="rounded-lg border border-white/20 bg-white/5 px-6 py-3 text-sm font-medium text-gray-200 backdrop-blur transition hover:bg-white/10"
-          >
-            GitHub
-          </a>
+          </Link>
+          <Link
+            href="/login"
+            className="rounded-lg border border-white/20 bg-white/5 px-6 py-3 text-sm font-medium text-gray-200 backdrop-blur transition hover:bg-white/10">
+            Login
+          </Link>
         </div>
 
         {/* Live code preview box */}
@@ -65,7 +64,7 @@ export default function GetStarted() {
             <span className="ml-3 font-medium text-gray-300">Example.jsx</span>
           </div>
           <pre className="p-4 text-left text-sm text-green-300">
-{`function Hello() {
+            {`function Hello() {
   return <h1>Hello, Kwikdocs 🚀</h1>
 }
 
@@ -82,13 +81,14 @@ render(<Hello />, root)`}
 
       {/* Features */}
       <section className="mx-auto mt-24 max-w-6xl grid gap-10 px-6 text-center sm:grid-cols-3">
+
+        <FeatureCard
+          title="Easy Documentation"
+          desc="Read documentation alongside runnable code snippets for better understanding."
+        />
         <FeatureCard
           title="Live Editor"
           desc="Write and run code right inside your docs. No setup required."
-        />
-        <FeatureCard
-          title="MDX + Code Blocks"
-          desc="Mix markdown and live code for rich, interactive tutorials."
         />
         <FeatureCard
           title="Fast & Lightweight"

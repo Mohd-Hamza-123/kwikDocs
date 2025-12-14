@@ -88,14 +88,12 @@ export type UserDocument = HydratedDocument<User>;
 ### **🔹 Step 5: Create & Export the Model Safely**
 
 ```ts
-const UserModel =
-  (models.User as ReturnType<typeof model<User>> | undefined) ||
-  model<User>("User", userSchema);
+const User = models.users as Model<User> || model<User>("users", userSchema);
 
-export default UserModel;
+export default User;
 ```
 
-📌 **Why use `models.User || model()`?**
+📌 **Why use `models.users || model()`?**
 
 * avoids duplicate model error in Next.js, hot reload, serverless, etc.
 
@@ -135,11 +133,9 @@ export type UserDocument = HydratedDocument<User>;
 export type UserId = Types.ObjectId;
 
 // 4) Model creation (Next.js safe)
-const UserModel =
-  (models.User as Model<User> | undefined) ||
-  model<User>("User", userSchema);
+const User = models.users as Model<User> || model<User>("users", userSchema);
 
-export default UserModel;
+export default User;
 ```
 
 ---

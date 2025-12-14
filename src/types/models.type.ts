@@ -13,3 +13,15 @@ export interface IUser {
     verifyToken?: string;
     verifyTokenExpiry?: Date;
 }
+
+
+export type PlaygroundInput = {
+  html?: string;
+  css?: string;
+  title: string;
+  description?: string;
+  user: string;
+  javascript?: string;
+  python?: string;
+  views : number;
+}

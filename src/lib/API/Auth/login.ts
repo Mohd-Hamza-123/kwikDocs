@@ -1,6 +1,7 @@
+import { LoginSchemaType } from "@/lib/validation/authSchema";
 
-const LoginUser = async (userData: any) => {
-    console.log(userData)
+const LoginUser = async (userData: LoginSchemaType) => {
+
     const response = await fetch(`/api/auth/login`, {
         method: 'POST',
         headers: {
@@ -9,11 +10,7 @@ const LoginUser = async (userData: any) => {
         body: JSON.stringify(userData)
     });
     const data = await response.json()
-    console.log(data)
-    if (data?.success) {
-        return data
-    }
-    return null
+    return data
 };
 
 export default LoginUser

@@ -1,5 +1,5 @@
 import connectDB from "@/dbConfig/dbConfig";
-import UserModel from "@/models/user.model";
+import User from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
         const body = await request.json();
         const { token } = body;
 
-        const user = await UserModel.findOne({
+        const user = await User.findOne({
             verifyToken: token,
             verifyTokenExpiry: { $gt: Date.now() }
         });
@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
             }, { status: 400 })
         }
 
-        const updateUser = await UserModel.findByIdAndUpdate(user?._id, {
+        const updateUser = await User.findByIdAndUpdate(user?._id, {
             $set: {
                 isVerified: true,
             },
@@ -36,12 +36,13 @@ export async function POST(request: NextRequest) {
             payload: updateUser
         })
 
-    } catch (error: any) {
-
+    } catch (error: unknown) {
         console.log(error);
+        const env = process.env.NODE_ENV;
         return NextResponse.json({
             success: true,
-            error: error?.message || "Internal Server Error"
+            error: env === "development" ? (error instanceof Error ? error.message : "Internal Server Error") : "Something went wrong",
+            message: "verify failed"
         }, { status: 500 })
     }
 }

@@ -1,5 +1,5 @@
 import sendEmail from "@/lib/mailer";
-import UserModel from "@/models/user.model";
+import User from "@/models/user.model";
 import connectDB from "@/dbConfig/dbConfig";
 import { type_Reset_Email } from "@/constant";
 import { NextRequest, NextResponse } from "next/server";
@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
         const body = await request.json();
         const { email } = body;
         console.log("Email ---- ", email)
-        const user = await UserModel.findOne({ email: email }, { _id: 1 })
+        const user = await User.findOne({ email: email }, { _id: 1 })
         console.log("user_Id ---- ", user?._id?.toString())
         if (!user) {
             return NextResponse.json({

@@ -5,8 +5,8 @@ import { toast } from '@/hooks/use-toast'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { emailSchema } from '@/lib/validation/authSchema'
-import validateZodSchema from '@/utils/wrapper/zod-validation/validateSchema'
-import forgotPassword from '@/services/API/auth/forgot-password'
+import validateSchema from '@/lib/validation/validateSchema'
+
 
 const page = () => {
 
@@ -15,14 +15,14 @@ const page = () => {
         e.preventDefault()
 
         const formData = new FormData(e.currentTarget)
-        const email = formData.get("email")
+        const email = formData.get("email") as string
 
-        const validationResult = validateZodSchema(emailSchema, email)
+        const validationResult = validateSchema(emailSchema, email)
 
         if (validationResult.isValid) {
             const email = validationResult?.data
-            const res = await forgotPassword(email)
-            console.log(res)
+            // const res = await forgotPassword(email)
+            // console.log(res)
         } else {
             const errors = validationResult?.errors
             if (Array.isArray(errors))

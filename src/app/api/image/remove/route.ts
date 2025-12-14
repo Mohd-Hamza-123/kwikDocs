@@ -4,10 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 import TechModel from "@/models/tech.model";
 import uploadImage from "@/lib/imageConfig/imageUpload";
 
-connectDB();
 
 export async function DELETE(req: NextRequest) {
     try {
+        connectDB();
         return NextResponse.json(
             {
                 message: "Image Deleted",

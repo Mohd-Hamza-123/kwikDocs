@@ -1,92 +1,84 @@
 'use client'
 import {
     Sheet,
-    SheetContent,
-    SheetHeader,
-    SheetTrigger,
     SheetTitle,
+    SheetHeader,
+    SheetContent,
 } from "@/components/ui/sheet"
-import React from 'react'
-import { Button } from '../ui/button';
-import { toast } from '@/hooks/use-toast';
-import { useRouter } from 'next/navigation';
-import { IoMdLogOut } from "react-icons/io";
-import logoutAPI from '@/lib/API/Auth/logout';
-import { logout } from '@/lib/store/features/authSlice';
-import { useTypicalContext } from '@/context/Typical-Context'
-import { useAppDispatch, useAppSelector } from '@/lib/hooks/hooks';
-// import { useResponsiveContext } from "@/context/CSS-Context";
-import SidebarLinks from "./SidebarLinks";
-import { ThemeToggle } from "@/index";
+import React, { useEffect } from "react"
+import { Button } from "../ui/button"
+import { ThemeToggle } from "@/index"
+import SidebarLinks from "./SidebarLinks"
+import { useRouter } from "next/navigation"
+import { IoMdLogOut } from "react-icons/io"
+import { useTypicalContext } from "@/context/Typical-Context"
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks"
+import useAuth from "@/hooks/use-auth"
 
 const Sidebar = () => {
-
     const router = useRouter()
-    const dispatch = useAppDispatch();
-    const userData = useAppSelector((state) => state.auth.userData);
+    const dispatch = useAppDispatch()
+    const userData = useAppSelector((state) => state.auth.userData)
     const userStatus = useAppSelector((state) => state.auth.userStatus)
-    const { isSideBarOpen, setIsSideBarOpen } = useTypicalContext();
-    // const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
+    const { isSideBarOpen, setIsSideBarOpen } = useTypicalContext()
+    const { logout, createSession } = useAuth()
 
     const closeSideBar = () => setIsSideBarOpen(false)
-
-    const handleLogout = async () => {
-        try {
-            await logoutAPI();
-            router.push('/')
-            closeSideBar();
-            toast({
-                variant: "default",
-                title: "Logged out successfully"
-            })
-            dispatch(logout());
-        } catch (error) {
-            toast({
-                variant: "destructive",
-                title: "Logged out failed"
-            });
-            closeSideBar();
-        }
-
-    }
 
     if (!isSideBarOpen) return null
 
     return (
-        <Sheet
-            open={isSideBarOpen}
-            onOpenChange={setIsSideBarOpen}>
-            <SheetTrigger asChild>Open</SheetTrigger>
-            <SheetContent side={"right"}>
-                <SheetHeader>
-                    <SheetTitle></SheetTitle>
-                    <div className="flex flex-col justify-around flex-1 mt-6">
-                        <nav className="flex-1 -mx-3 space-y-3 ">
-                            <div className="relative mx-3">
-                                <ThemeToggle closeSideBar={closeSideBar} />
-                            </div>
-
-                            <SidebarLinks
-                                userData={userData}
-                                userStatus={userStatus}
-                                closeSideBar={closeSideBar}
-                            />
-                        </nav>
-
-                        {userStatus && <div className="flex items-center justify-between mt-6">
-
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{userData?.username}</span>
-
-                            <Button
-                                variant={'destructive'}
-                                onClick={handleLogout}
-                            >
-                                <IoMdLogOut className="text-2xl" />
-                            </Button>
-                        </div>}
-
+        <Sheet open={isSideBarOpen} onOpenChange={setIsSideBarOpen}>
+            <SheetContent
+                side="right"
+                className="w-[280px] sm:w-[320px] border-l border-border/60
+          bg-gradient-to-b from-background/95 via-background/90 to-background/80
+          backdrop-blur-xl
+          px-4 py-6
+          flex flex-col gap-4">
+                <SheetHeader className="flex flex-row items-center justify-between space-y-0">
+                    <div className="flex items-center gap-3">
+                        <div className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-lg font-semibold">
+                            {userData?.username?.[0]?.toUpperCase() || "K"}
+                        </div>
+                        <div className="flex flex-col items-start">
+                            <SheetTitle className="text-sm font-semibold tracking-tight">
+                                Kwikdocs
+                            </SheetTitle>
+                            <span className="text-xs text-muted-foreground">
+                                Your coding space
+                            </span>
+                        </div>
                     </div>
+
+
                 </SheetHeader>
+
+                {/* NAV */}
+                <nav className="mt-2 flex-1 overflow-y-auto pr-1">
+                    <div className="p-2">
+                        <SidebarLinks closeSideBar={closeSideBar} />
+                    </div>
+                </nav>
+
+
+                <div className="ml-auto">
+                    <ThemeToggle closeSideBar={closeSideBar} />
+                </div>
+
+                {/* USER FOOTER */}
+                {userStatus && (
+                    <div className="mt-2 border-t border-border/50 pt-4 flex items-center justify-between gap-3">
+                        <Button
+                            variant="destructive"
+                            size="sm"
+                            onClick={logout}
+                            className="gap-2 rounded-full px-3 transition-all duration-200 hover:scale-[1.02]">
+                            <IoMdLogOut className="text-base" />
+                            <span className="hidden sm:inline">Logout</span>
+                        </Button>
+                    </div>
+                )}
             </SheetContent>
         </Sheet>
     )

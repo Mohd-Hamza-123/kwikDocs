@@ -9,7 +9,7 @@ Common import:
 
 ```ts
 import { Schema, model, models, InferSchemaType, HydratedDocument, Types } from "mongoose";
-````
+```
 
 This guide explains the **TypeScript utilities from Mongoose**:
 
@@ -29,7 +29,7 @@ This guide explains the **TypeScript utilities from Mongoose**:
 ✔ Always in sync with the schema
 ✔ Safer refactoring (change schema ➝ TS updates automatically)
 
-#### 🧪 Example
+**Example**
 
 ```ts
 const userSchema = new Schema({
@@ -68,7 +68,7 @@ It includes:
 
 > 📌 Use it when you work with *fetched* or *created* documents.
 
-#### 🧪 Example
+**Example**
 
 ```ts
 export type UserDocument = HydratedDocument<User>;
@@ -128,7 +128,7 @@ For example, **ObjectId ≠ string**, and **Decimal128 ≠ number**.
 
 ---
 
-### 🧪 Examples for Each
+**Examples for Each**
 
 #### 1) `Types.ObjectId`
 

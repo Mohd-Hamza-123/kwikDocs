@@ -1,4 +1,4 @@
-import { docsInterface } from '@/models/docs.model'
+
 import { DocumentType } from '@/types/docs.type'
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'

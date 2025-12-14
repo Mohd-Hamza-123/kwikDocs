@@ -2,13 +2,13 @@
 import React from 'react';
 import { Branding } from '@/index';
 import { Input } from './ui/input';
+import { svgIcons } from './icons';
 import { Button } from './ui/button';
 import { usePathname } from 'next/navigation';
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoListCircleOutline } from "react-icons/io5";
 import { useResponsiveContext } from '@/context/CSS-Context';
 import { useTypicalContext } from '@/context/Typical-Context';
-import { svgIcons } from './icons';
 
 const Navbar = () => {
 
@@ -33,7 +33,7 @@ const Navbar = () => {
     if (hidePaths.includes(pathName)) return null;
 
     return (
-        <header className="fixed top-0 border-b border-border bg-background/95 backdrop:blur supports-[backdrop-filter]:bg-background/60 z-10 w-full h-[9vh">
+        <header className="border-b border-border bg-background/95 backdrop:blur supports-[backdrop-filter]:bg-background/60 z-10 w-full h-[9dvh]">
             <nav
                 className="flex justify-between items-center dark:bg-bgDark shadow-xl h-[9dvh] px-3 lg:px-7 w-full"
                 aria-label="Main Navigation">

@@ -9,8 +9,11 @@ const hashPassword = async (password: string) => {
         const hashedPassword = await bcrypt.hash(password, salt);
         return hashedPassword
     } catch (error) {
-        console.log(error)
-        return null
+        if (process.env.NODE_ENV === 'development') {
+            console.error("Error : hashing password", error)
+        } else {
+            throw new Error("Failed to hash password")
+        }
     }
 }
 export default hashPassword

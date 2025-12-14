@@ -1,31 +1,28 @@
-import mongoose, { Schema } from "mongoose";
-import { IUser } from "@/types/models.type";
+import { Schema, InferSchemaType, models, model, Model, HydratedDocument } from "mongoose";
+import bcrypt from "bcrypt"
 
-const userSchema = new Schema<IUser>({
+const userSchema = new Schema({
     username: {
         type: String,
         required: [true, "username is required"],
         trim: true,
+        maxlength: 40,
         unique: true
+        // index: true, unique: true already creates a unique index
     },
     email: {
         type: String,
         required: [true, "email is required"],
         trim: true,
         lowercase: true,
-        unique: true,
+        unique: true
     },
     password: {
         type: String,
         required: [true, "password is required"],
-        minlength: 8
+        minlength: 8,
+        select: false, // Mongoose will NOT return the password field when query
     },
-    bookmark: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'doc'
-        }
-    ],
     isVerified: {
         type: Boolean,
         default: false,
@@ -49,10 +46,30 @@ const userSchema = new Schema<IUser>({
 },
     {
         timestamps: true
-    })
+    }
+)
+
+export type UserType = InferSchemaType<typeof userSchema>
+export type UserDocument = HydratedDocument<UserType>
+
+userSchema.pre("save", async function (next) {
+    try {
+        // console.log(this) // this is the document being saved
+        // console.log("isModified : ",this.isModified("password")) // true ONLY when the password field has changed
+        if (!this.isModified("password")) return next()
+        const user = this as UserDocument
+        const salt = await bcrypt.genSalt(10)
+        user.password = await bcrypt.hash(user.password, salt)
+        next()
+    } catch (error) {
+        next(error as Error)
+    }
+})
+
+const User = (models.users as Model<UserType>) || model<UserType>("users", userSchema);
+
+export default User
 
 
-const UserModel = mongoose.models.UserModel || mongoose.model("UserModel", userSchema);
 
-export default UserModel
 

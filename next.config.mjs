@@ -3,8 +3,13 @@ import { build } from "velite";
 /** @type {import('next').NextConfig} */
 export default {
   images: {
-    domains: ['res.cloudinary.com'],
-    unoptimized: true
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '**',
+      },
+    ],
   },
   webpack: (config) => {
     config.plugins.push(new VeliteWebpackPlugin());
@@ -30,3 +35,35 @@ class VeliteWebpackPlugin {
     });
   }
 }
+
+
+// // next.config.mjs (or ESM next.config.js)
+
+// // Detect command (dev or build)
+// const isDev = process.argv.indexOf('dev') !== -1;
+// const isBuild = process.argv.indexOf('build') !== -1;
+
+// // Start Velite only once, for dev or build
+// if (!process.env.VELITE_STARTED && (isDev || isBuild)) {
+//   process.env.VELITE_STARTED = '1';
+//   const { build } = await import('velite');
+//   await build({ watch: isDev, clean: !isDev });
+// }
+
+// /** @type {import('next').NextConfig} */
+// const nextConfig = {
+//   images: {
+//     remotePatterns: [
+//       {
+//         protocol: 'https',
+//         hostname: 'res.cloudinary.com',
+//         pathname: '**',
+//       },
+//     ],
+//   },
+//   // (optional) explicitly say you're using Turbopack
+//   // turbopack: {},
+// };
+
+// export default nextConfig;
+

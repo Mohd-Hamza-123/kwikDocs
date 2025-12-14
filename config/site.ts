@@ -2,7 +2,7 @@ import conf from "@/conf/conf"
 export const siteConfig = {
     name: "Kwik Docs",
     url: conf.api_end_point,
-    description: "Learn Simply: Your Beginner-Friendly Guide to Mastering Concepts",
+    description: "Kwikdocs : Your Beginner-Friendly Guide to Mastering Concepts",
     author: "Mohd Hamza",
     links: {
         twitter: 'https://x.com/Mohd_Hamza_byte?t=Y6IlBXQ6nooW1eo-__OXEQ&s=08',

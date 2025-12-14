@@ -1,10 +1,9 @@
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-import conf from "@/conf/conf";
-import UserModel from "@/models/user.model";
+import crypto from 'crypto'
+import User from '@/models/user.model';
 import connectDB from "@/dbConfig/dbConfig";
+import Session from '@/models/session.model';
 import { NextRequest, NextResponse } from "next/server";
-
 
 export async function POST(request: NextRequest) {
     try {
@@ -13,9 +12,8 @@ export async function POST(request: NextRequest) {
         const body = await request.json();
 
         const { email, password } = body;
-        console.log(email,password)
 
-        const user = await UserModel.findOne({ email });
+        const user = await User.findOne({ email }).select("+password")
 
         if (!user) {
             return NextResponse.json({
@@ -24,9 +22,7 @@ export async function POST(request: NextRequest) {
             }, { status: 400 })
         }
 
-        const isPasswordCorrect = await bcrypt.compare(password, user?.password);
-
-        console.log(isPasswordCorrect)
+        const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
         if (!isPasswordCorrect) {
             return NextResponse.json({
@@ -35,35 +31,41 @@ export async function POST(request: NextRequest) {
             }, { status: 400 })
         }
 
-        const tokenData = {
-            _id: user?._id,
-            email: user?.email,
-            username: user?.username
-        }
+        const sessionToken = crypto.randomBytes(32).toString('hex')
+        const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24);
 
-        const token = jwt.sign(
-            tokenData,
-            conf.token_secret,
-            { expiresIn: '24h' }
-        );
-        // console.log(token);
+        await Session.deleteMany({ userId: user._id });
+        await Session.create({
+            userId: user._id,
+            sessionToken,
+            expiresAt
+        })
+
+        const payload : any = { ...user.toObject() }
+        delete payload.password
 
         const response = NextResponse.json({
             message: 'You are login',
             success: true,
+            data: payload
         }, { status: 200 });
 
-        response.cookies.set('token', token, {
+        response.cookies.set('session', sessionToken, {
             httpOnly: true,
-            secure: true
+            secure: process.env.NODE_ENV === 'production',
+            expires: expiresAt,
+            path: '/',
+            sameSite: 'lax'
         })
 
         return response
 
-    } catch (error: any) {
+    } catch (error: unknown) {
+        const environment = process.env.NODE_ENV
         return NextResponse.json({
             success: false,
-            message: error?.message || "Internal Server Error",
+            message: "login failed",
+            error: environment === "development" ? (error instanceof Error ? error.message : "internal server error") : "something went wrong , please try again later"
         }, { status: 500 })
     }
 }

@@ -6,7 +6,7 @@ import rehypeAutoLinkHeadings from 'rehype-autolink-headings'
 const computedFields = <T extends { slug: string }>(data: T) => ({
   ...data,
   slugAsParams: data.slug.split(`/`).slice(1).join(`/`)
-})
+});
 
 const posts = defineCollection({
   name: `Post`,
@@ -15,7 +15,6 @@ const posts = defineCollection({
     .object({
       slug: s.path(),
       title: s.string().max(99),
-      // description: s.string().max(999).optional(),
       published: s.boolean().default(true),
       body: s.mdx()
     })
@@ -24,8 +23,7 @@ const posts = defineCollection({
 
 
 export default defineConfig({
-  root: `src/content`,
-  // root : 'src/content/python',
+  root: process.env.NODE_ENV === "production" ? "src/content" : 'src/content/typescript',
   output: {
     data: `.velite`,
     assets: `public/static`,
@@ -51,5 +49,3 @@ export default defineConfig({
     remarkPlugins: [],
   }
 })
-
-
