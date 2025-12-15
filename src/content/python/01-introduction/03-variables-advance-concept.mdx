@@ -1,0 +1,90 @@
+---
+title: More About Variables
+published: true
+---
+
+### Variables Are Not Storage Containers
+
+In Python, variables **do not store data directly**.  
+Instead, they store a **reference** (a label or pointer) to an object in memory.
+
+When you write:
+
+```python
+a = 10
+```
+
+this is what actually happens internally.
+
+---
+
+#### What Is `a`?
+
+* `a` is a **variable name** (also called an identifier).
+* It acts as a **reference** to an object in memory.
+* In this example, `a` refers to the object `10`.
+
+---
+
+#### What Is `10`?
+
+* `10` is an **object** of type `int`.
+* It exists independently in memory.
+* The variable `a` is simply associated with the memory address of this object.
+
+---
+
+#### How It Works Internally
+
+1. Python creates an `int` object representing the value `10`.
+2. Python binds the name `a` to that object.
+3. The name `a` now refers to the `10` object.
+
+You can confirm the type of `10`:
+
+```python
+print(type(10))  # <class 'int'>
+```
+
+---
+
+**Key Concepts**
+
+* **Variables are references**, not containers.
+* Reassigning a variable does **not** modify the original object.
+
+Example:
+
+```python
+a = 10
+a = 20
+```
+
+Here:
+
+* `a` stops referring to `10`
+* `a` now refers to `20`
+* The `10` object remains unchanged and is removed only if no references exist
+
+---
+
+
+### Creating Variables in Python
+
+Python does **not** require explicit variable declarations.
+
+A variable is created **the moment a value is assigned** to it:
+
+```python
+a = 10
+print(a)
+```
+
+---
+
+<Callout>
+All data in Python — regardless of type — is ultimately represented in binary (0s and 1s) within the computer’s memory.
+</Callout>
+
+
+---

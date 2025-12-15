@@ -6,7 +6,6 @@ import { siteConfig } from "../../config/site";
 import Providers from "../Providers/Providers";
 import { Toaster } from "@/components/ui/toaster";
 
-
 const inter = Inter({ subsets: ["latin"], variable: '--font-sans' });
 const poppins = Poppins({
   subsets: ["latin"],
@@ -29,9 +28,9 @@ export default async function RootLayout({
 }>) {
 
   return (
-    <html lang="en" className="scroll-pt-[3.5rem]">
+    <html lang="en" className={cn("scroll-pt-[3.5rem]", poppins.variable)}  >
       <body suppressHydrationWarning={true}
-        className={cn("bg-background antialiased dark:bg-bgDark bg-gray-100", poppins.variable, inter.variable)}>
+        className={"bg-background antialiased dark:bg-bgDark bg-gray-100"}>
         <Providers>
           <Toaster />
           {children}

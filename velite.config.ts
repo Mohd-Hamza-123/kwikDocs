@@ -23,7 +23,7 @@ const posts = defineCollection({
 
 
 export default defineConfig({
-  root: process.env.NODE_ENV === "production" ? "src/content" : 'src/content/typescript',
+  root: process.env.NODE_ENV === "production" ? "src/content" : 'src/content/python',
   output: {
     data: `.velite`,
     assets: `public/static`,

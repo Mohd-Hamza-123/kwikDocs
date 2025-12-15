@@ -1,9 +1,8 @@
 'use client'
 import Link from "next/link";
 import { MDXContent } from "../mdx-component";
-import { MdOutlineZoomOutMap } from "react-icons/md";
 import { useAppSelector } from "@/lib/hooks/hooks";
-
+import { MdOutlineZoomOutMap } from "react-icons/md";
 
 const ShowPost = () => {
 

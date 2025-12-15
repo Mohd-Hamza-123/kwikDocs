@@ -1,0 +1,54 @@
+---
+title: Object
+published : true
+---
+
+
+
+## Inspecting Objects in Python
+
+Python provides several built-in tools to inspect objects.
+
+### 1. Viewing the Object Type
+
+```python
+print(type(10))  # <class 'int'>
+```
+
+---
+
+### 2. Viewing the Object ID (Memory Identity)
+
+```python
+print(id(10))
+```
+
+> `id()` returns a unique identifier for the object during its lifetime.
+> This is commonly the memory address (implementation-dependent).
+
+---
+
+### 3. Exploring Object Attributes
+
+```python
+print(dir(10))
+```
+
+This outputs all methods and attributes available on the `int` object, such as:
+
+* `bit_length`
+* `to_bytes`
+* arithmetic and comparison methods
+
+---
+
+**Key Concepts**
+
+* **Everything in Python is an object** — numbers, strings, functions, classes, and more.
+
+<Callout>
+Everything in Python is an object. All objects are instances of a class, and all classes ultimately derive from the `type` metaclass, which sits at the top of Python’s object model.
+</Callout>
+
+
+---

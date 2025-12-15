@@ -1,7 +1,7 @@
 
 import { DocumentType } from '@/types/docs.type'
 import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
+
 
 interface I_document {
     document: DocumentType | null,

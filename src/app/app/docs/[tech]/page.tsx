@@ -12,23 +12,25 @@ import { setAllDocs, setDoc } from "@/lib/store/features/docsSlice";
 
 export default function DocPage() {
 
-  console.log(posts)
+  let filteredPost = [];
   const { tech } = useParams()
-  console.log(tech)
   const dispatch = useAppDispatch()
-  const [nodes, setNodes] = useState<FileNode[] | null>(null)
+  const [nodes, setNodes] = useState<FileNode[] | null>(null);
 
-  let allPost = useMemo(() => posts?.filter((post) => post?.slug.indexOf(tech as string) === 0 && post?.published)
-    , [posts, tech]);
-
-  console.log("All post ")
-  console.log(allPost)
+  if (process.env.NODE_ENV === "production") {
+    filteredPost = useMemo(() => posts?.filter((post) => post?.slug.indexOf(tech as string) === 0 && post?.published)
+      , [posts, tech]);
+  } else {
+    filteredPost = posts
+  }
 
   const { isDocIndexOpen } = useResponsiveContext();
 
+  // console.log(filteredPost)
+
   useEffect(() => {
-    dispatch(setAllDocs({ allDocuments: allPost }))
-    dispatch(setDoc({ document: allPost[0] }))
+    dispatch(setAllDocs({ allDocuments: filteredPost }))
+    dispatch(setDoc({ document: filteredPost[0] }))
     fetch(`/api/content-tree/?tech=${tech}`)
       .then(res => res.json())
       .then((res) => {

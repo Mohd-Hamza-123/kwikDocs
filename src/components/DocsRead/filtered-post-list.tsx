@@ -21,15 +21,27 @@ const FilteredPostList = ({ nodes }: { nodes: FileNode[] }) => {
 export default FilteredPostList;
 
 function TreeNode({ node }: { node: FileNode }) {
+
+  // console.log(node)
   const dispatch = useAppDispatch();
   const [isExpanded, setIsExpanded] = useState(false);
-  const allPosts = useAppSelector((state) => state.docs.allDocuments);
   const { setIsDocIndexOpen } = useResponsiveContext();
+  const allPosts = useAppSelector((state) => state.docs.allDocuments);
 
   const handleDocument = (slug: string | undefined) => {
-    const document = allPosts.find((doc) => doc.slug === slug);
-    dispatch(setDoc({ document }));
+    console.log("slug : ", slug);
+    console.log("allPosts : ", allPosts)
     setIsDocIndexOpen(false);
+    if (!slug) return
+    let document;
+    if (process.env.NODE_ENV === "production") {
+      document = allPosts.find((doc) => doc.slug === slug);
+    } else {
+      document = allPosts.find((doc) => slug.includes(doc.slug))
+    }
+    // console.log("kkk : ", document)
+    dispatch(setDoc({ document }));
+
   };
 
   const expand = () => setIsExpanded((prev) => !prev);
@@ -53,9 +65,8 @@ function TreeNode({ node }: { node: FileNode }) {
               <span>{name}</span>
             </span>
             <span
-              className={`transition-transform duration-200 ${
-                isExpanded ? "rotate-90" : ""
-              }`}
+              className={`transition-transform duration-200 ${isExpanded ? "rotate-90" : ""
+                }`}
             >
               <svgIcons.arrowDropRight className="h-4 w-4" />
             </span>
@@ -81,8 +92,10 @@ function TreeNode({ node }: { node: FileNode }) {
                    text-[14px] text-gray-700 dark:text-gray-300
                    hover:bg-zinc-100 dark:hover:bg-zinc-800/80
                    transition-colors"
-        onClick={() => handleDocument(node?.slug)}
-      >
+        onClick={() => {
+          
+          handleDocument(node?.slug)
+        }}>
         <span className="h-1.5 w-1.5 rounded-full bg-zinc-400 dark:bg-zinc-500" />
         <span className="truncate">{name}</span>
       </li>
