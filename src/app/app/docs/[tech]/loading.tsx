@@ -1,5 +1,6 @@
+import { LoadingPage } from '@/components'
 import React from 'react'
-import LoadingPage from '../../../components/Spinner/LoadingPage'
+
 
 const loading = () => {
   return (

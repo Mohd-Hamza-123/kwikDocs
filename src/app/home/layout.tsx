@@ -9,6 +9,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
             <Sidebar />
             <SearchDocs />
             <main>{children}</main>
+            <Footer />
         </>
     )
 }

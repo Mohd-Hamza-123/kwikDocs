@@ -40,7 +40,7 @@ const SearchDocs = () => {
                 <ul className='overflow-y-scroll h-full mt-2'>
                     {searchPosts?.length > 0 ? searchPosts?.map((post: any) => {
                         return <li className='list-none px-3 py-2 hover:bg-gray-100 dark:hover:bg-black' key={post?.slug}>
-                            <Link href={`/document/${post?.slug.split('/')[0]}/${post?.slugAsParams}`} className='flex gap-2' onClick={() => setIsDocSearchOpen(false)}>
+                            <Link href={`/app/document/${post?.slug.split('/')[0]}/${post?.slugAsParams}`} className='flex gap-2' onClick={() => setIsDocSearchOpen(false)}>
                                 <h6 className='font-bold'>
                                     {(post?.slug?.split('/')[0]).toUpperCase()}
                                 </h6>

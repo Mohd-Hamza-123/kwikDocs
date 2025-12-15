@@ -51,7 +51,7 @@ const Technologies = async ({ technology }: Props) => {
                   {tech?.description}
                 </p>
                 <Link
-                  href={`/docs/${tech?.name?.toLowerCase()}`}
+                  href={`/app/docs/${tech?.name?.toLowerCase()}`}
                   className="inline-block w-full md:w-auto px-6 py-2 text-lg font-semibold text-white 
       bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 
       rounded-xl shadow-md hover:shadow-xl 

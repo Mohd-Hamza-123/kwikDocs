@@ -6,7 +6,7 @@ import { posts } from "#site/content";
 import { MDXContent } from '@/components/mdx-component';
 import { useRouter, useParams } from "next/navigation";
 import { toast } from "@/hooks/use-toast";
-import { DocumentType as PostType } from "../../../types/docs.type";
+import { DocumentType as PostType } from "@/types/docs.type";
 
 // export async function generateStaticParams(): Promise<
 //     PostPageProps["params"][]

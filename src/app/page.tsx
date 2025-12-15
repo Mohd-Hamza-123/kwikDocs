@@ -8,7 +8,7 @@ export default async function Root() {
     // console.log(session)
 
     if (session) {
-        redirect("/app")
+        redirect("/home")
     }
 
     redirect("/get-started")

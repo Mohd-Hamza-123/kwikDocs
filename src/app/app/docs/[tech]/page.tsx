@@ -2,13 +2,13 @@
 import "@/styles/mdx.css";
 import { posts } from '#site/content';
 import { toast } from "@/hooks/use-toast";
+import { useParams } from "next/navigation";
 import { useAppDispatch } from '@/lib/hooks/hooks';
+import type { FileNode } from "@/utils/getContentTree";
 import React, { useEffect, useMemo, useState } from 'react';
 import { useResponsiveContext } from "@/context/CSS-Context";
 import { FilteredPostList, LoadingPage, ShowPost } from "@/index";
-import type { FileNode } from "@/utils/getContentTree";
 import { setAllDocs, setDoc } from "@/lib/store/features/docsSlice";
-import { useParams } from "next/navigation";
 
 export default function DocPage() {
 
@@ -20,6 +20,9 @@ export default function DocPage() {
 
   let allPost = useMemo(() => posts?.filter((post) => post?.slug.indexOf(tech as string) === 0 && post?.published)
     , [posts, tech]);
+
+  console.log("All post ")
+  console.log(allPost)
 
   const { isDocIndexOpen } = useResponsiveContext();
 
