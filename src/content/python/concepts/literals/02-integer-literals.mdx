@@ -1,0 +1,89 @@
+---
+title: Integer Literals
+published: true
+---
+
+Python supports **four forms of integer literals**, based on how an integer value is written in the source code.
+
+---
+
+## Types of Integer Literals in Python
+
+### 1. Decimal Integer Literals (Base 10)
+
+Digits used: `0–9`  
+This is the **default** number system in Python.
+
+```python
+10
+25
+0
+-99
+````
+
+---
+
+### 2. Binary Integer Literals (Base 2)
+
+Prefix: `0b` or `0B`
+Digits used: `0`, `1`
+
+```python
+0b1010    # 10 in decimal
+0B1111    # 15 in decimal
+```
+
+---
+
+### 3. Octal Integer Literals (Base 8)
+
+Prefix: `0o` or `0O`
+Digits used: `0–7`
+
+```python
+0o12      # 10 in decimal
+0O77      # 63 in decimal
+```
+
+---
+
+### 4. Hexadecimal Integer Literals (Base 16)
+
+Prefix: `0x` or `0X`
+Digits used: `0–9`, `A–F` (or `a–f`)
+
+```python
+0xA       # 10 in decimal
+0XFF      # 255 in decimal
+```
+
+---
+
+### Important Note
+
+Although these literals are written using different number systems, **all of them are stored as `int` in Python**.
+
+```python
+type(0b1010)   # int
+type(0o12)     # int
+type(0xA)      # int
+```
+
+* Decimal, binary, octal, and hexadecimal are **forms of integer literals**
+* They represent different **notations**, not different data types
+
+---
+
+### Quick Summary
+
+| Literal Form | Prefix | Base |
+| ------------ | ------ | ---- |
+| Decimal      | none   | 10   |
+| Binary       | `0b`   | 2    |
+| Octal        | `0o`   | 8    |
+| Hexadecimal  | `0x`   | 16   |
+
+> Python supports decimal, binary (`0b`), octal (`0o`), and hexadecimal (`0x`) integer literals. Regardless of the base used, they are all of type `int`.
+
+
+---

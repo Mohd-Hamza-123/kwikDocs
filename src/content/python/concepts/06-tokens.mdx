@@ -1,0 +1,157 @@
+---
+title: Tokens
+published : true
+---
+
+
+In Python, **tokens** are the **smallest meaningful units of source code** that the Python interpreter recognizes during **lexical analysis** (the first phase of parsing).
+
+> **A token is the smallest unit of code that has meaning to Python.**
+
+---
+
+**Real-Life Example**
+
+Sentence:
+
+```
+I like apples
+```
+
+Tokens:
+
+```
+I | like | apples
+```
+
+Each word is treated as a separate meaningful unit—similar to tokens in Python.
+
+---
+
+**Python Example**
+
+```python
+result = 10 + y
+```
+
+Tokens:
+
+```
+result | = | 10 | + | y
+```
+
+---
+
+### Why Python Uses Tokens
+
+Python cannot understand code all at once.
+Instead, it follows these steps:
+
+1. Break the code into **tokens**
+2. Understand how those tokens fit together
+3. Execute the code
+
+---
+
+## Main Types of Python Tokens
+
+### 1. Keywords
+
+Reserved words with predefined meaning.
+
+Examples:
+
+```python
+if, else, for, while, def, return, class, import
+```
+
+---
+
+### 2. Identifiers
+
+Names used to identify variables, functions, classes, etc.
+
+Examples:
+
+```python
+age
+total_sum
+calculateArea
+```
+
+---
+
+### 3. Literals
+
+Fixed values written directly in code.
+
+```python
+10        # integer literal
+3.14      # float literal
+"Hello"   # string literal
+True      # boolean literal
+None      # special literal
+```
+
+---
+
+### 4. Operators
+
+Symbols that perform operations on values.
+
+```plaintext
++   -   *   /   %        # arithmetic
+==  !=  >   <   >=  <=  # comparison
+and or not              # logical
+=   +=  -=              # assignment
+```
+
+---
+
+### 5. Delimiters (Separators)
+
+Characters that structure code.
+
+```python
+( )   [ ]   { }
+,     :     .
+;     @
+```
+
+---
+
+### 6. Comments
+
+Lines that are ignored by the interpreter.
+
+```python
+# This is a comment
+```
+
+---
+
+#### Example: Token Breakdown
+
+```python
+colors = ['red', 'yellow', 'blue']
+```
+
+Tokens:
+
+1. `colors` → identifier
+2. `=` → operator
+3. `[` → delimiter
+4. `'red'` → string literal
+5. `,` → delimiter
+6. `'yellow'` → string literal
+7. `,` → delimiter
+8. `'blue'` → string literal
+9. `]` → delimiter
+
+---
+
+**One-Line Summary**
+
+> **Tokens are the basic building blocks of Python code that the interpreter understands.**
+
+This version is suitable for notes, blogs, or documentation.

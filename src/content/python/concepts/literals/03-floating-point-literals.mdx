@@ -1,0 +1,51 @@
+---
+title: Floating-Point Literals
+published: true
+---
+
+Python supports **two forms of floating-point literals**, based on how a floating-point value is written in the source code.
+
+---
+
+## Types of Floating-Point Literals in Python
+
+### 1. Decimal Floating-Point Literals
+
+Digits used: `0–9`  
+These literals contain a **decimal point** and represent real numbers.  
+This is the **most commonly used** form of floating-point literal.
+
+```python
+3.14
+0.5
+-12.75
+2.0
+```
+
+---
+
+### 2. Exponential (Scientific Notation) Floating-Point Literals
+
+Numbers written using `e` or `E`, representing powers of 10.
+This form is useful for representing **very large or very small numbers**.
+
+```python
+1e3     # 1000.0
+2.5e2   # 250.0
+1e-3    # 0.001
+-3.2E4  # -32000.0
+```
+
+---
+
+**Important Note**
+
+Regardless of how they are written, **all floating-point literals are stored as `float` in Python**.
+
+```python
+type(3.14)   # float
+type(1e3)    # float
+```
+
+> Python supports decimal and exponential floating-point literals. Regardless of the notation, they are all of type `float`.
+
