@@ -7,10 +7,11 @@ import { siteConfig } from "../../../config/site";
 import { FiMenu, FiX } from "react-icons/fi";
 
 export default function GetStarted() {
+  
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="relative bg-[#0b0b10] text-gray-100 antialiased selection:bg-indigo-500/30 selection:text-white">
+    <div className="overflow-x-hidden relative bg-[#0b0b10] text-gray-100 antialiased selection:bg-indigo-500/30 selection:text-white">
 
       {/* Background */}
       <div className="pointer-events-none absolute inset-0">

@@ -6,9 +6,9 @@ export default async function Root() {
     const cookie = await cookies()
     const session = cookie.get("session")?.value
 
-    if (session) {
-        redirect("/home")
-    }
+    // if (session) {
+    //     redirect("/home")
+    // }
 
     return <GetStarted />
 }
