@@ -3,12 +3,5 @@
     "env": {
       "NPM_FLAGS": "--legacy-peer-deps"
     }
-  },
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "destination": "https://kwikdocs.dev/$1",
-      "permanent": true
-    }
-  ]
+  }
 }
