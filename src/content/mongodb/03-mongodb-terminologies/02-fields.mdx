@@ -1,0 +1,68 @@
+---
+title: Fields
+published: true
+---
+
+> **Fields in MongoDB are the *key–value pairs* inside a document.**
+
+---
+
+**Example document**
+
+```json
+{
+  "_id": "u123",
+  "name": "Hamza",
+  "age": 24,
+  "skills": ["Node.js", "MongoDB"],
+  "address": {
+    "city": "Delhi",
+    "pincode": 110001
+  },
+  "isActive": true
+}
+```
+
+Each **key** here is a **field**.
+
+---
+
+### What counts as a field?
+
+| Field name | Field value | Type              |
+| ---------- | ----------- | ----------------- |
+| `_id`      | `"u123"`    | ObjectId / String |
+| `name`     | `"Hamza"`   | String            |
+| `age`      | `24`        | Number            |
+| `skills`   | `[...]`     | Array             |
+| `address`  | `{...}`     | Embedded document |
+| `isActive` | `true`      | Boolean           |
+
+So:
+
+* **Field = name + value**
+* Value can be **any BSON type**
+
+---
+
+### Key MongoDB rules about fields
+
+* Documents **don’t need the same fields**
+* Fields can be **added or removed anytime**
+* Field names are **case-sensitive**
+* Field order usually doesn’t matter
+* `_id` is mandatory (MongoDB auto-creates it)
+
+---
+
+### SQL comparison (quick)
+
+| SQL    | MongoDB    |
+| ------ | ---------- |
+| Column | Field      |
+| Row    | Document   |
+| Table  | Collection |
+
+---
+
+

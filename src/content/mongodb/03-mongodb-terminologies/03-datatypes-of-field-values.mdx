@@ -1,0 +1,181 @@
+---
+title: Datatypes of field values
+published: true
+---
+
+These are the **data types a field value can have in MongoDB**.
+
+
+## 1️⃣ String
+
+```json
+{ "name": "Hamza" }
+```
+
+---
+
+## 2️⃣ Number
+
+MongoDB supports multiple numeric types.
+
+```json
+{ "age": 24 }
+{ "price": 99.99 }
+```
+
+* `int32`
+* `int64`
+* `double`
+* `decimal128` (money, precision)
+
+---
+
+## 3️⃣ Boolean
+
+```json
+{ "isActive": true }
+```
+
+---
+
+## 4️⃣ Array
+
+```json
+{ "skills": ["Node.js", "MongoDB", "Docker"] }
+```
+
+Arrays can hold **mixed types**:
+
+```json
+{ "values": [1, "two", true] }
+```
+
+---
+
+## 5️⃣ Object / Embedded Document
+
+```json
+{
+  "address": {
+    "city": "Delhi",
+    "pincode": 110001
+  }
+}
+```
+
+---
+
+## 6️⃣ ObjectId
+
+Used mainly for `_id`.
+
+```json
+{ "_id": ObjectId("64fa9b1c2a7d9a1234567890") }
+```
+
+---
+
+## 7️⃣ Date
+
+```json
+{ "createdAt": ISODate("2025-01-01T10:30:00Z") }
+```
+
+---
+
+## 8️⃣ Null
+
+```json
+{ "middleName": null }
+```
+
+---
+
+## 9️⃣ Binary Data
+
+Used for files, images, buffers.
+
+```json
+{ "file": BinData(0, "QmFzZTY0") }
+```
+
+---
+
+## 🔟 Regular Expression
+
+```json
+{ "usernamePattern": /^[a-z0-9_]+$/ }
+```
+
+---
+
+## 1️⃣1️⃣ JavaScript (rare, not recommended)
+
+```json
+{ "calc": function(x) { return x * 2 } }
+```
+
+---
+
+## 1️⃣2️⃣ Timestamp
+
+Used internally for replication.
+
+```json
+{ "ts": Timestamp(1712345678, 1) }
+```
+
+---
+
+## 1️⃣3️⃣ MinKey / MaxKey
+
+Special comparison values.
+
+```json
+{ "min": MinKey() }
+{ "max": MaxKey() }
+```
+
+---
+
+## Commonly used vs rarely used
+
+### You’ll use these **90% of the time**
+
+* String
+* Number
+* Boolean
+* Array
+* Object
+* ObjectId
+* Date
+* Null
+
+### Advanced / internal use
+
+* Binary
+* Regex
+* Timestamp
+* MinKey / MaxKey
+* JavaScript
+
+---
+
+### One-document example (realistic)
+
+```json
+{
+  "_id": ObjectId("..."),
+  "name": "Hamza",
+  "age": 24,
+  "skills": ["Node.js", "MongoDB"],
+  "address": { "city": "Delhi" },
+  "isActive": true,
+  "createdAt": ISODate("2025-01-01T10:30:00Z"),
+  "middleName": null
+}
+```
+
+---
+
+

@@ -1,0 +1,111 @@
+---
+title: Collection and Document
+published: true
+---
+
+> A *document* is one record (JSON-like).
+
+> A *collection* is a group of documents (like a table).**
+
+Now let’s make that concrete.
+
+---
+
+## In **MongoDB**
+
+![Image](https://cdn.prod.website-files.com/68ac1d7405234ac5768d8914/68cbc26ff47829cb2e2d4a4a_screenshot-2023-08-28-at-3-32-02-pm.png?utm_source=chatgpt.com)
+
+![Image](https://media.geeksforgeeks.org/wp-content/uploads/20200219180521/MongoDB-database-colection.png?utm_source=chatgpt.com)
+
+![Image](https://mongodbtutorial.org/wp-content/uploads/2020/08/MongoDB-Document.png?utm_source=chatgpt.com)
+
+---
+
+## 📄 Document (smallest unit)
+
+A **document** is:
+
+* A single data record
+* Stored in **BSON** (binary JSON)
+* Flexible (no fixed schema)
+
+Example document:
+
+```json
+{
+  "_id": "u123",
+  "name": "Hamza",
+  "age": 24,
+  "skills": ["Node.js", "MongoDB"],
+  "isActive": true
+}
+```
+
+Think of a document as:
+
+* One **row** in SQL
+* One **object** in JavaScript
+* One **JSON file**
+
+---
+
+## 📁 Collection (container)
+
+A **collection** is:
+
+* A group of related documents
+* Inside a database
+* Usually represents one “thing” (users, orders, posts)
+
+Example:
+
+```text
+users (collection)
+ ├── document 1
+ ├── document 2
+ └── document 3
+```
+
+Think of a collection as:
+
+* A **table** in SQL
+* An **array of objects**
+* A **folder** full of JSON files
+
+---
+
+## 🆚 Difference (side-by-side)
+
+| Feature        | Document        | Collection        |
+| -------------- | --------------- | ----------------- |
+| What it is     | Single record   | Group of records  |
+| SQL equivalent | Row             | Table             |
+| Structure      | JSON-like       | Schema-less group |
+| Can contain    | Fields & arrays | Documents         |
+| Smallest unit  | ✅ Yes           | ❌ No              |
+
+---
+
+## Important MongoDB-specific ideas
+
+### 1️⃣ Documents in a collection **don’t need identical fields**
+
+```json
+{ "name": "A" }
+{ "name": "B", "age": 30 }
+{ "name": "C", "skills": ["JS"] }
+```
+
+All valid in the same collection.
+
+---
+
+### 2️⃣ Collections don’t enforce schema (by default)
+
+* You *can* add schema validation
+* But MongoDB favors flexibility
+
+---
+
+
+
