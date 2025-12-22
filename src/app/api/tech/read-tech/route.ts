@@ -11,7 +11,7 @@ export async function GET() {
     try {
         await connectDB();
 
-        const allTech = await TechModel.find({}, { techType: 1, _id: 0 }).distinct('techType').exec();
+        const allTech = await TechModel.distinct('techType')
 
         console.log(allTech);
 

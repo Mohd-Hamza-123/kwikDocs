@@ -3,6 +3,7 @@ import rehypePrettyCode from 'rehype-pretty-code'
 import { defineConfig, s, defineCollection } from 'velite'
 import rehypeAutoLinkHeadings from 'rehype-autolink-headings'
 
+
 const computedFields = <T extends { slug: string }>(data: T) => ({
   ...data,
   slugAsParams: data.slug.split(`/`).slice(1).join(`/`)
@@ -23,7 +24,7 @@ const posts = defineCollection({
 
 
 export default defineConfig({
-  root: process.env.NODE_ENV === "production" ? "src/content" : 'src/content/void',
+  root: process.env.NODE_ENV === "production" ? "src/content" : 'src/content/html',
   output: {
     data: `.velite`,
     assets: `public/static`,
