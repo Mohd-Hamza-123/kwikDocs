@@ -6,7 +6,7 @@ published: true
 These are the **data types a field value can have in MongoDB**.
 
 
-## 1️⃣ String
+### 1️⃣ String
 
 ```json
 { "name": "Hamza" }
@@ -14,7 +14,7 @@ These are the **data types a field value can have in MongoDB**.
 
 ---
 
-## 2️⃣ Number
+### 2️⃣ Number
 
 MongoDB supports multiple numeric types.
 
@@ -30,7 +30,7 @@ MongoDB supports multiple numeric types.
 
 ---
 
-## 3️⃣ Boolean
+### 3️⃣ Boolean
 
 ```json
 { "isActive": true }
@@ -38,7 +38,7 @@ MongoDB supports multiple numeric types.
 
 ---
 
-## 4️⃣ Array
+### 4️⃣ Array
 
 ```json
 { "skills": ["Node.js", "MongoDB", "Docker"] }
@@ -52,7 +52,7 @@ Arrays can hold **mixed types**:
 
 ---
 
-## 5️⃣ Object / Embedded Document
+### 5️⃣ Object / Embedded Document
 
 ```json
 {
@@ -65,7 +65,7 @@ Arrays can hold **mixed types**:
 
 ---
 
-## 6️⃣ ObjectId
+### 6️⃣ ObjectId
 
 Used mainly for `_id`.
 
@@ -75,7 +75,7 @@ Used mainly for `_id`.
 
 ---
 
-## 7️⃣ Date
+### 7️⃣ Date
 
 ```json
 { "createdAt": ISODate("2025-01-01T10:30:00Z") }
@@ -83,7 +83,7 @@ Used mainly for `_id`.
 
 ---
 
-## 8️⃣ Null
+### 8️⃣ Null
 
 ```json
 { "middleName": null }
@@ -91,7 +91,7 @@ Used mainly for `_id`.
 
 ---
 
-## 9️⃣ Binary Data
+### 9️⃣ Binary Data
 
 Used for files, images, buffers.
 
@@ -101,7 +101,7 @@ Used for files, images, buffers.
 
 ---
 
-## 🔟 Regular Expression
+### 🔟 Regular Expression
 
 ```json
 { "usernamePattern": /^[a-z0-9_]+$/ }
@@ -109,7 +109,7 @@ Used for files, images, buffers.
 
 ---
 
-## 1️⃣1️⃣ JavaScript (rare, not recommended)
+### 1️⃣1️⃣ JavaScript (rare, not recommended)
 
 ```json
 { "calc": function(x) { return x * 2 } }
@@ -117,7 +117,7 @@ Used for files, images, buffers.
 
 ---
 
-## 1️⃣2️⃣ Timestamp
+### 1️⃣2️⃣ Timestamp
 
 Used internally for replication.
 
@@ -127,7 +127,7 @@ Used internally for replication.
 
 ---
 
-## 1️⃣3️⃣ MinKey / MaxKey
+### 1️⃣3️⃣ MinKey / MaxKey
 
 Special comparison values.
 
@@ -138,9 +138,7 @@ Special comparison values.
 
 ---
 
-## Commonly used vs rarely used
-
-### You’ll use these **90% of the time**
+### Commonly used
 
 * String
 * Number
@@ -161,7 +159,7 @@ Special comparison values.
 
 ---
 
-### One-document example (realistic)
+#### One-document example (realistic)
 
 ```json
 {

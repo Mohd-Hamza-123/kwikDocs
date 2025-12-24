@@ -5,6 +5,7 @@ import { siteConfig } from "../../config/site";
 import Providers from "../Providers/Providers";
 import { Inter, Poppins } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-sans' });
 const poppins = Poppins({
@@ -32,7 +33,8 @@ export default async function RootLayout({
       <body suppressHydrationWarning={true}
         className={"bg-background antialiased dark:bg-bgDark bg-gray-100"}>
         <Providers>
-          <Toaster />
+        <Toaster />
+        <Analytics />
           {children}
         </Providers>
       </body>

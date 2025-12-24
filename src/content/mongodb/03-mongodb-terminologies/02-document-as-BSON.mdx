@@ -1,0 +1,61 @@
+---
+title: Document as BSON
+published: true
+---
+
+> BSON is a binary, machine-friendly version of JSON used by MongoDB to store data efficiently
+
+BSON looks like JSON when you use it, but under the hood it’s:
+
+* Binary-encoded (not plain text)
+* Faster for computers to read/write
+* Richer in data types
+
+**Example** 
+
+### JSON (human-readable)
+
+```json
+{
+  "name": "mohd hamza",
+  "age": 30,
+  "isStudent":true,
+  "skills": ["Python", "JavaScript"],
+}
+```
+
+---
+
+### BSON (REAL binary structure – shown as escaped bytes)
+
+```text
+\x6c\x00\x00\x00                     // document length (108 bytes)
+
+\x02 name\x00                        // type: string
+\x06\x00\x00\x00 mohd hamza\x00           // length + value
+
+\x10 age\x00                         // type: int32
+\x1d\x00\x00\x00                     // 30
+
+\x08 isStudent\x00                   // type: boolean
+\x00                                 // true
+
+\x04 skills\x00                      // type: array
+\x1a\x00\x00\x00                     // array size
+\x10 0\x00 \x5c\x00\x00\x00           // Python
+\x10 1\x00 \x6c\x00\x00\x00           // JavaScript
+\x00                                 // end array
+
+\x00                                 // end main document
+```
+---
+
+### Why MongoDB uses BSON
+
+* Faster queries
+* Smaller disk size
+* Easy indexing
+* Precise data typing
+
+
+---

@@ -1,0 +1,74 @@
+---
+title: Open MongoDB Interactively
+isPublished: true
+---
+
+**`mongosh`** is the **MongoDB Shell** command.
+
+**In one line:**
+
+> `mongosh` opens an interactive terminal to **connect to MongoDB and run database commands**.
+
+---
+
+### What `mongosh` is used for
+
+### 1️⃣ Connect to MongoDB
+
+```bash
+mongosh
+```
+
+Connects to the **local MongoDB server** (default: `mongodb://localhost:27017`).
+
+With a connection string:
+
+```bash
+mongosh "mongodb+srv://user:pass@cluster0.mongodb.net/mydb"
+```
+
+---
+
+### 2️⃣ Run MongoDB commands
+
+Inside `mongosh`, you can:
+
+```js
+show dbs
+use test
+db.users.find()
+```
+
+So it’s like a **REPL** for MongoDB.
+
+---
+
+### 3️⃣ Create, read, update, delete (CRUD)
+
+```js
+db.users.insertOne({ name: "Hamza", age: 24 })
+db.users.find()
+db.users.updateOne({ name: "Hamza" }, { $set: { age: 25 } })
+db.users.deleteOne({ name: "Hamza" })
+```
+
+---
+
+### 4️⃣ Inspect BSON / ObjectId / Dates
+
+```js
+ObjectId()
+new Date()
+```
+
+Very useful for **understanding how MongoDB stores data**.
+
+### When you typically use `mongosh`
+
+* Testing queries quickly
+* Debugging database issues
+* Exploring collections
+* Learning MongoDB interactively
+
+---
+

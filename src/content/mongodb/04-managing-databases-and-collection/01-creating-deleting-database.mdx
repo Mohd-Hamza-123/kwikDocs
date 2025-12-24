@@ -1,0 +1,62 @@
+---
+title: Creating and Deleting Database
+published: true
+---
+
+
+### 1. Start the shell
+
+```bash
+mongosh
+```
+
+(or pass a connection string if remote)
+
+---
+
+### 2. See databases
+
+```js
+show dbs
+show databases
+```
+
+> MongoDB only shows Databases that **have data**.
+
+---
+
+### 3. Create / switch database
+
+```js
+use myDatabase
+```
+
+⚠️ This does **not** create the DB yet.
+It’s created **when you insert data**.
+
+---
+
+### 4. Drop database
+
+Drop database:
+
+```js
+db.dropDatabase()
+```
+
+⚠️ Permanent. No undo.
+
+
+---
+
+### Mental model (easy to remember)
+
+```
+mongosh
+ └── database (use db)
+      └── collections
+           └── documents (BSON)
+```
+
+---
+
