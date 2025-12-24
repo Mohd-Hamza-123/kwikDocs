@@ -6,6 +6,7 @@ import Providers from "../Providers/Providers";
 import { Inter, Poppins } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-sans' });
 const poppins = Poppins({
@@ -35,6 +36,7 @@ export default async function RootLayout({
         <Providers>
         <Toaster />
         <Analytics />
+        <SpeedInsights />
           {children}
         </Providers>
       </body>
