@@ -98,9 +98,9 @@ export default function GetStarted() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-lg text-gray-400">
-          Kwikdocs lets you write documentation{" "}
+          Kwikdocs lets you write {" "}
           <span className="font-semibold text-gray-200">
-            with live runnable code snippets
+            live runnable code snippets
           </span>{" "}
           — perfect for tutorials, APIs, and interactive guides.
         </p>

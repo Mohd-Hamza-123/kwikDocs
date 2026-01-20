@@ -28,15 +28,15 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
+// scroll-pt-[3.5rem]"
   return (
     <html lang="en" className={cn("scroll-pt-[3.5rem]", poppins.variable)}  >
       <body suppressHydrationWarning={true}
         className={"bg-background antialiased dark:bg-bgDark bg-gray-100"}>
         <Providers>
-        <Toaster />
-        <Analytics />
-        <SpeedInsights />
+          <Toaster />
+          <Analytics />
+          <SpeedInsights />
           {children}
         </Providers>
       </body>

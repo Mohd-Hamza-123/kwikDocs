@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env next dev --webpack",
-    "build": "next build --webpack",
+    "dev": "cross-env next dev",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "velite:build": "velite build"

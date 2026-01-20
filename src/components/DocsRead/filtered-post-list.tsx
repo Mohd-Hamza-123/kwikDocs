@@ -29,8 +29,8 @@ function TreeNode({ node }: { node: FileNode }) {
   const allPosts = useAppSelector((state) => state.docs.allDocuments);
 
   const handleDocument = (slug: string | undefined) => {
-    console.log("slug : ", slug);
-    console.log("allPosts : ", allPosts)
+    // console.log("slug : ", slug);
+    // console.log("allPosts : ", allPosts)
     setIsDocIndexOpen(false);
     if (!slug) return
     let document;

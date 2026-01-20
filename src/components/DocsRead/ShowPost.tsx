@@ -7,10 +7,10 @@ import { MdOutlineZoomOutMap } from "react-icons/md";
 const ShowPost = () => {
 
     const post = useAppSelector((state) => state.docs.document);
-    console.log(post)
+    
     return <section className="w-full lg:w-[80%] overflow-y-scroll" >
 
-        {post && <article className="py-3 prose dark:prose-invert max-w-[100%] px-3">
+        {post && <article className="p-3 prose dark:prose-invert max-w-[100%] ">
             <div className="flex justify-between items-center">
 
                 <h1 className="mb-2 text-xl">{post?.title}</h1>

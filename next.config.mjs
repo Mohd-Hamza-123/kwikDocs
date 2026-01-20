@@ -15,6 +15,9 @@ export default {
     config.plugins.push(new VeliteWebpackPlugin());
     return config;
   },
+  turbopack : {
+    
+  }
 };
 
 class VeliteWebpackPlugin {

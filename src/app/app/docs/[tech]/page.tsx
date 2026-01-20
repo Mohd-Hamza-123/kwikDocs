@@ -10,6 +10,7 @@ import { useResponsiveContext } from "@/context/CSS-Context";
 import { FilteredPostList, LoadingPage, ShowPost } from "@/index";
 import { setAllDocs, setDoc } from "@/lib/store/features/docsSlice";
 
+
 export default function DocPage() {
 
   let filteredPost = [];
@@ -51,12 +52,12 @@ export default function DocPage() {
 
   if (nodes) {
     return (
-      <>
-        <section className={`w-[100%] lg:w-[20%] max-h-[91vh] overflow-y-scroll absolute lg:sticky top-0 bg-slate-50 dark:bg-bgDark z-20 py-2 lg:block ${isDocIndexOpen ? "block" : "hidden"} lg:block`}>
+      <div className="w-full flex flex-col lg:flex-row">
+        <section className={`w-full lg:w-[20%] overflow-y-scroll bg-slate-50 dark:bg-bgDark z-20 py-2 sticky top-0 ${isDocIndexOpen ? "block" : "hidden"} lg:block`}>
           <FilteredPostList nodes={nodes} />
         </section>
         <ShowPost />
-      </>
+      </div>
     )
   } else {
     return <LoadingPage />
