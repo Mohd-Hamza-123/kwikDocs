@@ -68,9 +68,11 @@ export const routes = {
 
 const baseUrl = process.env.NODE_ENV === "production" ? conf.EXPRESS_BASE_URL : "http://localhost:8000"
 
+const x = 10
+
 export const expressRoutes = {
     getDocs: `${baseUrl}/api/docs/tech`,
-    getSingleDoc: `${baseUrl}/api/docs/slug`
+    getSingleDoc: `${baseUrl}/api/docs/slug`,
 }
 
 export const api = {
