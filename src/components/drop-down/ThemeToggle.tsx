@@ -6,10 +6,12 @@ import {
     DropdownMenuContent,
 } from "@/components/ui/dropdown-menu"
 import { svgIcons } from '../icons';
+import { Button } from '../ui/button';
 import { useTheme } from 'next-themes';
 import { MdOutlineNightlightRound } from 'react-icons/md';
 
-const ThemeToggle = ({ closeSideBar }: any) => {
+const ThemeToggle = ({ closeSideBar }: { closeSideBar: () => void }) => {
+
     const { setTheme: setNextTheme, theme } = useTheme();
 
     const darkMode = () => {
@@ -28,7 +30,9 @@ const ThemeToggle = ({ closeSideBar }: any) => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
-                {theme === "dark" ? <MdOutlineNightlightRound className={"h-6 w-6 fill-white"} /> : <svgIcons.light className="w-6 h-6 fill-black" />}
+                <Button variant="ghost" className='px-2'>
+                    {theme === "dark" ? <MdOutlineNightlightRound className={"fill-white"} /> : <svgIcons.light className="fill-black" />}
+                </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuItem onClick={lightMode}>Light Mode</DropdownMenuItem>

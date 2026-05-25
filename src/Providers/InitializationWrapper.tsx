@@ -1,22 +1,22 @@
 'use client'
 
-import useAuth from '@/hooks/use-auth'
 import { useAppDispatch } from '@/lib/hooks/hooks'
 import React, { ReactNode, useEffect } from 'react'
+import useCurrentUser from '@/hooks/use-current-user'
 import { changeTheme } from '@/lib/store/features/editorSlice'
 
 const InitializationWrapper = ({ children }: { children: ReactNode }) => {
 
     const dispatch = useAppDispatch();
-    const { createSession } = useAuth();
+
+    useCurrentUser()
 
     useEffect(() => {
-        createSession()
-        const EditorTheme = localStorage.getItem("editorTheme") || 'monokai'
-        dispatch(changeTheme({ theme: EditorTheme }))
+        const editorTheme = localStorage.getItem("editorTheme") || 'monokai'
+        dispatch(changeTheme({ theme: editorTheme }))
     }, [])
 
-    return (<>{children}</>)
+    return children
 }
 
 export default InitializationWrapper

@@ -1,4 +1,4 @@
-import cloudinary from "../connectCloudinary";
+import cloudinary from "../../conf/connectCloudinary";
 
 export const deleteImage = async (publicId: string) => {
     const result = await cloudinary.uploader.destroy(publicId);

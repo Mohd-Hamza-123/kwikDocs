@@ -5,7 +5,7 @@ import path from "path";
 
 export type FileNode = {
     name: string;
-    type: "file" | "directory";
+    type: "file" | "folder";
     slug?: string;
     children?: FileNode[];
 }
@@ -21,7 +21,7 @@ const getContentTree = async (source: string): Promise<FileNode[] | null> => {
                 const children = await getContentTree(subPath)
                 return {
                     name: dirent?.name,
-                    type: "directory" as const,
+                    type: "folder" as const,
                     children: children || []
                 }
             } else {
@@ -45,6 +45,3 @@ const getContentTree = async (source: string): Promise<FileNode[] | null> => {
         return null
     }
 }
-
-
-export default getContentTree

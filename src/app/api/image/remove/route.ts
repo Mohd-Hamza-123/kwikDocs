@@ -1,4 +1,4 @@
-import connectDB from "@/dbConfig/dbConfig";
+import connectDB from "@/conf/database";
 import { ObjectId } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
 import TechModel from "@/models/tech.model";

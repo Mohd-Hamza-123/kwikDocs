@@ -2,73 +2,62 @@
 
 import React from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { toast } from "@/hooks/use-toast";
-import { registerUser } from "@/lib/API/Auth/register";
-import { signupSchema, SignupSchemaType } from "@/lib/validation/authSchema";
-import { ButtonSpinner } from "@/components";
-import useAuth from "@/hooks/use-auth";
+import { api, routes } from "@/lib/api/common";
+import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
+import { useMutation } from "@tanstack/react-query";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signupSchema, type Signup } from "@/lib/validation/authSchema";
 
 const SignupPage = () => {
-  const router = useRouter();
-  const { createSession } = useAuth()
 
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignupSchemaType>({
+  } = useForm<Signup>({
     resolver: zodResolver(signupSchema),
   });
 
-  const signupMutation = useMutation({
-    mutationFn: (payload: SignupSchemaType) => registerUser(payload),
+  const mutation = useMutation({
+    mutationFn: api.post,
     onError: (error: unknown) => {
-      const environment = process.env.NODE_ENV
+      console.error(error)
+      const message = error instanceof Error ? error.message : "something went wrong"
       toast({
         variant: "destructive",
-        title: "Signup failed.",
-        description: environment === "development" ? (error instanceof Error ? error.message : "internal server error") : "something went wrong , please try again later"
+        title: "Signup failed",
+        description: message
       });
     },
     onSuccess: (data) => {
-      console.log(data)
-      if (data.success) {
+      // console.log(data)
+      if (data.isMailSent) {
         toast({
-          title: "Account created!",
-          description: data.message
-          // description: "Verification email has been sent.",
-        });
-        createSession()
-        router.push("/");
-      } else {
-        toast({
-          title: "signup failed",
-          variant: "destructive",
-          description: data.message
+          variant: "default",
+          description: "Verify Email has been sent "
         });
       }
-
+      router.replace("/");
     }
   });
 
-  const onSubmit = (data: SignupSchemaType) => signupMutation.mutate(data);
+  const onSubmit = (data: Signup) => mutation.mutate({
+    data,
+    url: routes.register
+  });
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      noValidate
-      className="space-y-6"
-    >
-      <div className="space-y-1">
-        <h2 className="text-3xl font-semibold text-white">Create account</h2>
+      className="space-y-3">
 
-      </div>
+      <h2 className="text-3xl font-semibold text-white">Create account</h2>
 
       {/* Username */}
       <div className="space-y-1.5">
@@ -94,8 +83,7 @@ const SignupPage = () => {
       <div className="space-y-1.5">
         <Label
           htmlFor="email"
-          className="text-sm text-neutral-300 font-medium"
-        >
+          className="text-sm text-neutral-300 font-medium">
           Email
         </Label>
         <Input
@@ -133,8 +121,8 @@ const SignupPage = () => {
       </div>
 
       {/* Main button */}
-      <Button disabled={signupMutation.isPending} className="w-full bg-pink-600 hover:bg-pink-500 text-white flex justify-center items-center">
-        {signupMutation.isPending ? <ButtonSpinner /> : "Signup"}
+      <Button disabled={mutation.isPending} className="w-full bg-purple-700 hover:bg-purple-800 text-white">
+        {mutation.isPending ? <Spinner /> : "Signup"}
       </Button>
 
       {/* Divider */}

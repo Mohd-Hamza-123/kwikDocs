@@ -19,8 +19,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useQuery } from "@tanstack/react-query";
-import { getAllTechnology } from "@/lib/API/techAPI/getAllTech";
-
+import { getAllTechnology } from "@/lib/getAllTechnology";
 
 export function ComboboxDemo({
   value,

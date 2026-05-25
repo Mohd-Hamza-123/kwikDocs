@@ -2,9 +2,9 @@
 
 import React from 'react'
 import { ProjectCard } from '..';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { getPlaygroundProject } from '@/lib/API/playground';
 import { PlaygroundInput } from '@/types/models.type';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { getPlaygroundProject } from '@/lib/api/playground';
 export default function PlaygroundProjectWrapper({ userId }: { userId: string }) {
 
     // console.log("User ID from params:", userId);
@@ -18,7 +18,7 @@ export default function PlaygroundProjectWrapper({ userId }: { userId: string })
     })
 
     const projects = data?.pages?.flatMap((page: any) => page.document)
-    console.log(projects)
+    // console.log(projects)
 
 
     if (status === "error") return <div>Error fetching projects.</div>

@@ -1,41 +1,33 @@
-import connectDB from "@/dbConfig/dbConfig";
+import connectDB from "@/conf/database";
 import Session from "@/models/session.model";
 import { NextRequest, NextResponse } from "next/server";
 
-
 export async function POST(request: NextRequest) {
+
     try {
         await connectDB();
-        const token = request.cookies.get("session")
-        if (!token) return NextResponse.json({
+        const sessionId = request.cookies.get("sessionId")?.value
+        if (!sessionId) return NextResponse.json({
             success: false,
-            message: "Not logged in",
-            error: "UNAUTHORIZED",
+            message: "unauthorized",
         }, { status: 401 })
 
-        const session = await Session.findOneAndDelete({ sessionToken: token.value })
+        const session = await Session.findOneAndDelete({ sessionToken: sessionId })
 
         const response = NextResponse.json({
             success: true,
             message: "Logout Successfully"
         }, { status: 200 })
 
-        response.cookies.set("session", "", {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
-            path: "/",
-            maxAge: 0
-        })
+        response.cookies.delete("sessionId")
 
         return response
     } catch (error: unknown) {
-        const env = process.env.NODE_ENV;
-        console.log(error)
+        const message = error instanceof Error ? error.message : 'Internal Server Error';
+        console.log(message)
         return NextResponse.json({
             success: false,
-            error: env === "development" ? (error instanceof Error ? error.message : "Internal Server Error") : "Something went wrong",
-            message: "logout failed"
-        }, { status: 500 })
+            message
+        }, { status: 500 });
     }
 }

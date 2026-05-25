@@ -1,14 +1,8 @@
-import bcrypt from 'bcrypt'
+import crypto from "crypto"
 import conf from '@/conf/conf';
 import nodemailer from 'nodemailer'
 import User from '@/models/user.model';
-import { randomBytes } from 'crypto';
-
-import {
-    saltRounds,
-    type_Reset_Email,
-    type_Verify_Email
-} from '@/constant';
+import { VERIFY_EMAIL, RESET_PASSWORD, template } from '@/constant';
 
 interface Email {
     email: string;
@@ -18,16 +12,15 @@ interface Email {
 
 const sendEmail = async ({ email, emailType, userId }: Email) => {
     try {
+        const endPoint = process.env.NODE_ENV === "development" ? "http://localhost:3000" : conf.api_end_point
+        const token = crypto.randomBytes(32).toString("hex")
 
-        const salt = await bcrypt.genSalt(saltRounds);
-        const token = await bcrypt.hash(userId, salt);
-
-        if (emailType === type_Verify_Email) {
+        if (emailType === VERIFY_EMAIL) {
             await User.findByIdAndUpdate(userId, {
                 verifyToken: token,
                 verifyTokenExpiry: Date.now() + (1000 * 60 * 60)
             })
-        } else if (emailType === type_Reset_Email) {
+        } else if (emailType === RESET_PASSWORD) {
             await User.findByIdAndUpdate(userId, {
                 forgotPasswordToken: token,
                 forgetPasswordTokenExpiry: Date.now() + (1000 * 60 * 5)
@@ -43,44 +36,52 @@ const sendEmail = async ({ email, emailType, userId }: Email) => {
             }
         });
 
-        const link = emailType === type_Verify_Email ? `${conf.api_end_point}verify-email?token=${token}` : `${conf.api_end_point}reset-password?token=${token}`
-        // console.log("link", link);
+        let link = ""
+        let subject = ""
+        let html = ""
+
+        switch (emailType) {
+            case VERIFY_EMAIL:
+                link = `${endPoint}/verify-email?token=${token}`
+                subject = 'Verify your email'
+                html = template.verifyEmail(link)
+                break
+            case RESET_PASSWORD:
+                link = `${endPoint}/reset-password?token=${token}`
+                subject = 'Reset password'
+                html = template.resetPassword(link)
+                break
+        }
 
         const mailOptions = {
             from: conf.mail_user,
             to: email,
-            subject: emailType === type_Verify_Email ? 'Verify your email' : 'Forgot password',
-            text: `${emailType === type_Verify_Email ? 'Verify Email' : 'Forgot Password'}`,
-            html: `<html>
-                <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
-                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; overflow: hidden;">
-                        <tr>
-                            <td style="padding: 20px; text-align: center; background-color: #0044cc; color: #ffffff;">
-                                <h1 style="margin: 0; font-size: 24px;">Password Reset Request</h1>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 20px; text-align: center;">
-                                <p style="font-size: 16px; color: #333333;">Click the button below to reset your password. If you did not request this password reset, please ignore this email.</p>
-                                <a href="${link}" style="display: inline-block; padding: 15px 25px; font-size: 16px; color: #ffffff; background-color: #28a745; text-decoration: none; border-radius: 5px; margin-top: 20px;">here</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 20px; text-align: center; background-color: #f4f4f4;">
-                                <p style="font-size: 14px; color: #777777; margin: 0;">If you have any questions, feel free to <a href="mailto:${conf.mail_user}" style="color: #0044cc;">${link}</a></p>
-                            </td>
-                        </tr>
-                    </table>
-                </body>
-                </html>`,
+            subject,
+            html,
         }
 
-        const mailResponse = await transporter.sendMail(mailOptions);
-        // console.log(mailResponse)
-        return mailResponse
+        const response = await transporter.sendMail(mailOptions);
+        const isSuccess = response.accepted.length > 0 && response.rejected.length === 0
+
+        if (!isSuccess) {
+            return {
+                success: false,
+                message: `Email Not Sent`
+            }
+        }
+
+        return {
+            success: true,
+            message: "Email Sent"
+        }
+
     } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : "mail not sent"
         console.error(error instanceof Error ? error.message : "mail not sent");
-        return null
+        return {
+            success: false,
+            message,
+        }
     }
 }
 

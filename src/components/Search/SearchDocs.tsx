@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { posts } from '#site/content';
 import { Input } from "@/components/ui/input";
 import { useTypicalContext } from '@/context/Typical-Context';
 import React, { useCallback, useEffect, useState, useRef } from 'react'
@@ -13,13 +12,8 @@ const SearchDocs = () => {
     const { setIsDocSearchOpen, isDocSearchOpen } = useTypicalContext()
 
     const onSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        const searchTerm = e.currentTarget.value
-        if (!searchTerm || searchTerm.length < 3) return []
-        const filterPosts = posts?.filter((post) => {
-            if (post?.title.includes(searchTerm) || post?.body.includes(searchTerm)) return post
-        })
-        filterPosts?.length > 0 ? filterPosts : []
-        setSearchPosts(filterPosts)
+        
+        // setSearchPosts(filterPosts)
     }, [])
 
     useEffect(() => {

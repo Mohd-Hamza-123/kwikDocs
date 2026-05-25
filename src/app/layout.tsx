@@ -1,12 +1,15 @@
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import dns from "node:dns/promises";
 import type { Metadata } from "next";
-import { siteConfig } from "../../config/site";
+import siteConfig from "@/conf/site";
 import Providers from "../Providers/Providers";
 import { Inter, Poppins } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+// import { Analytics } from "@vercel/analytics/react";
+// import { SpeedInsights } from "@vercel/speed-insights/next"
+
+dns.setServers(["1.1.1.1"]);
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-sans' });
 const poppins = Poppins({
@@ -28,16 +31,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-// scroll-pt-[3.5rem]"
+
   return (
     <html lang="en" className={cn("scroll-pt-[3.5rem]", poppins.variable)}  >
       <body suppressHydrationWarning={true}
         className={"bg-background antialiased dark:bg-bgDark bg-gray-100"}>
         <Providers>
-          <Toaster />
-          <Analytics />
-          <SpeedInsights />
+          {/* <Analytics /> */}
+          {/* <SpeedInsights /> */}
           {children}
+          <Toaster />
         </Providers>
       </body>
     </html>

@@ -1,13 +1,18 @@
-import connectDB from "@/dbConfig/dbConfig";
+import connectDB from "@/conf/database";
 import User from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
     try {
         await connectDB();
-        const body = await request.json();
-        const { token } = body;
+        const token = request.nextUrl.searchParams.get("token")
 
+        if (!token) {
+            return NextResponse.json({
+                success: false,
+                message: "Invalid Token"
+            }, { status: 400 })
+        }
         const user = await User.findOne({
             verifyToken: token,
             verifyTokenExpiry: { $gt: Date.now() }
@@ -16,7 +21,7 @@ export async function POST(request: NextRequest) {
         if (!user) {
             return NextResponse.json({
                 success: false,
-                message: "Invalid Token"
+                message: "verification Link Expired. Try again later"
             }, { status: 400 })
         }
 
@@ -28,21 +33,19 @@ export async function POST(request: NextRequest) {
                 verifyToken: "",
                 verifyTokenExpiry: "",
             }
-        }, { new: true }).select("-password").lean();
+        }, { new: true })
 
         return NextResponse.json({
             success: true,
-            message: "Email Verified",
-            payload: updateUser
+            message: "Email Verified"
         })
 
     } catch (error: unknown) {
-        console.log(error);
+        console.log(error instanceof Error ? error.message : error);
         const env = process.env.NODE_ENV;
         return NextResponse.json({
             success: true,
-            error: env === "development" ? (error instanceof Error ? error.message : "Internal Server Error") : "Something went wrong",
-            message: "verify failed"
+            message: "Verification failed"
         }, { status: 500 })
     }
 }

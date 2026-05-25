@@ -36,5 +36,5 @@ next-env.d.ts
 # velite files
 .velite
 
-/importantFiles
+assessment.md
 

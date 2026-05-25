@@ -12,16 +12,10 @@ import Sidebar from "./components/Sidebar/Sidebar"
 import ThemeToggle from "./components/drop-down/ThemeToggle"
 import Technologies from "./components/cards/Technologies"
 import EmptyTechnologies from "./components/Technologies/EmpytTechnologies.tsx"
-import ShowPost from "./components/DocsRead/ShowPost.tsx"
-import DocContent from "./components/DocsRead/ShowPost.tsx"
-import RelatedDocs from "./components/DocsRead/RelatedDocs"
 import SearchDocs from "./components/Search/SearchDocs.tsx"
 import CodeOutput from "./components/Code-Editor/CodeOutput.tsx"
-import VerifyEmailContent from "./components/VerifyEmailContent.tsx"
 import FilteredPostList from "./components/DocsRead/filtered-post-list.tsx"
 import JavaScriptTerminal from "./components/Terminal/JavaScriptTerminal.tsx"
 import PythonMonacoEditor from "./components/Code-Editor/Monaco/PythonMonacoEditor"
 
-
-
-export { VerifyEmailContent, Welcome, Technologies, Navbar, ImageUpload, DocContent, RelatedDocs, LoadingPage, Sidebar, Prism, Spinner, Footer, PostItems, FilteredPostList, ShowPost, CodeOutput, SearchDocs, ThemeToggle, Overlay, Branding, EmptyTechnologies , JavaScriptTerminal,PythonMonacoEditor }
+export { Welcome, Technologies, Navbar, ImageUpload,  LoadingPage, Sidebar, Prism, Spinner, Footer, PostItems, FilteredPostList, CodeOutput, SearchDocs, ThemeToggle, Overlay, Branding, EmptyTechnologies, JavaScriptTerminal, PythonMonacoEditor }

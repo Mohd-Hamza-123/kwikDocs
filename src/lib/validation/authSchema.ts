@@ -1,5 +1,14 @@
 import { z } from 'zod'
 
+
+export const usernameSchema = z
+    .string()
+    .min(3, "Username is too short. Please enter a longer username.")
+    .max(30, "Username is too long. Please enter a shorter username.")
+    .toLowerCase()
+    .trim()
+
+
 export const emailSchema = z
     .string()
     .email("Invalid email address")
@@ -16,12 +25,15 @@ export const passwordSchema = z
         "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character."
     );
 
-export const usernameSchema = z
+export const confirmPasswordSchema = z
     .string()
-    .min(3, "Username is too short. Please enter a longer username.")
-    .max(30, "Username is too long. Please enter a shorter username.")
-    .toLowerCase()
-    .trim()
+    .min(8, "Password is too short. Please enter a longer password.")
+    .max(50, "Password is too long. Please enter a shorter password.")
+    .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/,
+        "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character."
+    );
+
 
 
 export const signupSchema = z.object({
@@ -35,5 +47,14 @@ export const loginSchema = z.object({
     password: passwordSchema
 })
 
-export type LoginSchemaType = z.infer<typeof loginSchema>
-export type SignupSchemaType = z.infer<typeof signupSchema>
+export const passwordMatchSchema = z.object({
+    password: passwordSchema,
+    confirmPassword: confirmPasswordSchema
+}).refine((data) => data.password === data.confirmPassword, {
+    message: 'password do no match',
+    path: ["confirmPassword"]
+})
+
+export type PasswordMatch = z.infer<typeof passwordMatchSchema>
+export type Login = z.infer<typeof loginSchema>
+export type Signup = z.infer<typeof signupSchema>

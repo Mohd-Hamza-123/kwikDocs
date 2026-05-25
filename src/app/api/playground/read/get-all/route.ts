@@ -1,8 +1,11 @@
+import connectDB from "@/conf/database";
 import Playground from "@/models/playground.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
     try {
+        
+        await connectDB()
         const { userId, tech , pageParam } = await request.json()
         console.log(userId, tech)
         

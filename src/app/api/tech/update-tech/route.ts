@@ -1,4 +1,4 @@
-import connectDB from "@/dbConfig/dbConfig";
+import connectDB from "@/conf/database";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(request: NextRequest, { params }: any) {

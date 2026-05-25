@@ -1,17 +1,17 @@
 "use client";
-
 import React from "react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
-import LoginUser from "@/lib/API/Auth/login";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { api, routes } from "@/lib/api/common";
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import { useMutation } from "@tanstack/react-query";
-import { login, logout } from "@/lib/store/features/authSlice";
-import { ButtonSpinner } from "@/components";
+import { login } from "@/lib/store/features/authSlice";
 
 type LoginFormValues = {
   email: string;
@@ -19,29 +19,30 @@ type LoginFormValues = {
 };
 
 export default function LoginPage() {
-  const dispatch = useAppDispatch();
+
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const { register, handleSubmit } = useForm<LoginFormValues>();
 
   const mutation = useMutation({
-    mutationFn: (payload: LoginFormValues) => LoginUser(payload),
+    mutationFn: api.post,
     onError: (error: unknown) => {
-      const environment = process.env.NODE_ENV
+      const message = error instanceof Error ? error.message : "something went wrong"
+      console.error(message)
       toast({
         variant: "destructive",
         title: "Login failed",
-        description: environment === "development" ? (error instanceof Error ? error.message : "internal server error") : "something went wrong , please try again later"
       })
     },
     onSuccess: (data) => {
-      console.log(data)
+      // console.log(data)
       dispatch(login({ userData: data.data }))
       toast({ title: data.message });
-      router.push("/");
+      router.replace("/");
     },
   });
 
-  const onSubmit = (data: LoginFormValues) => mutation.mutate(data);
+  const onSubmit = (data: LoginFormValues) => mutation.mutate({data,url : routes.login});
 
   return (
     <form
@@ -67,9 +68,17 @@ export default function LoginPage() {
 
       {/* Password */}
       <div className="space-y-1.5">
-        <Label className="text-sm text-neutral-300" htmlFor="password">
-          Password
-        </Label>
+        <div className="flex items-center justify-between">
+          <Label className="text-sm text-neutral-300" htmlFor="password">
+            Password
+          </Label>
+          <Link
+            href="/forgot-password"
+            className="text-sm text-neutral-300 hover:underline"
+          >
+            Forgot password?
+          </Link>
+        </div>
         <Input
           id="password"
           type="password"
@@ -80,8 +89,8 @@ export default function LoginPage() {
       </div>
 
       {/* Primary sign in */}
-      <Button disabled={mutation.isPending} className="w-full bg-pink-600 hover:bg-pink-500 text-white">
-        {mutation.isPending ? <ButtonSpinner /> : "Log In"}
+      <Button disabled={mutation.isPending} className="w-full bg-purple-700 hover:bg-purple-800 text-white">
+        {mutation.isPending ? <Spinner /> : "Log In"}
       </Button>
 
       {/* Divider */}

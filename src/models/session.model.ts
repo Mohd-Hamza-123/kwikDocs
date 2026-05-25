@@ -6,7 +6,7 @@ const sessionSchema = new Schema({
         ref: "users",
         required: true
     },
-    sessionToken: {
+    sessionId :  {
         type: String,
         required: true,
         unique: true

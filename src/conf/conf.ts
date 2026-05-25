@@ -1,3 +1,4 @@
+
 const conf = {
     my_sql_host: String(process.env.MYSQL_HOST),
     my_sql_user: String(process.env.MYSQL_USER),
@@ -11,7 +12,9 @@ const conf = {
     mail_user: String(process.env.MAIL_USER),
     mail_password: String(process.env.MAIL_PASSWORD),
     token_secret: String(process.env.TOKEN_SECRET),
-    preview : String(process.env.NEXT_PUBLIC_PREVIEW),
+    preview: String(process.env.NEXT_PUBLIC_PREVIEW),
+    EXPRESS_BASE_URL : String(process.env.NEXT_PUBLIC_EXPRESS_BASE_URL)
 }
 
 export default conf
+

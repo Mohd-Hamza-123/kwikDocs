@@ -1,4 +1,4 @@
-import cloudinary from "../connectCloudinary";
+import cloudinary from "../../conf/connectCloudinary";
 
 const uploadImage = async (image: File, folder: string = 'vnsluxe') => {
     try {

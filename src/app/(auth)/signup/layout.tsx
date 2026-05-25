@@ -1,19 +1,20 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function SignupLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <div className="min-h-dvh w-full grid grid-cols-1 lg:grid-cols-2 bg-neutral-950 text-neutral-100">
       {/* LEFT HERO */}
       <div className="hidden lg:block relative overflow-hidden">
         {/* Background image */}
         <Image
-          src="/images/hero.jpg"
+          src="/images/hero.webp"
           alt="Hero"
           width={1600}
           height={1600}
@@ -27,15 +28,15 @@ export default function SignupLayout({
         <div className="relative z-10 flex h-full flex-col justify-between px-12 py-10">
           {/* Brand row */}
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-full bg-black/60 border border-pink-400/40 flex items-center justify-center shadow-[0_0_18px_rgba(244,114,182,0.5)]">
-              <Image
-                src="/logo.png"
-                alt="Kwik Docs"
-                width={24}
-                height={24}
-                className="h-6 w-6"
-              />
-            </div>
+
+            <img
+              src="/logo.webp"
+              alt="Kwik Docs"
+              width={24}
+              height={24}
+              className="h-24 w-32"
+            />
+
             <div className="flex flex-col">
               <span className="text-sm font-semibold tracking-wide text-pink-300">
                 Kwik Docs

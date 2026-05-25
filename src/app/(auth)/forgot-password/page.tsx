@@ -1,43 +1,57 @@
 'use client'
-
 import React from 'react'
 import { toast } from '@/hooks/use-toast'
 import { Input } from '@/components/ui/input'
+import { api, routes } from '@/lib/api/common'
 import { Button } from '@/components/ui/button'
+import { Spinner } from '@/components/ui/spinner'
+import { useMutation } from '@tanstack/react-query'
 import { emailSchema } from '@/lib/validation/authSchema'
-import validateSchema from '@/lib/validation/validateSchema'
 
+const ForgotPassword = () => {
 
-const page = () => {
+    const mutation = useMutation({
+        mutationFn: api.post,
+        onError: (error: unknown) => {
+            console.error(error)
+            const message = error instanceof Error ? error.message : "something went wrong"
+            toast({
+                variant: "destructive",
+                title: "Failed",
+                description: message
+            });
+        },
+        onSuccess: (data) => {
+            toast({
+                variant: "default",
+                description: "Check your email for password reset link"
+            });
+            
+        }
+    })
 
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
 
         e.preventDefault()
 
         const formData = new FormData(e.currentTarget)
-        const email = formData.get("email") as string
+        let email = formData.get("email") as string
 
-        const validationResult = validateSchema(emailSchema, email)
-
-        if (validationResult.isValid) {
-            const email = validationResult?.data
-            // const res = await forgotPassword(email)
-            // console.log(res)
-        } else {
-            const errors = validationResult?.errors
-            if (Array.isArray(errors))
-                toast({
-                    title: errors[0]?.message,
-                    variant: 'destructive',
-                })
-            else {
-                toast({
-                    title: 'Unexpected Error',
-                    variant: 'destructive',
-                })
-            }
+        const validationResult = emailSchema.safeParse(email)
+        if (!validationResult.success) {
+            toast({
+                title: "Invalid email",
+                description: validationResult.error.message,
+                variant: "destructive"
+            })
+            return
         }
+
+        email = validationResult.data
+        mutation.mutate({ url: routes.forgotPassword, query: { email } })
+
     }
+
     return (
         <form
             className="space-y-6"
@@ -45,16 +59,17 @@ const page = () => {
             <div className="mt-2">
                 <Input
                     type='email'
-                    placeholder='email'
                     name='email'
+                    placeholder='email'
                 />
             </div>
 
-            <div>
-                <Button className='w-full' type='submit'>Reset</Button>
-            </div>
+            <Button disabled={mutation.isPending} className="w-full bg-purple-700 hover:bg-purple-800 text-white">
+                {mutation.isPending ? <Spinner /> : "Reset Password"}
+            </Button>
+
         </form>
     )
 }
 
-export default page
+export default ForgotPassword

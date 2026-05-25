@@ -5,13 +5,14 @@ import Image from 'next/image'
 const page = ({ children }: { children: React.ReactNode }) => {
 
     return (
-        <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+
+        <div className="flex h-dvh flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                 <Image
                     height={200}
                     width={200}
                     className="mx-auto h-12 w-auto"
-                    src="./logo.png"
+                    src="/logo.webp"
                     alt='Image'
                     quality={100}
                 />

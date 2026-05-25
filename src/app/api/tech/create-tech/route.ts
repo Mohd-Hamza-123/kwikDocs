@@ -1,4 +1,4 @@
-import connectDB from "@/dbConfig/dbConfig";
+import connectDB from "@/conf/database";
 import { NextResponse, NextRequest } from "next/server";
 import TechModel from "@/models/tech.model";
 import uploadImage from "@/lib/imageConfig/imageUpload";
@@ -6,11 +6,11 @@ export const dynamic = 'force-dynamic';  // This forces the route to be dynamic
 export const fetchCache = 'force-no-store';  // This prevents caching
 export const revalidate = 0; // if 60 then data will be cached for 60 seconds
 
-connectDB()
+
 
 export async function POST(request: NextRequest) {
     try {
-
+        await connectDB()
         const formData = await request.formData();
         const image = formData.get("image") as File || null
         const name = formData.get("name") || ""
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
 
         const imageObject = await uploadImage(image, folderString);
 
-        
+
 
         const creatingTech = new TechModel({
             name,
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
         });
         console.log(creatingTech)
         const payload = await creatingTech.save();
-    
+
         console.log(payload)
         if (payload) {
             return NextResponse.json({

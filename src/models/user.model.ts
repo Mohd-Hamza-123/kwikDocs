@@ -1,21 +1,21 @@
-import { Schema, InferSchemaType, models, model, Model, HydratedDocument } from "mongoose";
 import bcrypt from "bcrypt"
+import { Schema, InferSchemaType, models, model, Model, HydratedDocument } from "mongoose";
 
 const userSchema = new Schema({
     username: {
         type: String,
-        required: [true, "username is required"],
         trim: true,
-        maxlength: 40,
-        unique: true
-        // index: true, unique: true already creates a unique index
+        unique: true,
+        required: [true, "username is required"],
+        minlength: [3, "minimum 3 characters required"],
+        maxlength: [30, "maximum 30 characters allowed"],
     },
     email: {
         type: String,
-        required: [true, "email is required"],
         trim: true,
+        unique: true,
         lowercase: true,
-        unique: true
+        required: [true, "email is required"],
     },
     password: {
         type: String,

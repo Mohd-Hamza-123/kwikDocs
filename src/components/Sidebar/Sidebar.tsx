@@ -13,7 +13,6 @@ import { useRouter } from "next/navigation"
 import { IoMdLogOut } from "react-icons/io"
 import { useTypicalContext } from "@/context/Typical-Context"
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks"
-import useAuth from "@/hooks/use-auth"
 
 const Sidebar = () => {
     const router = useRouter()
@@ -21,7 +20,6 @@ const Sidebar = () => {
     const userData = useAppSelector((state) => state.auth.userData)
     const userStatus = useAppSelector((state) => state.auth.userStatus)
     const { isSideBarOpen, setIsSideBarOpen } = useTypicalContext()
-    const { logout, createSession } = useAuth()
 
     const closeSideBar = () => setIsSideBarOpen(false)
 
@@ -62,9 +60,7 @@ const Sidebar = () => {
                 </nav>
 
 
-                <div className="ml-auto">
-                    <ThemeToggle closeSideBar={closeSideBar} />
-                </div>
+      
 
                 {/* USER FOOTER */}
                 {userStatus && (
@@ -72,7 +68,7 @@ const Sidebar = () => {
                         <Button
                             variant="destructive"
                             size="sm"
-                            onClick={logout}
+                            // onClick={logout}
                             className="gap-2 rounded-full px-3 transition-all duration-200 hover:scale-[1.02]">
                             <IoMdLogOut className="text-base" />
                             <span className="hidden sm:inline">Logout</span>
