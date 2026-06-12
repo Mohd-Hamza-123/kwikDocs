@@ -54,7 +54,7 @@ const SidebarLinks = ({ closeSideBar }: { closeSideBar: any }) => {
             name: 'Create Tech',
             icon: <TbPencilCode />,
             isVisible: userData?.isAdmin ? true : false
-        }
+        },
     ]
 
     return (

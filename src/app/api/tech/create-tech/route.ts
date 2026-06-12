@@ -2,9 +2,7 @@ import connectDB from "@/conf/database";
 import { NextResponse, NextRequest } from "next/server";
 import TechModel from "@/models/tech.model";
 import uploadImage from "@/lib/imageConfig/imageUpload";
-export const dynamic = 'force-dynamic';  // This forces the route to be dynamic
-export const fetchCache = 'force-no-store';  // This prevents caching
-export const revalidate = 0; // if 60 then data will be cached for 60 seconds
+
 
 export async function POST(request: NextRequest) {
     try {
@@ -18,13 +16,6 @@ export async function POST(request: NextRequest) {
         const image = formData.get("image") as File || null
         const description = formData.get("description") || ""
         const folderString: string = typeof folder === "string" ? folder : "";
-
-        console.log(image)
-        console.log(name)
-        console.log(description)
-        console.log(techType)
-        console.log(folder)
-        console.log(folderString)
         
         const x: string = typeof folder === "string" ? folder : "";
 

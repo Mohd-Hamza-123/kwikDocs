@@ -1,4 +1,5 @@
 import Welcome from "@/components/Welcome";
+import RefreshButton from "@/components/RefreshButton";
 import { getAllTechnology } from "@/lib/getAllTechnology";
 import Technologies from "@/components/cards/Technologies";
 import EmptyTechnologies from "@/components/Technologies/EmpytTechnologies";
@@ -8,7 +9,7 @@ const TechStack = async () => {
     try {
 
         const technology = await getAllTechnology();
-        // console.log("Technology:", technology);
+        
         const isTechnologyNotEmpty = Array.isArray(technology) && technology.length > 0
 
         if (!isTechnologyNotEmpty) {
@@ -17,6 +18,7 @@ const TechStack = async () => {
 
         return <>
             <Welcome />
+            <RefreshButton />
             <Technologies technology={technology} />
         </>
 

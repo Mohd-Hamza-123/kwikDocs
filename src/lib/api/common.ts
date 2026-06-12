@@ -83,9 +83,6 @@ export const api = {
             const routeUrl = routeParameterHandler(url, route)
             const finalUrl = queryParameterHandler(routeUrl, query)
             // console.log(finalUrl)
-
-            console.log(data)
-            console.log(finalUrl)
             const response = await fetch(finalUrl, {
                 method: "POST",
                 ...(data instanceof FormData
