@@ -1,15 +1,16 @@
 'use client'
+
 import React from 'react'
 import { toast } from '@/hooks/use-toast'
+import { useForm } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
+import { api, routes } from '@/lib/api/common'
 import { Button } from '@/components/ui/button'
+import { Spinner } from '@/components/ui/spinner'
+import { useMutation } from '@tanstack/react-query'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { PasswordMatch, passwordMatchSchema } from '@/lib/validation/authSchema'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation } from '@tanstack/react-query'
-import { api, routes } from '@/lib/api/common'
-import { Spinner } from '@/components/ui/spinner'
 
 const ResetPassword = () => {
 

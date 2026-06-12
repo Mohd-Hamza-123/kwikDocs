@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
 
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
-        console.log("password",isPasswordCorrect)
+        // console.log("password",isPasswordCorrect)
         if (!isPasswordCorrect) {
             return NextResponse.json({
                 success: false,

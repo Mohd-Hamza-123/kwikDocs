@@ -8,7 +8,7 @@ const TechStack = async () => {
     try {
 
         const technology = await getAllTechnology();
-        
+        // console.log("Technology:", technology);
         const isTechnologyNotEmpty = Array.isArray(technology) && technology.length > 0
 
         if (!isTechnologyNotEmpty) {

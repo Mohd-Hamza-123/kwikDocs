@@ -7,11 +7,12 @@ import { useRouter } from "next/navigation";
 import { technologyEnums } from "@/constant";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { api, routes } from "@/lib/api/common";
 import React, { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { getAllTechnology } from "@/lib/getAllTechnology";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import {
     useMutation,
     useQuery,
@@ -20,8 +21,8 @@ import {
 
 
 const CreateTech = () => {
+
     const router = useRouter()
-    const dispatch = useAppDispatch();
     const queryClient = useQueryClient();
 
     const userData = useAppSelector((state) => state.auth.userData)
@@ -41,36 +42,31 @@ const CreateTech = () => {
         queryFn: getAllTechnology,
         staleTime: Infinity,
     });
-    // console.log(technology)
+    console.log(technology)
     const createCategoryMutation = useMutation({
-        mutationFn: async (formData: FormData) => {
-            // return createTechnology(formData)
-        },
-        onMutate: () => {
-          
-        },
+        mutationFn: async (formData: FormData) => api.post({
+            url: routes.createTechnology,
+            data: formData
+        }),
         onSuccess: (response) => {
 
+            reset()
             router.push('/')
             // const newCategory = response?.payload;
             // queryClient.setQueryData(['technology'], (prev: any) => {
             //   return prev ? [newCategory, ...prev] : [newCategory]
             // })
 
-            // toast({
-            //     variant: "success",
-            //     title: response?.message,
-            // });
+            toast({
+                variant: "default",
+                title: response?.message,
+            });
         },
         onError: (error) => {
             toast({
                 variant: "destructive",
                 title: error?.message,
             });
-        },
-        onSettled: () => {
-            
-            reset()
         }
     })
 
@@ -78,33 +74,25 @@ const CreateTech = () => {
         mutationFn: async (payload: Object) => {
             // return updateTechnology(payload)
         },
-        onMutate: () => {
-            refetch();
-
-        },
         onSuccess: (response) => {
+            refetch();
             // queryClient.invalidateQueries({ queryKey: ['technology'] })
-
-
             // toast({
             //     variant: "success",
             //     title: response?.message,
             // });
         },
         onError: (error) => {
-
             toast({
                 variant: "destructive",
                 title: error.message,
             });
         }
     })
+
     const deleteCategoryMutation = useMutation({
         mutationFn: async (id: string) => {
             // return deleteTechnology(id)
-        },
-        onMutate: () => {
-
         },
         onSuccess: (response) => {
             queryClient.invalidateQueries({ queryKey: ['technology'] })
@@ -140,7 +128,7 @@ const CreateTech = () => {
         if (data.image) {
             formData.append("image", data.image);
             formData.append('userId', userData?._id!);
-            formData.append('folder', 'documentarium/tech');
+            formData.append('folder', 'kwikdocs/technologies');
         }
         if (data.name) {
             formData.append("name", data.name)
@@ -169,7 +157,6 @@ const CreateTech = () => {
         categoryID.current = "";
         image_Delete_ID.current = ""
     }
-
 
     const handleDeleteCategory = async (ID: string, categoryName: string) => {
         const flag = prompt(`Are you sure you want to delete the '${categoryName}' category? Please note that all products related to this category will also be deleted. Type 'YES' to confirm this action.`)
@@ -204,23 +191,23 @@ const CreateTech = () => {
     }
 
     return <>
-        <form className="my-10 mx-10" onSubmit={handleSubmit(submit)}>
-            <div className="flex flex-col gap-2 mb-2">
+        <form
+            className="mx-auto w-full rounded-2xl border border-border bg-card p-6 shadow-sm"
+            onSubmit={handleSubmit(submit)}
+        >
+            <div className="mb-6 space-y-6">
                 <div>
                     <Label
-                        ref={inputRef}
                         htmlFor="technology"
-                        className="block mb-2 text-xl font-medium text-gray-900 dark:text-white"
+                        className="mb-2 block text-sm font-semibold text-foreground"
                     >
                         Technology
                     </Label>
 
                     <Input
                         id="technology"
-                        {...register("name", {
-                            required: true,
-                        })}
-                        className="w-full"
+                        {...register("name", { required: true })}
+                        className="h-11 w-full rounded-xl border-border bg-background px-4 text-foreground placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
                         placeholder="Create Technology"
                     />
                 </div>
@@ -228,104 +215,115 @@ const CreateTech = () => {
                 <div>
                     <Label
                         htmlFor="description"
-                        className="block mb-2 text-xl font-medium text-gray-900 dark:text-white"
+                        className="mb-2 block text-sm font-semibold text-foreground"
                     >
                         Description
                     </Label>
+
                     <Textarea
                         id="description"
-                        {...register("description", {
-                            required: true,
-                        })}
-                        className="w-full h-[80px]"
-                        placeholder="description"
-
-                    >
-                    </Textarea>
-
+                        {...register("description", { required: true })}
+                        className="min-h-28 w-full resize-none rounded-xl border-border bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                        placeholder="Write short description"
+                    />
                 </div>
 
                 <div>
                     <Label
-                        htmlFor="description"
-                        className="block mb-2 text-xl font-medium text-gray-900 dark:text-white"
+                        htmlFor="techType"
+                        className="mb-2 block text-sm font-semibold text-foreground"
                     >
                         Tech Type
                     </Label>
-                    <select
-                        className="w-full rounded-sm"
-                        {...register("techType", {
-                            required: true
-                        })}
-                    >
-                        <option hidden={true} value="">Select Technology Type</option>
-                        {technologyEnums?.map((tech, index) => (
-                            <option key={tech + index} value={tech}>{tech}</option>
-                        ))}
 
+                    <select
+                        id="techType"
+                        className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm text-foreground outline-none focus:ring-2 focus:ring-ring"
+                        {...register("techType", { required: true })}
+                    >
+                        <option hidden value="">
+                            Select Technology Type
+                        </option>
+
+                        {technologyEnums?.map((tech, index) => (
+                            <option key={tech + index} value={tech}>
+                                {tech}
+                            </option>
+                        ))}
                     </select>
                 </div>
 
-                <div>
-                    <section className="flex flex-col gap-2">
-                        <h3>Image</h3>
-                        <div>
-                            {!imageURL && (
-                                <div>
-                                    <Input
-                                        onChange={handleImage}
-                                        type="file"
-                                        className="w-full"
-                                        accept="image/*"
-                                    />
-                                </div>
-                            )}
+                <section>
+                    <h3 className="mb-2 text-sm font-semibold text-foreground">Image</h3>
+
+                    {!imageURL && (
+                        <div className="rounded-xl border border-dashed border-border bg-background p-5">
+                            <Input
+                                onChange={handleImage}
+                                type="file"
+                                className="w-full cursor-pointer"
+                                accept="image/*"
+                            />
+                            <p className="mt-2 text-xs text-muted-foreground">
+                                Upload an image for this technology.
+                            </p>
                         </div>
-                        {imageURL && (
-                            <div className="flex flex-col items-center w-full">
+                    )}
+
+                    {imageURL && (
+                        <div className="rounded-xl border border-border bg-background p-4">
+                            <div className="flex flex-col items-center gap-3">
                                 <Image
                                     width={300}
                                     height={300}
-                                    className="h-auto w-[40%] rounded-lg"
+                                    className="aspect-square w-48 rounded-xl border border-border object-cover shadow-sm"
                                     src={imageURL}
-                                    alt="image description"
+                                    alt="Technology preview"
                                 />
-                                <span
+
+                                <button
+                                    type="button"
                                     onClick={() => {
                                         setImageURL("");
-                                        if (isTechUpdate)
-                                            setValue("deleteImage", image_Delete_ID);
+                                        if (isTechUpdate) setValue("deleteImage", image_Delete_ID);
                                         setValue("image", "");
                                     }}
-                                    className="mt-2 text-sm text-center text-gray-500 dark:text-gray-400"
+                                    className="text-sm font-medium text-destructive hover:underline"
                                 >
-                                    remove Image
-                                </span>
+                                    Remove image
+                                </button>
                             </div>
-                        )}
-                    </section>
-                </div>
+                        </div>
+                    )}
+                </section>
             </div>
 
-            <Button type="submit">{isTechUpdate ? "Update" : "Create"}</Button>
+            <div className="flex items-center gap-3">
 
-            {isTechUpdate && (
                 <Button
-                    onClick={() => {
-
-                        setImageURL("");
-                        setValue("name", "");
-                        setValue("image", "");
-                        image_Delete_ID.current = ""
-                        setValue("deleteImage", "");
-                        setIsTechUpdate(false);
-                        categoryID.current = "";
-                    }}
-                    className="ml-2"
-                >
-                    Cancel
+                    type="submit"
+                    disabled={createCategoryMutation.isPending}
+                    className="rounded-sm px-6">
+                    {isTechUpdate ? "Update" : "Create"}
                 </Button>
-            )}
+
+                {isTechUpdate && (
+                    <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => {
+                            setImageURL("");
+                            reset()
+                            image_Delete_ID.current = "";
+                            setIsTechUpdate(false);
+                            categoryID.current = "";
+                        }}
+                        className="rounded-xl px-6"
+                    >
+                        Cancel
+                    </Button>
+                )}
+            </div>
         </form>
 
         {technology?.map((techObj: any) => {
@@ -456,5 +454,4 @@ const CreateTech = () => {
 };
 
 export default CreateTech
-
 

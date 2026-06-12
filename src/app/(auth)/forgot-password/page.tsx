@@ -26,7 +26,6 @@ const ForgotPassword = () => {
                 variant: "default",
                 description: "Check your email for password reset link"
             });
-            
         }
     })
 

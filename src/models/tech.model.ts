@@ -1,8 +1,6 @@
-
 import mongoose from "mongoose";
 
 const techSchema = new mongoose.Schema({
-
     name: {
         type: String,
         unique: true,
@@ -27,6 +25,6 @@ const techSchema = new mongoose.Schema({
 
 })
 
-const TechModel = mongoose.models.TechModel || mongoose.model("TechModel", techSchema);
+const TechModel = mongoose.models?.Technologies || mongoose.model("Technologies", techSchema);
 
 export default TechModel;

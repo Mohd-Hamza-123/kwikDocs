@@ -63,12 +63,12 @@ export const routes = {
     verifyEmail: "/api/auth/verify-email",
     forgotPassword: "/api/auth/forgot-password",
     resetPassword: "/api/auth/reset-password",
-    me: "/api/auth/me"
+    me: "/api/auth/me",
+    createTechnology: "/api/tech/create-tech"
 }
 
 const baseUrl = process.env.NODE_ENV === "production" ? conf.EXPRESS_BASE_URL : "http://localhost:8000"
 
-const x = 10
 
 export const expressRoutes = {
     getDocs: `${baseUrl}/api/docs/tech`,
@@ -79,15 +79,25 @@ export const api = {
 
     post: async ({ data, url, query, route }: apiRequestOptions) => {
         try {
+
             const routeUrl = routeParameterHandler(url, route)
             const finalUrl = queryParameterHandler(routeUrl, query)
             // console.log(finalUrl)
-            // console.log(data)
+
+            console.log(data)
+            console.log(finalUrl)
             const response = await fetch(finalUrl, {
                 method: "POST",
-                headers: { "content-type": "application/json" },
-                body: JSON.stringify(data)
+                ...(data instanceof FormData
+                    ? {}
+                    : {
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }),
+                body: data instanceof FormData ? data : JSON.stringify(data),
             });
+
             const responseData = await responseHandler(response)
             return responseData
         } catch (error) {
@@ -98,7 +108,6 @@ export const api = {
     },
     get: async ({ query, url, route }: apiRequestOptions) => {
         try {
-
 
             const routeUrl = routeParameterHandler(url, route)
             const finalUrl = queryParameterHandler(routeUrl, query)

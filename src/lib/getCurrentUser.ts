@@ -16,7 +16,7 @@ async function getCurrentUser() {
             select : ""
         })
 
-        console.log(session)
+        // console.log(session)
 
         return session?.userId
 

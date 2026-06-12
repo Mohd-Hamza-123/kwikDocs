@@ -1,7 +1,8 @@
 import cloudinary from "../../conf/connectCloudinary";
 
-const uploadImage = async (image: File, folder: string = 'vnsluxe') => {
+const uploadImage = async (image: File, folder : string) => {
     try {
+
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes)
         const result = await new Promise((resolve, reject) => {

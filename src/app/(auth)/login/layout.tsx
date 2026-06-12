@@ -1,6 +1,6 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import siteConfig from "@/conf/site"
 
 export default function LoginLayout({

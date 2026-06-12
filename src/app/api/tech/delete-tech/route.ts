@@ -1,7 +1,6 @@
 import connectDB from "@/conf/database";
 import { NextRequest, NextResponse } from "next/server";
 
-
 export async function DELETE(request: NextRequest, { params }: any) {
     try {
 
@@ -16,6 +15,7 @@ export async function DELETE(request: NextRequest, { params }: any) {
 
 
     } catch (error: any) {
+
         console.log("((error))--> ", error)
         return NextResponse.json({
             success: false,
@@ -23,4 +23,5 @@ export async function DELETE(request: NextRequest, { params }: any) {
             error: error?.message || 'Internal server error'
         }, { status: 500 })
     }
+
 }
