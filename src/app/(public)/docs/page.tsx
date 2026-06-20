@@ -18,7 +18,7 @@ const TechStack = async () => {
 
         return <>
             <Welcome />
-            <RefreshButton />
+            {/* <RefreshButton /> */}
             <Technologies technology={technology} />
         </>
 

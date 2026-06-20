@@ -1,10 +1,11 @@
 'use client'
-import { LoadingPage } from '@/index'
+
 import { useParams } from 'next/navigation'
 import { useQuery } from '@tanstack/react-query'
+import { Spinner } from '@/components/ui/spinner'
+import { useAppSelector } from '@/lib/hooks/hooks'
 import { api, expressRoutes } from '@/lib/api/common'
 import { MDXContent } from '@/components/mdx-component'
-import { useAppSelector } from '@/lib/hooks/hooks'
 
 export default function Page() {
 
@@ -30,9 +31,9 @@ export default function Page() {
   })
 
   const document = data?.data ? data?.data : firstDoc
-  console.log(document)
+  // console.log(document)
 
-  if (!document) return <LoadingPage />
+  if (!document) return <div className="w-full h-full flex justify-center items-center"><Spinner/></div>
 
   if (isError) {
     return (

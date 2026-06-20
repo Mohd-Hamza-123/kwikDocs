@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef} from "react";
 
 type TreeNode = {
   name: string;
@@ -18,21 +19,34 @@ type SidebarTreeProps = {
 function TreeItem({ node }: { node: TreeNode }) {
 
   const pathname = usePathname();
+  const activeRef = useRef<HTMLAnchorElement>(null);
+
 
   if (node.type === "file") {
 
     const href = `/docs/${node.slug}`;
     const isActive = pathname === href;
 
+    useEffect(() => {
+      if (isActive) {
+        activeRef.current?.scrollIntoView({
+          block: "center",
+          // behavior : "smooth"
+        })
+      }
+    }, [isActive])
+
     return (
       <li className="ml-4">
         <Link
+          ref={isActive ? activeRef : null}
           href={href}
           className={`block rounded-md px-2 py-1 text-sm transition-colors ${isActive
-            ? "bg-accent text-foreground font-medium"
+            ? "bg-accent text-foreground font-medium focus"
             : "text-muted-foreground hover:bg-accent hover:text-foreground"
             }`}
         >
+
           {node.title}
         </Link>
       </li>
@@ -53,7 +67,7 @@ function TreeItem({ node }: { node: TreeNode }) {
   );
 }
 
-export default function SidebarTree({ nodes}: SidebarTreeProps) {
+export default function SidebarTree({ nodes }: SidebarTreeProps) {
   return (
     <aside className="w-full max-w-sm bg-background text-foreground">
       <ul className="space-y-2 px-2 py-3">
