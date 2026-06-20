@@ -31,22 +31,15 @@ export default function Page() {
   })
 
   const document = data?.data ? data?.data : firstDoc
-  // console.log(document)
 
-  if (!document) return <div className="w-full h-full flex justify-center items-center"><Spinner/></div>
+  if (!document) return <div className="w-full h-full flex justify-center items-center">
+    <Spinner />
+  </div>
 
   if (isError) {
     return (
       <div className="p-6 text-red-500">
         Error: {error.message}
-      </div>
-    )
-  }
-
-  if (!document) {
-    return (
-      <div className="p-6">
-        Document not found
       </div>
     )
   }

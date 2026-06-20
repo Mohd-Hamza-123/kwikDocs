@@ -11,13 +11,13 @@ const layout = ({ children }: { children: React.ReactNode }) => {
 
     const dispatch = useAppDispatch()
     const firstDoc = useAppSelector((state) => state.dataSlice.defaultDoc)
-    
+
     const router = useRouter();
     const params = useParams();
     const slug = params.slug as string[]
     const tech = slug[0]
 
-    const { isDocIndexOpen } = useResponsiveContext();
+    const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
 
     const { data, isPending, isError, error } = useQuery({
         queryKey: ['documents', tech],
@@ -38,13 +38,33 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     if (isError) return <Error error={error} reset={() => router.refresh()} />
 
     return (
-        <div className="flex flex-col-reverse lg:flex-row relative h-[91dvh] overflow-x-hidden w-full justify-between">
-            <div className="w-full flex flex-col lg:flex-row">
-                <section className={`w-full lg:w-[27%] overflow-y-scroll bg-slate-50 dark:bg-bgDark z-20 sticky top-0 ${isDocIndexOpen ? "block" : "hidden"} lg:block`}>
-                    <FilteredPostList nodes={documents} />
-                </section>
+        <div className="relative flex h-[calc(100dvh-64px)] w-full overflow-hidden">
+
+            {/* Mobile/tablet overlay */}
+            {isDocIndexOpen && (
+                <div className="fixed inset-0 z-10 bg-black/40 lg:hidden" />
+            )}
+
+            {/* Sidebar */}
+            <section
+                className={`
+        fixed left-0 top-16 z-20 h-[calc(100dvh-64px)] w-[80%] max-w-[320px]
+        overflow-y-auto bg-slate-50 dark:bg-bgDark
+        transition-transform duration-300
+
+        ${isDocIndexOpen ? "translate-x-0" : "-translate-x-full"}
+
+        lg:static lg:block lg:h-full lg:w-[27%] lg:max-w-none lg:translate-x-0
+      `}
+            >
+                <FilteredPostList nodes={documents} />
+            </section>
+
+            {/* Content */}
+            <main className="h-full w-full overflow-y-auto px-4 py-4 lg:w-[73%] lg:px-8">
                 {children}
-            </div>
+            </main>
+
         </div>
     )
 }

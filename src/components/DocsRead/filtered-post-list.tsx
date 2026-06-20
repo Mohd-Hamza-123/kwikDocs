@@ -1,8 +1,9 @@
 "use client";
 
+import { useResponsiveContext } from "@/context/CSS-Context";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef} from "react";
+import { useEffect, useRef } from "react";
 
 type TreeNode = {
   name: string;
@@ -18,6 +19,8 @@ type SidebarTreeProps = {
 
 function TreeItem({ node }: { node: TreeNode }) {
 
+
+  const { isDocIndexOpen, setIsDocIndexOpen } = useResponsiveContext();
   const pathname = usePathname();
   const activeRef = useRef<HTMLAnchorElement>(null);
 
@@ -39,6 +42,7 @@ function TreeItem({ node }: { node: TreeNode }) {
     return (
       <li className="ml-4">
         <Link
+          onClick={() => setIsDocIndexOpen(false)}
           ref={isActive ? activeRef : null}
           href={href}
           className={`block rounded-md px-2 py-1 text-sm transition-colors ${isActive
@@ -69,7 +73,7 @@ function TreeItem({ node }: { node: TreeNode }) {
 
 export default function SidebarTree({ nodes }: SidebarTreeProps) {
   return (
-    <aside className="w-full max-w-sm bg-background text-foreground">
+    <aside className="w-full bg-background text-foreground">
       <ul className="space-y-2 px-2 py-3">
         {nodes.map((node) => (
           <TreeItem key={`${node.type}-${node.name}`} node={node} />
