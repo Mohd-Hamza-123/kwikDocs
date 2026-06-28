@@ -17,12 +17,12 @@ export default function HomePage() {
 
     const links = [
         {
-            name: "signup",
+            name: "Create Account",
             href: "/signup",
             isHidden: user ? true : false
         },
         {
-            name: "login",
+            name: "Login",
             href: "/login",
             isHidden: user ? true : false
         },
@@ -54,7 +54,7 @@ export default function HomePage() {
                             <Link
                                 href={link.href}
                                 className={cn(link.isHidden ? "hidden" : "", "transition hover:text-white")}
-                                >
+                            >
                                 {link.name}
                             </Link>
                         ))}
@@ -107,7 +107,7 @@ export default function HomePage() {
 
                     <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
                         <Link
-                            href="/app/playground"
+                            href="/playground"
                             className="rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-500/20 transition hover:scale-[1.02] hover:opacity-95">
                             Open Playground
                         </Link>

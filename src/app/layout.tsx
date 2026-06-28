@@ -6,8 +6,8 @@ import siteConfig from "@/conf/site";
 import Providers from "../Providers/Providers";
 import { Inter, Poppins } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
-// import { Analytics } from "@vercel/analytics/react";
-// import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 dns.setServers(["1.1.1.1","8.8.8.8"]);
 
@@ -37,8 +37,8 @@ export default async function RootLayout({
       <body suppressHydrationWarning={true}
         className={"bg-background antialiased dark:bg-bgDark bg-gray-100"}>
         <Providers>
-          {/* <Analytics /> */}
-          {/* <SpeedInsights /> */}
+          <Analytics />
+          <SpeedInsights />
           {children}
           <Toaster />
         </Providers>

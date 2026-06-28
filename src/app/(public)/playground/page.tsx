@@ -6,7 +6,7 @@ import { svgIcons } from "@/components";
 const languages = [
   {
     name: "HTML & CSS",
-    path: "/app/playground/html-css",
+    path: "/playground/html-css",
     fullLogoBg: false,
     icon: (
       <div className="flex items-center gap-3 justify-center">
@@ -17,7 +17,7 @@ const languages = [
   },
   {
     name: "HTML , CSS & JavaScript",
-    path: "/app/playground/html-css-javascript",
+    path: "/playground/html-css-javascript",
     fullLogoBg: true, // <-- this makes the logo background span full card width
     icon: (
       <div className="flex items-center gap-3 justify-center">
@@ -29,7 +29,7 @@ const languages = [
   },
   {
     name: "Python",
-    path: "/app/playground/python",
+    path: "/playground/python",
     fullLogoBg: false,
     icon: <svgIcons.python className="w-20 md:w-24 lg:w-28" />,
   },
