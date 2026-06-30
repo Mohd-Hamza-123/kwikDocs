@@ -3,7 +3,7 @@ import TechModel from "@/models/tech.model";
 
 export const getAllTechnology = async () => {
 
-    console.log("TechModel")
+    // console.log("TechModel")
     await connectDB();
     const data = await TechModel.aggregate([
         {
@@ -23,7 +23,7 @@ export const getAllTechnology = async () => {
         }
     ])
 
-    console.log(data)
+    // console.log(data)
     return data
 
 }

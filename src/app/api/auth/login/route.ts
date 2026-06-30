@@ -5,13 +5,21 @@ import connectDB from "@/conf/database";
 import { NextRequest, NextResponse } from "next/server";
 import { loginSchema } from '@/lib/validation/authSchema';
 import createSession from '@/lib/createSession';
+import { rateLimit } from '@/lib/rateLimit';
+import { connectRedis } from '@/conf/redis';
+
+const LIMIT = 5
+const WINDOW = 60 * 15
 
 export async function POST(request: NextRequest) {
     try {
 
         await connectDB();
+        await connectRedis()
         const body = await request.json();
         const validate = loginSchema.safeParse(body)
+
+
 
         if (!validate.success) {
             return NextResponse.json({
@@ -22,6 +30,27 @@ export async function POST(request: NextRequest) {
         }
 
         const { email, password } = validate.data
+
+        const ip = request.headers.get("x-forwarded-for")?.split(",")[0] ||
+            "unknown";
+
+    
+
+        const key = `auth:login:${ip}:${email}`
+        const limit = await rateLimit(key, LIMIT, WINDOW)
+
+        console.log(limit)
+
+        if (!limit.success) {
+            return NextResponse.json(
+                {
+                    message: limit.message,
+                    retryAfter: limit?.retryAfter
+                },
+                { status: 429 }
+            );
+        }
+
         const user = await User.findOne({ email }).select("+password")
 
         if (!user) {

@@ -2,14 +2,20 @@ import sendEmail from "@/lib/mailer";
 import User from "@/models/user.model";
 import connectDB from "@/conf/database";
 import { VERIFY_EMAIL } from "@/constant";
+import { connectRedis } from "@/conf/redis";
+import { rateLimit } from "@/lib/rateLimit";
 import createSession from "@/lib/createSession";
 import { NextRequest, NextResponse } from "next/server";
 import { signupSchema } from "@/lib/validation/authSchema"
+const LIMIT = 3
+const WINDOW = 60 * 60
 
 export async function POST(request: NextRequest) {
 
     try {
+
         await connectDB();
+        await connectRedis()
         const body = await request.json();
         const validate = signupSchema.safeParse(body);
 
@@ -22,6 +28,22 @@ export async function POST(request: NextRequest) {
         }
 
         const { username, email, password } = validate.data;
+        const ip = request.headers.get("x-forwarded-for")?.split(",")[0] ||
+            "unknown";
+
+        const key = `auth:signup:${ip}`
+        
+        const limit = await rateLimit(key, LIMIT, WINDOW)
+
+        if (!limit.success) {
+            return NextResponse.json(
+                {
+                    message: limit.message,
+                    retryAfter: limit?.retryAfter
+                },
+                { status: 429 }
+            );
+        }
 
         const isUserExists = await User.findOne({
             $or: [{ username }, { email }]
@@ -54,7 +76,7 @@ export async function POST(request: NextRequest) {
 
     } catch (error: unknown) {
         const message = error instanceof Error ? error.message : 'An unknown error occurred';
-        console.log(message)
+        console.error(message)
         return NextResponse.json({
             success: false,
             message

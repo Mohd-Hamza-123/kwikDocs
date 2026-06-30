@@ -1,6 +1,5 @@
-
-import getCurrentUser from "@/lib/getCurrentUser";
 import { redirect } from "next/navigation";
+import getCurrentUser from "@/lib/getCurrentUser";
 
 export default async function AppLayout({
   children,

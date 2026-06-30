@@ -6,9 +6,12 @@ import { CiLogin } from "react-icons/ci";
 import { TbPencilCode } from "react-icons/tb";
 import { BiLogInCircle } from "react-icons/bi";
 import { useAppSelector } from '@/lib/hooks/hooks';
+import useCurrentUser from '@/hooks/use-current-user';
 
 const SidebarLinks = ({ closeSideBar }: { closeSideBar: any }) => {
 
+    const { data: user } = useCurrentUser()
+    // console.log(user)
     const userStatus = useAppSelector((state) => state.auth.userStatus)
     const userData = useAppSelector((state) => state.auth.userData)
 
@@ -23,13 +26,13 @@ const SidebarLinks = ({ closeSideBar }: { closeSideBar: any }) => {
             slug: '/signup',
             name: 'Sign Up',
             icon: <BiLogInCircle className="h-5 w-5" />,
-            isVisible: userStatus ? false : true
+            isVisible: user?.success ? false : true
         },
         {
             slug: '/login',
             name: 'Login',
             icon: <CiLogin className="w-5 h-5" />,
-            isVisible: userStatus ? false : true,
+            isVisible: user?.success ? false : true
         },
         {
             slug: "/app/playground",

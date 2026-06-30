@@ -2,13 +2,20 @@ import bcrypt from "bcrypt";
 import User from "@/models/user.model";
 import { saltRounds } from "@/constant";
 import connectDB from "@/conf/database";
+import { connectRedis } from "@/conf/redis";
+import { rateLimit } from "@/lib/rateLimit";
 import { NextRequest, NextResponse } from "next/server";
 import { passwordMatchSchema } from "@/lib/validation/authSchema";
+
+const LIMIT = 5;
+const WINDOW = 60 * 15;
 
 export async function POST(request: NextRequest) {
     try {
 
         await connectDB();
+        await connectRedis();
+
         const body = await request.json()
         const token = request.nextUrl.searchParams.get("token")
 
@@ -19,14 +26,31 @@ export async function POST(request: NextRequest) {
             }, { status: 400 })
         }
 
+        const ip = request.headers.get("x-forwarded-for")?.split(",")[0] ||
+            "unknown";
+
+        const limit = await rateLimit(`auth:reset-password:${ip}`, LIMIT, WINDOW);
+
+        if (!limit.success) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    message: limit.message,
+                    retryAfter: limit.retryAfter,
+                },
+                {
+                    status: 429,
+                    // headers: {
+                    //     "Retry-After": String(limit.retryAfter),
+                    // },
+                }
+            );
+        }
 
         const validation = passwordMatchSchema.safeParse(body)
 
-
         if (!validation.success) {
-
             const errors = validation.error.flatten()
-            // console.log(errors)
 
             return NextResponse.json({
                 success: false,
@@ -43,8 +67,6 @@ export async function POST(request: NextRequest) {
                 $gt: Date.now()
             }
         })
-
-    
 
         if (!user) {
             return NextResponse.json({
@@ -65,12 +87,10 @@ export async function POST(request: NextRequest) {
             }
         }, { new: true })
 
-
         return NextResponse.json({
             success: true,
             message: "Password Changed"
         }, { status: 200 })
-
 
     } catch (error) {
         const message = error instanceof Error ? error.message : "Internal Server Error"

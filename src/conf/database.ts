@@ -1,6 +1,9 @@
 // lib/mongoose.ts
 import mongoose from "mongoose";
 import conf from "@/conf/conf";
+import dns from "node:dns/promises";
+
+dns.setServers(['8.8.8.8', '1.1.1.1']);
 
 declare global {
   // eslint-disable-next-line no-var

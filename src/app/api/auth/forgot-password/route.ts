@@ -1,13 +1,20 @@
 import sendEmail from "@/lib/mailer";
 import User from "@/models/user.model";
 import connectDB from "@/conf/database";
+import { connectRedis } from "@/conf/redis";
+import { rateLimit } from "@/lib/rateLimit";
 import { RESET_PASSWORD } from "@/constant";
 import { NextRequest, NextResponse } from "next/server";
+
+const LIMIT = 3;
+const WINDOW = 60 * 60; // 1 hour
 
 export async function POST(request: NextRequest) {
     try {
 
         await connectDB();
+        await connectRedis();
+
         const email = request.nextUrl.searchParams.get("email")
         console.log(email)
 
@@ -16,6 +23,24 @@ export async function POST(request: NextRequest) {
                 success: false,
                 message: "Invalid Email"
             }, { status: 400 })
+        }
+
+        const ip = request.headers.get("x-forwarded-for")?.split(",")[0] ||
+            "unknown";
+
+        const limit = await rateLimit(`auth:forgot-password:${ip}:${email}`, LIMIT, WINDOW);
+
+        if (!limit.success) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    message: limit.message,
+                    retryAfter: limit.retryAfter,
+                },
+                {
+                    status: 429,
+                }
+            );
         }
 
         const user = await User.findOne({ email: email }, { _id: 1 })

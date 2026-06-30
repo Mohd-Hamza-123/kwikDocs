@@ -1,17 +1,18 @@
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import dns from "node:dns/promises";
+
 import type { Metadata } from "next";
 import siteConfig from "@/conf/site";
 import Providers from "../Providers/Providers";
 import { Inter, Poppins } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+// import { Analytics } from "@vercel/analytics/react";
+// import { SpeedInsights } from "@vercel/speed-insights/next"
 
-dns.setServers(["1.1.1.1","8.8.8.8"]);
+
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-sans' });
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -37,8 +38,8 @@ export default async function RootLayout({
       <body suppressHydrationWarning={true}
         className={"bg-background antialiased dark:bg-bgDark bg-gray-100"}>
         <Providers>
-          <Analytics />
-          <SpeedInsights />
+          {/* <Analytics />
+          <SpeedInsights /> */}
           {children}
           <Toaster />
         </Providers>
