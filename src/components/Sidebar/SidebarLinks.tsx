@@ -1,5 +1,5 @@
-import React from 'react'
-import Link from 'next/link'
+import React from 'react';
+import Link from 'next/link';
 import { memo } from 'react';
 import { svgIcons } from "../icons";
 import { CiLogin } from "react-icons/ci";
@@ -11,7 +11,6 @@ import useCurrentUser from '@/hooks/use-current-user';
 const SidebarLinks = ({ closeSideBar }: { closeSideBar: any }) => {
 
     const { data: user } = useCurrentUser()
-    // console.log(user)
     const userStatus = useAppSelector((state) => state.auth.userStatus)
     const userData = useAppSelector((state) => state.auth.userData)
 
@@ -35,7 +34,7 @@ const SidebarLinks = ({ closeSideBar }: { closeSideBar: any }) => {
             isVisible: user?.success ? false : true
         },
         {
-            slug: "/app/playground",
+            slug: "/playground",
             name: "Playground",
             icon: <svgIcons.playground className="w-5 h-5 fill-gray-800 dark:fill-white" />,
             isVisible: true

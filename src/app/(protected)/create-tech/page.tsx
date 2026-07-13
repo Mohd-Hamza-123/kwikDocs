@@ -11,7 +11,7 @@ import { api, routes } from "@/lib/api/common";
 import React, { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { getAllTechnology } from "@/lib/getAllTechnology";
+// import { getAllTechnology } from "@/lib/getAllTechnology";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import {
     useMutation,
@@ -24,14 +24,13 @@ const CreateTech = () => {
 
     const router = useRouter()
     const queryClient = useQueryClient();
-
     const userData = useAppSelector((state) => state.auth.userData)
     // REACT-HOOK-FORM
 
     const { register, handleSubmit, setValue, reset } = useForm();
 
     const {
-        data: technology = [],
+        data,
         error: technologyError,
         isPending: technologyPending,
         isSuccess: technologySuccess,
@@ -39,10 +38,16 @@ const CreateTech = () => {
         refetch
     } = useQuery({
         queryKey: ['technologies'],
-        queryFn: getAllTechnology,
+        queryFn: async() => {
+           const response = await fetch(`/api/tech`)
+           return await response.json()
+        },
         staleTime: Infinity,
     });
-    console.log(technology)
+
+
+    const technology = data?.payload || []
+
     const createCategoryMutation = useMutation({
         mutationFn: async (formData: FormData) => api.post({
             url: routes.createTechnology,

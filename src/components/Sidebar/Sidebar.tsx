@@ -15,6 +15,7 @@ import { useTypicalContext } from "@/context/Typical-Context"
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks"
 
 const Sidebar = () => {
+    
     const router = useRouter()
     const dispatch = useAppDispatch()
     const userData = useAppSelector((state) => state.auth.userData)

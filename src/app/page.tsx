@@ -144,13 +144,15 @@ export default function HomePage() {
                                 </p>
 
                                 <pre className="overflow-x-auto rounded-xl bg-black/50 p-4 text-left text-sm leading-7 text-green-300">
-                                    {`function Welcome() {
-  return (
-    <h1>Hello, KwikDocs 🚀</h1>
-  );
-}
-
-render(<Welcome />);`}
+                                    {`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Hello World 🏍 </h1>
+</body>
+</html>`}
                                 </pre>
                             </div>
 
@@ -161,11 +163,8 @@ render(<Welcome />);`}
 
                                 <div className="rounded-xl border border-white/10 bg-black/40 p-5">
                                     <h2 className="text-2xl font-bold text-white">
-                                        Hello, KwikDocs 🚀
-                                    </h2>
-                                    <p className="mt-2 text-sm text-gray-400">
-                                        This output updates when your code changes.
-                                    </p>
+                                        Hello World 🏍
+                                    </h2>  
                                 </div>
                             </div>
                         </div>

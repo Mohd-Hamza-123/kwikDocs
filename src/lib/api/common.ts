@@ -1,8 +1,6 @@
 import conf from "@/conf/conf"
-
 type RouteParams = Record<string, string | number>
 type QueryParams = Record<string, string | number | boolean>
-
 type apiRequestOptions = {
     url: string,
     data?: unknown,
@@ -23,8 +21,6 @@ async function responseHandler(response: Response) {
         throw new Error(message)
     }
 }
-
-
 function queryParameterHandler(url: string, query?: QueryParams,) {
 
     if (!query || Object.entries(query).length === 0) {
@@ -40,7 +36,6 @@ function queryParameterHandler(url: string, query?: QueryParams,) {
     // console.log(`${url}?${searchParams.toString()}`)
     return `${url}?${searchParams.toString()}`
 }
-
 function routeParameterHandler(url: string, routeParams?: RouteParams) {
     // console.log(routeParams)
 
@@ -64,7 +59,8 @@ export const routes = {
     forgotPassword: "/api/auth/forgot-password",
     resetPassword: "/api/auth/reset-password",
     me: "/api/auth/me",
-    createTechnology: "/api/tech/create-tech"
+    createTechnology: "/api/tech/create-tech",
+    searchDocs : "/api/tech"
 }
 
 const baseUrl = process.env.NODE_ENV === "production" ? conf.EXPRESS_BASE_URL : "http://localhost:8000"
@@ -73,6 +69,7 @@ const baseUrl = process.env.NODE_ENV === "production" ? conf.EXPRESS_BASE_URL : 
 export const expressRoutes = {
     getDocs: `${baseUrl}/api/docs/tech`,
     getSingleDoc: `${baseUrl}/api/docs/slug`,
+    searchDocs : `${baseUrl}/api/docs`
 }
 
 export const api = {
@@ -108,7 +105,7 @@ export const api = {
 
             const routeUrl = routeParameterHandler(url, route)
             const finalUrl = queryParameterHandler(routeUrl, query)
-            // console.log(finalUrl)
+            console.log(finalUrl)
             const response = await fetch(finalUrl)
             return await responseHandler(response)
 

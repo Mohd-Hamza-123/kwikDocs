@@ -4,6 +4,7 @@ import { getAllTechnology } from "@/lib/getAllTechnology";
 import Technologies from "@/components/cards/Technologies";
 import EmptyTechnologies from "@/components/Technologies/EmpytTechnologies";
 
+
 const TechStack = async () => {
 
     try {
@@ -16,7 +17,8 @@ const TechStack = async () => {
         }
 
         return <>
-            <Welcome />
+      
+            <Welcome technologies={technology} />
             {/* <RefreshButton /> */}
             <Technologies technology={technology} />
         </>
