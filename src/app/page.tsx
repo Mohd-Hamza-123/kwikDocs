@@ -1,39 +1,15 @@
-"use client";
+
 import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { useState } from "react";
 import siteConfig from "@/conf/site";
-import Branding from "@/components/Branding";
-import { Button } from "@/components/ui/button";
-import useCurrentUser from "@/hooks/use-current-user";
-import { FiMenu, FiX, FiCode, FiBookOpen, FiZap } from "react-icons/fi";
+import { getCurrentUser } from "@/lib/auth";
+import HomeAuthNav from "@/components/HomeAuthNav";
+import { FiCode, FiBookOpen, FiZap } from "react-icons/fi";
 
-export default function HomePage() {
+export default async function Home() {
 
-    const [open, setOpen] = useState(false);
-    const { data: user } = useCurrentUser()
+    const user = await getCurrentUser()
 
     // console.log(user)
-
-    const links = [
-        {
-            name: "Create Account",
-            href: "/signup",
-            isHidden: user ? true : false
-        },
-        {
-            name: "Login",
-            href: "/login",
-            isHidden: user ? true : false
-        },
-
-    ]
-
-    const explore = [
-        {
-
-        }
-    ]
 
     return (
         <div className="relative min-h-screen overflow-x-hidden bg-[#07070c] text-gray-100 antialiased selection:bg-violet-500/30 selection:text-white">
@@ -44,48 +20,7 @@ export default function HomePage() {
             </div>
 
             {/* Header */}
-            <header className="sticky top-0 z-30 border-b border-white/10 bg-black/40 backdrop-blur-xl">
-                <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
-
-                    <Branding />
-
-                    <nav className="hidden items-center gap-8 text-sm font-medium text-gray-300 md:flex">
-                        {links.map((link) => (
-                            <Link
-                                href={link.href}
-                                className={cn(link.isHidden ? "hidden" : "", "transition hover:text-white")}
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
-                        {user && <Button variant={"destructive"} >
-                            Logout
-                        </Button>}
-                    </nav>
-
-                    <Button
-                        onClick={() => setOpen(!open)}
-                        aria-label="Toggle menu"
-                        variant="ghost"
-                        size="icon"
-                        className="md:hidden text-white hover:bg-white/10">
-                        {open ? <FiX size={22} /> : <FiMenu size={22} />}
-                    </Button>
-                </div>
-
-                {open && (
-                    <div className="md:hidden from-indigo-600/40 via-purple-500/30 to-cyan-400/20">
-                        <nav className="flex flex-col px-6 py-4 text-sm font-medium text-gray-300">
-                            <Link href="/signup" onClick={() => setOpen(false)} className="py-3 hover:text-white">
-                                Sign Up
-                            </Link>
-                            <Link href="/app/playground" onClick={() => setOpen(false)} className="py-3 hover:text-white">
-                                Playground
-                            </Link>
-                        </nav>
-                    </div>
-                )}
-            </header>
+            <HomeAuthNav user={user} />
 
             <main className="relative z-10">
                 {/* Hero */}
@@ -123,7 +58,7 @@ export default function HomePage() {
                     </div>
 
                     <p className="mt-5 text-sm text-gray-500">
-                        Markdown Docs · Live Code Execution · Instant Preview
+                        Live Code Execution · Instant Preview
                     </p>
                 </section>
 
@@ -164,7 +99,7 @@ export default function HomePage() {
                                 <div className="rounded-xl border border-white/10 bg-black/40 p-5">
                                     <h2 className="text-2xl font-bold text-white">
                                         Hello World 🏍
-                                    </h2>  
+                                    </h2>
                                 </div>
                             </div>
                         </div>
@@ -192,7 +127,7 @@ export default function HomePage() {
             </main>
 
             <footer className="relative z-10 mt-24 border-t border-white/10 py-6 text-center text-xs text-gray-500">
-                © {new Date().getFullYear()} KwikDocs. Build docs users can run.
+                © {new Date().getFullYear()} KwikDocs
             </footer>
         </div>
     );
