@@ -27,12 +27,12 @@ const languages = [
       </div>
     ),
   },
-  {
-    name: "Python",
-    path: "/playground/python",
-    fullLogoBg: false,
-    icon: <svgIcons.python className="w-20 md:w-24 lg:w-28" />,
-  },
+  // {
+  //   name: "Python",
+  //   path: "/playground/python",
+  //   fullLogoBg: false,
+  //   icon: <svgIcons.python className="w-20 md:w-24 lg:w-28" />,
+  // },
 ];
 
 const Playground = () => {

@@ -126,14 +126,14 @@ const SignupPage = () => {
       </Button>
 
       {/* Divider */}
-      <div className="flex items-center gap-4">
+      {/* <div className="flex items-center gap-4">
         <span className="h-px flex-1 bg-neutral-800" />
         <span className="text-xs text-neutral-500">OR</span>
         <span className="h-px flex-1 bg-neutral-800" />
-      </div>
+      </div> */}
 
       {/* Social auth buttons – same style as login */}
-      <div className="space-y-3">
+      {/* <div className="space-y-3">
         <Button
           type="button"
           variant="outline"
@@ -157,7 +157,7 @@ const SignupPage = () => {
           </span>
           <span>Sign up with Google</span>
         </Button>
-      </div>
+      </div> */}
     </form>
   );
 };

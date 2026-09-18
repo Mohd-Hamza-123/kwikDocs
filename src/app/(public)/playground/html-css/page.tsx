@@ -99,9 +99,9 @@ const Page = () => {
                     <svgIcons.play className="w-4 h-4 md:w-7 md:h-7" />
                 </Button>
 
-                <CodeSaveDialog
+                {/* <CodeSaveDialog
                     saveProject={saveProject}
-                />
+                /> */}
 
             </div>
 

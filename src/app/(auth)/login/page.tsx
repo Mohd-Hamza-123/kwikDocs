@@ -94,40 +94,40 @@ export default function LoginPage() {
       </Button>
 
       {/* Divider */}
-      <div className="flex items-center gap-4">
+      {/* <div className="flex items-center gap-4">
         <span className="h-px flex-1 bg-neutral-800" />
         <span className="text-xs text-neutral-500">OR</span>
         <span className="h-px flex-1 bg-neutral-800" />
-      </div>
+      </div> */}
 
       {/* Social logins */}
-      <div className="space-y-3">
+      {/* <div className="space-y-3">
         <Button
           type="button"
           variant="outline"
           className="w-full border-neutral-700 text-neutral-200 hover:bg-neutral-900/70 flex items-center justify-center gap-2"
-        // onClick={handleGithubLogin}
+        onClick={handleGithubLogin}
         >
-          {/* simple circle icon placeholder */}
+          simple circle icon placeholder
           <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-neutral-800 text-xs">
             GH
           </span>
           <span>Sign in with GitHub</span>
-        </Button>
+        </Button> */}
 
-        <Button
+        {/* <Button
           type="button"
           variant="outline"
           className="w-full border-neutral-700 text-neutral-200 hover:bg-neutral-900/70 flex items-center justify-center gap-2"
-        // onClick={handleGoogleLogin}
+        onClick={handleGoogleLogin}
         >
-          {/* Google-like "G" badge */}
+          Google-like "G" badge
           <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white text-[11px] font-bold text-neutral-900">
             G
           </span>
           <span>Sign in with Google</span>
-        </Button>
-      </div>
+        </Button> */}
+      {/* </div> */}
     </form>
   );
 }
